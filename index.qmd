@@ -1,0 +1,6 @@
+---
+title: "Prácticas"
+---
+
+```{r child="README.qmd"}
+```

@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "BIOEST 2026-27"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Programa
+      # - href: Practica0.qmd
+      #   text: Práctica 0
+      # - href: Practica1.qmd
+      #   text: Práctica 1
+      # - href: Practica2.qmd
+      #   text: Práctica 2
+      # - href: Practica3.qmd
+      #   text: Práctica 3
+      # - href: Practica4.qmd
+      #   text: Práctica 4
+      # - href: Practica5.qmd
+      #   text: Práctica 5
+      # - href: Practica6.qmd
+      #   text: Práctica 6
+      # - href: Practica7.qmd
+      #   text: Práctica 7
+      # - href: PracticaRepaso.qmd
+      #   text: Práctica Repaso
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    link-external-newwindow: true
+
+editor: visual
+
