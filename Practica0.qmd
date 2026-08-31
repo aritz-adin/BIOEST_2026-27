@@ -1,0 +1,243 @@
+---
+title: "Práctica 0: Introducción a R"
+author: "Aritz Adin"
+date: "2026-10-05"
+date-format: "DD/MM/YYYY"
+format:
+  html:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)  
+```
+
+# Operaciones básicas
+
+## 1. Operaciones matemáticas
+
+`R` permite realizar operaciones matemáticas de manera sencilla. Realiza las siguientes operaciones matemáticas.
+
+-   $(7 \times 3)+12/2+7^2+\sqrt{4}$
+
+```{r include=FALSE}
+(7*3)+12/2-7^2+sqrt(4)
+```
+
+-   $\log{3}+\sqrt{2}\mbox{sin}(\pi/4)-e^3$
+
+```{r include=FALSE}
+log(3)+sqrt(2)*sin(pi/4)-exp(3)
+```
+
+-   $3+2+\log(5)+\dfrac{e^3}{4}+\sqrt{6}$
+
+```{r include=FALSE}
+3+2+log(5)+exp(3)/4+sqrt(6)
+```
+
+## 2. Asignaciones
+
+-   Asigna a la letra $x$ el valor 0.28354. Redondea a 2 y 3 decimales.
+
+```{r include=FALSE}
+x <- 0.28354
+round(x,2)
+round(x,3)
+```
+
+-   Asigna a la letra $x$ el valor 7 y visualízalo en pantalla. Elimina esta asignación utilizando la función `rm()`.
+
+```{r include=FALSE}
+x <- 7
+x
+
+rm(x)
+```
+
+-   Asigna a la letra $x$ el valor 2 y a la letra $y$ el valor 5. Multiplica $x$ por $y$ y asigna el resultado a la letra $z$.
+
+```{r include=FALSE}
+x <- 2
+y <- 5
+
+z <- x*y
+z
+```
+
+-   Utiliza la función `ls()` para obtener una lista de todos los objetos guardados en la memoria.
+
+```{r include=FALSE}
+ls()
+```
+
+<!-- -   Elimina todos los objetos de la memoria con la función `rm()`. -->
+
+<!-- ```{r include=FALSE} -->
+<!-- rm(list=ls()) -->
+<!-- ls() -->
+<!-- ``` -->
+
+## 3. Vectores y secuencias
+
+-   Crea el vector $x=(1.5,2,3)$ y visualízalo por pantalla.
+
+```{r include=FALSE}
+x <- c(1.5,2,3)
+x
+```
+
+-   Eleva el vector $x$ al cuadrado y guarda el resultado en un objeto denotado por la letra $y$. ¿Qué hace `R`?
+
+```{r include=FALSE}
+y <- x^2
+y
+```
+
+<!-- -   Selecciona el valor del vector $y$ que es igual a 4. -->
+
+<!-- ```{r include=FALSE} -->
+<!-- which(y==4) -->
+<!-- ``` -->
+
+-   Crea un vector cuyas componentes sean *small*, *medium* y *large*.
+
+```{r include=FALSE}
+y <- c("small","medium","large")
+y
+```
+
+-   Crea los vectores $x=(2,3,4,1)$ y $y=(1,1,3,7)$.
+
+```{r include=FALSE}
+x <- c(2,3,4,1)
+y <- c(1,1,3,7)
+```
+
+-   Suma los vectores $x$ e $y$. ¿Qué hace `R`?
+
+```{r include=FALSE}
+x+y
+```
+
+-   Crea una matriz cuyas columnas sean los vectores $x$ e $y$.
+
+```{r include=FALSE}
+M1 <- cbind(x,y)
+M1
+```
+
+-   Crea una matriz cuyas filas sean los vectores $x$ e $y$.
+
+```{r include=FALSE}
+M2 <- rbind(x,y)
+M2
+```
+
+-   **EJERCICIO:** Vamos a definir un pequeño fichero de datos a modo de ejemplo:
+
+
+```{r}
+#| echo: false
+Nombre <- c("Aritz","Ana","Pepe","Nicole")
+Edad <- c(38,24,70,24)
+Peso <- c(75,50,84,60.5)
+
+datos <- data.frame(Nombre,Edad,Peso)
+datos
+```
+
+<!-- -   Crea una secuencia de 0 a 1 con incrementos de 0.2 unidades. -->
+
+<!-- ```{r include=FALSE} -->
+
+<!-- seq(from=0,to=1,by=0.2) -->
+
+<!-- ``` -->
+
+<!-- -   Crea una secuencia de 0 a 8 con incrementos de 1 unidad. -->
+
+<!-- ```{r include=FALSE} -->
+
+<!-- seq(0,8) -->
+
+<!-- 0:8 -->
+
+<!-- ``` -->
+
+<!-- -   Crea una secuencia descendente del 8 al 1. -->
+
+<!-- ```{r include=FALSE} -->
+
+<!-- seq(8,1,-1) -->
+
+<!-- 8:1 -->
+
+<!-- ``` -->
+
+<!-- -   Crea un vector de longitud 5 cuyas componentes sean iguales a 1. -->
+
+<!-- ```{r include=FALSE} -->
+
+<!-- rep(1,5) -->
+
+<!-- ``` -->
+
+<!-- -   Crea un vector cuyas primeras tres componentes tomen el valor 1, las tres siguientes tomen el valor 2 y las tres últimas tomen el valor 3. -->
+
+<!-- ```{r include=FALSE} -->
+
+<!-- c(rep(1,3), rep(2,3), rep(3,3)) -->
+
+<!-- rep(1:3, each=3) -->
+
+<!-- ``` -->
+
+<!-- -   Introduce en `R` los datos `typos=(2,2,2,3,3,0,3,4,6,4)` -->
+
+<!-- ```{r include=FALSE} -->
+
+<!-- typos <- c(2,2,2,3,3,0,3,4,6,4) -->
+
+<!-- typos -->
+
+<!-- ``` -->
+
+<!-- -   Utilizando el vector `typos`, selecciona el 4º elemento del vector. -->
+
+<!-- ```{r include=FALSE} -->
+
+<!-- typos[4] -->
+
+<!-- ``` -->
+
+<!-- -   Selecciona todos los elmentos del vector `typos` excepto el 2º y el 3º. -->
+
+<!-- ```{r include=FALSE} -->
+
+<!-- typos[-c(2,3)] -->
+
+<!-- ``` -->
+
+
+## 4. Ficheros
+
+-   En primer lugar, debemos estar seguros de cuál es nuestro directorio de trabajo.
+
+```{r eval=FALSE}
+getwd()
+```
+
+-   Descarga el fichero `Bodyfat.txt` desde MiAulario, léelo en `R` y almacénalo en un objeto llamado `datos`.
+
+```{r eval=FALSE}
+datos <- read.table("BodyFat.txt", header=TRUE)
+
+head(datos)
+```
+
+-   Guarda el fichero datos en el archivo `Bodyfat.Rdata`.
+
+```{r eval=FALSE}
+save(datos, file="BodyFat.Rdata")
+```

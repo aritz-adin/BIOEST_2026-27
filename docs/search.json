@@ -19,5 +19,40 @@
     "title": "Prácticas",
     "section": "Bibliografía",
     "text": "Bibliografía\nPara la realización de esta práctica, puede consultarse el texto:\nUgarte, M.D., Militino, A.F., and Arnholt, A.T. (2016). Probability and Statistics with R (Second Edition). Chapman and Hall."
+  },
+  {
+    "objectID": "Practica0.html",
+    "href": "Practica0.html",
+    "title": "Práctica 0: Introducción a R",
+    "section": "",
+    "text": "R permite realizar operaciones matemáticas de manera sencilla. Realiza las siguientes operaciones matemáticas.\n\n\\((7 \\times 3)+12/2+7^2+\\sqrt{4}\\)\n\\(\\log{3}+\\sqrt{2}\\mbox{sin}(\\pi/4)-e^3\\)\n\\(3+2+\\log(5)+\\dfrac{e^3}{4}+\\sqrt{6}\\)\n\n\n\n\n\nAsigna a la letra \\(x\\) el valor 0.28354. Redondea a 2 y 3 decimales.\nAsigna a la letra \\(x\\) el valor 7 y visualízalo en pantalla. Elimina esta asignación utilizando la función rm().\nAsigna a la letra \\(x\\) el valor 2 y a la letra \\(y\\) el valor 5. Multiplica \\(x\\) por \\(y\\) y asigna el resultado a la letra \\(z\\).\nUtiliza la función ls() para obtener una lista de todos los objetos guardados en la memoria.\n\n\n\n\n\n\n\n\n\n\nCrea el vector \\(x=(1.5,2,3)\\) y visualízalo por pantalla.\nEleva el vector \\(x\\) al cuadrado y guarda el resultado en un objeto denotado por la letra \\(y\\). ¿Qué hace R?\n\n\n\n\n\n\nCrea un vector cuyas componentes sean small, medium y large.\nCrea los vectores \\(x=(2,3,4,1)\\) y \\(y=(1,1,3,7)\\).\nSuma los vectores \\(x\\) e \\(y\\). ¿Qué hace R?\nCrea una matriz cuyas columnas sean los vectores \\(x\\) e \\(y\\).\nCrea una matriz cuyas filas sean los vectores \\(x\\) e \\(y\\).\nEJERCICIO: Vamos a definir un pequeño fichero de datos a modo de ejemplo:\n\n\n\n  Nombre Edad Peso\n1  Aritz   38 75.0\n2    Ana   24 50.0\n3   Pepe   70 84.0\n4 Nicole   24 60.5\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEn primer lugar, debemos estar seguros de cuál es nuestro directorio de trabajo.\n\n\ngetwd()\n\n\nDescarga el fichero Bodyfat.txt desde MiAulario, léelo en R y almacénalo en un objeto llamado datos.\n\n\ndatos &lt;- read.table(\"BodyFat.txt\", header=TRUE)\n\nhead(datos)\n\n\nGuarda el fichero datos en el archivo Bodyfat.Rdata.\n\n\nsave(datos, file=\"BodyFat.Rdata\")"
+  },
+  {
+    "objectID": "Practica0.html#operaciones-matemáticas",
+    "href": "Practica0.html#operaciones-matemáticas",
+    "title": "Práctica 0: Introducción a R",
+    "section": "",
+    "text": "R permite realizar operaciones matemáticas de manera sencilla. Realiza las siguientes operaciones matemáticas.\n\n\\((7 \\times 3)+12/2+7^2+\\sqrt{4}\\)\n\\(\\log{3}+\\sqrt{2}\\mbox{sin}(\\pi/4)-e^3\\)\n\\(3+2+\\log(5)+\\dfrac{e^3}{4}+\\sqrt{6}\\)"
+  },
+  {
+    "objectID": "Practica0.html#asignaciones",
+    "href": "Practica0.html#asignaciones",
+    "title": "Práctica 0: Introducción a R",
+    "section": "",
+    "text": "Asigna a la letra \\(x\\) el valor 0.28354. Redondea a 2 y 3 decimales.\nAsigna a la letra \\(x\\) el valor 7 y visualízalo en pantalla. Elimina esta asignación utilizando la función rm().\nAsigna a la letra \\(x\\) el valor 2 y a la letra \\(y\\) el valor 5. Multiplica \\(x\\) por \\(y\\) y asigna el resultado a la letra \\(z\\).\nUtiliza la función ls() para obtener una lista de todos los objetos guardados en la memoria."
+  },
+  {
+    "objectID": "Practica0.html#vectores-y-secuencias",
+    "href": "Practica0.html#vectores-y-secuencias",
+    "title": "Práctica 0: Introducción a R",
+    "section": "",
+    "text": "Crea el vector \\(x=(1.5,2,3)\\) y visualízalo por pantalla.\nEleva el vector \\(x\\) al cuadrado y guarda el resultado en un objeto denotado por la letra \\(y\\). ¿Qué hace R?\n\n\n\n\n\n\nCrea un vector cuyas componentes sean small, medium y large.\nCrea los vectores \\(x=(2,3,4,1)\\) y \\(y=(1,1,3,7)\\).\nSuma los vectores \\(x\\) e \\(y\\). ¿Qué hace R?\nCrea una matriz cuyas columnas sean los vectores \\(x\\) e \\(y\\).\nCrea una matriz cuyas filas sean los vectores \\(x\\) e \\(y\\).\nEJERCICIO: Vamos a definir un pequeño fichero de datos a modo de ejemplo:\n\n\n\n  Nombre Edad Peso\n1  Aritz   38 75.0\n2    Ana   24 50.0\n3   Pepe   70 84.0\n4 Nicole   24 60.5"
+  },
+  {
+    "objectID": "Practica0.html#ficheros",
+    "href": "Practica0.html#ficheros",
+    "title": "Práctica 0: Introducción a R",
+    "section": "",
+    "text": "En primer lugar, debemos estar seguros de cuál es nuestro directorio de trabajo.\n\n\ngetwd()\n\n\nDescarga el fichero Bodyfat.txt desde MiAulario, léelo en R y almacénalo en un objeto llamado datos.\n\n\ndatos &lt;- read.table(\"BodyFat.txt\", header=TRUE)\n\nhead(datos)\n\n\nGuarda el fichero datos en el archivo Bodyfat.Rdata.\n\n\nsave(datos, file=\"BodyFat.Rdata\")"
   }
 ]
