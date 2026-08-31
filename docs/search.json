@@ -54,5 +54,40 @@
     "title": "Práctica 0: Introducción a R",
     "section": "",
     "text": "En primer lugar, debemos estar seguros de cuál es nuestro directorio de trabajo.\n\n\ngetwd()\n\n\nDescarga el fichero Bodyfat.txt desde MiAulario, léelo en R y almacénalo en un objeto llamado datos.\n\n\ndatos &lt;- read.table(\"BodyFat.txt\", header=TRUE)\n\nhead(datos)\n\n\nGuarda el fichero datos en el archivo Bodyfat.Rdata.\n\n\nsave(datos, file=\"BodyFat.Rdata\")"
+  },
+  {
+    "objectID": "Practica1.html",
+    "href": "Practica1.html",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "",
+    "text": "Carga la librería PASWR2 para trabajar con el fichero EPIDURAL.\n\nlibrary(PASWR2)\n\ndata(\"EPIDURAL\")\n\n\nVisualiza los primeros 6 registros del fichero EPIDURAL con el comando head().\nVisualiza los primeros 20 registros del fichero EPIDURAL con el comando head().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando dim().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando str().\n\n\n\n\n\nSelecciona la variable doctor del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable kg del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable cm del fichero EPIDURAL y visualízala en pantalla\nCrea una nueva variable llamada ratio definida como el cociente entre kg/cm. Añádela al fichero EPIDURAL\nEJERCICIO Crea una nueva variable llamada IMC (índice de masa corporal) definida como \\(kg/(m^2)\\). Añádela al fichero EPIDURAL\nSelecciona la paciente número 19 del fichero EPIDURAL. Visualízala por pantalla y averigua cuánto pesa y cuánto mide\n\n\n\n\n\n\n\n\n\n\nCrea un nuevo fichero llamado datos1 con aquellas pacientes que pesen menos de 85 kg. ¿Cuántos registros tiene el fichero datos1?\nCrea un nuevo fichero llamado datos2 con aquellas pacientes que midan más de 170 cm. ¿Cuántos registros tiene el fichero datos2?\nCrea un nuevo fichero llamado datos3 con aquellas pacientes que midan más de 170 cm o menos de 165 cm. ¿Cuántos registros tiene el fichero datos3?\nCrea un nuevo fichero llamado datos4 con aquellas pacientes que midan más de 165 cm y menos de 170 cm. ¿Cuántos registros tiene el fichero datos4?\nCrea un nuevo fichero llamado datos5 con aquellas pacientes atendidas por el Doctor A. ¿Cuántos registros tiene el fichero datos5?"
+  },
+  {
+    "objectID": "Practica1.html#visualización-de-ficheros",
+    "href": "Practica1.html#visualización-de-ficheros",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "",
+    "text": "Carga la librería PASWR2 para trabajar con el fichero EPIDURAL.\n\nlibrary(PASWR2)\n\ndata(\"EPIDURAL\")\n\n\nVisualiza los primeros 6 registros del fichero EPIDURAL con el comando head().\nVisualiza los primeros 20 registros del fichero EPIDURAL con el comando head().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando dim().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando str()."
+  },
+  {
+    "objectID": "Practica1.html#selección-de-filas-individuos-y-columnas-variables.",
+    "href": "Practica1.html#selección-de-filas-individuos-y-columnas-variables.",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "",
+    "text": "Selecciona la variable doctor del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable kg del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable cm del fichero EPIDURAL y visualízala en pantalla\nCrea una nueva variable llamada ratio definida como el cociente entre kg/cm. Añádela al fichero EPIDURAL\nEJERCICIO Crea una nueva variable llamada IMC (índice de masa corporal) definida como \\(kg/(m^2)\\). Añádela al fichero EPIDURAL\nSelecciona la paciente número 19 del fichero EPIDURAL. Visualízala por pantalla y averigua cuánto pesa y cuánto mide\n\n\n\n\n\n\n\n\n\n\nCrea un nuevo fichero llamado datos1 con aquellas pacientes que pesen menos de 85 kg. ¿Cuántos registros tiene el fichero datos1?\nCrea un nuevo fichero llamado datos2 con aquellas pacientes que midan más de 170 cm. ¿Cuántos registros tiene el fichero datos2?\nCrea un nuevo fichero llamado datos3 con aquellas pacientes que midan más de 170 cm o menos de 165 cm. ¿Cuántos registros tiene el fichero datos3?\nCrea un nuevo fichero llamado datos4 con aquellas pacientes que midan más de 165 cm y menos de 170 cm. ¿Cuántos registros tiene el fichero datos4?\nCrea un nuevo fichero llamado datos5 con aquellas pacientes atendidas por el Doctor A. ¿Cuántos registros tiene el fichero datos5?"
+  },
+  {
+    "objectID": "Practica1.html#descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-imprímelo-por-pantalla",
+    "href": "Practica1.html#descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-imprímelo-por-pantalla",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "2.1. Descarga el fichero Bodyfat.txt desde MiAulario. Léelo en R y almacénalo en un objeto llamado datos. Imprímelo por pantalla",
+    "text": "2.1. Descarga el fichero Bodyfat.txt desde MiAulario. Léelo en R y almacénalo en un objeto llamado datos. Imprímelo por pantalla"
+  },
+  {
+    "objectID": "Practica1.html#realiza-los-siguientes-ejercicios",
+    "href": "Practica1.html#realiza-los-siguientes-ejercicios",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "2.2. Realiza los siguientes ejercicios",
+    "text": "2.2. Realiza los siguientes ejercicios\n\nCon el fichero datos, visualiza en pantalla la variable fat\nSelecciona las observaciones de las variable fat cuyo valor sea menor que 25 y guárdalas en un objeto llamado low.fat\nUtiliza el comando table para averiguar cuántos hombres y mujeres hay en el fichero datos.\nHaz un summary del fichero datos\n\n\n\n\n\n\n\n\n\n\nUtiliza la función eda() del paquete PASWR2 para realizar un análisis exploratorio de la variable fat"
   }
 ]
