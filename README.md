@@ -11,9 +11,8 @@
 | 04-noviembre | Práctica 3: Contrastes paramétricos                          |
 | 16-noviembre | Práctica 4: Regresión lineal                                 |
 | 23-noviembre | Práctica 5: Asociación. Riesgos relativos y Odds Ratio       |
-| 01-diciembre | Práctica 6: Regresión logística                              |
-| 14-diciembre | Práctica 7: Análisis de supervivencia                        |
-| 16-diciembre | Práctica repaso                                              |
+| 09-diciembre | Práctica 6: Regresión logística                              |
+| 16-diciembre | Práctica 7: Análisis de supervivencia                        |
 
 ## Bibliografía
 
