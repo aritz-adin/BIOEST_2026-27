@@ -1,5 +1,82 @@
 [
   {
+    "objectID": "Practica1.html",
+    "href": "Practica1.html",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "",
+    "text": "NOTA: Para realizar los siguientes ejercicios utilizaremos principalmente la sintaxis del paquete dplyr para la manipulación de datos, combinadas con el operador pipe (|&gt;).\n\nlibrary(dplyr)\n\nOs he preparado un breve manual con las principales funcionalidades de este paquete.\n\n\nCarga la librería PASWR2 para trabajar con el fichero EPIDURAL.\n\nlibrary(PASWR2)\ndata(\"EPIDURAL\")\n\nEPIDURAL &lt;- as_tibble(EPIDURAL)\n\n\nVisualiza los primeros 6 registros del fichero EPIDURAL con el comando head().\nVisualiza los primeros 20 registros del fichero EPIDURAL con el comando head().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando dim().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando str().\n\n\n\n\n\nSelecciona la variable doctor del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable kg del fichero EPIDURAL y visualízala en pantalla\nSelecciona simultáneamente las variables kgy cm del fichero EPIDURAL y visualízalas en pantalla\n“Elimina” las variables kgy cm del fichero EPIDURAL\nCrea una nueva variable llamada ratio definida como el cociente entre kg/cm. Añádela al fichero EPIDURAL\nEJERCICIO Crea una nueva variable llamada IMC (índice de masa corporal) definida como \\(kg/(m^2)\\). Añádela al fichero EPIDURAL\nSelecciona la paciente número 19 del fichero EPIDURAL. Visualízala por pantalla y averigua cuánto pesa y cuánto mide\nCrea un nuevo fichero llamado datos1 con aquellas pacientes que pesen menos de 85 kg. ¿Cuántos registros tiene el fichero datos1?\nCrea un nuevo fichero llamado datos2 con aquellas pacientes que midan más de 170 cm. ¿Cuántos registros tiene el fichero datos2?\nCrea un nuevo fichero llamado datos3 con aquellas pacientes que midan más de 170 cm o menos de 165 cm. ¿Cuántos registros tiene el fichero datos3?\nCrea un nuevo fichero llamado datos4 con aquellas pacientes que midan entre 165 y 170 cm (ambos incluidos). ¿Cuántos registros tiene el fichero datos4?\nCrea un nuevo fichero llamado datos5 con aquellas pacientes atendidas por el Doctor A. ¿Cuántos registros tiene el fichero datos5?"
+  },
+  {
+    "objectID": "Practica1.html#visualización-de-ficheros",
+    "href": "Practica1.html#visualización-de-ficheros",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "",
+    "text": "Carga la librería PASWR2 para trabajar con el fichero EPIDURAL.\n\nlibrary(PASWR2)\ndata(\"EPIDURAL\")\n\nEPIDURAL &lt;- as_tibble(EPIDURAL)\n\n\nVisualiza los primeros 6 registros del fichero EPIDURAL con el comando head().\nVisualiza los primeros 20 registros del fichero EPIDURAL con el comando head().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando dim().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando str()."
+  },
+  {
+    "objectID": "Practica1.html#selección-de-columnas-variables-y-filas-individuos",
+    "href": "Practica1.html#selección-de-columnas-variables-y-filas-individuos",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "",
+    "text": "Selecciona la variable doctor del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable kg del fichero EPIDURAL y visualízala en pantalla\nSelecciona simultáneamente las variables kgy cm del fichero EPIDURAL y visualízalas en pantalla\n“Elimina” las variables kgy cm del fichero EPIDURAL\nCrea una nueva variable llamada ratio definida como el cociente entre kg/cm. Añádela al fichero EPIDURAL\nEJERCICIO Crea una nueva variable llamada IMC (índice de masa corporal) definida como \\(kg/(m^2)\\). Añádela al fichero EPIDURAL\nSelecciona la paciente número 19 del fichero EPIDURAL. Visualízala por pantalla y averigua cuánto pesa y cuánto mide\nCrea un nuevo fichero llamado datos1 con aquellas pacientes que pesen menos de 85 kg. ¿Cuántos registros tiene el fichero datos1?\nCrea un nuevo fichero llamado datos2 con aquellas pacientes que midan más de 170 cm. ¿Cuántos registros tiene el fichero datos2?\nCrea un nuevo fichero llamado datos3 con aquellas pacientes que midan más de 170 cm o menos de 165 cm. ¿Cuántos registros tiene el fichero datos3?\nCrea un nuevo fichero llamado datos4 con aquellas pacientes que midan entre 165 y 170 cm (ambos incluidos). ¿Cuántos registros tiene el fichero datos4?\nCrea un nuevo fichero llamado datos5 con aquellas pacientes atendidas por el Doctor A. ¿Cuántos registros tiene el fichero datos5?"
+  },
+  {
+    "objectID": "Practica1.html#descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-abre-el-fichero-en-el-visor-de-datos.",
+    "href": "Practica1.html#descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-abre-el-fichero-en-el-visor-de-datos.",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "2.1. Descarga el fichero Bodyfat.txt desde MiAulario. Léelo en R y almacénalo en un objeto llamado datos. Abre el fichero en el visor de datos.",
+    "text": "2.1. Descarga el fichero Bodyfat.txt desde MiAulario. Léelo en R y almacénalo en un objeto llamado datos. Abre el fichero en el visor de datos."
+  },
+  {
+    "objectID": "Practica1.html#realiza-los-siguientes-ejercicios",
+    "href": "Practica1.html#realiza-los-siguientes-ejercicios",
+    "title": "Práctica 1: Lectura y manejo de ficheros",
+    "section": "2.2. Realiza los siguientes ejercicios",
+    "text": "2.2. Realiza los siguientes ejercicios\n\nCon el fichero datos, visualiza en pantalla la variable fat\nSelecciona las mujeres cuyo valor de fat sea menor que 30.\nUtiliza el comando table para averiguar cuántos hombres y mujeres hay en el fichero datos.\nHaz un summary del fichero datos\nUtiliza la función eda() del paquete PASWR2 para realizar un análisis exploratorio de la variable fat"
+  },
+  {
+    "objectID": "Manual_dplyr.html",
+    "href": "Manual_dplyr.html",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "",
+    "text": "dplyr es uno de los paquetes más utilizados del lenguaje de programación R para manipular y analizar datos. Sus funciones permiten seleccionar variables de una base de datos, filtrar observaciones, crear nuevas variables, agrupar los datos y calcular estadísticos descriptivos de forma sencilla y comprensible.\nPara utilizar dplyr, primero hay que cargar el paquete:\n\nlibrary(dplyr)\n\nUna vez cargado el paquete, todas sus funciones estarán disponibles durante toda la sesión.\nEn esta asignatura se utilizarán principalmente las siguientes funciones del paquete dplyr:\n\nselect(): para seleccionar variables\nfilter(): para filtrar observaciones\nmutate(): para crear nuevas variables\ngroup_by(): para agrupar las observaciones según una variable\nsummarise(): para calcular estadísticos descriptivos para cada grupo\n\nAdemás, en algunos ejemplos se utilizarán las siguientes funciones:\n\ncase_when(): para recodificar variables\nfactor(): para definir las categorías de una variable cualitativa y su orden\npull(): para obtener los valores de una variable como vector\nshapiro.test(): para realizar el test de normalidad de Shapiro-Wilk\neda(): para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete PASWR2)"
+  },
+  {
+    "objectID": "Manual_dplyr.html#el-paquete-dplyr",
+    "href": "Manual_dplyr.html#el-paquete-dplyr",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "",
+    "text": "dplyr es uno de los paquetes más utilizados del lenguaje de programación R para manipular y analizar datos. Sus funciones permiten seleccionar variables de una base de datos, filtrar observaciones, crear nuevas variables, agrupar los datos y calcular estadísticos descriptivos de forma sencilla y comprensible.\nPara utilizar dplyr, primero hay que cargar el paquete:\n\nlibrary(dplyr)\n\nUna vez cargado el paquete, todas sus funciones estarán disponibles durante toda la sesión.\nEn esta asignatura se utilizarán principalmente las siguientes funciones del paquete dplyr:\n\nselect(): para seleccionar variables\nfilter(): para filtrar observaciones\nmutate(): para crear nuevas variables\ngroup_by(): para agrupar las observaciones según una variable\nsummarise(): para calcular estadísticos descriptivos para cada grupo\n\nAdemás, en algunos ejemplos se utilizarán las siguientes funciones:\n\ncase_when(): para recodificar variables\nfactor(): para definir las categorías de una variable cualitativa y su orden\npull(): para obtener los valores de una variable como vector\nshapiro.test(): para realizar el test de normalidad de Shapiro-Wilk\neda(): para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete PASWR2)"
+  },
+  {
+    "objectID": "Manual_dplyr.html#el-operador-pipe",
+    "href": "Manual_dplyr.html#el-operador-pipe",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "El operador pipe (|>)",
+    "text": "El operador pipe (|&gt;)\nEl operador pipe (|&gt;) permite encadenar varias operaciones de forma consecutiva.\nEste operador pasa automáticamente el resultado de la expresión anterior a la siguiente función.\n\nDatos |&gt; \n  Operacion1() |&gt; \n  Operacion2() |&gt; \n  Operacion3()\n\nPor tanto, gracias al operador |&gt;, no es necesario volver a escribir el nombre de la base de datos en cada función. Esto hace que el código sea más corto, claro y fácil de leer."
+  },
+  {
+    "objectID": "Manual_dplyr.html#seleccionando-variables-select",
+    "href": "Manual_dplyr.html#seleccionando-variables-select",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "Seleccionando variables: select()",
+    "text": "Seleccionando variables: select()\nLa función select() se utiliza para seleccionar variables (columnas) de una base de datos.\nPor ejemplo, para seleccionar únicamente las variables kgy cm del fichero EPIDURAL\n\nEPIDURAL |&gt; \n  select(kg, cm)\n\n# A tibble: 85 × 2\n      kg    cm\n   &lt;int&gt; &lt;int&gt;\n 1   116   172\n 2    86   176\n 3    72   157\n 4    63   169\n 5   114   163\n 6   121   163\n 7    90   170\n 8    87   164\n 9    74   166\n10    91   175\n# ℹ 75 more rows"
+  },
+  {
+    "objectID": "Manual_dplyr.html#filtrando-observaciones-filter",
+    "href": "Manual_dplyr.html#filtrando-observaciones-filter",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "Filtrando observaciones: filter()",
+    "text": "Filtrando observaciones: filter()\nLa función filter() se utiliza para seleccionar las observaciones (filas) de una base de datos, manteniendo únicamente aquellas que cumplen una o varias condiciones.\nPor ejemplo, para filtar las pacientes atendidas por el Dr. A con peso superior a 90kg:\n\nEPIDURAL |&gt; \n  filter(doctor==\"Dr. A\", kg&gt;90)\n\n# A tibble: 6 × 7\n  doctor    kg    cm ease       treatment              oc complications         \n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;fct&gt;      &lt;fct&gt;               &lt;int&gt; &lt;fct&gt;                 \n1 Dr. A    105   165 Difficult  Hamstring Stretch      10 Failure - too many OCs\n2 Dr. A    106   165 Easy       Traditional Sitting     2 None                  \n3 Dr. A    103   161 Easy       Hamstring Stretch       1 None                  \n4 Dr. A    142   170 Impossible Traditional Sitting     1 None                  \n5 Dr. A    103   170 Easy       Traditional Sitting     1 None                  \n6 Dr. A     94   165 Easy       Hamstring Stretch       0 None"
+  },
+  {
+    "objectID": "Manual_dplyr.html#creando-nuevas-variables-mutate",
+    "href": "Manual_dplyr.html#creando-nuevas-variables-mutate",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "Creando nuevas variables: mutate()",
+    "text": "Creando nuevas variables: mutate()\nLa función mutate() se utiliza para crear nuevas variables en una base de datos o modificar variables existentes.\nPor ejemplo, para crear en la base de datos EPIDURAL la nueva variable \\(IMC=kg/(cm/100)^2\\):\n\nEPIDURAL |&gt; \n  mutate(IMC=kg/(cm/100)^2) |&gt; \n  select(kg, cm, IMC)\n\n# A tibble: 85 × 3\n      kg    cm   IMC\n   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n 1   116   172  39.2\n 2    86   176  27.8\n 3    72   157  29.2\n 4    63   169  22.1\n 5   114   163  42.9\n 6   121   163  45.5\n 7    90   170  31.1\n 8    87   164  32.3\n 9    74   166  26.9\n10    91   175  29.7\n# ℹ 75 more rows"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Prácticas",
@@ -54,40 +131,5 @@
     "title": "Práctica 0: Introducción a R",
     "section": "",
     "text": "En primer lugar, debemos estar seguros de cuál es nuestro directorio de trabajo.\n\n\ngetwd()\n\n\nDescarga el fichero Bodyfat.txt desde MiAulario, léelo en R y almacénalo en un objeto llamado datos.\n\n\ndatos &lt;- read.table(\"BodyFat.txt\", header=TRUE)\n\nhead(datos)\n\n\nGuarda el fichero datos en el archivo Bodyfat.Rdata.\n\n\nsave(datos, file=\"BodyFat.Rdata\")"
-  },
-  {
-    "objectID": "Practica1.html",
-    "href": "Practica1.html",
-    "title": "Práctica 1: Lectura y manejo de ficheros",
-    "section": "",
-    "text": "Carga la librería PASWR2 para trabajar con el fichero EPIDURAL.\n\nlibrary(PASWR2)\n\ndata(\"EPIDURAL\")\n\n\nVisualiza los primeros 6 registros del fichero EPIDURAL con el comando head().\nVisualiza los primeros 20 registros del fichero EPIDURAL con el comando head().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando dim().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando str().\n\n\n\n\n\nSelecciona la variable doctor del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable kg del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable cm del fichero EPIDURAL y visualízala en pantalla\nCrea una nueva variable llamada ratio definida como el cociente entre kg/cm. Añádela al fichero EPIDURAL\nEJERCICIO Crea una nueva variable llamada IMC (índice de masa corporal) definida como \\(kg/(m^2)\\). Añádela al fichero EPIDURAL\nSelecciona la paciente número 19 del fichero EPIDURAL. Visualízala por pantalla y averigua cuánto pesa y cuánto mide\n\n\n\n\n\n\n\n\n\n\nCrea un nuevo fichero llamado datos1 con aquellas pacientes que pesen menos de 85 kg. ¿Cuántos registros tiene el fichero datos1?\nCrea un nuevo fichero llamado datos2 con aquellas pacientes que midan más de 170 cm. ¿Cuántos registros tiene el fichero datos2?\nCrea un nuevo fichero llamado datos3 con aquellas pacientes que midan más de 170 cm o menos de 165 cm. ¿Cuántos registros tiene el fichero datos3?\nCrea un nuevo fichero llamado datos4 con aquellas pacientes que midan más de 165 cm y menos de 170 cm. ¿Cuántos registros tiene el fichero datos4?\nCrea un nuevo fichero llamado datos5 con aquellas pacientes atendidas por el Doctor A. ¿Cuántos registros tiene el fichero datos5?"
-  },
-  {
-    "objectID": "Practica1.html#visualización-de-ficheros",
-    "href": "Practica1.html#visualización-de-ficheros",
-    "title": "Práctica 1: Lectura y manejo de ficheros",
-    "section": "",
-    "text": "Carga la librería PASWR2 para trabajar con el fichero EPIDURAL.\n\nlibrary(PASWR2)\n\ndata(\"EPIDURAL\")\n\n\nVisualiza los primeros 6 registros del fichero EPIDURAL con el comando head().\nVisualiza los primeros 20 registros del fichero EPIDURAL con el comando head().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando dim().\nCalcula cuántos registros y cuantas variables tiene el fichero EPIDURAL con el comando str()."
-  },
-  {
-    "objectID": "Practica1.html#selección-de-filas-individuos-y-columnas-variables.",
-    "href": "Practica1.html#selección-de-filas-individuos-y-columnas-variables.",
-    "title": "Práctica 1: Lectura y manejo de ficheros",
-    "section": "",
-    "text": "Selecciona la variable doctor del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable kg del fichero EPIDURAL y visualízala en pantalla\nSelecciona la variable cm del fichero EPIDURAL y visualízala en pantalla\nCrea una nueva variable llamada ratio definida como el cociente entre kg/cm. Añádela al fichero EPIDURAL\nEJERCICIO Crea una nueva variable llamada IMC (índice de masa corporal) definida como \\(kg/(m^2)\\). Añádela al fichero EPIDURAL\nSelecciona la paciente número 19 del fichero EPIDURAL. Visualízala por pantalla y averigua cuánto pesa y cuánto mide\n\n\n\n\n\n\n\n\n\n\nCrea un nuevo fichero llamado datos1 con aquellas pacientes que pesen menos de 85 kg. ¿Cuántos registros tiene el fichero datos1?\nCrea un nuevo fichero llamado datos2 con aquellas pacientes que midan más de 170 cm. ¿Cuántos registros tiene el fichero datos2?\nCrea un nuevo fichero llamado datos3 con aquellas pacientes que midan más de 170 cm o menos de 165 cm. ¿Cuántos registros tiene el fichero datos3?\nCrea un nuevo fichero llamado datos4 con aquellas pacientes que midan más de 165 cm y menos de 170 cm. ¿Cuántos registros tiene el fichero datos4?\nCrea un nuevo fichero llamado datos5 con aquellas pacientes atendidas por el Doctor A. ¿Cuántos registros tiene el fichero datos5?"
-  },
-  {
-    "objectID": "Practica1.html#descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-imprímelo-por-pantalla",
-    "href": "Practica1.html#descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-imprímelo-por-pantalla",
-    "title": "Práctica 1: Lectura y manejo de ficheros",
-    "section": "2.1. Descarga el fichero Bodyfat.txt desde MiAulario. Léelo en R y almacénalo en un objeto llamado datos. Imprímelo por pantalla",
-    "text": "2.1. Descarga el fichero Bodyfat.txt desde MiAulario. Léelo en R y almacénalo en un objeto llamado datos. Imprímelo por pantalla"
-  },
-  {
-    "objectID": "Practica1.html#realiza-los-siguientes-ejercicios",
-    "href": "Practica1.html#realiza-los-siguientes-ejercicios",
-    "title": "Práctica 1: Lectura y manejo de ficheros",
-    "section": "2.2. Realiza los siguientes ejercicios",
-    "text": "2.2. Realiza los siguientes ejercicios\n\nCon el fichero datos, visualiza en pantalla la variable fat\nSelecciona las observaciones de las variable fat cuyo valor sea menor que 25 y guárdalas en un objeto llamado low.fat\nUtiliza el comando table para averiguar cuántos hombres y mujeres hay en el fichero datos.\nHaz un summary del fichero datos\n\n\n\n\n\n\n\n\n\n\nUtiliza la función eda() del paquete PASWR2 para realizar un análisis exploratorio de la variable fat"
   }
 ]

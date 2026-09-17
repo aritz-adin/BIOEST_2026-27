@@ -1,0 +1,162 @@
+---
+title: "dplyr: una gramática para la manipulación de datos"
+author: "Aritz Adin"
+date: "2026-10-07"
+date-format: "DD/MM/YYYY"
+format:
+  html:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+data(EPIDURAL, package="PASWR2")
+EPIDURAL <- tibble::as_tibble(EPIDURAL)
+```
+
+## El paquete dplyr
+
+**dplyr** es uno de los paquetes más utilizados del lenguaje de programación R para manipular y analizar datos. Sus funciones permiten seleccionar variables de una base de datos, filtrar observaciones, crear nuevas variables, agrupar los datos y calcular estadísticos descriptivos de forma sencilla y comprensible.
+
+Para utilizar **dplyr**, primero hay que cargar el paquete:
+
+```{r, eval=TRUE, message=FALSE}
+library(dplyr)
+```
+
+Una vez cargado el paquete, todas sus funciones estarán disponibles durante toda la sesión.
+
+En esta asignatura se utilizarán principalmente las siguientes funciones del paquete **dplyr**:
+
+* `select()`: para seleccionar variables
+
+* `filter()`: para filtrar observaciones
+
+* `mutate()`: para crear nuevas variables
+
+* `group_by()`: para agrupar las observaciones según una variable
+
+* `summarise()`: para calcular estadísticos descriptivos para cada grupo
+
+Además, en algunos ejemplos se utilizarán las siguientes funciones:
+
+* `case_when()`: para recodificar variables
+
+* `factor()`: para definir las categorías de una variable cualitativa y su orden
+
+* `pull()`: para obtener los valores de una variable como vector
+
+* `shapiro.test()`: para realizar el test de normalidad de Shapiro-Wilk
+
+* `eda()`: para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete **PASWR2**)
+
+## El operador pipe (`|>`)
+
+El operador pipe (`|>`) permite encadenar varias operaciones de forma consecutiva.
+
+Este operador pasa automáticamente el resultado de la expresión anterior a la siguiente función.
+
+```{r, eval=FALSE}
+Datos |> 
+  Operacion1() |> 
+  Operacion2() |> 
+  Operacion3()
+```
+
+Por tanto, gracias al operador `|>`, no es necesario volver a escribir el nombre de la base de datos en cada función. Esto hace que el código sea más corto, claro y fácil de leer.
+
+
+## Seleccionando variables: `select()`
+
+La función `select()` se utiliza para seleccionar variables (columnas) de una base de datos.
+
+Por ejemplo, para seleccionar únicamente las variables `kg`y `cm` del fichero `EPIDURAL`
+
+```{r, eval=TRUE}
+EPIDURAL |> 
+  select(kg, cm)
+```
+
+## Filtrando observaciones: `filter()`
+
+La función `filter()` se utiliza para seleccionar las observaciones (filas) de una base de datos, manteniendo únicamente aquellas que cumplen una o varias condiciones.
+
+Por ejemplo, para filtar las pacientes atendidas por el Dr. A con peso superior a 90kg:
+
+```{r, eval=TRUE}
+EPIDURAL |> 
+  filter(doctor=="Dr. A", kg>90)
+```
+
+## Creando nuevas variables: `mutate()`
+
+La función `mutate()` se utiliza para crear nuevas variables en una base de datos o modificar variables existentes.
+
+Por ejemplo, para crear en la base de datos `EPIDURAL` la nueva variable $IMC=kg/(cm/100)^2$:
+
+```{r, eval=TRUE}
+EPIDURAL |> 
+  mutate(IMC=kg/(cm/100)^2) |> 
+  select(kg, cm, IMC)
+```
+
+<!-- ## Análisis estadístico descriptivo por grupos: `group_by()` + `summarise()` -->
+
+<!-- A menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo. -->
+
+<!-- Para ello, se utilizan conjuntamente las funciones `group_by()` y `summarise()`. -->
+
+<!-- Por ejemplo, PENDIENTE -->
+
+<!-- ```{r, eval=TRUE} -->
+
+<!-- ``` -->
+
+<!-- ## Recodificando variables: `mutate()` + `case_when()` -->
+
+<!-- En ocasiones, se desea clasificar los valores de una variable cuantitativa en diferentes intervalos, creando una nueva variable cualitativa. Para ello, se pueden utilizar las funciones `mutate()` y `case_when()`. -->
+
+<!-- Por ejemplo, PENDIENTE -->
+
+<!-- * Normala: 95$m^2$ baino txikiagoa -->
+
+<!-- * Handia: 95$m^2$ eta 150$m^2$ bitarteko tamaina -->
+
+<!-- * Oso handia: 150$m^2$ baino haundiagoa -->
+
+<!-- Además, para utilizar las categorías creadas en un orden determinado, es conveniente definirlas como un factor ordenado mediante la función `factor()`: -->
+
+<!-- ```{r, eval=TRUE} -->
+
+<!-- ``` -->
+
+<!-- ## Test de normalidad: `shapiro.test()` -->
+
+<!-- La función `shapiro.test()` se utiliza para evaluar si una muestra sigue una distribución normal. Para ello, aplica el test de normalidad de Shapiro-Wilk. -->
+
+<!-- Por ejemplo, para analizar la normalidad de la variable X = "PENDIENTE": -->
+
+<!-- ```{r, eval=TRUE} -->
+<!-- # NOTA: Se puede utilizar directamente el operador `$` -->
+<!-- # shapiro.test(Datos$X) -->
+
+<!-- ``` -->
+
+
+<!-- ## Análisis exploratorio de datos: `eda()` -->
+
+<!-- Para analizar la distribución de una variable cuantitativa, una opción útil es utilizar la función `eda()` del paquete **PASWR2**. -->
+
+<!-- Esta función realiza un análisis exploratorio de los datos y proporciona diversos estadísticos y representaciones gráficas. -->
+
+<!-- Por ejemplo, para realizar el análisis exploratorio de la variable X = "PENDIENTE: -->
+
+<!-- ```{r, eval=TRUE, message=FALSE, fig.width=7} -->
+<!-- library(PASWR2) -->
+
+<!-- # eda(Datos$X) -->
+
+<!-- ``` -->
+
+<!-- Entre los resultados que muestra esta función también aparece el p-valor del test de normalidad de Shapiro-Wilk (SW). -->

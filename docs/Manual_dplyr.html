@@ -9,7 +9,7 @@
 <meta name="author" content="Aritz Adin">
 <meta name="dcterms.date" content="2026-07-10">
 
-<title>Práctica 1: Lectura y manejo de ficheros – BIOEST 2026-27</title>
+<title>dplyr: una gramática para la manipulación de datos – BIOEST 2026-27</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -167,7 +167,7 @@ window.Quarto = {
 <span class="menu-text">Práctica 0</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./Practica1.html" aria-current="page"> 
+    <a class="nav-link" href="./Practica1.html"> 
 <span class="menu-text">Práctica 1</span></a>
   </li>  
 </ul>
@@ -186,16 +186,11 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#trabajar-con-ficheros" id="toc-trabajar-con-ficheros" class="nav-link active" data-scroll-target="#trabajar-con-ficheros">1. Trabajar con ficheros</a>
-  <ul class="collapse">
-  <li><a href="#visualización-de-ficheros" id="toc-visualización-de-ficheros" class="nav-link" data-scroll-target="#visualización-de-ficheros">1.1. Visualización de ficheros</a></li>
-  <li><a href="#selección-de-columnas-variables-y-filas-individuos" id="toc-selección-de-columnas-variables-y-filas-individuos" class="nav-link" data-scroll-target="#selección-de-columnas-variables-y-filas-individuos">1.2. Selección de columnas (variables) y filas (individuos)</a></li>
-  </ul></li>
-  <li><a href="#lectura-de-ficheros-externos" id="toc-lectura-de-ficheros-externos" class="nav-link" data-scroll-target="#lectura-de-ficheros-externos">2. Lectura de ficheros externos</a>
-  <ul class="collapse">
-  <li><a href="#descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-abre-el-fichero-en-el-visor-de-datos." id="toc-descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-abre-el-fichero-en-el-visor-de-datos." class="nav-link" data-scroll-target="#descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-abre-el-fichero-en-el-visor-de-datos.">2.1. Descarga el fichero <code>Bodyfat.txt</code> desde MiAulario. Léelo en <code>R</code> y almacénalo en un objeto llamado <code>datos</code>. Abre el fichero en el visor de datos.</a></li>
-  <li><a href="#realiza-los-siguientes-ejercicios" id="toc-realiza-los-siguientes-ejercicios" class="nav-link" data-scroll-target="#realiza-los-siguientes-ejercicios">2.2. Realiza los siguientes ejercicios</a></li>
-  </ul></li>
+  <li><a href="#el-paquete-dplyr" id="toc-el-paquete-dplyr" class="nav-link active" data-scroll-target="#el-paquete-dplyr">El paquete dplyr</a></li>
+  <li><a href="#el-operador-pipe" id="toc-el-operador-pipe" class="nav-link" data-scroll-target="#el-operador-pipe">El operador pipe (<code>|&gt;</code>)</a></li>
+  <li><a href="#seleccionando-variables-select" id="toc-seleccionando-variables-select" class="nav-link" data-scroll-target="#seleccionando-variables-select">Seleccionando variables: <code>select()</code></a></li>
+  <li><a href="#filtrando-observaciones-filter" id="toc-filtrando-observaciones-filter" class="nav-link" data-scroll-target="#filtrando-observaciones-filter">Filtrando observaciones: <code>filter()</code></a></li>
+  <li><a href="#creando-nuevas-variables-mutate" id="toc-creando-nuevas-variables-mutate" class="nav-link" data-scroll-target="#creando-nuevas-variables-mutate">Creando nuevas variables: <code>mutate()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -204,7 +199,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Práctica 1: Lectura y manejo de ficheros</h1>
+<h1 class="title">dplyr: una gramática para la manipulación de datos</h1>
 </div>
 
 
@@ -233,70 +228,146 @@ window.Quarto = {
 </header>
 
 
-<section id="trabajar-con-ficheros" class="level1">
-<h1>1. Trabajar con ficheros</h1>
-<p><strong>NOTA:</strong> Para realizar los siguientes ejercicios utilizaremos principalmente la sintaxis del paquete <strong>dplyr</strong> para la manipulación de datos, combinadas con el operador pipe (<code>|&gt;</code>).</p>
+<section id="el-paquete-dplyr" class="level2">
+<h2 class="anchored" data-anchor-id="el-paquete-dplyr">El paquete dplyr</h2>
+<p><strong>dplyr</strong> es uno de los paquetes más utilizados del lenguaje de programación R para manipular y analizar datos. Sus funciones permiten seleccionar variables de una base de datos, filtrar observaciones, crear nuevas variables, agrupar los datos y calcular estadísticos descriptivos de forma sencilla y comprensible.</p>
+<p>Para utilizar <strong>dplyr</strong>, primero hay que cargar el paquete:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Os he preparado un breve <a href="./Manual_dplyr.html">manual</a> con las principales funcionalidades de este paquete.</p>
-<section id="visualización-de-ficheros" class="level2">
-<h2 class="anchored" data-anchor-id="visualización-de-ficheros">1.1. Visualización de ficheros</h2>
-<p>Carga la librería <code>PASWR2</code> para trabajar con el fichero <code>EPIDURAL</code>.</p>
+<p>Una vez cargado el paquete, todas sus funciones estarán disponibles durante toda la sesión.</p>
+<p>En esta asignatura se utilizarán principalmente las siguientes funciones del paquete <strong>dplyr</strong>:</p>
+<ul>
+<li><p><code>select()</code>: para seleccionar variables</p></li>
+<li><p><code>filter()</code>: para filtrar observaciones</p></li>
+<li><p><code>mutate()</code>: para crear nuevas variables</p></li>
+<li><p><code>group_by()</code>: para agrupar las observaciones según una variable</p></li>
+<li><p><code>summarise()</code>: para calcular estadísticos descriptivos para cada grupo</p></li>
+</ul>
+<p>Además, en algunos ejemplos se utilizarán las siguientes funciones:</p>
+<ul>
+<li><p><code>case_when()</code>: para recodificar variables</p></li>
+<li><p><code>factor()</code>: para definir las categorías de una variable cualitativa y su orden</p></li>
+<li><p><code>pull()</code>: para obtener los valores de una variable como vector</p></li>
+<li><p><code>shapiro.test()</code>: para realizar el test de normalidad de Shapiro-Wilk</p></li>
+<li><p><code>eda()</code>: para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete <strong>PASWR2</strong>)</p></li>
+</ul>
+</section>
+<section id="el-operador-pipe" class="level2">
+<h2 class="anchored" data-anchor-id="el-operador-pipe">El operador pipe (<code>|&gt;</code>)</h2>
+<p>El operador pipe (<code>|&gt;</code>) permite encadenar varias operaciones de forma consecutiva.</p>
+<p>Este operador pasa automáticamente el resultado de la expresión anterior a la siguiente función.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PASWR2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"EPIDURAL"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(EPIDURAL)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Datos <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Operacion1</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Operacion2</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Operacion3</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<ul>
-<li><p>Visualiza los primeros 6 registros del fichero <code>EPIDURAL</code> con el comando <code>head()</code>.</p></li>
-<li><p>Visualiza los primeros 20 registros del fichero <code>EPIDURAL</code> con el comando <code>head()</code>.</p></li>
-<li><p>Calcula cuántos registros y cuantas variables tiene el fichero <code>EPIDURAL</code> con el comando <code>dim()</code>.</p></li>
-<li><p>Calcula cuántos registros y cuantas variables tiene el fichero <code>EPIDURAL</code> con el comando <code>str()</code>.</p></li>
-</ul>
+<p>Por tanto, gracias al operador <code>|&gt;</code>, no es necesario volver a escribir el nombre de la base de datos en cada función. Esto hace que el código sea más corto, claro y fácil de leer.</p>
 </section>
-<section id="selección-de-columnas-variables-y-filas-individuos" class="level2">
-<h2 class="anchored" data-anchor-id="selección-de-columnas-variables-y-filas-individuos">1.2. Selección de columnas (variables) y filas (individuos)</h2>
-<ul>
-<li><p>Selecciona la variable <code>doctor</code> del fichero <code>EPIDURAL</code> y visualízala en pantalla</p></li>
-<li><p>Selecciona la variable <code>kg</code> del fichero <code>EPIDURAL</code> y visualízala en pantalla</p></li>
-<li><p>Selecciona simultáneamente las variables <code>kg</code>y <code>cm</code> del fichero <code>EPIDURAL</code> y visualízalas en pantalla</p></li>
-<li><p>“Elimina” las variables <code>kg</code>y <code>cm</code> del fichero <code>EPIDURAL</code></p></li>
-<li><p>Crea una nueva variable llamada <code>ratio</code> definida como el cociente entre <code>kg</code>/<code>cm</code>. Añádela al fichero <code>EPIDURAL</code></p></li>
-<li><p><strong>EJERCICIO</strong> Crea una nueva variable llamada <code>IMC</code> (índice de masa corporal) definida como <span class="math inline">\(kg/(m^2)\)</span>. Añádela al fichero <code>EPIDURAL</code></p></li>
-<li><p>Selecciona la paciente número 19 del fichero <code>EPIDURAL</code>. Visualízala por pantalla y averigua cuánto pesa y cuánto mide</p></li>
-<li><p>Crea un nuevo fichero llamado <code>datos1</code> con aquellas pacientes que pesen menos de 85 kg. ¿Cuántos registros tiene el fichero <code>datos1</code>?</p></li>
-<li><p>Crea un nuevo fichero llamado <code>datos2</code> con aquellas pacientes que midan más de 170 cm. ¿Cuántos registros tiene el fichero <code>datos2</code>?</p></li>
-<li><p>Crea un nuevo fichero llamado <code>datos3</code> con aquellas pacientes que midan más de 170 cm o menos de 165 cm. ¿Cuántos registros tiene el fichero <code>datos3</code>?</p></li>
-<li><p>Crea un nuevo fichero llamado <code>datos4</code> con aquellas pacientes que midan entre 165 y 170 cm (ambos incluidos). ¿Cuántos registros tiene el fichero <code>datos4</code>?</p></li>
-<li><p>Crea un nuevo fichero llamado <code>datos5</code> con aquellas pacientes atendidas por el Doctor A. ¿Cuántos registros tiene el fichero <code>datos5</code>?</p></li>
-</ul>
+<section id="seleccionando-variables-select" class="level2">
+<h2 class="anchored" data-anchor-id="seleccionando-variables-select">Seleccionando variables: <code>select()</code></h2>
+<p>La función <code>select()</code> se utiliza para seleccionar variables (columnas) de una base de datos.</p>
+<p>Por ejemplo, para seleccionar únicamente las variables <code>kg</code>y <code>cm</code> del fichero <code>EPIDURAL</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(kg, cm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 85 × 2
+      kg    cm
+   &lt;int&gt; &lt;int&gt;
+ 1   116   172
+ 2    86   176
+ 3    72   157
+ 4    63   169
+ 5   114   163
+ 6   121   163
+ 7    90   170
+ 8    87   164
+ 9    74   166
+10    91   175
+# ℹ 75 more rows</code></pre>
+</div>
+</div>
 </section>
+<section id="filtrando-observaciones-filter" class="level2">
+<h2 class="anchored" data-anchor-id="filtrando-observaciones-filter">Filtrando observaciones: <code>filter()</code></h2>
+<p>La función <code>filter()</code> se utiliza para seleccionar las observaciones (filas) de una base de datos, manteniendo únicamente aquellas que cumplen una o varias condiciones.</p>
+<p>Por ejemplo, para filtar las pacientes atendidas por el Dr.&nbsp;A con peso superior a 90kg:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(doctor<span class="sc">==</span><span class="st">"Dr. A"</span>, kg<span class="sc">&gt;</span><span class="dv">90</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+  doctor    kg    cm ease       treatment              oc complications         
+  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;fct&gt;      &lt;fct&gt;               &lt;int&gt; &lt;fct&gt;                 
+1 Dr. A    105   165 Difficult  Hamstring Stretch      10 Failure - too many OCs
+2 Dr. A    106   165 Easy       Traditional Sitting     2 None                  
+3 Dr. A    103   161 Easy       Hamstring Stretch       1 None                  
+4 Dr. A    142   170 Impossible Traditional Sitting     1 None                  
+5 Dr. A    103   170 Easy       Traditional Sitting     1 None                  
+6 Dr. A     94   165 Easy       Hamstring Stretch       0 None                  </code></pre>
+</div>
+</div>
 </section>
-<section id="lectura-de-ficheros-externos" class="level1">
-<h1>2. Lectura de ficheros externos</h1>
-<section id="descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-abre-el-fichero-en-el-visor-de-datos." class="level2">
-<h2 class="anchored" data-anchor-id="descarga-el-fichero-bodyfat.txt-desde-miaulario.-léelo-en-r-y-almacénalo-en-un-objeto-llamado-datos.-abre-el-fichero-en-el-visor-de-datos.">2.1. Descarga el fichero <code>Bodyfat.txt</code> desde MiAulario. Léelo en <code>R</code> y almacénalo en un objeto llamado <code>datos</code>. Abre el fichero en el visor de datos.</h2>
-<!-- ## 2.2. Descarga el fichero `Bodyfat.xlsx` desde MiAulario. Léelo en `R` y almacénalo en un objeto llamado `datos2`. Imprímelo por pantalla -->
-<!-- ```{r, message=FALSE, warning=FALSE, include=FALSE} -->
-<!-- library(xlsx) -->
-<!-- datos2 <- read.xlsx("Bodyfat.xlsx", sheetIndex="Hoja1") -->
-<!-- datos2 -->
+<section id="creando-nuevas-variables-mutate" class="level2">
+<h2 class="anchored" data-anchor-id="creando-nuevas-variables-mutate">Creando nuevas variables: <code>mutate()</code></h2>
+<p>La función <code>mutate()</code> se utiliza para crear nuevas variables en una base de datos o modificar variables existentes.</p>
+<p>Por ejemplo, para crear en la base de datos <code>EPIDURAL</code> la nueva variable <span class="math inline">\(IMC=kg/(cm/100)^2\)</span>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">IMC=</span>kg<span class="sc">/</span>(cm<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(kg, cm, IMC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 85 × 3
+      kg    cm   IMC
+   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+ 1   116   172  39.2
+ 2    86   176  27.8
+ 3    72   157  29.2
+ 4    63   169  22.1
+ 5   114   163  42.9
+ 6   121   163  45.5
+ 7    90   170  31.1
+ 8    87   164  32.3
+ 9    74   166  26.9
+10    91   175  29.7
+# ℹ 75 more rows</code></pre>
+</div>
+</div>
+<!-- ## Análisis estadístico descriptivo por grupos: `group_by()` + `summarise()` -->
+<!-- A menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo. -->
+<!-- Para ello, se utilizan conjuntamente las funciones `group_by()` y `summarise()`. -->
+<!-- Por ejemplo, PENDIENTE -->
+<!-- ```{r, eval=TRUE} -->
 <!-- ``` -->
-</section>
-<section id="realiza-los-siguientes-ejercicios" class="level2">
-<h2 class="anchored" data-anchor-id="realiza-los-siguientes-ejercicios">2.2. Realiza los siguientes ejercicios</h2>
-<ul>
-<li><p>Con el fichero <code>datos</code>, visualiza en pantalla la variable <code>fat</code></p></li>
-<li><p>Selecciona las mujeres cuyo valor de <code>fat</code> sea menor que 30.</p></li>
-<li><p>Utiliza el comando <code>table</code> para averiguar cuántos hombres y mujeres hay en el fichero <code>datos</code>.</p></li>
-<li><p>Haz un <em>summary</em> del fichero <code>datos</code></p></li>
-<li><p>Utiliza la función <code>eda()</code> del paquete <code>PASWR2</code> para realizar un análisis exploratorio de la variable <code>fat</code></p></li>
-</ul>
+<!-- ## Recodificando variables: `mutate()` + `case_when()` -->
+<!-- En ocasiones, se desea clasificar los valores de una variable cuantitativa en diferentes intervalos, creando una nueva variable cualitativa. Para ello, se pueden utilizar las funciones `mutate()` y `case_when()`. -->
+<!-- Por ejemplo, PENDIENTE -->
+<!-- * Normala: 95$m^2$ baino txikiagoa -->
+<!-- * Handia: 95$m^2$ eta 150$m^2$ bitarteko tamaina -->
+<!-- * Oso handia: 150$m^2$ baino haundiagoa -->
+<!-- Además, para utilizar las categorías creadas en un orden determinado, es conveniente definirlas como un factor ordenado mediante la función `factor()`: -->
+<!-- ```{r, eval=TRUE} -->
+<!-- ``` -->
+<!-- ## Test de normalidad: `shapiro.test()` -->
+<!-- La función `shapiro.test()` se utiliza para evaluar si una muestra sigue una distribución normal. Para ello, aplica el test de normalidad de Shapiro-Wilk. -->
+<!-- Por ejemplo, para analizar la normalidad de la variable X = "PENDIENTE": -->
+<!-- ```{r, eval=TRUE} -->
+<!-- # NOTA: Se puede utilizar directamente el operador `$` -->
+<!-- # shapiro.test(Datos$X) -->
+<!-- ``` -->
+<!-- ## Análisis exploratorio de datos: `eda()` -->
+<!-- Para analizar la distribución de una variable cuantitativa, una opción útil es utilizar la función `eda()` del paquete **PASWR2**. -->
+<!-- Esta función realiza un análisis exploratorio de los datos y proporciona diversos estadísticos y representaciones gráficas. -->
+<!-- Por ejemplo, para realizar el análisis exploratorio de la variable X = "PENDIENTE: -->
+<!-- ```{r, eval=TRUE, message=FALSE, fig.width=7} -->
+<!-- library(PASWR2) -->
+<!-- # eda(Datos$X) -->
+<!-- ``` -->
+<!-- Entre los resultados que muestra esta función también aparece el p-valor del test de normalidad de Shapiro-Wilk (SW). -->
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
