@@ -1,0 +1,549 @@
+---
+title: "Práctica 2: Estadística Descriptiva"
+author: "Aritz Adin"
+date: "2026-10-21"
+date-format: "DD/MM/YYYY"
+format:
+  html:
+    toc: true
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(width=1000)
+```
+
+# Descripción
+
+En esta práctica vamos a trabajar con el fichero de datos `Diabetes`.
+
+-   El fichero de datos contiene 19 variables medidas sobre 403 pacientes. Estos pacientes forman parte de un estudio con 1046 sujetos diseñado para investigar la prevalencia de la de obesidad, diabetes, y otros factores de riesgo cardiovasculares para Afroamericanos en Virginia, EEUU.
+
+-   Según Dr John Hong, Diabetes Mellitus Tipo II está asociada con la obesidad. El índice cintura-cadera puede ser un predictor en diabetes y enfermedades de corazón.
+
+-   Diabetes Mellitus Tipo II está también asociada con hipertensión y ambos pueden ser parte del "Síndrome X".
+
+-   Los 403 sujetos del estudio son aquellos a los que se les hizo un seguimiento de diabetes. La hemoglobina glicosilada $>7.0$ se toma normalmente como diagnóstico positivo de diabetes.
+
+El fichero puede descargarse de la web <http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets>
+
+Para más información ver el paper
+
+Willems JP, Saunders JT, DE Hunt, JB Schorling. Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. *Southern Medical Journal* 90:814-820; 1997. <https://europepmc.org/abstract/med/9258308>
+
+## Variables
+
+Estas son las variables que contiene el fichero (se han eliminado alguna del fichero original y se han reemplazado algunos valores perdidos):
+
+| Variable   | Descripción                            |
+|------------|----------------------------------------|
+| `id`       | Subject ID                             |
+| `chol`     | Total Cholesterol (mg/dL)              |
+| `stab.glu` | Stabilized Glucose (mg/dL)             |
+| `hdl`      | High Density Lipoprotein (mg/dL)       |
+| `ratio`    | Cholesterol / HDL ratio                |
+| `glyhb`    | Glycolsolated Hemoglobin (%)           |
+| `location` | Buckingham or Louisa                   |
+| `age`      | Age of patient (years)                 |
+| `gender`   | Male or Female                         |
+| `height`   | Height (inches)                        |
+| `weight`   | Weight (pounds)                        |
+| `frame`    | Body frame size (small, medium, large) |
+| `bp.1s`    | First Systolic Blood Pressure (mmHg)   |
+| `pb.1d`    | First Diastolic Blood Pressure (mmHg)  |
+| `waist`    | Waistline (inches)                     |
+| `hip`      | Hip measurement (inches)               |
+
+# 1. Estadística descriptiva univariante
+
+## 1.1. Descarga y lee el fichero diabetes
+
+```{r, message=FALSE}
+library(readr)
+library(dplyr)
+
+diabetes <- read_table("diabetes.txt")
+
+# Para convertir los carácteres en factor 
+diabetes <- diabetes |> 
+  mutate(across(where(is.character), as.factor))
+
+print(diabetes)
+```
+
+## 1.2 ¿Cuántas variables tiene el fichero diabetes?
+
+```{r include=FALSE}
+diabetes |> 
+  dim()
+```
+
+## 1.3 ¿De qué tipo es cada variable?
+
+```{r include=FALSE}
+diabetes |> 
+  str()
+```
+
+## 1.4 ¿Cuántas categorías tiene la variable `frame`?
+
+```{r include=FALSE}
+diabetes$frame |> 
+  levels()
+```
+
+## 1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable `frame`.
+
+**NOTA**: Primero debemos reordenar los niveles de la variable `frame`.
+
+```{r include=FALSE}
+diabetes <- diabetes |> 
+  mutate(frame=factor(frame, levels=c("small","medium","large")))
+
+diabetes$frame |> levels()
+```
+```{r include=FALSE}
+## Tabla de frecuencias absolutas y relativas
+Tabla <- diabetes |> 
+  count(frame) |> 
+  mutate(prop=n/nrow(diabetes))
+
+Tabla
+```
+
+## 1.6 Realiza una representación gráfica adecuada para la variable `frame`. ¿Qué información obtienes?
+
+```{r include=FALSE}
+library(ggplot2)
+
+Tabla |> 
+  ggplot(aes(x=frame, y=n, fill=frame)) +
+  geom_col() + 
+  ggtitle("Tamaño del cuerpo")
+```
+
+## 1.7 Calcula la moda de la variable `frame`. ¿Qué significa?
+
+<!-- - Moda: `medium` -->
+<!-- - **Intepretación**: La mayoría de los pacientes tienen tamaño del cuerpo mediano -->
+
+## 1.8 ¿Qué representaciones gráficas te parecen adecuadas para la variable `chol`?
+
+## 1.9 Realiza un histograma y un diagrama de cajas de la variable `chol`. ¿Qué información obtienes de ellos?
+
+```{r include=FALSE}
+par(mfrow=c(1,2))
+
+diabetes$chol |> 
+  hist(main="Histograma", xlab="Colesterol")
+
+diabetes$chol |> 
+  boxplot(main="Diagrama de caja", xlab="Colesterol")
+```
+
+## 1.10 A la vista del diagrama de cajas y del histograma de la variable `chol`, qué puedes decir acerca de su simetría? ¿Qué crees que será mayor, la media o la mediana?
+
+## 1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable `chol`.
+
+```{r include=FALSE}
+library(PASWR2)
+
+diabetes$chol |> eda()
+```
+<!-- Coeficiente de asimetria: 0.924 -->
+<!-- - **Intepretación**: Como el coeficiente es positivo, la distribución de la variable colesterol muestra una asimetría hacia la derecha. Es decir, los niveles de colesterol por encima de la media (207.85 mg/dL) están más dispersos que los valores por debajo de ella. -->
+
+<!-- Mediana: 204 mg/dl -->
+<!-- - **Intepretación**: La mitad de los pacientes tienen un colesterol (inferior a) menor o igual a 204 mg/dl -->
+
+<!-- Percentil 75 (Cuartil 3): 230 mg/dl -->
+<!-- - **Intepretación**: El 75% de los paciente tiene un colesterol de 230 mg/dl o menos. -->
+
+## 1.12 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable `chol`. ¿Entre qué valores se encuentra el 25% de las personas con el colesterol más alto? ¿Y el 75% de las personas con el colesterol más bajo? ¿Qué puedes decir acerca de la dispersión de la variable?¿ Dónde hay más dispersión, en el 25% de las personas con mayor colesterol o en el 25% de las personas con colesterol más bajo?
+
+## 1.13 Calcula el coeficiente de curtosis de la variable `chol`. ¿Qué indica?
+
+<!-- Curtosis: 2.558 -->
+<!-- - **Intepretación**: Como la curtosis es positiva, la distribución de la variable colesterol muestra una mayor concentración en torno a la media (207.85 mg/dL) que una distribución normal. -->
+
+## 1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?
+
+```{r include=FALSE}
+b <- diabetes$chol |> boxplot()
+b$out
+
+## Para calcular valores extremos, debemos tipificar la variable ##
+diabetes <- diabetes |> 
+  mutate(Z.chol = (chol-mean(chol))/sd(chol))
+
+diabetes |> 
+  filter(Z.chol< -3 | Z.chol> 3) |> 
+  arrange(chol)
+```
+
+- Los valores de colesterol 443, 404, 347 y 342 mg/dL son valores extremos.
+
+## 1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?
+
+```{r include=FALSE}
+diabetes |> 
+  count(gender)
+```
+
+## 1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?
+
+```{r include=FALSE}
+diabetes |> 
+  count(location)
+```
+
+## 1.17 ¿Puedes calcular la media y la mediana de la variable `location`?
+
+## 1.18 Realiza un diagrama de cajas de la variable `chol` según las categorías de la variable `frame`.
+
+```{r include=FALSE}
+boxplot(chol ~ frame, data=diabetes)
+```
+
+## 1.19 Realiza un diagrama de cajas de la variable `chol` según las categorías de la `frame` y la variable `gender`.
+
+```{r include=FALSE}
+boxplot(chol ~ frame + gender, data=diabetes)
+```
+
+## 1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable `chol` según las categorías de la variable `frame`?
+
+```{r include=FALSE}
+diabetes |> 
+  group_by(frame) |> 
+  summarise(media=mean(chol),
+            mediana=median(chol),
+            sd=sd(chol),
+            q2.5=quantile(chol, 0.025),
+            q2.5=quantile(chol, 0.975))
+```
+
+## 1.21 Realiza un histograma de la variable `chol` según las categorías de la variable `frame` y la variable `gender`.
+
+```{r include=FALSE}
+library(lattice)
+
+diabetes |> 
+  ggplot(aes(x=chol)) +
+  geom_histogram() +
+  facet_wrap(~ gender * frame)
+```
+
+## 1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable `glyhb`. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica.
+
+```{r include=FALSE}
+diabetes$glyhb |> eda()
+
+par(mfrow=c(1,2))
+diabetes$glyhb |> hist()
+diabetes$glyhb |> boxplot()
+```
+
+## 1.23 Compara la dispersión de las variables `chol` y `glyhb`. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?
+
+```{r include=FALSE}
+diabetes$chol |> eda()
+diabetes$glyhb |> eda()
+
+diabetes |> 
+  summarise(CV.chol = sd(chol)/mean(chol),
+            CV.glyhb = sd(glyhb)/mean(glyhb))
+```
+
+## 1.24 Considera la variable `chol` por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?
+
+```{r include=FALSE}
+diabetes |> 
+  filter(gender=="male") |> 
+  mutate(Z.chol = (chol-mean(chol))/sd(chol)) |> 
+  arrange(desc(chol)) |> 
+  slice(1)
+  
+diabetes |> 
+  filter(gender=="female") |> 
+  mutate(Z.chol = (chol-mean(chol))/sd(chol)) |> 
+  slice(1)
+```
+
+## 1.25 Crea una nueva variable denominada `ratioWH` definida como el cociente de la variable `waist` y la variable `hip` (waist/hip)
+
+```{r include=FALSE}
+diabetes <- diabetes |> 
+  mutate(ratioWH = waist/hip)
+
+diabetes
+```
+
+## 1.26 Dibuja un histograma y un diagrama de cajas de la variable `ratioWH`.
+
+```{r include=FALSE}
+par(mfrow=c(1,2))
+diabetes$ratioWH |> hist()
+diabetes$ratioWH |> boxplot()
+```
+
+## 1.27 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable `ratioWH`. ¿Entre qué valores se encuentra el 25% de los valores más altos? ¿Y el 75% de los valores más bajos?
+
+```{r include=FALSE}
+diabetes$ratioWH |> eda()
+```
+
+# 2. Tablas de doble entrada
+
+## 2.1 ¿Cuántos hombres y cuántas mujeres hay en la localización Buckingham? ¿Cuántos en Louisa?
+
+```{r include=FALSE}
+diabetes |> 
+  select(gender, location) |> 
+  table()
+```
+
+## 2.2 ¿Qué porcentaje de personas en la muestra tienen un body frame *small* y además son de Buckingham?
+
+```{r include=FALSE}
+diabetes |> 
+  select(frame, location) |> 
+  table() |> 
+  prop.table()
+```
+
+## 2.3 Dibuja un diagrama de barras donde representes las frecuencias de la variable `location` para cada una de las categorías de la variable `frame`?
+
+```{r include=FALSE}
+diabetes |> 
+  select(location, frame) |> 
+  table() |> 
+  barplot(beside=TRUE, legend.text=TRUE)
+```
+
+## 2.4 Forma una tabla de doble entrada cruzando las variables `gender` y `frame`. ¿Cuántas mujeres tienen un body frame *medium*?
+
+```{r include=FALSE}
+diabetes |> 
+  select(gender, frame) |> 
+  table()
+```
+
+## 2.5 Qué porcentaje de hombres tienen un body frame *large*?
+
+```{r include=FALSE}
+diabetes |> 
+  select(gender, frame) |> 
+  table() |> 
+  prop.table(1)
+```
+
+## EJERCICIOS: Para resolver en clase
+
+Cruza las variables `gender` y `frame` y responde a las siguientes preguntas
+
+-   ¿Cuántas mujeres tienen body frame *large*?
+-   ¿Qué porcentaje de mujeres tienen body frame *large*?
+-   ¿Cuál es el porcentaje de hombres con body frame *small*?
+-   ¿Qué porcentaje de pacientes con body frame *medium* son hombres?
+
+
+# 3. Covarianza y correlación
+
+## 3.1 Realiza un diagrama de dispersión de las variables `weight` y `waist`. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.
+
+```{r include=FALSE}
+diabetes |>
+  ggplot(aes(x=weight, y=waist)) +
+  geom_point()
+
+diabetes |> 
+  select(weight, waist) |>
+  cov()
+
+diabetes |> 
+  select(weight, waist) |>
+  cor()
+```
+
+<!-- - Covarianza: 194.88 (pounds*inches) -->
+
+<!-- - Correlación: 0.846 (sin unidades) -->
+
+<!-- - **Interpretación:** Dado que la covarianza es positiva, existe una relación lineal directa entre el peso y la anchura de la cintura de los pacientes. Es decir, a medida que aumenta el peso se espera que también lo haga la anchura d ela cintura. Además como la correlación está cerca del valor "1", podemos afirmar que dicha relación lineal es fuerte. -->
+
+## 3.2 Realiza un diagrama de dispersión de las variables `chol` y `weight`. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.
+
+```{r include=FALSE}
+diabetes |>
+  ggplot(aes(x=chol, y=weight)) +
+  geom_point()
+
+diabetes |> 
+  select(chol, weight) |>
+  cov()
+
+diabetes |> 
+  select(chol, weight) |>
+  cor()
+```
+
+## 3.3 Selecciona las personas del condado de Buckingham y realiza un diagrama de dispersión de las variables `waist` y `hip`. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.
+
+```{r include=FALSE}
+diabetes.B <- diabetes |>
+  filter(location=="Buckingham")
+
+diabetes.B |> 
+  ggplot(aes(x=waist, y=hip)) +
+  geom_point()
+
+diabetes.B |> 
+  select(waist, hip) |>
+  cov()
+
+diabetes.B |> 
+  select(waist, hip) |>
+  cor()
+```
+
+## 3.4 Selecciona las mujeres con body frame medium y realiza un diagrama de dispersión de las variables `bp.1s` y `age`. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.
+
+```{r include=FALSE}
+datos <- diabetes |>
+  filter(gender=="female",
+         frame=="medium")
+
+datos |> 
+  ggplot(aes(x=bp.1s, y=age)) +
+  geom_point()
+
+datos |> 
+  select(bp.1s, age) |>
+  cov()
+
+datos |> 
+  select(bp.1s, age) |>
+  cor()
+```
+
+## A fancy way of visualizing correlation matrices
+
+```{r include=FALSE}
+library(corrplot)
+
+cor.matrix <- diabetes |> 
+  select(where(is.numeric)) |> 
+  cor()
+
+cor.matrix |> corrplot(method="circle", type="upper")
+cor.matrix |> corrplot(method="number", type="upper")
+```
+
+
+<!-- # EJERCICIOS A ENTREGAR -->
+
+<!-- Una Organización de Salud busca identificar qué factores de los pacientes están más asociados con la remisión del cáncer de pulmón tras el tratamiento, en el marco de un estudio más amplio sobre los resultados del tratamiento y la calidad de vida de los pacientes con esta enfermedad. -->
+
+<!-- El archivo `patients.txt` contiene las siguientes variables medidas sobre un conjunto de datos de 8.525 pacientes. -->
+
+<!-- -   `remission`: response variable (0=no, 1=yes) -->
+
+<!-- -   `Age`: age of the patient (in years) -->
+
+<!-- -   `IL6`: Interleukin-6 concentration in blood (pg/ml) -->
+
+<!-- -   `CRP`: C-reactive protein concentration in blood (mg/dl) -->
+
+<!-- -   `LengthofStay`: duration of a patient's hospital stay (in weeks) -->
+
+<!-- -   `CancerStage`: lung cancer stage (I, II, III or IV) -->
+
+<!-- -   `Smoking`: is the patient a smoker? (1=never, 2=former, 3=current) -->
+
+<!-- -   `ID.hospital`: ID of the hospital -->
+
+<!-- ```{r, message=FALSE} -->
+<!-- patients <- read_table("patients.txt") -->
+
+<!-- # Para convertir los carácteres en factor  -->
+<!-- patients <- patients |>  -->
+<!--   mutate(across(where(is.character), as.factor)) -->
+
+<!-- print(patients) -->
+<!-- ``` -->
+
+<!-- En primer lugar, selecciona los pacientes asociados a tu código de hospital (`ID.hospital`) e indica cuántos pacientes pertenecen a dicho hospital. -->
+
+<!-- Por ejemplo: -->
+
+<!-- ```{r} -->
+<!-- datos <- patients |>  -->
+<!--   filter(ID.hospital=="1") -->
+
+<!-- datos |> str() -->
+<!-- ``` -->
+<!-- El hospital "1" contiene 252 pacientes. -->
+
+<!-- ## 1) Realiza un histograma y un diagrama de cajas de la variable `IL6`. ¿Qué puedes decir acerca de la simetría y la dispersión de la variable? -->
+
+<!-- ```{r include=FALSE} -->
+<!-- par(mfrow=c(1,2)) -->
+<!-- datos$IL6 |> hist() -->
+<!-- datos$IL6 |> boxplot() -->
+<!-- ``` -->
+
+<!-- ## 2) Calcula la media, mediana, cuartiles, desviación típica, coeficientes de asimetría y de curtosis, y los coeficientes de variación. Indica sus unidades e interpreta los estadísticos (en aquellos casos que sea posible). -->
+
+<!-- ```{r include=FALSE} -->
+<!-- datos$IL6 |> eda() -->
+
+<!-- datos |>  -->
+<!--   summarise(CV.IL6=sd(IL6)/mean(IL6)) -->
+<!-- ``` -->
+
+<!-- ## 3) Dibuja un histograma y un diagrama de cajas de la variable `IL6` en función de la variable `CancerStage`. Interpreta los gráficos obtenidos. -->
+
+<!-- ```{r, include=FALSE} -->
+<!-- datos |>  -->
+<!--   ggplot(aes(x=IL6)) + -->
+<!--   geom_histogram(bins=10) + -->
+<!--   facet_wrap(~ CancerStage) -->
+
+<!-- boxplot(IL6 ~ CancerStage, data=datos) -->
+<!-- ``` -->
+
+
+<!-- ## 4) Realiza un diagrama de dispersión de las variables `IL6` y `CRP`. ¿Crees que existe relación lineal entre ellas? Calcula e interpreta la covarianza y el coeficiente de correlación lineal (indica sus unidades). -->
+
+<!-- ```{r include=FALSE} -->
+<!-- datos |> -->
+<!--   ggplot(aes(x=IL6, y=CRP)) + -->
+<!--   geom_point() -->
+
+<!-- datos |>  -->
+<!--   select(IL6, CRP) |> -->
+<!--   cov() -->
+
+<!-- datos |>  -->
+<!--   select(IL6, CRP) |> -->
+<!--   cor() -->
+<!-- ``` -->
+
+
+<!-- ## 5) Selecciona el paciente fumador (*former*) y ex-fumador (*never*) con valores más bajos en la variable `CRP`. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta. -->
+
+<!-- ```{r include=FALSE} -->
+<!-- datos |>  -->
+<!--   filter(Smoking=="former") |>  -->
+<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>  -->
+<!--   arrange(CRP) |>  -->
+<!--   slice(1) -->
+
+<!-- datos |>  -->
+<!--   filter(Smoking=="never") |>  -->
+<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>  -->
+<!--   arrange(CRP) |>  -->
+<!--   slice(1) -->
+<!-- ``` -->

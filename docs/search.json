@@ -39,14 +39,14 @@
     "href": "Manual_dplyr.html",
     "title": "dplyr: una gramática para la manipulación de datos",
     "section": "",
-    "text": "dplyr es uno de los paquetes más utilizados del lenguaje de programación R para manipular y analizar datos. Sus funciones permiten seleccionar variables de una base de datos, filtrar observaciones, crear nuevas variables, agrupar los datos y calcular estadísticos descriptivos de forma sencilla y comprensible.\nPara utilizar dplyr, primero hay que cargar el paquete:\n\nlibrary(dplyr)\n\nUna vez cargado el paquete, todas sus funciones estarán disponibles durante toda la sesión.\nEn esta asignatura se utilizarán principalmente las siguientes funciones del paquete dplyr:\n\nselect(): para seleccionar variables\nfilter(): para filtrar observaciones\nmutate(): para crear nuevas variables\ngroup_by(): para agrupar las observaciones según una variable\nsummarise(): para calcular estadísticos descriptivos para cada grupo\n\nAdemás, en algunos ejemplos se utilizarán las siguientes funciones:\n\ncase_when(): para recodificar variables\nfactor(): para definir las categorías de una variable cualitativa y su orden\npull(): para obtener los valores de una variable como vector\nshapiro.test(): para realizar el test de normalidad de Shapiro-Wilk\neda(): para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete PASWR2)"
+    "text": "dplyr es uno de los paquetes más utilizados del lenguaje de programación R para manipular y analizar datos. Sus funciones permiten seleccionar variables de una base de datos, filtrar observaciones, crear nuevas variables, agrupar los datos y calcular estadísticos descriptivos de forma sencilla y comprensible.\nPara utilizar dplyr, primero hay que cargar el paquete:\n\nlibrary(dplyr)\n\nUna vez cargado el paquete, todas sus funciones estarán disponibles durante toda la sesión.\nEn esta asignatura se utilizarán principalmente las siguientes funciones del paquete dplyr:\n\nselect(): para seleccionar variables\nslice(): para seleccionar observaciones\nfilter(): para filtrar observaciones\nmutate(): para crear nuevas variables\ngroup_by(): para agrupar las observaciones según una variable\nsummarise(): para calcular estadísticos descriptivos para cada grupo\n\nAdemás, en algunos ejemplos se utilizarán las siguientes funciones:\n\ncase_when(): para recodificar variables\nfactor(): para definir las categorías de una variable cualitativa y su orden\npull(): para obtener los valores de una variable como vector\nshapiro.test(): para realizar el test de normalidad de Shapiro-Wilk\neda(): para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete PASWR2)"
   },
   {
     "objectID": "Manual_dplyr.html#el-paquete-dplyr",
     "href": "Manual_dplyr.html#el-paquete-dplyr",
     "title": "dplyr: una gramática para la manipulación de datos",
     "section": "",
-    "text": "dplyr es uno de los paquetes más utilizados del lenguaje de programación R para manipular y analizar datos. Sus funciones permiten seleccionar variables de una base de datos, filtrar observaciones, crear nuevas variables, agrupar los datos y calcular estadísticos descriptivos de forma sencilla y comprensible.\nPara utilizar dplyr, primero hay que cargar el paquete:\n\nlibrary(dplyr)\n\nUna vez cargado el paquete, todas sus funciones estarán disponibles durante toda la sesión.\nEn esta asignatura se utilizarán principalmente las siguientes funciones del paquete dplyr:\n\nselect(): para seleccionar variables\nfilter(): para filtrar observaciones\nmutate(): para crear nuevas variables\ngroup_by(): para agrupar las observaciones según una variable\nsummarise(): para calcular estadísticos descriptivos para cada grupo\n\nAdemás, en algunos ejemplos se utilizarán las siguientes funciones:\n\ncase_when(): para recodificar variables\nfactor(): para definir las categorías de una variable cualitativa y su orden\npull(): para obtener los valores de una variable como vector\nshapiro.test(): para realizar el test de normalidad de Shapiro-Wilk\neda(): para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete PASWR2)"
+    "text": "dplyr es uno de los paquetes más utilizados del lenguaje de programación R para manipular y analizar datos. Sus funciones permiten seleccionar variables de una base de datos, filtrar observaciones, crear nuevas variables, agrupar los datos y calcular estadísticos descriptivos de forma sencilla y comprensible.\nPara utilizar dplyr, primero hay que cargar el paquete:\n\nlibrary(dplyr)\n\nUna vez cargado el paquete, todas sus funciones estarán disponibles durante toda la sesión.\nEn esta asignatura se utilizarán principalmente las siguientes funciones del paquete dplyr:\n\nselect(): para seleccionar variables\nslice(): para seleccionar observaciones\nfilter(): para filtrar observaciones\nmutate(): para crear nuevas variables\ngroup_by(): para agrupar las observaciones según una variable\nsummarise(): para calcular estadísticos descriptivos para cada grupo\n\nAdemás, en algunos ejemplos se utilizarán las siguientes funciones:\n\ncase_when(): para recodificar variables\nfactor(): para definir las categorías de una variable cualitativa y su orden\npull(): para obtener los valores de una variable como vector\nshapiro.test(): para realizar el test de normalidad de Shapiro-Wilk\neda(): para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete PASWR2)"
   },
   {
     "objectID": "Manual_dplyr.html#el-operador-pipe",
@@ -131,5 +131,341 @@
     "title": "Práctica 0: Introducción a R",
     "section": "",
     "text": "En primer lugar, debemos estar seguros de cuál es nuestro directorio de trabajo.\n\n\ngetwd()\n\n\nDescarga el fichero Bodyfat.txt desde MiAulario, léelo en R y almacénalo en un objeto llamado datos.\n\n\ndatos &lt;- read.table(\"BodyFat.txt\", header=TRUE)\n\nhead(datos)\n\n\nGuarda el fichero datos en el archivo Bodyfat.Rdata.\n\n\nsave(datos, file=\"BodyFat.Rdata\")"
+  },
+  {
+    "objectID": "Practica2.html",
+    "href": "Practica2.html",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "",
+    "text": "En esta práctica vamos a trabajar con el fichero de datos Diabetes.\n\nEl fichero de datos contiene 19 variables medidas sobre 403 pacientes. Estos pacientes forman parte de un estudio con 1046 sujetos diseñado para investigar la prevalencia de la de obesidad, diabetes, y otros factores de riesgo cardiovasculares para Afroamericanos en Virginia, EEUU.\nSegún Dr John Hong, Diabetes Mellitus Tipo II está asociada con la obesidad. El índice cintura-cadera puede ser un predictor en diabetes y enfermedades de corazón.\nDiabetes Mellitus Tipo II está también asociada con hipertensión y ambos pueden ser parte del “Síndrome X”.\nLos 403 sujetos del estudio son aquellos a los que se les hizo un seguimiento de diabetes. La hemoglobina glicosilada \\(&gt;7.0\\) se toma normalmente como diagnóstico positivo de diabetes.\n\nEl fichero puede descargarse de la web http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets\nPara más información ver el paper\nWillems JP, Saunders JT, DE Hunt, JB Schorling. Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997. https://europepmc.org/abstract/med/9258308\n\n\nEstas son las variables que contiene el fichero (se han eliminado alguna del fichero original y se han reemplazado algunos valores perdidos):\n\n\n\nVariable\nDescripción\n\n\n\n\nid\nSubject ID\n\n\nchol\nTotal Cholesterol (mg/dL)\n\n\nstab.glu\nStabilized Glucose (mg/dL)\n\n\nhdl\nHigh Density Lipoprotein (mg/dL)\n\n\nratio\nCholesterol / HDL ratio\n\n\nglyhb\nGlycolsolated Hemoglobin (%)\n\n\nlocation\nBuckingham or Louisa\n\n\nage\nAge of patient (years)\n\n\ngender\nMale or Female\n\n\nheight\nHeight (inches)\n\n\nweight\nWeight (pounds)\n\n\nframe\nBody frame size (small, medium, large)\n\n\nbp.1s\nFirst Systolic Blood Pressure (mmHg)\n\n\npb.1d\nFirst Diastolic Blood Pressure (mmHg)\n\n\nwaist\nWaistline (inches)\n\n\nhip\nHip measurement (inches)"
+  },
+  {
+    "objectID": "Practica2.html#variables",
+    "href": "Practica2.html#variables",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "",
+    "text": "Estas son las variables que contiene el fichero (se han eliminado alguna del fichero original y se han reemplazado algunos valores perdidos):\n\n\n\nVariable\nDescripción\n\n\n\n\nid\nSubject ID\n\n\nchol\nTotal Cholesterol (mg/dL)\n\n\nstab.glu\nStabilized Glucose (mg/dL)\n\n\nhdl\nHigh Density Lipoprotein (mg/dL)\n\n\nratio\nCholesterol / HDL ratio\n\n\nglyhb\nGlycolsolated Hemoglobin (%)\n\n\nlocation\nBuckingham or Louisa\n\n\nage\nAge of patient (years)\n\n\ngender\nMale or Female\n\n\nheight\nHeight (inches)\n\n\nweight\nWeight (pounds)\n\n\nframe\nBody frame size (small, medium, large)\n\n\nbp.1s\nFirst Systolic Blood Pressure (mmHg)\n\n\npb.1d\nFirst Diastolic Blood Pressure (mmHg)\n\n\nwaist\nWaistline (inches)\n\n\nhip\nHip measurement (inches)"
+  },
+  {
+    "objectID": "Practica2.html#descarga-y-lee-el-fichero-diabetes",
+    "href": "Practica2.html#descarga-y-lee-el-fichero-diabetes",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.1. Descarga y lee el fichero diabetes",
+    "text": "1.1. Descarga y lee el fichero diabetes\n\nlibrary(readr)\nlibrary(dplyr)\n\ndiabetes &lt;- read_table(\"diabetes.txt\")\n\n# Para convertir los carácteres en factor \ndiabetes &lt;- diabetes |&gt; \n  mutate(across(where(is.character), as.factor))\n\nprint(diabetes)\n\n# A tibble: 403 × 16\n      id  chol stab.glu   hdl ratio glyhb location     age gender height weight frame  bp.1s bp.1d waist   hip\n   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1  1000   203       82    56  3.60  4.31 Buckingham    46 female     62    121 medium  118   59      29    38\n 2  1001   165       97    24  6.90  4.44 Buckingham    29 female     64    218 large   112   68      46    48\n 3  1002   228       92    37  6.20  4.64 Buckingham    58 female     61    256 large   190   92      49    57\n 4  1003    78       93    12  6.5   4.63 Buckingham    67 male       67    119 large   110   50      33    38\n 5  1005   249       90    28  8.90  7.72 Buckingham    64 male       68    183 medium  138   80      44    41\n 6  1008   248       94    69  3.60  4.81 Buckingham    34 male       71    190 large   132   86      36    42\n 7  1011   195       92    41  4.80  4.84 Buckingham    30 male       69    191 medium  161  112      46    49\n 8  1015   227       75    44  5.20  3.94 Buckingham    37 male       59    170 medium  137.  83.3    34    39\n 9  1016   177       87    49  3.60  4.84 Buckingham    45 male       69    166 large   160   80      34    40\n10  1022   263       89    40  6.60  5.78 Buckingham    55 female     63    202 small   108   72      45    50\n# ℹ 393 more rows"
+  },
+  {
+    "objectID": "Practica2.html#cuántas-variables-tiene-el-fichero-diabetes",
+    "href": "Practica2.html#cuántas-variables-tiene-el-fichero-diabetes",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.2 ¿Cuántas variables tiene el fichero diabetes?",
+    "text": "1.2 ¿Cuántas variables tiene el fichero diabetes?"
+  },
+  {
+    "objectID": "Practica2.html#de-qué-tipo-es-cada-variable",
+    "href": "Practica2.html#de-qué-tipo-es-cada-variable",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.3 ¿De qué tipo es cada variable?",
+    "text": "1.3 ¿De qué tipo es cada variable?"
+  },
+  {
+    "objectID": "Practica2.html#cuántas-categorías-tiene-la-variable-frame",
+    "href": "Practica2.html#cuántas-categorías-tiene-la-variable-frame",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.4 ¿Cuántas categorías tiene la variable frame?",
+    "text": "1.4 ¿Cuántas categorías tiene la variable frame?"
+  },
+  {
+    "objectID": "Practica2.html#obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame.",
+    "href": "Practica2.html#obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable frame.",
+    "text": "1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable frame.\nNOTA: Primero debemos reordenar los niveles de la variable frame."
+  },
+  {
+    "objectID": "Practica2.html#realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes",
+    "href": "Practica2.html#realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.6 Realiza una representación gráfica adecuada para la variable frame. ¿Qué información obtienes?",
+    "text": "1.6 Realiza una representación gráfica adecuada para la variable frame. ¿Qué información obtienes?"
+  },
+  {
+    "objectID": "Practica2.html#calcula-la-moda-de-la-variable-frame.-qué-significa",
+    "href": "Practica2.html#calcula-la-moda-de-la-variable-frame.-qué-significa",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.7 Calcula la moda de la variable frame. ¿Qué significa?",
+    "text": "1.7 Calcula la moda de la variable frame. ¿Qué significa?"
+  },
+  {
+    "objectID": "Practica2.html#qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol",
+    "href": "Practica2.html#qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.8 ¿Qué representaciones gráficas te parecen adecuadas para la variable chol?",
+    "text": "1.8 ¿Qué representaciones gráficas te parecen adecuadas para la variable chol?"
+  },
+  {
+    "objectID": "Practica2.html#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos",
+    "href": "Practica2.html#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.9 Realiza un histograma y un diagrama de cajas de la variable chol. ¿Qué información obtienes de ellos?",
+    "text": "1.9 Realiza un histograma y un diagrama de cajas de la variable chol. ¿Qué información obtienes de ellos?"
+  },
+  {
+    "objectID": "Practica2.html#a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana",
+    "href": "Practica2.html#a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.10 A la vista del diagrama de cajas y del histograma de la variable chol, qué puedes decir acerca de su simetría? ¿Qué crees que será mayor, la media o la mediana?",
+    "text": "1.10 A la vista del diagrama de cajas y del histograma de la variable chol, qué puedes decir acerca de su simetría? ¿Qué crees que será mayor, la media o la mediana?"
+  },
+  {
+    "objectID": "Practica2.html#calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol.",
+    "href": "Practica2.html#calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable chol.",
+    "text": "1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable chol."
+  },
+  {
+    "objectID": "Practica2.html#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo",
+    "href": "Practica2.html#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.12 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable chol. ¿Entre qué valores se encuentra el 25% de las personas con el colesterol más alto? ¿Y el 75% de las personas con el colesterol más bajo? ¿Qué puedes decir acerca de la dispersión de la variable?¿ Dónde hay más dispersión, en el 25% de las personas con mayor colesterol o en el 25% de las personas con colesterol más bajo?",
+    "text": "1.12 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable chol. ¿Entre qué valores se encuentra el 25% de las personas con el colesterol más alto? ¿Y el 75% de las personas con el colesterol más bajo? ¿Qué puedes decir acerca de la dispersión de la variable?¿ Dónde hay más dispersión, en el 25% de las personas con mayor colesterol o en el 25% de las personas con colesterol más bajo?"
+  },
+  {
+    "objectID": "Practica2.html#calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica",
+    "href": "Practica2.html#calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.13 Calcula el coeficiente de curtosis de la variable chol. ¿Qué indica?",
+    "text": "1.13 Calcula el coeficiente de curtosis de la variable chol. ¿Qué indica?"
+  },
+  {
+    "objectID": "Practica2.html#según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo",
+    "href": "Practica2.html#según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?",
+    "text": "1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?\n\nLos valores de colesterol 443, 404, 347 y 342 mg/dL son valores extremos."
+  },
+  {
+    "objectID": "Practica2.html#cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra",
+    "href": "Practica2.html#cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?",
+    "text": "1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?"
+  },
+  {
+    "objectID": "Practica2.html#cuántas-personas-residen-en-buckingham-cuántas-en-louisa",
+    "href": "Practica2.html#cuántas-personas-residen-en-buckingham-cuántas-en-louisa",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?",
+    "text": "1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?"
+  },
+  {
+    "objectID": "Practica2.html#puedes-calcular-la-media-y-la-mediana-de-la-variable-location",
+    "href": "Practica2.html#puedes-calcular-la-media-y-la-mediana-de-la-variable-location",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.17 ¿Puedes calcular la media y la mediana de la variable location?",
+    "text": "1.17 ¿Puedes calcular la media y la mediana de la variable location?"
+  },
+  {
+    "objectID": "Practica2.html#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame.",
+    "href": "Practica2.html#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.18 Realiza un diagrama de cajas de la variable chol según las categorías de la variable frame.",
+    "text": "1.18 Realiza un diagrama de cajas de la variable chol según las categorías de la variable frame."
+  },
+  {
+    "objectID": "Practica2.html#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender.",
+    "href": "Practica2.html#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.19 Realiza un diagrama de cajas de la variable chol según las categorías de la frame y la variable gender.",
+    "text": "1.19 Realiza un diagrama de cajas de la variable chol según las categorías de la frame y la variable gender."
+  },
+  {
+    "objectID": "Practica2.html#calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame",
+    "href": "Practica2.html#calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame?",
+    "text": "1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame?"
+  },
+  {
+    "objectID": "Manual_dplyr.html#análisis-estadístico-descriptivo-por-grupos-group_by-summarise",
+    "href": "Manual_dplyr.html#análisis-estadístico-descriptivo-por-grupos-group_by-summarise",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "Análisis estadístico descriptivo por grupos: group_by() + summarise()",
+    "text": "Análisis estadístico descriptivo por grupos: group_by() + summarise()\nA menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo.\nPara ello, se utilizan conjuntamente las funciones group_by() y summarise().\nPor ejemplo, con el fichero diabetes calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame\n\ndiabetes |&gt; \n  group_by(frame) |&gt; \n  summarise(media=mean(chol),\n            mediana=median(chol),\n            sd=sd(chol),\n            q2.5=quantile(chol, 0.025),\n            q2.5=quantile(chol, 0.975))\n\n# A tibble: 3 × 5\n  frame  media mediana    sd  q2.5\n  &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 large   208     206   43.3  300.\n2 medium  213.    206.  46.9  318.\n3 small   198.    196   39.0  287."
+  },
+  {
+    "objectID": "Manual_dplyr.html#seleccionando-observaciones-slice",
+    "href": "Manual_dplyr.html#seleccionando-observaciones-slice",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "Seleccionando observaciones: slice()",
+    "text": "Seleccionando observaciones: slice()\nLa función slice() se utiliza para seleccionar observaciones (filas) de una base de datos.\nPor ejemplo, para seleccionar la paciente número 19 del fichero EPIDURAL:\n\nEPIDURAL |&gt; \n  slice(19)\n\n# A tibble: 1 × 7\n  doctor    kg    cm ease  treatment            oc complications\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;             &lt;int&gt; &lt;fct&gt;        \n1 Dr. D     59   152 Easy  Hamstring Stretch     0 None"
+  },
+  {
+    "objectID": "Practica2.html#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.",
+    "href": "Practica2.html#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.21 Realiza un histograma de la variable chol según las categorías de la variable frame y la variable gender.",
+    "text": "1.21 Realiza un histograma de la variable chol según las categorías de la variable frame y la variable gender."
+  },
+  {
+    "objectID": "Practica2.html#calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica.",
+    "href": "Practica2.html#calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable glyhb. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica.",
+    "text": "1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable glyhb. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica."
+  },
+  {
+    "objectID": "Practica2.html#compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada",
+    "href": "Practica2.html#compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.23 Compara la dispersión de las variables chol y glyhb. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?",
+    "text": "1.23 Compara la dispersión de las variables chol y glyhb. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?"
+  },
+  {
+    "objectID": "Practica2.html#considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo",
+    "href": "Practica2.html#considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.24 Considera la variable chol por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?",
+    "text": "1.24 Considera la variable chol por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?"
+  },
+  {
+    "objectID": "Practica2.html#crea-una-nueva-variable-denominada-ratiowh-definida-como-el-cociente-de-la-variable-waist-y-la-variable-hip-waisthip",
+    "href": "Practica2.html#crea-una-nueva-variable-denominada-ratiowh-definida-como-el-cociente-de-la-variable-waist-y-la-variable-hip-waisthip",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.25 Crea una nueva variable denominada ratioWH definida como el cociente de la variable waist y la variable hip (waist/hip)",
+    "text": "1.25 Crea una nueva variable denominada ratioWH definida como el cociente de la variable waist y la variable hip (waist/hip)"
+  },
+  {
+    "objectID": "Practica2.html#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-ratiowh.",
+    "href": "Practica2.html#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-ratiowh.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.26 Dibuja un histograma y un diagrama de cajas de la variable ratioWH.",
+    "text": "1.26 Dibuja un histograma y un diagrama de cajas de la variable ratioWH."
+  },
+  {
+    "objectID": "Practica2.html#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-ratiowh.-entre-qué-valores-se-encuentra-el-25-de-los-valores-más-altos-y-el-75-de-los-valores-más-bajos",
+    "href": "Practica2.html#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-ratiowh.-entre-qué-valores-se-encuentra-el-25-de-los-valores-más-altos-y-el-75-de-los-valores-más-bajos",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1.27 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable ratioWH. ¿Entre qué valores se encuentra el 25% de los valores más altos? ¿Y el 75% de los valores más bajos?",
+    "text": "1.27 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable ratioWH. ¿Entre qué valores se encuentra el 25% de los valores más altos? ¿Y el 75% de los valores más bajos?"
+  },
+  {
+    "objectID": "Practica2.html#cuántos-hombres-y-cuántas-mujeres-hay-en-la-localización-buckingham-cuántos-en-louisa",
+    "href": "Practica2.html#cuántos-hombres-y-cuántas-mujeres-hay-en-la-localización-buckingham-cuántos-en-louisa",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "2.1 ¿Cuántos hombres y cuántas mujeres hay en la localización Buckingham? ¿Cuántos en Louisa?",
+    "text": "2.1 ¿Cuántos hombres y cuántas mujeres hay en la localización Buckingham? ¿Cuántos en Louisa?"
+  },
+  {
+    "objectID": "Practica2.html#qué-porcentaje-de-personas-en-la-muestra-tienen-un-body-frame-small-y-además-son-de-buckingham",
+    "href": "Practica2.html#qué-porcentaje-de-personas-en-la-muestra-tienen-un-body-frame-small-y-además-son-de-buckingham",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "2.2 ¿Qué porcentaje de personas en la muestra tienen un body frame small y además son de Buckingham?",
+    "text": "2.2 ¿Qué porcentaje de personas en la muestra tienen un body frame small y además son de Buckingham?"
+  },
+  {
+    "objectID": "Practica2.html#dibuja-un-diagrama-de-barras-donde-representes-las-frecuencias-de-la-variable-location-para-cada-una-de-las-categorías-de-la-variable-frame",
+    "href": "Practica2.html#dibuja-un-diagrama-de-barras-donde-representes-las-frecuencias-de-la-variable-location-para-cada-una-de-las-categorías-de-la-variable-frame",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "2.3 Dibuja un diagrama de barras donde representes las frecuencias de la variable location para cada una de las categorías de la variable frame?",
+    "text": "2.3 Dibuja un diagrama de barras donde representes las frecuencias de la variable location para cada una de las categorías de la variable frame?"
+  },
+  {
+    "objectID": "Practica2.html#forma-una-tabla-de-doble-entrada-cruzando-las-variables-gender-y-frame.-cuántas-mujeres-tienen-un-body-frame-medium",
+    "href": "Practica2.html#forma-una-tabla-de-doble-entrada-cruzando-las-variables-gender-y-frame.-cuántas-mujeres-tienen-un-body-frame-medium",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "2.4 Forma una tabla de doble entrada cruzando las variables gender y frame. ¿Cuántas mujeres tienen un body frame medium?",
+    "text": "2.4 Forma una tabla de doble entrada cruzando las variables gender y frame. ¿Cuántas mujeres tienen un body frame medium?"
+  },
+  {
+    "objectID": "Practica2.html#qué-porcentaje-de-hombres-tienen-un-body-frame-large",
+    "href": "Practica2.html#qué-porcentaje-de-hombres-tienen-un-body-frame-large",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "2.5 Qué porcentaje de hombres tienen un body frame large?",
+    "text": "2.5 Qué porcentaje de hombres tienen un body frame large?"
+  },
+  {
+    "objectID": "Practica2.html#ejercicios-para-resolver-en-clase",
+    "href": "Practica2.html#ejercicios-para-resolver-en-clase",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "EJERCICIOS: Para resolver en clase",
+    "text": "EJERCICIOS: Para resolver en clase\nCruza las variables gender y frame y responde a las siguientes preguntas\n\n¿Cuántas mujeres tienen body frame large?\n¿Qué porcentaje de mujeres tienen body frame large?\n¿Cuál es el porcentaje de hombres con body frame small?\n¿Qué porcentaje de pacientes con body frame medium son hombres?"
+  },
+  {
+    "objectID": "Practica2.html#realiza-un-diagrama-de-dispersión-de-las-variables-weight-y-waist.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.",
+    "href": "Practica2.html#realiza-un-diagrama-de-dispersión-de-las-variables-weight-y-waist.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "3.1 Realiza un diagrama de dispersión de las variables weight y waist. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.",
+    "text": "3.1 Realiza un diagrama de dispersión de las variables weight y waist. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal."
+  },
+  {
+    "objectID": "Practica2.html#realiza-un-diagrama-de-dispersión-de-las-variables-chol-y-weight.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.",
+    "href": "Practica2.html#realiza-un-diagrama-de-dispersión-de-las-variables-chol-y-weight.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "3.2 Realiza un diagrama de dispersión de las variables chol y weight. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.",
+    "text": "3.2 Realiza un diagrama de dispersión de las variables chol y weight. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal."
+  },
+  {
+    "objectID": "Practica2.html#selecciona-las-personas-del-condado-de-buckingham-y-realiza-un-diagrama-de-dispersión-de-las-variables-waist-y-hip.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.",
+    "href": "Practica2.html#selecciona-las-personas-del-condado-de-buckingham-y-realiza-un-diagrama-de-dispersión-de-las-variables-waist-y-hip.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "3.3 Selecciona las personas del condado de Buckingham y realiza un diagrama de dispersión de las variables waist y hip. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.",
+    "text": "3.3 Selecciona las personas del condado de Buckingham y realiza un diagrama de dispersión de las variables waist y hip. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal."
+  },
+  {
+    "objectID": "Practica2.html#selecciona-las-mujeres-con-body-frame-medium-y-realiza-un-diagrama-de-dispersión-de-las-variables-bp.1s-y-age.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.",
+    "href": "Practica2.html#selecciona-las-mujeres-con-body-frame-medium-y-realiza-un-diagrama-de-dispersión-de-las-variables-bp.1s-y-age.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "3.4 Selecciona las mujeres con body frame medium y realiza un diagrama de dispersión de las variables bp.1s y age. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.",
+    "text": "3.4 Selecciona las mujeres con body frame medium y realiza un diagrama de dispersión de las variables bp.1s y age. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal."
+  },
+  {
+    "objectID": "Practica2.html#a-fancy-way-of-visualizing-correlation-a-matrix",
+    "href": "Practica2.html#a-fancy-way-of-visualizing-correlation-a-matrix",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "A fancy way of visualizing correlation a matrix",
+    "text": "A fancy way of visualizing correlation a matrix"
+  },
+  {
+    "objectID": "Practica2.html#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-il6.-qué-puedes-decir-acerca-de-la-simetría-y-la-dispersión-de-la-variable",
+    "href": "Practica2.html#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-il6.-qué-puedes-decir-acerca-de-la-simetría-y-la-dispersión-de-la-variable",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "1) Realiza un histograma y un diagrama de cajas de la variable IL6. ¿Qué puedes decir acerca de la simetría y la dispersión de la variable?",
+    "text": "1) Realiza un histograma y un diagrama de cajas de la variable IL6. ¿Qué puedes decir acerca de la simetría y la dispersión de la variable?"
+  },
+  {
+    "objectID": "Practica2.html#calcula-la-media-mediana-cuartiles-desviación-típica-coeficientes-de-asimetría-y-de-curtosis-y-los-coeficientes-de-variación.-indica-sus-unidades-e-interpreta-los-estadísticos-en-aquellos-casos-que-sea-posible.",
+    "href": "Practica2.html#calcula-la-media-mediana-cuartiles-desviación-típica-coeficientes-de-asimetría-y-de-curtosis-y-los-coeficientes-de-variación.-indica-sus-unidades-e-interpreta-los-estadísticos-en-aquellos-casos-que-sea-posible.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "2) Calcula la media, mediana, cuartiles, desviación típica, coeficientes de asimetría y de curtosis, y los coeficientes de variación. Indica sus unidades e interpreta los estadísticos (en aquellos casos que sea posible).",
+    "text": "2) Calcula la media, mediana, cuartiles, desviación típica, coeficientes de asimetría y de curtosis, y los coeficientes de variación. Indica sus unidades e interpreta los estadísticos (en aquellos casos que sea posible)."
+  },
+  {
+    "objectID": "Practica2.html#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-il6-en-función-de-la-variable-cancerstage.-interpreta-los-gráficos-obtenidos.",
+    "href": "Practica2.html#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-il6-en-función-de-la-variable-cancerstage.-interpreta-los-gráficos-obtenidos.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "3) Dibuja un histograma y un diagrama de cajas de la variable IL6 en función de la variable CancerStage. Interpreta los gráficos obtenidos.",
+    "text": "3) Dibuja un histograma y un diagrama de cajas de la variable IL6 en función de la variable CancerStage. Interpreta los gráficos obtenidos."
+  },
+  {
+    "objectID": "Practica2.html#realiza-un-diagrama-de-dispersión-de-las-variables-il6-y-crp.-crees-que-existe-relación-lineal-entre-ellas-calcula-e-interpreta-la-covarianza-y-el-coeficiente-de-correlación-lineal-indica-sus-unidades.",
+    "href": "Practica2.html#realiza-un-diagrama-de-dispersión-de-las-variables-il6-y-crp.-crees-que-existe-relación-lineal-entre-ellas-calcula-e-interpreta-la-covarianza-y-el-coeficiente-de-correlación-lineal-indica-sus-unidades.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "4) Realiza un diagrama de dispersión de las variables IL6 y CRP. ¿Crees que existe relación lineal entre ellas? Calcula e interpreta la covarianza y el coeficiente de correlación lineal (indica sus unidades).",
+    "text": "4) Realiza un diagrama de dispersión de las variables IL6 y CRP. ¿Crees que existe relación lineal entre ellas? Calcula e interpreta la covarianza y el coeficiente de correlación lineal (indica sus unidades)."
+  },
+  {
+    "objectID": "Practica2.html#selecciona-el-paciente-fumador-former-y-ex-fumador-never-con-valores-más-bajos-en-la-variable-crp.-cuál-de-los-dos-pacientes-destaca-más-en-comparación-a-la-media-de-su-grupo-justifica-la-respuesta.",
+    "href": "Practica2.html#selecciona-el-paciente-fumador-former-y-ex-fumador-never-con-valores-más-bajos-en-la-variable-crp.-cuál-de-los-dos-pacientes-destaca-más-en-comparación-a-la-media-de-su-grupo-justifica-la-respuesta.",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "5) Selecciona el paciente fumador (former) y ex-fumador (never) con valores más bajos en la variable CRP. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta.",
+    "text": "5) Selecciona el paciente fumador (former) y ex-fumador (never) con valores más bajos en la variable CRP. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta."
+  },
+  {
+    "objectID": "Practica2.html#a-fancy-way-of-visualizing-correlation-matrices",
+    "href": "Practica2.html#a-fancy-way-of-visualizing-correlation-matrices",
+    "title": "Práctica 2: Estadística Descriptiva",
+    "section": "A fancy way of visualizing correlation matrices",
+    "text": "A fancy way of visualizing correlation matrices"
   }
 ]

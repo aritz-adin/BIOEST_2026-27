@@ -189,6 +189,7 @@ window.Quarto = {
   <li><a href="#el-paquete-dplyr" id="toc-el-paquete-dplyr" class="nav-link active" data-scroll-target="#el-paquete-dplyr">El paquete dplyr</a></li>
   <li><a href="#el-operador-pipe" id="toc-el-operador-pipe" class="nav-link" data-scroll-target="#el-operador-pipe">El operador pipe (<code>|&gt;</code>)</a></li>
   <li><a href="#seleccionando-variables-select" id="toc-seleccionando-variables-select" class="nav-link" data-scroll-target="#seleccionando-variables-select">Seleccionando variables: <code>select()</code></a></li>
+  <li><a href="#seleccionando-observaciones-slice" id="toc-seleccionando-observaciones-slice" class="nav-link" data-scroll-target="#seleccionando-observaciones-slice">Seleccionando observaciones: <code>slice()</code></a></li>
   <li><a href="#filtrando-observaciones-filter" id="toc-filtrando-observaciones-filter" class="nav-link" data-scroll-target="#filtrando-observaciones-filter">Filtrando observaciones: <code>filter()</code></a></li>
   <li><a href="#creando-nuevas-variables-mutate" id="toc-creando-nuevas-variables-mutate" class="nav-link" data-scroll-target="#creando-nuevas-variables-mutate">Creando nuevas variables: <code>mutate()</code></a></li>
   </ul>
@@ -239,6 +240,7 @@ window.Quarto = {
 <p>En esta asignatura se utilizarán principalmente las siguientes funciones del paquete <strong>dplyr</strong>:</p>
 <ul>
 <li><p><code>select()</code>: para seleccionar variables</p></li>
+<li><p><code>slice()</code>: para seleccionar observaciones</p></li>
 <li><p><code>filter()</code>: para filtrar observaciones</p></li>
 <li><p><code>mutate()</code>: para crear nuevas variables</p></li>
 <li><p><code>group_by()</code>: para agrupar las observaciones según una variable</p></li>
@@ -290,13 +292,28 @@ window.Quarto = {
 </div>
 </div>
 </section>
+<section id="seleccionando-observaciones-slice" class="level2">
+<h2 class="anchored" data-anchor-id="seleccionando-observaciones-slice">Seleccionando observaciones: <code>slice()</code></h2>
+<p>La función <code>slice()</code> se utiliza para seleccionar observaciones (filas) de una base de datos.</p>
+<p>Por ejemplo, para seleccionar la paciente número 19 del fichero <code>EPIDURAL</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">19</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  doctor    kg    cm ease  treatment            oc complications
+  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;             &lt;int&gt; &lt;fct&gt;        
+1 Dr. D     59   152 Easy  Hamstring Stretch     0 None         </code></pre>
+</div>
+</div>
+</section>
 <section id="filtrando-observaciones-filter" class="level2">
 <h2 class="anchored" data-anchor-id="filtrando-observaciones-filter">Filtrando observaciones: <code>filter()</code></h2>
 <p>La función <code>filter()</code> se utiliza para seleccionar las observaciones (filas) de una base de datos, manteniendo únicamente aquellas que cumplen una o varias condiciones.</p>
 <p>Por ejemplo, para filtar las pacientes atendidas por el Dr.&nbsp;A con peso superior a 90kg:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(doctor<span class="sc">==</span><span class="st">"Dr. A"</span>, kg<span class="sc">&gt;</span><span class="dv">90</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(doctor<span class="sc">==</span><span class="st">"Dr. A"</span>, kg<span class="sc">&gt;</span><span class="dv">90</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 7
   doctor    kg    cm ease       treatment              oc complications         
@@ -315,9 +332,9 @@ window.Quarto = {
 <p>La función <code>mutate()</code> se utiliza para crear nuevas variables en una base de datos o modificar variables existentes.</p>
 <p>Por ejemplo, para crear en la base de datos <code>EPIDURAL</code> la nueva variable <span class="math inline">\(IMC=kg/(cm/100)^2\)</span>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">IMC=</span>kg<span class="sc">/</span>(cm<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(kg, cm, IMC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">IMC=</span>kg<span class="sc">/</span>(cm<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(kg, cm, IMC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 85 × 3
       kg    cm   IMC
@@ -338,8 +355,20 @@ window.Quarto = {
 <!-- ## Análisis estadístico descriptivo por grupos: `group_by()` + `summarise()` -->
 <!-- A menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo. -->
 <!-- Para ello, se utilizan conjuntamente las funciones `group_by()` y `summarise()`. -->
-<!-- Por ejemplo, PENDIENTE -->
+<!-- Por ejemplo, con el fichero `diabetes` calcula la media, mediana, la desviación típica y los cuartiles de la variable `chol` según las categorías de la variable `frame` -->
+<!-- ```{r, include=FALSE} -->
+<!-- diabetes <- readr::read_table("diabetes.txt") -->
+<!-- diabetes <- diabetes |>  -->
+<!--   mutate(across(where(is.character), as.factor)) -->
+<!-- ``` -->
 <!-- ```{r, eval=TRUE} -->
+<!-- diabetes |>  -->
+<!--   group_by(frame) |>  -->
+<!--   summarise(media=mean(chol), -->
+<!--             mediana=median(chol), -->
+<!--             sd=sd(chol), -->
+<!--             q2.5=quantile(chol, 0.025), -->
+<!--             q2.5=quantile(chol, 0.975)) -->
 <!-- ``` -->
 <!-- ## Recodificando variables: `mutate()` + `case_when()` -->
 <!-- En ocasiones, se desea clasificar los valores de una variable cuantitativa en diferentes intervalos, creando una nueva variable cualitativa. Para ello, se pueden utilizar las funciones `mutate()` y `case_when()`. -->

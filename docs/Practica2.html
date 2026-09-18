@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aritz Adin">
+
+<title>Práctica 2: Estadística Descriptiva – BIOEST 2026-27</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">BIOEST 2026-27</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Practica0.html"> 
+<span class="menu-text">Práctica 0</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Practica1.html"> 
+<span class="menu-text">Práctica 1</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#descripción" id="toc-descripción" class="nav-link active" data-scroll-target="#descripción">Descripción</a>
+  <ul class="collapse">
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  </ul></li>
+  <li><a href="#estadística-descriptiva-univariante" id="toc-estadística-descriptiva-univariante" class="nav-link" data-scroll-target="#estadística-descriptiva-univariante">1. Estadística descriptiva univariante</a>
+  <ul class="collapse">
+  <li><a href="#descarga-y-lee-el-fichero-diabetes" id="toc-descarga-y-lee-el-fichero-diabetes" class="nav-link" data-scroll-target="#descarga-y-lee-el-fichero-diabetes">1.1. Descarga y lee el fichero diabetes</a></li>
+  <li><a href="#cuántas-variables-tiene-el-fichero-diabetes" id="toc-cuántas-variables-tiene-el-fichero-diabetes" class="nav-link" data-scroll-target="#cuántas-variables-tiene-el-fichero-diabetes">1.2 ¿Cuántas variables tiene el fichero diabetes?</a></li>
+  <li><a href="#de-qué-tipo-es-cada-variable" id="toc-de-qué-tipo-es-cada-variable" class="nav-link" data-scroll-target="#de-qué-tipo-es-cada-variable">1.3 ¿De qué tipo es cada variable?</a></li>
+  <li><a href="#cuántas-categorías-tiene-la-variable-frame" id="toc-cuántas-categorías-tiene-la-variable-frame" class="nav-link" data-scroll-target="#cuántas-categorías-tiene-la-variable-frame">1.4 ¿Cuántas categorías tiene la variable <code>frame</code>?</a></li>
+  <li><a href="#obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame." id="toc-obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame." class="nav-link" data-scroll-target="#obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame.">1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable <code>frame</code>.</a></li>
+  <li><a href="#realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes" id="toc-realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes" class="nav-link" data-scroll-target="#realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes">1.6 Realiza una representación gráfica adecuada para la variable <code>frame</code>. ¿Qué información obtienes?</a></li>
+  <li><a href="#calcula-la-moda-de-la-variable-frame.-qué-significa" id="toc-calcula-la-moda-de-la-variable-frame.-qué-significa" class="nav-link" data-scroll-target="#calcula-la-moda-de-la-variable-frame.-qué-significa">1.7 Calcula la moda de la variable <code>frame</code>. ¿Qué significa?</a></li>
+  <li><a href="#qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol" id="toc-qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol" class="nav-link" data-scroll-target="#qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol">1.8 ¿Qué representaciones gráficas te parecen adecuadas para la variable <code>chol</code>?</a></li>
+  <li><a href="#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos" id="toc-realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos" class="nav-link" data-scroll-target="#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos">1.9 Realiza un histograma y un diagrama de cajas de la variable <code>chol</code>. ¿Qué información obtienes de ellos?</a></li>
+  <li><a href="#a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana" id="toc-a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana" class="nav-link" data-scroll-target="#a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana">1.10 A la vista del diagrama de cajas y del histograma de la variable <code>chol</code>, qué puedes decir acerca de su simetría? ¿Qué crees que será mayor, la media o la mediana?</a></li>
+  <li><a href="#calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol." id="toc-calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol." class="nav-link" data-scroll-target="#calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol.">1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable <code>chol</code>.</a></li>
+  <li><a href="#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo" id="toc-calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo" class="nav-link" data-scroll-target="#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo">1.12 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable <code>chol</code>. ¿Entre qué valores se encuentra el 25% de las personas con el colesterol más alto? ¿Y el 75% de las personas con el colesterol más bajo? ¿Qué puedes decir acerca de la dispersión de la variable?¿ Dónde hay más dispersión, en el 25% de las personas con mayor colesterol o en el 25% de las personas con colesterol más bajo?</a></li>
+  <li><a href="#calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica" id="toc-calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica" class="nav-link" data-scroll-target="#calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica">1.13 Calcula el coeficiente de curtosis de la variable <code>chol</code>. ¿Qué indica?</a></li>
+  <li><a href="#según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo" id="toc-según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo" class="nav-link" data-scroll-target="#según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo">1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?</a></li>
+  <li><a href="#cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra" id="toc-cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra" class="nav-link" data-scroll-target="#cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra">1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?</a></li>
+  <li><a href="#cuántas-personas-residen-en-buckingham-cuántas-en-louisa" id="toc-cuántas-personas-residen-en-buckingham-cuántas-en-louisa" class="nav-link" data-scroll-target="#cuántas-personas-residen-en-buckingham-cuántas-en-louisa">1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?</a></li>
+  <li><a href="#puedes-calcular-la-media-y-la-mediana-de-la-variable-location" id="toc-puedes-calcular-la-media-y-la-mediana-de-la-variable-location" class="nav-link" data-scroll-target="#puedes-calcular-la-media-y-la-mediana-de-la-variable-location">1.17 ¿Puedes calcular la media y la mediana de la variable <code>location</code>?</a></li>
+  <li><a href="#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame." id="toc-realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame." class="nav-link" data-scroll-target="#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame.">1.18 Realiza un diagrama de cajas de la variable <code>chol</code> según las categorías de la variable <code>frame</code>.</a></li>
+  <li><a href="#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender." id="toc-realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender." class="nav-link" data-scroll-target="#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender.">1.19 Realiza un diagrama de cajas de la variable <code>chol</code> según las categorías de la <code>frame</code> y la variable <code>gender</code>.</a></li>
+  <li><a href="#calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame" id="toc-calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame" class="nav-link" data-scroll-target="#calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame">1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable <code>chol</code> según las categorías de la variable <code>frame</code>?</a></li>
+  <li><a href="#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender." id="toc-realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender." class="nav-link" data-scroll-target="#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.">1.21 Realiza un histograma de la variable <code>chol</code> según las categorías de la variable <code>frame</code> y la variable <code>gender</code>.</a></li>
+  <li><a href="#calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica." id="toc-calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica." class="nav-link" data-scroll-target="#calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica.">1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable <code>glyhb</code>. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica.</a></li>
+  <li><a href="#compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada" id="toc-compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada" class="nav-link" data-scroll-target="#compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada">1.23 Compara la dispersión de las variables <code>chol</code> y <code>glyhb</code>. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?</a></li>
+  <li><a href="#considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo" id="toc-considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo" class="nav-link" data-scroll-target="#considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo">1.24 Considera la variable <code>chol</code> por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?</a></li>
+  <li><a href="#crea-una-nueva-variable-denominada-ratiowh-definida-como-el-cociente-de-la-variable-waist-y-la-variable-hip-waisthip" id="toc-crea-una-nueva-variable-denominada-ratiowh-definida-como-el-cociente-de-la-variable-waist-y-la-variable-hip-waisthip" class="nav-link" data-scroll-target="#crea-una-nueva-variable-denominada-ratiowh-definida-como-el-cociente-de-la-variable-waist-y-la-variable-hip-waisthip">1.25 Crea una nueva variable denominada <code>ratioWH</code> definida como el cociente de la variable <code>waist</code> y la variable <code>hip</code> (waist/hip)</a></li>
+  <li><a href="#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-ratiowh." id="toc-dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-ratiowh." class="nav-link" data-scroll-target="#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-ratiowh.">1.26 Dibuja un histograma y un diagrama de cajas de la variable <code>ratioWH</code>.</a></li>
+  <li><a href="#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-ratiowh.-entre-qué-valores-se-encuentra-el-25-de-los-valores-más-altos-y-el-75-de-los-valores-más-bajos" id="toc-calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-ratiowh.-entre-qué-valores-se-encuentra-el-25-de-los-valores-más-altos-y-el-75-de-los-valores-más-bajos" class="nav-link" data-scroll-target="#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-ratiowh.-entre-qué-valores-se-encuentra-el-25-de-los-valores-más-altos-y-el-75-de-los-valores-más-bajos">1.27 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable <code>ratioWH</code>. ¿Entre qué valores se encuentra el 25% de los valores más altos? ¿Y el 75% de los valores más bajos?</a></li>
+  </ul></li>
+  <li><a href="#tablas-de-doble-entrada" id="toc-tablas-de-doble-entrada" class="nav-link" data-scroll-target="#tablas-de-doble-entrada">2. Tablas de doble entrada</a>
+  <ul class="collapse">
+  <li><a href="#cuántos-hombres-y-cuántas-mujeres-hay-en-la-localización-buckingham-cuántos-en-louisa" id="toc-cuántos-hombres-y-cuántas-mujeres-hay-en-la-localización-buckingham-cuántos-en-louisa" class="nav-link" data-scroll-target="#cuántos-hombres-y-cuántas-mujeres-hay-en-la-localización-buckingham-cuántos-en-louisa">2.1 ¿Cuántos hombres y cuántas mujeres hay en la localización Buckingham? ¿Cuántos en Louisa?</a></li>
+  <li><a href="#qué-porcentaje-de-personas-en-la-muestra-tienen-un-body-frame-small-y-además-son-de-buckingham" id="toc-qué-porcentaje-de-personas-en-la-muestra-tienen-un-body-frame-small-y-además-son-de-buckingham" class="nav-link" data-scroll-target="#qué-porcentaje-de-personas-en-la-muestra-tienen-un-body-frame-small-y-además-son-de-buckingham">2.2 ¿Qué porcentaje de personas en la muestra tienen un body frame <em>small</em> y además son de Buckingham?</a></li>
+  <li><a href="#dibuja-un-diagrama-de-barras-donde-representes-las-frecuencias-de-la-variable-location-para-cada-una-de-las-categorías-de-la-variable-frame" id="toc-dibuja-un-diagrama-de-barras-donde-representes-las-frecuencias-de-la-variable-location-para-cada-una-de-las-categorías-de-la-variable-frame" class="nav-link" data-scroll-target="#dibuja-un-diagrama-de-barras-donde-representes-las-frecuencias-de-la-variable-location-para-cada-una-de-las-categorías-de-la-variable-frame">2.3 Dibuja un diagrama de barras donde representes las frecuencias de la variable <code>location</code> para cada una de las categorías de la variable <code>frame</code>?</a></li>
+  <li><a href="#forma-una-tabla-de-doble-entrada-cruzando-las-variables-gender-y-frame.-cuántas-mujeres-tienen-un-body-frame-medium" id="toc-forma-una-tabla-de-doble-entrada-cruzando-las-variables-gender-y-frame.-cuántas-mujeres-tienen-un-body-frame-medium" class="nav-link" data-scroll-target="#forma-una-tabla-de-doble-entrada-cruzando-las-variables-gender-y-frame.-cuántas-mujeres-tienen-un-body-frame-medium">2.4 Forma una tabla de doble entrada cruzando las variables <code>gender</code> y <code>frame</code>. ¿Cuántas mujeres tienen un body frame <em>medium</em>?</a></li>
+  <li><a href="#qué-porcentaje-de-hombres-tienen-un-body-frame-large" id="toc-qué-porcentaje-de-hombres-tienen-un-body-frame-large" class="nav-link" data-scroll-target="#qué-porcentaje-de-hombres-tienen-un-body-frame-large">2.5 Qué porcentaje de hombres tienen un body frame <em>large</em>?</a></li>
+  <li><a href="#ejercicios-para-resolver-en-clase" id="toc-ejercicios-para-resolver-en-clase" class="nav-link" data-scroll-target="#ejercicios-para-resolver-en-clase">EJERCICIOS: Para resolver en clase</a></li>
+  </ul></li>
+  <li><a href="#covarianza-y-correlación" id="toc-covarianza-y-correlación" class="nav-link" data-scroll-target="#covarianza-y-correlación">3. Covarianza y correlación</a>
+  <ul class="collapse">
+  <li><a href="#realiza-un-diagrama-de-dispersión-de-las-variables-weight-y-waist.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." id="toc-realiza-un-diagrama-de-dispersión-de-las-variables-weight-y-waist.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." class="nav-link" data-scroll-target="#realiza-un-diagrama-de-dispersión-de-las-variables-weight-y-waist.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.">3.1 Realiza un diagrama de dispersión de las variables <code>weight</code> y <code>waist</code>. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.</a></li>
+  <li><a href="#realiza-un-diagrama-de-dispersión-de-las-variables-chol-y-weight.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." id="toc-realiza-un-diagrama-de-dispersión-de-las-variables-chol-y-weight.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." class="nav-link" data-scroll-target="#realiza-un-diagrama-de-dispersión-de-las-variables-chol-y-weight.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.">3.2 Realiza un diagrama de dispersión de las variables <code>chol</code> y <code>weight</code>. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.</a></li>
+  <li><a href="#selecciona-las-personas-del-condado-de-buckingham-y-realiza-un-diagrama-de-dispersión-de-las-variables-waist-y-hip.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." id="toc-selecciona-las-personas-del-condado-de-buckingham-y-realiza-un-diagrama-de-dispersión-de-las-variables-waist-y-hip.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." class="nav-link" data-scroll-target="#selecciona-las-personas-del-condado-de-buckingham-y-realiza-un-diagrama-de-dispersión-de-las-variables-waist-y-hip.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.">3.3 Selecciona las personas del condado de Buckingham y realiza un diagrama de dispersión de las variables <code>waist</code> y <code>hip</code>. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.</a></li>
+  <li><a href="#selecciona-las-mujeres-con-body-frame-medium-y-realiza-un-diagrama-de-dispersión-de-las-variables-bp.1s-y-age.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." id="toc-selecciona-las-mujeres-con-body-frame-medium-y-realiza-un-diagrama-de-dispersión-de-las-variables-bp.1s-y-age.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." class="nav-link" data-scroll-target="#selecciona-las-mujeres-con-body-frame-medium-y-realiza-un-diagrama-de-dispersión-de-las-variables-bp.1s-y-age.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.">3.4 Selecciona las mujeres con body frame medium y realiza un diagrama de dispersión de las variables <code>bp.1s</code> y <code>age</code>. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.</a></li>
+  <li><a href="#a-fancy-way-of-visualizing-correlation-matrices" id="toc-a-fancy-way-of-visualizing-correlation-matrices" class="nav-link" data-scroll-target="#a-fancy-way-of-visualizing-correlation-matrices">A fancy way of visualizing correlation matrices</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Práctica 2: Estadística Descriptiva</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aritz Adin </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">21/10/2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="descripción" class="level1">
+<h1>Descripción</h1>
+<p>En esta práctica vamos a trabajar con el fichero de datos <code>Diabetes</code>.</p>
+<ul>
+<li><p>El fichero de datos contiene 19 variables medidas sobre 403 pacientes. Estos pacientes forman parte de un estudio con 1046 sujetos diseñado para investigar la prevalencia de la de obesidad, diabetes, y otros factores de riesgo cardiovasculares para Afroamericanos en Virginia, EEUU.</p></li>
+<li><p>Según Dr John Hong, Diabetes Mellitus Tipo II está asociada con la obesidad. El índice cintura-cadera puede ser un predictor en diabetes y enfermedades de corazón.</p></li>
+<li><p>Diabetes Mellitus Tipo II está también asociada con hipertensión y ambos pueden ser parte del “Síndrome X”.</p></li>
+<li><p>Los 403 sujetos del estudio son aquellos a los que se les hizo un seguimiento de diabetes. La hemoglobina glicosilada <span class="math inline">\(&gt;7.0\)</span> se toma normalmente como diagnóstico positivo de diabetes.</p></li>
+</ul>
+<p>El fichero puede descargarse de la web <a href="http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets" class="uri">http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets</a></p>
+<p>Para más información ver el paper</p>
+<p>Willems JP, Saunders JT, DE Hunt, JB Schorling. Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. <em>Southern Medical Journal</em> 90:814-820; 1997. <a href="https://europepmc.org/abstract/med/9258308" class="uri">https://europepmc.org/abstract/med/9258308</a></p>
+<section id="variables" class="level2">
+<h2 class="anchored" data-anchor-id="variables">Variables</h2>
+<p>Estas son las variables que contiene el fichero (se han eliminado alguna del fichero original y se han reemplazado algunos valores perdidos):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>Subject ID</td>
+</tr>
+<tr class="even">
+<td><code>chol</code></td>
+<td>Total Cholesterol (mg/dL)</td>
+</tr>
+<tr class="odd">
+<td><code>stab.glu</code></td>
+<td>Stabilized Glucose (mg/dL)</td>
+</tr>
+<tr class="even">
+<td><code>hdl</code></td>
+<td>High Density Lipoprotein (mg/dL)</td>
+</tr>
+<tr class="odd">
+<td><code>ratio</code></td>
+<td>Cholesterol / HDL ratio</td>
+</tr>
+<tr class="even">
+<td><code>glyhb</code></td>
+<td>Glycolsolated Hemoglobin (%)</td>
+</tr>
+<tr class="odd">
+<td><code>location</code></td>
+<td>Buckingham or Louisa</td>
+</tr>
+<tr class="even">
+<td><code>age</code></td>
+<td>Age of patient (years)</td>
+</tr>
+<tr class="odd">
+<td><code>gender</code></td>
+<td>Male or Female</td>
+</tr>
+<tr class="even">
+<td><code>height</code></td>
+<td>Height (inches)</td>
+</tr>
+<tr class="odd">
+<td><code>weight</code></td>
+<td>Weight (pounds)</td>
+</tr>
+<tr class="even">
+<td><code>frame</code></td>
+<td>Body frame size (small, medium, large)</td>
+</tr>
+<tr class="odd">
+<td><code>bp.1s</code></td>
+<td>First Systolic Blood Pressure (mmHg)</td>
+</tr>
+<tr class="even">
+<td><code>pb.1d</code></td>
+<td>First Diastolic Blood Pressure (mmHg)</td>
+</tr>
+<tr class="odd">
+<td><code>waist</code></td>
+<td>Waistline (inches)</td>
+</tr>
+<tr class="even">
+<td><code>hip</code></td>
+<td>Hip measurement (inches)</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="estadística-descriptiva-univariante" class="level1">
+<h1>1. Estadística descriptiva univariante</h1>
+<section id="descarga-y-lee-el-fichero-diabetes" class="level2">
+<h2 class="anchored" data-anchor-id="descarga-y-lee-el-fichero-diabetes">1.1. Descarga y lee el fichero diabetes</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>diabetes <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"diabetes.txt"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Para convertir los carácteres en factor </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>diabetes <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(diabetes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 403 × 16
+      id  chol stab.glu   hdl ratio glyhb location     age gender height weight frame  bp.1s bp.1d waist   hip
+   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  1000   203       82    56  3.60  4.31 Buckingham    46 female     62    121 medium  118   59      29    38
+ 2  1001   165       97    24  6.90  4.44 Buckingham    29 female     64    218 large   112   68      46    48
+ 3  1002   228       92    37  6.20  4.64 Buckingham    58 female     61    256 large   190   92      49    57
+ 4  1003    78       93    12  6.5   4.63 Buckingham    67 male       67    119 large   110   50      33    38
+ 5  1005   249       90    28  8.90  7.72 Buckingham    64 male       68    183 medium  138   80      44    41
+ 6  1008   248       94    69  3.60  4.81 Buckingham    34 male       71    190 large   132   86      36    42
+ 7  1011   195       92    41  4.80  4.84 Buckingham    30 male       69    191 medium  161  112      46    49
+ 8  1015   227       75    44  5.20  3.94 Buckingham    37 male       59    170 medium  137.  83.3    34    39
+ 9  1016   177       87    49  3.60  4.84 Buckingham    45 male       69    166 large   160   80      34    40
+10  1022   263       89    40  6.60  5.78 Buckingham    55 female     63    202 small   108   72      45    50
+# ℹ 393 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="cuántas-variables-tiene-el-fichero-diabetes" class="level2">
+<h2 class="anchored" data-anchor-id="cuántas-variables-tiene-el-fichero-diabetes">1.2 ¿Cuántas variables tiene el fichero diabetes?</h2>
+</section>
+<section id="de-qué-tipo-es-cada-variable" class="level2">
+<h2 class="anchored" data-anchor-id="de-qué-tipo-es-cada-variable">1.3 ¿De qué tipo es cada variable?</h2>
+</section>
+<section id="cuántas-categorías-tiene-la-variable-frame" class="level2">
+<h2 class="anchored" data-anchor-id="cuántas-categorías-tiene-la-variable-frame">1.4 ¿Cuántas categorías tiene la variable <code>frame</code>?</h2>
+</section>
+<section id="obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame." class="level2">
+<h2 class="anchored" data-anchor-id="obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame.">1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable <code>frame</code>.</h2>
+<p><strong>NOTA</strong>: Primero debemos reordenar los niveles de la variable <code>frame</code>.</p>
+</section>
+<section id="realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes" class="level2">
+<h2 class="anchored" data-anchor-id="realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes">1.6 Realiza una representación gráfica adecuada para la variable <code>frame</code>. ¿Qué información obtienes?</h2>
+</section>
+<section id="calcula-la-moda-de-la-variable-frame.-qué-significa" class="level2">
+<h2 class="anchored" data-anchor-id="calcula-la-moda-de-la-variable-frame.-qué-significa">1.7 Calcula la moda de la variable <code>frame</code>. ¿Qué significa?</h2>
+<!-- - Moda: `medium` -->
+<!-- - **Intepretación**: La mayoría de los pacientes tienen tamaño del cuerpo mediano -->
+</section>
+<section id="qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol" class="level2">
+<h2 class="anchored" data-anchor-id="qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol">1.8 ¿Qué representaciones gráficas te parecen adecuadas para la variable <code>chol</code>?</h2>
+</section>
+<section id="realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos" class="level2">
+<h2 class="anchored" data-anchor-id="realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos">1.9 Realiza un histograma y un diagrama de cajas de la variable <code>chol</code>. ¿Qué información obtienes de ellos?</h2>
+</section>
+<section id="a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana" class="level2">
+<h2 class="anchored" data-anchor-id="a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana">1.10 A la vista del diagrama de cajas y del histograma de la variable <code>chol</code>, qué puedes decir acerca de su simetría? ¿Qué crees que será mayor, la media o la mediana?</h2>
+</section>
+<section id="calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol." class="level2">
+<h2 class="anchored" data-anchor-id="calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol.">1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable <code>chol</code>.</h2>
+<!-- Coeficiente de asimetria: 0.924 -->
+<!-- - **Intepretación**: Como el coeficiente es positivo, la distribución de la variable colesterol muestra una asimetría hacia la derecha. Es decir, los niveles de colesterol por encima de la media (207.85 mg/dL) están más dispersos que los valores por debajo de ella. -->
+<!-- Mediana: 204 mg/dl -->
+<!-- - **Intepretación**: La mitad de los pacientes tienen un colesterol (inferior a) menor o igual a 204 mg/dl -->
+<!-- Percentil 75 (Cuartil 3): 230 mg/dl -->
+<!-- - **Intepretación**: El 75% de los paciente tiene un colesterol de 230 mg/dl o menos. -->
+</section>
+<section id="calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo" class="level2">
+<h2 class="anchored" data-anchor-id="calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo">1.12 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable <code>chol</code>. ¿Entre qué valores se encuentra el 25% de las personas con el colesterol más alto? ¿Y el 75% de las personas con el colesterol más bajo? ¿Qué puedes decir acerca de la dispersión de la variable?¿ Dónde hay más dispersión, en el 25% de las personas con mayor colesterol o en el 25% de las personas con colesterol más bajo?</h2>
+</section>
+<section id="calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica" class="level2">
+<h2 class="anchored" data-anchor-id="calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica">1.13 Calcula el coeficiente de curtosis de la variable <code>chol</code>. ¿Qué indica?</h2>
+<!-- Curtosis: 2.558 -->
+<!-- - **Intepretación**: Como la curtosis es positiva, la distribución de la variable colesterol muestra una mayor concentración en torno a la media (207.85 mg/dL) que una distribución normal. -->
+</section>
+<section id="según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo" class="level2">
+<h2 class="anchored" data-anchor-id="según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo">1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?</h2>
+<ul>
+<li>Los valores de colesterol 443, 404, 347 y 342 mg/dL son valores extremos.</li>
+</ul>
+</section>
+<section id="cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra" class="level2">
+<h2 class="anchored" data-anchor-id="cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra">1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?</h2>
+</section>
+<section id="cuántas-personas-residen-en-buckingham-cuántas-en-louisa" class="level2">
+<h2 class="anchored" data-anchor-id="cuántas-personas-residen-en-buckingham-cuántas-en-louisa">1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?</h2>
+</section>
+<section id="puedes-calcular-la-media-y-la-mediana-de-la-variable-location" class="level2">
+<h2 class="anchored" data-anchor-id="puedes-calcular-la-media-y-la-mediana-de-la-variable-location">1.17 ¿Puedes calcular la media y la mediana de la variable <code>location</code>?</h2>
+</section>
+<section id="realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame." class="level2">
+<h2 class="anchored" data-anchor-id="realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame.">1.18 Realiza un diagrama de cajas de la variable <code>chol</code> según las categorías de la variable <code>frame</code>.</h2>
+</section>
+<section id="realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender." class="level2">
+<h2 class="anchored" data-anchor-id="realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender.">1.19 Realiza un diagrama de cajas de la variable <code>chol</code> según las categorías de la <code>frame</code> y la variable <code>gender</code>.</h2>
+</section>
+<section id="calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame" class="level2">
+<h2 class="anchored" data-anchor-id="calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame">1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable <code>chol</code> según las categorías de la variable <code>frame</code>?</h2>
+</section>
+<section id="realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender." class="level2">
+<h2 class="anchored" data-anchor-id="realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.">1.21 Realiza un histograma de la variable <code>chol</code> según las categorías de la variable <code>frame</code> y la variable <code>gender</code>.</h2>
+</section>
+<section id="calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica." class="level2">
+<h2 class="anchored" data-anchor-id="calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica.">1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable <code>glyhb</code>. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica.</h2>
+</section>
+<section id="compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada" class="level2">
+<h2 class="anchored" data-anchor-id="compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada">1.23 Compara la dispersión de las variables <code>chol</code> y <code>glyhb</code>. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?</h2>
+</section>
+<section id="considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo" class="level2">
+<h2 class="anchored" data-anchor-id="considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo">1.24 Considera la variable <code>chol</code> por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?</h2>
+</section>
+<section id="crea-una-nueva-variable-denominada-ratiowh-definida-como-el-cociente-de-la-variable-waist-y-la-variable-hip-waisthip" class="level2">
+<h2 class="anchored" data-anchor-id="crea-una-nueva-variable-denominada-ratiowh-definida-como-el-cociente-de-la-variable-waist-y-la-variable-hip-waisthip">1.25 Crea una nueva variable denominada <code>ratioWH</code> definida como el cociente de la variable <code>waist</code> y la variable <code>hip</code> (waist/hip)</h2>
+</section>
+<section id="dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-ratiowh." class="level2">
+<h2 class="anchored" data-anchor-id="dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-ratiowh.">1.26 Dibuja un histograma y un diagrama de cajas de la variable <code>ratioWH</code>.</h2>
+</section>
+<section id="calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-ratiowh.-entre-qué-valores-se-encuentra-el-25-de-los-valores-más-altos-y-el-75-de-los-valores-más-bajos" class="level2">
+<h2 class="anchored" data-anchor-id="calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-ratiowh.-entre-qué-valores-se-encuentra-el-25-de-los-valores-más-altos-y-el-75-de-los-valores-más-bajos">1.27 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable <code>ratioWH</code>. ¿Entre qué valores se encuentra el 25% de los valores más altos? ¿Y el 75% de los valores más bajos?</h2>
+</section>
+</section>
+<section id="tablas-de-doble-entrada" class="level1">
+<h1>2. Tablas de doble entrada</h1>
+<section id="cuántos-hombres-y-cuántas-mujeres-hay-en-la-localización-buckingham-cuántos-en-louisa" class="level2">
+<h2 class="anchored" data-anchor-id="cuántos-hombres-y-cuántas-mujeres-hay-en-la-localización-buckingham-cuántos-en-louisa">2.1 ¿Cuántos hombres y cuántas mujeres hay en la localización Buckingham? ¿Cuántos en Louisa?</h2>
+</section>
+<section id="qué-porcentaje-de-personas-en-la-muestra-tienen-un-body-frame-small-y-además-son-de-buckingham" class="level2">
+<h2 class="anchored" data-anchor-id="qué-porcentaje-de-personas-en-la-muestra-tienen-un-body-frame-small-y-además-son-de-buckingham">2.2 ¿Qué porcentaje de personas en la muestra tienen un body frame <em>small</em> y además son de Buckingham?</h2>
+</section>
+<section id="dibuja-un-diagrama-de-barras-donde-representes-las-frecuencias-de-la-variable-location-para-cada-una-de-las-categorías-de-la-variable-frame" class="level2">
+<h2 class="anchored" data-anchor-id="dibuja-un-diagrama-de-barras-donde-representes-las-frecuencias-de-la-variable-location-para-cada-una-de-las-categorías-de-la-variable-frame">2.3 Dibuja un diagrama de barras donde representes las frecuencias de la variable <code>location</code> para cada una de las categorías de la variable <code>frame</code>?</h2>
+</section>
+<section id="forma-una-tabla-de-doble-entrada-cruzando-las-variables-gender-y-frame.-cuántas-mujeres-tienen-un-body-frame-medium" class="level2">
+<h2 class="anchored" data-anchor-id="forma-una-tabla-de-doble-entrada-cruzando-las-variables-gender-y-frame.-cuántas-mujeres-tienen-un-body-frame-medium">2.4 Forma una tabla de doble entrada cruzando las variables <code>gender</code> y <code>frame</code>. ¿Cuántas mujeres tienen un body frame <em>medium</em>?</h2>
+</section>
+<section id="qué-porcentaje-de-hombres-tienen-un-body-frame-large" class="level2">
+<h2 class="anchored" data-anchor-id="qué-porcentaje-de-hombres-tienen-un-body-frame-large">2.5 Qué porcentaje de hombres tienen un body frame <em>large</em>?</h2>
+</section>
+<section id="ejercicios-para-resolver-en-clase" class="level2">
+<h2 class="anchored" data-anchor-id="ejercicios-para-resolver-en-clase">EJERCICIOS: Para resolver en clase</h2>
+<p>Cruza las variables <code>gender</code> y <code>frame</code> y responde a las siguientes preguntas</p>
+<ul>
+<li>¿Cuántas mujeres tienen body frame <em>large</em>?</li>
+<li>¿Qué porcentaje de mujeres tienen body frame <em>large</em>?</li>
+<li>¿Cuál es el porcentaje de hombres con body frame <em>small</em>?</li>
+<li>¿Qué porcentaje de pacientes con body frame <em>medium</em> son hombres?</li>
+</ul>
+</section>
+</section>
+<section id="covarianza-y-correlación" class="level1">
+<h1>3. Covarianza y correlación</h1>
+<section id="realiza-un-diagrama-de-dispersión-de-las-variables-weight-y-waist.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." class="level2">
+<h2 class="anchored" data-anchor-id="realiza-un-diagrama-de-dispersión-de-las-variables-weight-y-waist.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.">3.1 Realiza un diagrama de dispersión de las variables <code>weight</code> y <code>waist</code>. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.</h2>
+<!-- - Covarianza: 194.88 (pounds*inches) -->
+<!-- - Correlación: 0.846 (sin unidades) -->
+<!-- - **Interpretación:** Dado que la covarianza es positiva, existe una relación lineal directa entre el peso y la anchura de la cintura de los pacientes. Es decir, a medida que aumenta el peso se espera que también lo haga la anchura d ela cintura. Además como la correlación está cerca del valor "1", podemos afirmar que dicha relación lineal es fuerte. -->
+</section>
+<section id="realiza-un-diagrama-de-dispersión-de-las-variables-chol-y-weight.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." class="level2">
+<h2 class="anchored" data-anchor-id="realiza-un-diagrama-de-dispersión-de-las-variables-chol-y-weight.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.">3.2 Realiza un diagrama de dispersión de las variables <code>chol</code> y <code>weight</code>. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.</h2>
+</section>
+<section id="selecciona-las-personas-del-condado-de-buckingham-y-realiza-un-diagrama-de-dispersión-de-las-variables-waist-y-hip.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." class="level2">
+<h2 class="anchored" data-anchor-id="selecciona-las-personas-del-condado-de-buckingham-y-realiza-un-diagrama-de-dispersión-de-las-variables-waist-y-hip.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.">3.3 Selecciona las personas del condado de Buckingham y realiza un diagrama de dispersión de las variables <code>waist</code> y <code>hip</code>. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.</h2>
+</section>
+<section id="selecciona-las-mujeres-con-body-frame-medium-y-realiza-un-diagrama-de-dispersión-de-las-variables-bp.1s-y-age.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal." class="level2">
+<h2 class="anchored" data-anchor-id="selecciona-las-mujeres-con-body-frame-medium-y-realiza-un-diagrama-de-dispersión-de-las-variables-bp.1s-y-age.-crees-que-existe-relación-lineal-entre-ambas-variables-calcula-la-covarianza-y-el-coeficiente-de-correlación-lineal.">3.4 Selecciona las mujeres con body frame medium y realiza un diagrama de dispersión de las variables <code>bp.1s</code> y <code>age</code>. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.</h2>
+</section>
+<section id="a-fancy-way-of-visualizing-correlation-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="a-fancy-way-of-visualizing-correlation-matrices">A fancy way of visualizing correlation matrices</h2>
+<!-- # EJERCICIOS A ENTREGAR -->
+<!-- Una Organización de Salud busca identificar qué factores de los pacientes están más asociados con la remisión del cáncer de pulmón tras el tratamiento, en el marco de un estudio más amplio sobre los resultados del tratamiento y la calidad de vida de los pacientes con esta enfermedad. -->
+<!-- El archivo `patients.txt` contiene las siguientes variables medidas sobre un conjunto de datos de 8.525 pacientes. -->
+<!-- -   `remission`: response variable (0=no, 1=yes) -->
+<!-- -   `Age`: age of the patient (in years) -->
+<!-- -   `IL6`: Interleukin-6 concentration in blood (pg/ml) -->
+<!-- -   `CRP`: C-reactive protein concentration in blood (mg/dl) -->
+<!-- -   `LengthofStay`: duration of a patient's hospital stay (in weeks) -->
+<!-- -   `CancerStage`: lung cancer stage (I, II, III or IV) -->
+<!-- -   `Smoking`: is the patient a smoker? (1=never, 2=former, 3=current) -->
+<!-- -   `ID.hospital`: ID of the hospital -->
+<!-- ```{r, message=FALSE} -->
+<!-- patients <- read_table("patients.txt") -->
+<!-- # Para convertir los carácteres en factor  -->
+<!-- patients <- patients |>  -->
+<!--   mutate(across(where(is.character), as.factor)) -->
+<!-- print(patients) -->
+<!-- ``` -->
+<!-- En primer lugar, selecciona los pacientes asociados a tu código de hospital (`ID.hospital`) e indica cuántos pacientes pertenecen a dicho hospital. -->
+<!-- Por ejemplo: -->
+<!-- ```{r} -->
+<!-- datos <- patients |>  -->
+<!--   filter(ID.hospital=="1") -->
+<!-- datos |> str() -->
+<!-- ``` -->
+<!-- El hospital "1" contiene 252 pacientes. -->
+<!-- ## 1) Realiza un histograma y un diagrama de cajas de la variable `IL6`. ¿Qué puedes decir acerca de la simetría y la dispersión de la variable? -->
+<!-- ```{r include=FALSE} -->
+<!-- par(mfrow=c(1,2)) -->
+<!-- datos$IL6 |> hist() -->
+<!-- datos$IL6 |> boxplot() -->
+<!-- ``` -->
+<!-- ## 2) Calcula la media, mediana, cuartiles, desviación típica, coeficientes de asimetría y de curtosis, y los coeficientes de variación. Indica sus unidades e interpreta los estadísticos (en aquellos casos que sea posible). -->
+<!-- ```{r include=FALSE} -->
+<!-- datos$IL6 |> eda() -->
+<!-- datos |>  -->
+<!--   summarise(CV.IL6=sd(IL6)/mean(IL6)) -->
+<!-- ``` -->
+<!-- ## 3) Dibuja un histograma y un diagrama de cajas de la variable `IL6` en función de la variable `CancerStage`. Interpreta los gráficos obtenidos. -->
+<!-- ```{r, include=FALSE} -->
+<!-- datos |>  -->
+<!--   ggplot(aes(x=IL6)) + -->
+<!--   geom_histogram(bins=10) + -->
+<!--   facet_wrap(~ CancerStage) -->
+<!-- boxplot(IL6 ~ CancerStage, data=datos) -->
+<!-- ``` -->
+<!-- ## 4) Realiza un diagrama de dispersión de las variables `IL6` y `CRP`. ¿Crees que existe relación lineal entre ellas? Calcula e interpreta la covarianza y el coeficiente de correlación lineal (indica sus unidades). -->
+<!-- ```{r include=FALSE} -->
+<!-- datos |> -->
+<!--   ggplot(aes(x=IL6, y=CRP)) + -->
+<!--   geom_point() -->
+<!-- datos |>  -->
+<!--   select(IL6, CRP) |> -->
+<!--   cov() -->
+<!-- datos |>  -->
+<!--   select(IL6, CRP) |> -->
+<!--   cor() -->
+<!-- ``` -->
+<!-- ## 5) Selecciona el paciente fumador (*former*) y ex-fumador (*never*) con valores más bajos en la variable `CRP`. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta. -->
+<!-- ```{r include=FALSE} -->
+<!-- datos |>  -->
+<!--   filter(Smoking=="former") |>  -->
+<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>  -->
+<!--   arrange(CRP) |>  -->
+<!--   slice(1) -->
+<!-- datos |>  -->
+<!--   filter(Smoking=="never") |>  -->
+<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>  -->
+<!--   arrange(CRP) |>  -->
+<!--   slice(1) -->
+<!-- ``` -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
