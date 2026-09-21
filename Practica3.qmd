@@ -1,0 +1,572 @@
+---
+title: "Práctica 3: Contrastes de hipótesis y análisis de la varianza"
+author: "Aritz Adin"
+date: "2026-11-04"
+date-format: "DD/MM/YYYY"
+format:
+  html:
+    toc: true
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(width=1000)
+```
+
+# Descripción
+
+En esta práctica vamos a trabajar con el fichero de datos `Diabetes`.
+
+-   El fichero de datos contiene 19 variables medidas sobre 403 pacientes. Estos pacientes forman parte de un estudio con 1046 sujetos diseñado para investigar la prevalencia de la de obesidad, diabetes, y otros factores de riesgo cardiovasculares para Afroamericanos en Virginia, EEUU.
+
+-   Según Dr John Hong, Diabetes Mellitus Tipo II está asociada con la obesidad. El índice cintura-cadera puede ser un predictor en diabetes y enfermedades de corazón.
+
+-   Diabetes Mellitus Tipo II está también asociada con hipertensión y ambos pueden ser parte del "Síndrome X".
+
+-   Los 403 sujetos del estudio son aquellos a los que se les hizo un seguimiento de diabetes. La hemoglobina glicosilada $>7.0$ se toma normalmente como diagnóstico positivo de diabetes.
+
+El fichero puede descargarse de la web <http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets>
+
+Para más información ver el paper
+
+Willems JP, Saunders JT, DE Hunt, JB Schorling. Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. *Southern Medical Journal* 90:814-820; 1997. <https://europepmc.org/abstract/med/9258308>
+
+## Variables
+
+Estas son las variables que contiene el fichero (se han eliminado alguna del fichero original y se han reemplazado algunos valores perdidos):
+
+| Variable   | Descripción                            |
+|------------|----------------------------------------|
+| `id`       | Subject ID                             |
+| `chol`     | Total Cholesterol (mg/dL)              |
+| `stab.glu` | Stabilized Glucose (mg/dL)             |
+| `hdl`      | High Density Lipoprotein (mg/dL)       |
+| `ratio`    | Cholesterol / HDL ratio                |
+| `glyhb`    | Glycolsolated Hemoglobin (%)           |
+| `location` | Buckingham or Louisa                   |
+| `age`      | Age of patient (years)                 |
+| `gender`   | Male or Female                         |
+| `height`   | Height (inches)                        |
+| `weight`   | Weight (pounds)                        |
+| `frame`    | Body frame size (small, medium, large) |
+| `bp.1s`    | First Systolic Blood Pressure (mmHg)   |
+| `bp.1d`    | First Diastolic Blood Pressure (mmHg)  |
+| `waist`    | Waistline (inches)                     |
+| `hip`      | Hip measurement (inches)               |
+
+**Para leer el fichero de diabetes en `R`:**
+
+```{r, message=FALSE}
+library(dplyr)
+library(PASWR2)
+library(readr)
+
+diabetes <- read_table("diabetes.txt")
+
+# Para convertir los carácteres en factor 
+diabetes <- diabetes |> 
+  mutate(across(where(is.character), as.factor))
+
+print(diabetes)
+```
+
+**IMPORTANTE:**
+
+-   Contraste bilateral –\> `alternative="two.sided"`
+
+-   Contraste unilateral inferior –\> `alternative="less"`
+
+-   Contraste unilateral superior –\> `alternative="greater"`
+
+# 1. Contrastes paramétricos
+
+## 1.1. Contrasta al nivel de significación 0.05 si el nivel medio de colesterol en los hombres del condado de Buckingham es superior a 200. Justifica si puedes asumir normalidad
+
+<!-- Sea X="Nivel de colesterol de los hombres del condado de Buckingham (mg/dL)". -->
+
+<!-- El contraste que debemos realizar ($\alpha=0.05$) se escribe como: -->
+
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu=200 \\ -->
+<!-- H_1: & \mu>200 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+
+<!-- En primer lugar seleccionamos los datos de la muestra: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- chol.manB <- diabetes |>  -->
+<!--   filter(gender=="male", -->
+<!--          location=="Buckingham") |>  -->
+<!--   pull(chol) -->
+<!-- ``` -->
+
+<!-- Comprobamos la condición de normalidad (test de Shapiro-Wilks): -->
+
+<!-- ```{r include=TRUE, message=FALSE} -->
+<!-- chol.manB |> eda() -->
+<!-- ``` -->
+
+<!-- Realizamos el test (paramétrico) para una media: -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- t.test(chol.manB, mu=200, alternative="greater") -->
+<!-- ``` -->
+
+<!-- Como p-valor$=0.23>\alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
+
+<!-- **Interpretación**: Con un nivel de significación del 5%, no existen evidencias estadísticas para afirmar que el nivel medio de colesterol en los hombres de Buckingham es superior a 200 mg/dL. -->
+
+## 1.2. Contrasta al nivel de significación 0.10 si la presión diastólica media de los hombres es distinta a la presión diastólica media de las mujeres. Comprueba que las dos muestras provienen de poblaciones normales. Realiza el correspondiente test de medias.
+
+<!-- Definimos las variables: -->
+
+<!-- X="Presión diastólica de los hombres (mmHg)" -->
+
+<!-- Y="Presión diastólica de las mujeres (mmHg)" -->
+
+<!-- El contraste que debemos realizar ($\alpha=0.10$) se escribe como: -->
+
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu_X - \mu_Y = 0 \\ -->
+<!-- H_1: & \mu_X - \mu_Y \neq 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+
+<!-- En primer lugar seleccionamos los datos de las muestras: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- diabetes |> count(gender) -->
+
+<!-- bp.male <- diabetes |>  -->
+<!--   filter(gender=="male") |>  -->
+<!--   pull(bp.1d) -->
+
+<!-- bp.female <- diabetes |>  -->
+<!--   filter(gender=="female") |>  -->
+<!--   pull(bp.1d) -->
+<!-- ``` -->
+
+<!-- Comprobamos la condición de normalidad en ambas variables: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- bp.male |> eda() -->
+<!-- bp.female |> eda() -->
+<!-- ``` -->
+
+<!-- Verificamos si podemos asumir que las varianzas son iguales o no: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- boxplot(bp.male, bp.female) -->
+<!-- # boxplot(bp.1d ~ gender, data=diabetes) -->
+<!-- ``` -->
+
+<!-- Realizamos el test (paramétrico) para la diferencia de medias en poblaciones independientes: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- t.test(bp.male, bp.female, mu=0, alternative="two.sided", var.equal=TRUE) -->
+<!-- ``` -->
+
+<!-- Como p-valor$=0.15>\alpha=0.10 \Rightarrow$ No rechazamos $H_0$. -->
+
+<!-- **Interpretación**: Con un nivel de significación del 10%, no existen evidencias estadísticas para afirmar que la presión diastólica media de los hombres sea distinta del de las mujeres. -->
+
+## 1.3. Se dispone de dos aparatos, uno nuevo y otro antiguo, para medir los niveles de glucosa en sangre. Los médicos sospechan que el nuevo aparato proporciona niveles de glucosa en sangre superiores al antiguo. Se dispone de una muestra con 15 pacientes diabéticos a los que se les ha medido los niveles de glucosa con los dos aparatos. Las medidas se encuentran en el fichero `GLUCOSE` de la librería `PASWR2`.
+
+```{r include=FALSE}
+data("GLUCOSE")
+print(GLUCOSE)
+```
+
+<!-- Definimos las variables: -->
+
+<!-- X="Nivel de glucosa (mg/dL) con el aparato viejo" -->
+
+<!-- Y="Nivel de glucosa (mg/dL) con el aparato nuevo" -->
+
+<!-- -   **¿Son las muestras independientes?** -->
+
+<!-- Como se tratan de los mismos individuos medidos en distintos instantes de tiempo, las muestras son dependientes (o emparejadas). Por lo tanto, trabajaremos con la diferencia entre ambas variables: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- GLUCOSE <- GLUCOSE |>  -->
+<!--   mutate(D=old-new) -->
+<!-- ``` -->
+
+<!-- -   **Comprueba si puede asumirse la hipótesis de normalidad.** -->
+
+<!-- ```{r include=TRUE} -->
+<!-- GLUCOSE$D |> eda() -->
+<!-- ``` -->
+
+<!-- -   **Contrasta al nivel de significación** $\alpha=0.05$ **si el nuevo aparato proporciona medidas más altas que el antiguo.** -->
+
+<!-- El contraste que debemos realizar se escribe como: -->
+
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu_D = 0 \\ -->
+<!-- H_1: & \mu_D < 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+
+<!-- Como se verifica la hipótesis de normalidad, realizamo el test (paramétrico) para una media: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- t.test(GLUCOSE$D, mu=0, alternative="less") -->
+
+<!-- # Otra opción: -->
+<!-- t.test(GLUCOSE$old, GLUCOSE$new, paired=TRUE, mu=0, alternative="less") -->
+<!-- ``` -->
+
+<!-- Como p-valor$\approx 0<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+
+<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el aparato nuevo proporciona niveles de medios de glucosa en sangre superiores al aparato viejo. -->
+
+## 1.4. Contrasta al nivel de significación 0.05 si la proporción de hombres con hemoglobina glicosilada (`glyhb`) por encima del 6% es superior a 0.2.
+
+<!-- Definimos la variable: -->
+
+<!-- X="Nº de hombres con valores de hemoglobina glicosilada superior al 6%" $\sim Bin(n,\pi)$ -->
+
+<!-- -   **Calcula el número de hombres en la muestra con `glyhb` por encima del 6% y el total de hombres en la muestra.** -->
+
+<!-- ```{r include=TRUE} -->
+<!-- # Casos favorables -->
+<!-- diabetes |>  -->
+<!--   filter(gender=="male", -->
+<!--          glyhb>6) |>  -->
+<!--   nrow() -->
+
+<!-- # Casos totales -->
+<!-- diabetes |> count(gender) -->
+<!-- ``` -->
+
+<!-- -   **Realiza un test exacto y un test aproximado para la proporción verdadera.** -->
+
+<!-- El contraste que debemos realizar se escribe como: -->
+
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \pi = 0.2 \\ -->
+<!-- H_1: & \pi > 0.2 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+
+<!-- Como se verifica que $n*\pi_0=169*0.2 = 33.8 > 10$ y $n*(1-\pi_0)=169*0.8 = 135.2 > 10$, podemos realizar el test aproximado como: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- prop.test(x=39, n=169, p=0.2, alternative="greater") -->
+<!-- ``` -->
+
+<!-- Como p-valor$=0.183 > \alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
+
+<!-- **Interpretación**: Con un nivel de significación del 5%, no podemos afirmar que la proporción de hombres con valores de hemoglobina glicosilada superior al 6% sea superior a 0.2. -->
+
+## 1.5. Contrasta al nivel de significación 0.05 si la proporción de hombres con colesterol por debajo de 200mg/dL es superior a la proporción de mujeres con colesterol por debajo de 200mg/dL.
+
+<!-- Definimos la variable: -->
+
+<!-- X="Nº de hombres con colesterol por debajo de 200mg/dL" $\sim Bin(n_X,\pi_X)$ -->
+
+<!-- Y="Nº de mujeres con colesterol por debajo de 200mg/dL" $\sim Bin(n_Y,\pi_Y)$ -->
+
+<!-- -   **Calcula el número de hombres en la muestra con colesterol por debajo de 200mg/dL y el total de hombres de la muestra (**$n_X$). -->
+
+<!-- ```{r include=TRUE} -->
+<!-- x <- diabetes |>  -->
+<!--   filter(gender=="male", -->
+<!--          chol<200) |>  -->
+<!--   nrow() -->
+<!-- x -->
+
+<!-- nx <- diabetes |>  -->
+<!--   filter(gender=="male") |>  -->
+<!--   nrow() -->
+<!-- nx -->
+<!-- ``` -->
+
+<!-- -   **Calcula el número de mujeres en la muestra con colesterol por debajo de 200mg/dL y el total de mujeres de la muestra (**$n_Y$). -->
+
+<!-- ```{r include=TRUE} -->
+<!-- y <- diabetes |>  -->
+<!--   filter(gender=="female", -->
+<!--          chol<200) |>  -->
+<!--   nrow() -->
+<!-- y -->
+
+<!-- ny <- diabetes |>  -->
+<!--   filter(gender=="female") |>  -->
+<!--   nrow() -->
+<!-- ny -->
+<!-- ``` -->
+<!-- -   **Realiza un test para la diferencia de proporciones.** -->
+
+<!-- El contraste que debemos realizar se escribe como: -->
+
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \pi_X - \pi_Y = 0 \\ -->
+<!-- H_1: & \pi_X - \pi_Y > 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+
+<!-- Realizamos el test en R: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- prop.test(c(x,y), c(nx,ny), alternative="greater") -->
+<!-- ``` -->
+
+<!-- Como p-valor$=0.3931 > \alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
+
+<!-- **Interpretación**: Con un nivel de significación del 5%, no podemos afirmar que la proporción de hombres con colesterol por debajo de 200mg/dL sea superior a la proporción de mujeres con colesterol por debajo de 200mg/dL. -->
+
+# 2. Contrastes no-paramétricos
+
+## 2.1. ¿Puede asumirse que la variable 'hdl' en mujeres sigue una distribución normal? Contrasta al nivel de significación 0.05 si la media de la variable 'hdl' en mujeres es superior a 47.
+
+<!-- Sea X="Nivel de HDL de las mujeres (mg/dL)". -->
+
+<!-- El contraste que debemos realizar ($\alpha=0.05$) se escribe como: -->
+
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu=47 \\ -->
+<!-- H_1: & \mu>47 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+
+<!-- En primer lugar seleccionamos los datos de la muestra: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- hdl.female <- diabetes |>  -->
+<!--   filter(gender=="female") |>  -->
+<!--   pull(hdl) -->
+<!-- ``` -->
+
+<!-- Comprobamos la condición de normalidad: -->
+
+<!-- ```{r include=TRUE, message=FALSE} -->
+<!-- hdl.female |> eda() -->
+<!-- ``` -->
+
+<!-- Como no se verifica la normalidad (p-valor $<0.05$), realizamos el test no-paramétrico para una media (test de Wilcoxon): -->
+
+<!-- ```{r include=TRUE} -->
+<!-- wilcox.test(hdl.female, mu=47, alternative="greater") -->
+<!-- ``` -->
+
+<!-- Como p-valor$=0.0015 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+
+<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en mujeres es superior a 47 mg/dL. -->
+
+## 2.2. ¿Contrasta al nivel de significación 0.05 si existen diferencias entre los niveles de hdl en hombres y en mujeres. Comprueba si puede asumirse normalidad y realiza el contraste adecuado.
+
+<!-- Definimos las variables: -->
+
+<!-- X="Nivel de HDL en hombres (mg/dL)" -->
+
+<!-- Y="Nivel de HDL en mujeres (mg/dL)" -->
+
+<!-- El contraste que debemos realizar ($\alpha=0.10$) se escribe como: \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu_X - \mu_Y = 0 \\ -->
+<!-- H_1: & \mu_X - \mu_Y \neq 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+
+<!-- En primer lugar seleccionamos los datos de las muestras: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- hdl.male <- diabetes |>  -->
+<!--   filter(gender=="male") |>  -->
+<!--   pull(hdl) -->
+
+<!-- hdl.female <- diabetes |>  -->
+<!--   filter(gender=="female") |>  -->
+<!--   pull(hdl) -->
+<!-- ``` -->
+
+<!-- Comprobamos la condición de normalidad en ambas variables: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- hdl.male |> eda() -->
+<!-- hdl.female |> eda() -->
+<!-- ``` -->
+
+<!-- En este caso no es necesario, pero podríamos verificar la igualdad de varianzas: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- boxplot(hdl ~ gender, data=diabetes) -->
+<!-- ``` -->
+
+<!-- Como no se verifica la normalidad, realizamos el test no-paramétrico para la diferencia de medias (test de Mann-Withney): -->
+
+<!-- ```{r include=TRUE} -->
+<!-- wilcox.test(hdl.male, hdl.female, mu=0, alternative="two.sided") -->
+<!-- ``` -->
+
+<!-- Como p-valor$=0.006<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+
+<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en hombres y mujeres es distinto. -->
+
+## 2.3. Considera el fichero `PHENYL` de la libreria `PASWR2`. Contrasta al nivel de significación 0.05 si existen diferencias en los niveles medios de la coenzima Q10 en el momento de comenzar el estudio (variable `Q10.1`) y al finalizar el estudio (variable `Q10.4`).
+
+<!-- Definimos las variables: -->
+
+<!-- X="Nivel de coenzima Q10 al comienzo del estudio" -->
+
+<!-- X="Nivel de coenzima Q10 al final del estudio" -->
+
+<!-- ```{r include=TRUE} -->
+<!-- data("PHENYL") -->
+<!-- head(PHENYL) -->
+<!-- ``` -->
+
+<!-- Como se tratan de los mismos individuos medidos en distintos instantes de tiempo, las muestras son dependientes (o emparejadas). Por lo tanto, trabajaremos con la diferencia entre ambas variables: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- PHENYL <- PHENYL |>  -->
+<!--   mutate(D=Q10.1-Q10.4) -->
+
+<!-- # Comprobamos la condición de normalidad -->
+<!-- PHENYL$D |> eda() -->
+<!-- ``` -->
+
+<!-- El contraste que debemos realizar se escribe como: -->
+
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu_D = 0 \\ -->
+<!-- H_1: & \mu_D \neq 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+
+<!-- Como no se verifica la hipótesis de normalidad, realizamo el test no-paramétrico para la diferencia de medias. -->
+
+<!-- ```{r include=TRUE} -->
+<!-- wilcox.test(PHENYL$D, mu=0, alternative="two.sided") -->
+
+<!-- # Otra opción -->
+<!-- wilcox.test(PHENYL$Q10.1, PHENYL$Q10.4, paired=TRUE, mu=0, alternative="two.sided") -->
+<!-- ``` -->
+
+<!-- Como p-valor$=0.0003 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+
+<!-- **Interpretación**: Con un nivel de significación del 5%, tenemos evidencias estadísticas para afirmar que los niveles medios de la coenzima Q10 han cambiado a lo largo del estudio. -->
+
+# 3. Análisis de la varianza y test de Kruskal-Wallis
+
+## 3.1. Contrasta al nivel de significación 0.10 si el tamaño del cuerpo (`frame`) influye en la presión diastólica (`bp.1d`) de las mujeres.
+
+**a) Crea un nuevo fichero llamado `diabetes.female` solo con las mujeres.**
+
+```{r include=FALSE}
+diabetes.female <- diabetes |> 
+  filter(gender=="female")
+```
+
+**b) Exploración gráfica: representa los diagrama de caja de la variable `bp.1d` según la variable `frame`.**
+
+```{r include=FALSE}
+boxplot(bp.1d ~ frame, data=diabetes.female)
+```
+
+**c) Realiza el análisis de la varianza con la función `aov()`**
+
+```{r include=FALSE}
+modelo <- aov(bp.1d ~ frame, data=diabetes.female)
+summary(modelo)
+```
+
+**d) Comprueba si pueden asumirse las hipótesis del modelo.**
+
+```{r include=FALSE}
+modelo |> 
+  checking.plots()
+
+## Test de normalidad para los errores
+modelo |> 
+  rstandard() |> 
+  shapiro.test()
+
+## Test de Levene para homogeneidad de varianzas
+library(car)
+leveneTest(bp.1d ~ frame, data=diabetes.female)
+```
+
+**e) Utiliza un test de Tukey para averiguar entre qué niveles de la variable `frame` existen diferencias significativas en los niveles medios de la variable `bp.1d`**
+
+```{r include=FALSE}
+modelo.comp <- TukeyHSD(modelo, conf.level=0.9)
+modelo.comp
+
+## Graficos de intervalos de confianza del test de Tukey
+plot(modelo.comp)
+```
+
+## 3.2. Utiliza el fichero `diabetes.female` para responder a las siguientes cuestiones.
+
+**a) Contrasta al nivel de significación** $\alpha=0.05$ **si existen diferencias entre los niveles medios de glucosa glicosilada (`glyhb`) según la constitución del tamaño del cuerpo (`frame`) entre las mujeres.**
+
+```{r include=FALSE}
+boxplot(glyhb ~ frame, data=diabetes)
+
+glyhb.aov <- aov(glyhb~frame, data=diabetes.female)
+summary(glyhb.aov)
+
+# Comprobamos las hipótesis del modelo
+glyhb.aov |> 
+  checking.plots()
+
+glyhb.aov |> 
+  rstandard() |> 
+  shapiro.test() 
+
+leveneTest(glyhb.aov)
+
+# Como no se cumplen las hipótesis del modelo, realizamos el test de Kruskal-Wallis
+kruskal.test(glyhb~frame, data=diabetes.female)
+```
+
+**b) Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas.**
+
+```{r include=FALSE}
+library(agricolae)
+
+kruskal(diabetes.female$glyhb, diabetes.female$frame, alpha=0.05, group=FALSE, console=TRUE)
+```
+
+<!-- # 4. Para entregar -->
+
+<!-- Responde a las siguientes cuestiones, utilizando la misma muestra de pacientes que te ha sido asignada en la Práctica 2 para el fichero `patients.txt`. -->
+
+<!-- ## 4.1. Contrasta al nivel de significación 0.1 si los niveles medios de la concentración de Interleukina-6 (`IL6`) son significativamente distintos en pacientes con cáncer en estadio I que en paciente con cáncer en estadio II. -->
+
+<!-- -   Define correctamente las variables del problema. -->
+
+<!-- -   Comprueba si las dos muestras provienen de poblaciones normales. -->
+
+<!-- -   Realiza el correspondiente test de hipótesis. -->
+
+
+<!-- ## 4.2. Se estudió la eficacia de la sulfinpirazona en prevenir la muerte después de sufrir infarto de miocardio. Para ello se consideraron pacientes que habían sufrido infarto de miocardio. A un grupo se les proporcionó sulfinpirazona y a otro grupo se les suministró placebo. En la siguiente tabla se muestra el número de pacientes de cada grupo que murieron y que superaron el infarto. -->
+
+<!-- |                 | Death (all causes) | Survivors | -->
+<!-- |-----------------|--------------------|-----------| -->
+<!-- | Sulphinpyrazole | 41                 | 692       | -->
+<!-- | Placebo         | 60                 | 682       | -->
+
+<!-- -   **Contrasta al nivel de significación** $\alpha=0.01$ si la proporción de muertes de pacientes que tomaron sulfinpirazona es inferior a la de pacientes que tomaron un placebo. -->
+
+
+<!-- ## 4.3. Contrasta al nivel de significación $\alpha=0.1$ si existen diferencias en la edad media de los pacientes según el estadio de cancer (`CancerStage`). -->
+
+<!-- -   **Realiza una exploración gráfica y el análisis de varianza correspondiente** -->
+
+<!-- -   **Comprueba si pueden asumirse las hipótesis del modelo** -->
+
+<!-- -   **Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas** -->

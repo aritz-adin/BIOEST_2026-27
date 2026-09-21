@@ -1,5 +1,89 @@
 [
   {
+    "objectID": "Practica3.html",
+    "href": "Practica3.html",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "",
+    "text": "En esta práctica vamos a trabajar con el fichero de datos Diabetes.\n\nEl fichero de datos contiene 19 variables medidas sobre 403 pacientes. Estos pacientes forman parte de un estudio con 1046 sujetos diseñado para investigar la prevalencia de la de obesidad, diabetes, y otros factores de riesgo cardiovasculares para Afroamericanos en Virginia, EEUU.\nSegún Dr John Hong, Diabetes Mellitus Tipo II está asociada con la obesidad. El índice cintura-cadera puede ser un predictor en diabetes y enfermedades de corazón.\nDiabetes Mellitus Tipo II está también asociada con hipertensión y ambos pueden ser parte del “Síndrome X”.\nLos 403 sujetos del estudio son aquellos a los que se les hizo un seguimiento de diabetes. La hemoglobina glicosilada \\(&gt;7.0\\) se toma normalmente como diagnóstico positivo de diabetes.\n\nEl fichero puede descargarse de la web http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets\nPara más información ver el paper\nWillems JP, Saunders JT, DE Hunt, JB Schorling. Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997. https://europepmc.org/abstract/med/9258308\n\n\nEstas son las variables que contiene el fichero (se han eliminado alguna del fichero original y se han reemplazado algunos valores perdidos):\n\n\n\nVariable\nDescripción\n\n\n\n\nid\nSubject ID\n\n\nchol\nTotal Cholesterol (mg/dL)\n\n\nstab.glu\nStabilized Glucose (mg/dL)\n\n\nhdl\nHigh Density Lipoprotein (mg/dL)\n\n\nratio\nCholesterol / HDL ratio\n\n\nglyhb\nGlycolsolated Hemoglobin (%)\n\n\nlocation\nBuckingham or Louisa\n\n\nage\nAge of patient (years)\n\n\ngender\nMale or Female\n\n\nheight\nHeight (inches)\n\n\nweight\nWeight (pounds)\n\n\nframe\nBody frame size (small, medium, large)\n\n\nbp.1s\nFirst Systolic Blood Pressure (mmHg)\n\n\nbp.1d\nFirst Diastolic Blood Pressure (mmHg)\n\n\nwaist\nWaistline (inches)\n\n\nhip\nHip measurement (inches)\n\n\n\nPara leer el fichero de diabetes en R:\n\nlibrary(dplyr)\nlibrary(PASWR2)\nlibrary(readr)\n\ndiabetes &lt;- read_table(\"diabetes.txt\")\n\n# Para convertir los carácteres en factor \ndiabetes &lt;- diabetes |&gt; \n  mutate(across(where(is.character), as.factor))\n\nprint(diabetes)\n\n# A tibble: 403 × 16\n      id  chol stab.glu   hdl ratio glyhb location     age gender height weight frame  bp.1s bp.1d waist   hip\n   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1  1000   203       82    56  3.60  4.31 Buckingham    46 female     62    121 medium  118   59      29    38\n 2  1001   165       97    24  6.90  4.44 Buckingham    29 female     64    218 large   112   68      46    48\n 3  1002   228       92    37  6.20  4.64 Buckingham    58 female     61    256 large   190   92      49    57\n 4  1003    78       93    12  6.5   4.63 Buckingham    67 male       67    119 large   110   50      33    38\n 5  1005   249       90    28  8.90  7.72 Buckingham    64 male       68    183 medium  138   80      44    41\n 6  1008   248       94    69  3.60  4.81 Buckingham    34 male       71    190 large   132   86      36    42\n 7  1011   195       92    41  4.80  4.84 Buckingham    30 male       69    191 medium  161  112      46    49\n 8  1015   227       75    44  5.20  3.94 Buckingham    37 male       59    170 medium  137.  83.3    34    39\n 9  1016   177       87    49  3.60  4.84 Buckingham    45 male       69    166 large   160   80      34    40\n10  1022   263       89    40  6.60  5.78 Buckingham    55 female     63    202 small   108   72      45    50\n# ℹ 393 more rows\n\n\nIMPORTANTE:\n\nContraste bilateral –&gt; alternative=\"two.sided\"\nContraste unilateral inferior –&gt; alternative=\"less\"\nContraste unilateral superior –&gt; alternative=\"greater\""
+  },
+  {
+    "objectID": "Practica3.html#variables",
+    "href": "Practica3.html#variables",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "",
+    "text": "Estas son las variables que contiene el fichero (se han eliminado alguna del fichero original y se han reemplazado algunos valores perdidos):\n\n\n\nVariable\nDescripción\n\n\n\n\nid\nSubject ID\n\n\nchol\nTotal Cholesterol (mg/dL)\n\n\nstab.glu\nStabilized Glucose (mg/dL)\n\n\nhdl\nHigh Density Lipoprotein (mg/dL)\n\n\nratio\nCholesterol / HDL ratio\n\n\nglyhb\nGlycolsolated Hemoglobin (%)\n\n\nlocation\nBuckingham or Louisa\n\n\nage\nAge of patient (years)\n\n\ngender\nMale or Female\n\n\nheight\nHeight (inches)\n\n\nweight\nWeight (pounds)\n\n\nframe\nBody frame size (small, medium, large)\n\n\nbp.1s\nFirst Systolic Blood Pressure (mmHg)\n\n\nbp.1d\nFirst Diastolic Blood Pressure (mmHg)\n\n\nwaist\nWaistline (inches)\n\n\nhip\nHip measurement (inches)\n\n\n\nPara leer el fichero de diabetes en R:\n\nlibrary(dplyr)\nlibrary(PASWR2)\nlibrary(readr)\n\ndiabetes &lt;- read_table(\"diabetes.txt\")\n\n# Para convertir los carácteres en factor \ndiabetes &lt;- diabetes |&gt; \n  mutate(across(where(is.character), as.factor))\n\nprint(diabetes)\n\n# A tibble: 403 × 16\n      id  chol stab.glu   hdl ratio glyhb location     age gender height weight frame  bp.1s bp.1d waist   hip\n   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1  1000   203       82    56  3.60  4.31 Buckingham    46 female     62    121 medium  118   59      29    38\n 2  1001   165       97    24  6.90  4.44 Buckingham    29 female     64    218 large   112   68      46    48\n 3  1002   228       92    37  6.20  4.64 Buckingham    58 female     61    256 large   190   92      49    57\n 4  1003    78       93    12  6.5   4.63 Buckingham    67 male       67    119 large   110   50      33    38\n 5  1005   249       90    28  8.90  7.72 Buckingham    64 male       68    183 medium  138   80      44    41\n 6  1008   248       94    69  3.60  4.81 Buckingham    34 male       71    190 large   132   86      36    42\n 7  1011   195       92    41  4.80  4.84 Buckingham    30 male       69    191 medium  161  112      46    49\n 8  1015   227       75    44  5.20  3.94 Buckingham    37 male       59    170 medium  137.  83.3    34    39\n 9  1016   177       87    49  3.60  4.84 Buckingham    45 male       69    166 large   160   80      34    40\n10  1022   263       89    40  6.60  5.78 Buckingham    55 female     63    202 small   108   72      45    50\n# ℹ 393 more rows\n\n\nIMPORTANTE:\n\nContraste bilateral –&gt; alternative=\"two.sided\"\nContraste unilateral inferior –&gt; alternative=\"less\"\nContraste unilateral superior –&gt; alternative=\"greater\""
+  },
+  {
+    "objectID": "Practica3.html#contrasta-al-nivel-de-significación-0.05-si-el-nivel-medio-de-colesterol-en-los-hombres-del-condado-de-buckingham-es-superior-a-200.-justifica-si-puedes-asumir-normalidad",
+    "href": "Practica3.html#contrasta-al-nivel-de-significación-0.05-si-el-nivel-medio-de-colesterol-en-los-hombres-del-condado-de-buckingham-es-superior-a-200.-justifica-si-puedes-asumir-normalidad",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "1.1. Contrasta al nivel de significación 0.05 si el nivel medio de colesterol en los hombres del condado de Buckingham es superior a 200. Justifica si puedes asumir normalidad",
+    "text": "1.1. Contrasta al nivel de significación 0.05 si el nivel medio de colesterol en los hombres del condado de Buckingham es superior a 200. Justifica si puedes asumir normalidad"
+  },
+  {
+    "objectID": "Practica3.html#contrasta-al-nivel-de-significación-0.10-si-la-presión-diastólica-media-de-los-hombres-es-distinta-a-la-presión-diastólica-media-de-las-mujeres.-comprueba-que-las-dos-muestras-provienen-de-poblaciones-normales.-realiza-el-correspondiente-test-de-medias.",
+    "href": "Practica3.html#contrasta-al-nivel-de-significación-0.10-si-la-presión-diastólica-media-de-los-hombres-es-distinta-a-la-presión-diastólica-media-de-las-mujeres.-comprueba-que-las-dos-muestras-provienen-de-poblaciones-normales.-realiza-el-correspondiente-test-de-medias.",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "1.2. Contrasta al nivel de significación 0.10 si la presión diastólica media de los hombres es distinta a la presión diastólica media de las mujeres. Comprueba que las dos muestras provienen de poblaciones normales. Realiza el correspondiente test de medias.",
+    "text": "1.2. Contrasta al nivel de significación 0.10 si la presión diastólica media de los hombres es distinta a la presión diastólica media de las mujeres. Comprueba que las dos muestras provienen de poblaciones normales. Realiza el correspondiente test de medias."
+  },
+  {
+    "objectID": "Practica3.html#se-dispone-de-dos-aparatos-uno-nuevo-y-otro-antiguo-para-medir-los-niveles-de-glucosa-en-sangre.-los-médicos-sospechan-que-el-nuevo-aparato-proporciona-niveles-de-glucosa-en-sangre-superiores-al-antiguo.-se-dispone-de-una-muestra-con-15-pacientes-diabéticos-a-los-que-se-les-ha-medido-los-niveles-de-glucosa-con-los-dos-aparatos.-las-medidas-se-encuentran-en-el-fichero-glucose-de-la-librería-paswr2.",
+    "href": "Practica3.html#se-dispone-de-dos-aparatos-uno-nuevo-y-otro-antiguo-para-medir-los-niveles-de-glucosa-en-sangre.-los-médicos-sospechan-que-el-nuevo-aparato-proporciona-niveles-de-glucosa-en-sangre-superiores-al-antiguo.-se-dispone-de-una-muestra-con-15-pacientes-diabéticos-a-los-que-se-les-ha-medido-los-niveles-de-glucosa-con-los-dos-aparatos.-las-medidas-se-encuentran-en-el-fichero-glucose-de-la-librería-paswr2.",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "1.3. Se dispone de dos aparatos, uno nuevo y otro antiguo, para medir los niveles de glucosa en sangre. Los médicos sospechan que el nuevo aparato proporciona niveles de glucosa en sangre superiores al antiguo. Se dispone de una muestra con 15 pacientes diabéticos a los que se les ha medido los niveles de glucosa con los dos aparatos. Las medidas se encuentran en el fichero GLUCOSE de la librería PASWR2.",
+    "text": "1.3. Se dispone de dos aparatos, uno nuevo y otro antiguo, para medir los niveles de glucosa en sangre. Los médicos sospechan que el nuevo aparato proporciona niveles de glucosa en sangre superiores al antiguo. Se dispone de una muestra con 15 pacientes diabéticos a los que se les ha medido los niveles de glucosa con los dos aparatos. Las medidas se encuentran en el fichero GLUCOSE de la librería PASWR2."
+  },
+  {
+    "objectID": "Practica3.html#contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-hemoglobina-glicosilada-glyhb-por-encima-del-6-es-superior-a-0.2.",
+    "href": "Practica3.html#contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-hemoglobina-glicosilada-glyhb-por-encima-del-6-es-superior-a-0.2.",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "1.4. Contrasta al nivel de significación 0.05 si la proporción de hombres con hemoglobina glicosilada (glyhb) por encima del 6% es superior a 0.2.",
+    "text": "1.4. Contrasta al nivel de significación 0.05 si la proporción de hombres con hemoglobina glicosilada (glyhb) por encima del 6% es superior a 0.2."
+  },
+  {
+    "objectID": "Practica3.html#contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-colesterol-por-debajo-de-200mgdl-es-superior-a-la-proporción-de-mujeres-con-colesterol-por-debajo-de-200mgdl.",
+    "href": "Practica3.html#contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-colesterol-por-debajo-de-200mgdl-es-superior-a-la-proporción-de-mujeres-con-colesterol-por-debajo-de-200mgdl.",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "1.5. Contrasta al nivel de significación 0.05 si la proporción de hombres con colesterol por debajo de 200mg/dL es superior a la proporción de mujeres con colesterol por debajo de 200mg/dL.",
+    "text": "1.5. Contrasta al nivel de significación 0.05 si la proporción de hombres con colesterol por debajo de 200mg/dL es superior a la proporción de mujeres con colesterol por debajo de 200mg/dL."
+  },
+  {
+    "objectID": "Practica3.html#puede-asumirse-que-la-variable-hdl-en-mujeres-sigue-una-distribución-normal-contrasta-al-nivel-de-significación-0.05-si-la-media-de-la-variable-hdl-en-mujeres-es-superior-a-47.",
+    "href": "Practica3.html#puede-asumirse-que-la-variable-hdl-en-mujeres-sigue-una-distribución-normal-contrasta-al-nivel-de-significación-0.05-si-la-media-de-la-variable-hdl-en-mujeres-es-superior-a-47.",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "2.1. ¿Puede asumirse que la variable ‘hdl’ en mujeres sigue una distribución normal? Contrasta al nivel de significación 0.05 si la media de la variable ‘hdl’ en mujeres es superior a 47.",
+    "text": "2.1. ¿Puede asumirse que la variable ‘hdl’ en mujeres sigue una distribución normal? Contrasta al nivel de significación 0.05 si la media de la variable ‘hdl’ en mujeres es superior a 47."
+  },
+  {
+    "objectID": "Practica3.html#contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-entre-los-niveles-de-hdl-en-hombres-y-en-mujeres.-comprueba-si-puede-asumirse-normalidad-y-realiza-el-contraste-adecuado.",
+    "href": "Practica3.html#contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-entre-los-niveles-de-hdl-en-hombres-y-en-mujeres.-comprueba-si-puede-asumirse-normalidad-y-realiza-el-contraste-adecuado.",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "2.2. ¿Contrasta al nivel de significación 0.05 si existen diferencias entre los niveles de hdl en hombres y en mujeres. Comprueba si puede asumirse normalidad y realiza el contraste adecuado.",
+    "text": "2.2. ¿Contrasta al nivel de significación 0.05 si existen diferencias entre los niveles de hdl en hombres y en mujeres. Comprueba si puede asumirse normalidad y realiza el contraste adecuado."
+  },
+  {
+    "objectID": "Practica3.html#considera-el-fichero-phenyl-de-la-libreria-paswr2.-contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-en-los-niveles-medios-de-la-coenzima-q10-en-el-momento-de-comenzar-el-estudio-variable-q10.1-y-al-finalizar-el-estudio-variable-q10.4.",
+    "href": "Practica3.html#considera-el-fichero-phenyl-de-la-libreria-paswr2.-contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-en-los-niveles-medios-de-la-coenzima-q10-en-el-momento-de-comenzar-el-estudio-variable-q10.1-y-al-finalizar-el-estudio-variable-q10.4.",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "2.3. Considera el fichero PHENYL de la libreria PASWR2. Contrasta al nivel de significación 0.05 si existen diferencias en los niveles medios de la coenzima Q10 en el momento de comenzar el estudio (variable Q10.1) y al finalizar el estudio (variable Q10.4).",
+    "text": "2.3. Considera el fichero PHENYL de la libreria PASWR2. Contrasta al nivel de significación 0.05 si existen diferencias en los niveles medios de la coenzima Q10 en el momento de comenzar el estudio (variable Q10.1) y al finalizar el estudio (variable Q10.4)."
+  },
+  {
+    "objectID": "Practica3.html#contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres.",
+    "href": "Practica3.html#contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres.",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "3.1. Contrasta al nivel de significación 0.10 si el tamaño del cuerpo (frame) influye en la presión diastólica (bp.1d) de las mujeres.",
+    "text": "3.1. Contrasta al nivel de significación 0.10 si el tamaño del cuerpo (frame) influye en la presión diastólica (bp.1d) de las mujeres.\na) Crea un nuevo fichero llamado diabetes.female solo con las mujeres.\nb) Exploración gráfica: representa los diagrama de caja de la variable bp.1d según la variable frame.\nc) Realiza el análisis de la varianza con la función aov()\nd) Comprueba si pueden asumirse las hipótesis del modelo.\ne) Utiliza un test de Tukey para averiguar entre qué niveles de la variable frame existen diferencias significativas en los niveles medios de la variable bp.1d"
+  },
+  {
+    "objectID": "Practica3.html#utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones.",
+    "href": "Practica3.html#utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones.",
+    "title": "Práctica 3: Contrastes de hipótesis y análisis de la varianza",
+    "section": "3.2. Utiliza el fichero diabetes.female para responder a las siguientes cuestiones.",
+    "text": "3.2. Utiliza el fichero diabetes.female para responder a las siguientes cuestiones.\na) Contrasta al nivel de significación \\(\\alpha=0.05\\) si existen diferencias entre los niveles medios de glucosa glicosilada (glyhb) según la constitución del tamaño del cuerpo (frame) entre las mujeres.\nb) Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas."
+  },
+  {
     "objectID": "Practica1.html",
     "href": "Practica1.html",
     "title": "Práctica 1: Lectura y manejo de ficheros",
@@ -61,6 +145,13 @@
     "title": "dplyr: una gramática para la manipulación de datos",
     "section": "Seleccionando variables: select()",
     "text": "Seleccionando variables: select()\nLa función select() se utiliza para seleccionar variables (columnas) de una base de datos.\nPor ejemplo, para seleccionar únicamente las variables kgy cm del fichero EPIDURAL\n\nEPIDURAL |&gt; \n  select(kg, cm)\n\n# A tibble: 85 × 2\n      kg    cm\n   &lt;int&gt; &lt;int&gt;\n 1   116   172\n 2    86   176\n 3    72   157\n 4    63   169\n 5   114   163\n 6   121   163\n 7    90   170\n 8    87   164\n 9    74   166\n10    91   175\n# ℹ 75 more rows"
+  },
+  {
+    "objectID": "Manual_dplyr.html#seleccionando-observaciones-slice",
+    "href": "Manual_dplyr.html#seleccionando-observaciones-slice",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "Seleccionando observaciones: slice()",
+    "text": "Seleccionando observaciones: slice()\nLa función slice() se utiliza para seleccionar observaciones (filas) de una base de datos.\nPor ejemplo, para seleccionar la paciente número 19 del fichero EPIDURAL:\n\nEPIDURAL |&gt; \n  slice(19)\n\n# A tibble: 1 × 7\n  doctor    kg    cm ease  treatment            oc complications\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;             &lt;int&gt; &lt;fct&gt;        \n1 Dr. D     59   152 Easy  Hamstring Stretch     0 None"
   },
   {
     "objectID": "Manual_dplyr.html#filtrando-observaciones-filter",
@@ -287,20 +378,6 @@
     "text": "1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame?"
   },
   {
-    "objectID": "Manual_dplyr.html#análisis-estadístico-descriptivo-por-grupos-group_by-summarise",
-    "href": "Manual_dplyr.html#análisis-estadístico-descriptivo-por-grupos-group_by-summarise",
-    "title": "dplyr: una gramática para la manipulación de datos",
-    "section": "Análisis estadístico descriptivo por grupos: group_by() + summarise()",
-    "text": "Análisis estadístico descriptivo por grupos: group_by() + summarise()\nA menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo.\nPara ello, se utilizan conjuntamente las funciones group_by() y summarise().\nPor ejemplo, con el fichero diabetes calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame\n\ndiabetes |&gt; \n  group_by(frame) |&gt; \n  summarise(media=mean(chol),\n            mediana=median(chol),\n            sd=sd(chol),\n            q2.5=quantile(chol, 0.025),\n            q2.5=quantile(chol, 0.975))\n\n# A tibble: 3 × 5\n  frame  media mediana    sd  q2.5\n  &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 large   208     206   43.3  300.\n2 medium  213.    206.  46.9  318.\n3 small   198.    196   39.0  287."
-  },
-  {
-    "objectID": "Manual_dplyr.html#seleccionando-observaciones-slice",
-    "href": "Manual_dplyr.html#seleccionando-observaciones-slice",
-    "title": "dplyr: una gramática para la manipulación de datos",
-    "section": "Seleccionando observaciones: slice()",
-    "text": "Seleccionando observaciones: slice()\nLa función slice() se utiliza para seleccionar observaciones (filas) de una base de datos.\nPor ejemplo, para seleccionar la paciente número 19 del fichero EPIDURAL:\n\nEPIDURAL |&gt; \n  slice(19)\n\n# A tibble: 1 × 7\n  doctor    kg    cm ease  treatment            oc complications\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;             &lt;int&gt; &lt;fct&gt;        \n1 Dr. D     59   152 Easy  Hamstring Stretch     0 None"
-  },
-  {
     "objectID": "Practica2.html#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.",
     "href": "Practica2.html#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.",
     "title": "Práctica 2: Estadística Descriptiva",
@@ -418,48 +495,6 @@
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "3.4 Selecciona las mujeres con body frame medium y realiza un diagrama de dispersión de las variables bp.1s y age. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.",
     "text": "3.4 Selecciona las mujeres con body frame medium y realiza un diagrama de dispersión de las variables bp.1s y age. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal."
-  },
-  {
-    "objectID": "Practica2.html#a-fancy-way-of-visualizing-correlation-a-matrix",
-    "href": "Practica2.html#a-fancy-way-of-visualizing-correlation-a-matrix",
-    "title": "Práctica 2: Estadística Descriptiva",
-    "section": "A fancy way of visualizing correlation a matrix",
-    "text": "A fancy way of visualizing correlation a matrix"
-  },
-  {
-    "objectID": "Practica2.html#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-il6.-qué-puedes-decir-acerca-de-la-simetría-y-la-dispersión-de-la-variable",
-    "href": "Practica2.html#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-il6.-qué-puedes-decir-acerca-de-la-simetría-y-la-dispersión-de-la-variable",
-    "title": "Práctica 2: Estadística Descriptiva",
-    "section": "1) Realiza un histograma y un diagrama de cajas de la variable IL6. ¿Qué puedes decir acerca de la simetría y la dispersión de la variable?",
-    "text": "1) Realiza un histograma y un diagrama de cajas de la variable IL6. ¿Qué puedes decir acerca de la simetría y la dispersión de la variable?"
-  },
-  {
-    "objectID": "Practica2.html#calcula-la-media-mediana-cuartiles-desviación-típica-coeficientes-de-asimetría-y-de-curtosis-y-los-coeficientes-de-variación.-indica-sus-unidades-e-interpreta-los-estadísticos-en-aquellos-casos-que-sea-posible.",
-    "href": "Practica2.html#calcula-la-media-mediana-cuartiles-desviación-típica-coeficientes-de-asimetría-y-de-curtosis-y-los-coeficientes-de-variación.-indica-sus-unidades-e-interpreta-los-estadísticos-en-aquellos-casos-que-sea-posible.",
-    "title": "Práctica 2: Estadística Descriptiva",
-    "section": "2) Calcula la media, mediana, cuartiles, desviación típica, coeficientes de asimetría y de curtosis, y los coeficientes de variación. Indica sus unidades e interpreta los estadísticos (en aquellos casos que sea posible).",
-    "text": "2) Calcula la media, mediana, cuartiles, desviación típica, coeficientes de asimetría y de curtosis, y los coeficientes de variación. Indica sus unidades e interpreta los estadísticos (en aquellos casos que sea posible)."
-  },
-  {
-    "objectID": "Practica2.html#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-il6-en-función-de-la-variable-cancerstage.-interpreta-los-gráficos-obtenidos.",
-    "href": "Practica2.html#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-il6-en-función-de-la-variable-cancerstage.-interpreta-los-gráficos-obtenidos.",
-    "title": "Práctica 2: Estadística Descriptiva",
-    "section": "3) Dibuja un histograma y un diagrama de cajas de la variable IL6 en función de la variable CancerStage. Interpreta los gráficos obtenidos.",
-    "text": "3) Dibuja un histograma y un diagrama de cajas de la variable IL6 en función de la variable CancerStage. Interpreta los gráficos obtenidos."
-  },
-  {
-    "objectID": "Practica2.html#realiza-un-diagrama-de-dispersión-de-las-variables-il6-y-crp.-crees-que-existe-relación-lineal-entre-ellas-calcula-e-interpreta-la-covarianza-y-el-coeficiente-de-correlación-lineal-indica-sus-unidades.",
-    "href": "Practica2.html#realiza-un-diagrama-de-dispersión-de-las-variables-il6-y-crp.-crees-que-existe-relación-lineal-entre-ellas-calcula-e-interpreta-la-covarianza-y-el-coeficiente-de-correlación-lineal-indica-sus-unidades.",
-    "title": "Práctica 2: Estadística Descriptiva",
-    "section": "4) Realiza un diagrama de dispersión de las variables IL6 y CRP. ¿Crees que existe relación lineal entre ellas? Calcula e interpreta la covarianza y el coeficiente de correlación lineal (indica sus unidades).",
-    "text": "4) Realiza un diagrama de dispersión de las variables IL6 y CRP. ¿Crees que existe relación lineal entre ellas? Calcula e interpreta la covarianza y el coeficiente de correlación lineal (indica sus unidades)."
-  },
-  {
-    "objectID": "Practica2.html#selecciona-el-paciente-fumador-former-y-ex-fumador-never-con-valores-más-bajos-en-la-variable-crp.-cuál-de-los-dos-pacientes-destaca-más-en-comparación-a-la-media-de-su-grupo-justifica-la-respuesta.",
-    "href": "Practica2.html#selecciona-el-paciente-fumador-former-y-ex-fumador-never-con-valores-más-bajos-en-la-variable-crp.-cuál-de-los-dos-pacientes-destaca-más-en-comparación-a-la-media-de-su-grupo-justifica-la-respuesta.",
-    "title": "Práctica 2: Estadística Descriptiva",
-    "section": "5) Selecciona el paciente fumador (former) y ex-fumador (never) con valores más bajos en la variable CRP. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta.",
-    "text": "5) Selecciona el paciente fumador (former) y ex-fumador (never) con valores más bajos en la variable CRP. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta."
   },
   {
     "objectID": "Practica2.html#a-fancy-way-of-visualizing-correlation-matrices",

@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aritz Adin">
+<meta name="dcterms.date" content="2026-04-11">
+
+<title>Práctica 3: Contrastes de hipótesis y análisis de la varianza – BIOEST 2026-27</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">BIOEST 2026-27</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Practica0.html"> 
+<span class="menu-text">Práctica 0</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Practica1.html"> 
+<span class="menu-text">Práctica 1</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#descripción" id="toc-descripción" class="nav-link active" data-scroll-target="#descripción">Descripción</a>
+  <ul class="collapse">
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  </ul></li>
+  <li><a href="#contrastes-paramétricos" id="toc-contrastes-paramétricos" class="nav-link" data-scroll-target="#contrastes-paramétricos">1. Contrastes paramétricos</a>
+  <ul class="collapse">
+  <li><a href="#contrasta-al-nivel-de-significación-0.05-si-el-nivel-medio-de-colesterol-en-los-hombres-del-condado-de-buckingham-es-superior-a-200.-justifica-si-puedes-asumir-normalidad" id="toc-contrasta-al-nivel-de-significación-0.05-si-el-nivel-medio-de-colesterol-en-los-hombres-del-condado-de-buckingham-es-superior-a-200.-justifica-si-puedes-asumir-normalidad" class="nav-link" data-scroll-target="#contrasta-al-nivel-de-significación-0.05-si-el-nivel-medio-de-colesterol-en-los-hombres-del-condado-de-buckingham-es-superior-a-200.-justifica-si-puedes-asumir-normalidad">1.1. Contrasta al nivel de significación 0.05 si el nivel medio de colesterol en los hombres del condado de Buckingham es superior a 200. Justifica si puedes asumir normalidad</a></li>
+  <li><a href="#contrasta-al-nivel-de-significación-0.10-si-la-presión-diastólica-media-de-los-hombres-es-distinta-a-la-presión-diastólica-media-de-las-mujeres.-comprueba-que-las-dos-muestras-provienen-de-poblaciones-normales.-realiza-el-correspondiente-test-de-medias." id="toc-contrasta-al-nivel-de-significación-0.10-si-la-presión-diastólica-media-de-los-hombres-es-distinta-a-la-presión-diastólica-media-de-las-mujeres.-comprueba-que-las-dos-muestras-provienen-de-poblaciones-normales.-realiza-el-correspondiente-test-de-medias." class="nav-link" data-scroll-target="#contrasta-al-nivel-de-significación-0.10-si-la-presión-diastólica-media-de-los-hombres-es-distinta-a-la-presión-diastólica-media-de-las-mujeres.-comprueba-que-las-dos-muestras-provienen-de-poblaciones-normales.-realiza-el-correspondiente-test-de-medias.">1.2. Contrasta al nivel de significación 0.10 si la presión diastólica media de los hombres es distinta a la presión diastólica media de las mujeres. Comprueba que las dos muestras provienen de poblaciones normales. Realiza el correspondiente test de medias.</a></li>
+  <li><a href="#se-dispone-de-dos-aparatos-uno-nuevo-y-otro-antiguo-para-medir-los-niveles-de-glucosa-en-sangre.-los-médicos-sospechan-que-el-nuevo-aparato-proporciona-niveles-de-glucosa-en-sangre-superiores-al-antiguo.-se-dispone-de-una-muestra-con-15-pacientes-diabéticos-a-los-que-se-les-ha-medido-los-niveles-de-glucosa-con-los-dos-aparatos.-las-medidas-se-encuentran-en-el-fichero-glucose-de-la-librería-paswr2." id="toc-se-dispone-de-dos-aparatos-uno-nuevo-y-otro-antiguo-para-medir-los-niveles-de-glucosa-en-sangre.-los-médicos-sospechan-que-el-nuevo-aparato-proporciona-niveles-de-glucosa-en-sangre-superiores-al-antiguo.-se-dispone-de-una-muestra-con-15-pacientes-diabéticos-a-los-que-se-les-ha-medido-los-niveles-de-glucosa-con-los-dos-aparatos.-las-medidas-se-encuentran-en-el-fichero-glucose-de-la-librería-paswr2." class="nav-link" data-scroll-target="#se-dispone-de-dos-aparatos-uno-nuevo-y-otro-antiguo-para-medir-los-niveles-de-glucosa-en-sangre.-los-médicos-sospechan-que-el-nuevo-aparato-proporciona-niveles-de-glucosa-en-sangre-superiores-al-antiguo.-se-dispone-de-una-muestra-con-15-pacientes-diabéticos-a-los-que-se-les-ha-medido-los-niveles-de-glucosa-con-los-dos-aparatos.-las-medidas-se-encuentran-en-el-fichero-glucose-de-la-librería-paswr2.">1.3. Se dispone de dos aparatos, uno nuevo y otro antiguo, para medir los niveles de glucosa en sangre. Los médicos sospechan que el nuevo aparato proporciona niveles de glucosa en sangre superiores al antiguo. Se dispone de una muestra con 15 pacientes diabéticos a los que se les ha medido los niveles de glucosa con los dos aparatos. Las medidas se encuentran en el fichero <code>GLUCOSE</code> de la librería <code>PASWR2</code>.</a></li>
+  <li><a href="#contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-hemoglobina-glicosilada-glyhb-por-encima-del-6-es-superior-a-0.2." id="toc-contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-hemoglobina-glicosilada-glyhb-por-encima-del-6-es-superior-a-0.2." class="nav-link" data-scroll-target="#contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-hemoglobina-glicosilada-glyhb-por-encima-del-6-es-superior-a-0.2.">1.4. Contrasta al nivel de significación 0.05 si la proporción de hombres con hemoglobina glicosilada (<code>glyhb</code>) por encima del 6% es superior a 0.2.</a></li>
+  <li><a href="#contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-colesterol-por-debajo-de-200mgdl-es-superior-a-la-proporción-de-mujeres-con-colesterol-por-debajo-de-200mgdl." id="toc-contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-colesterol-por-debajo-de-200mgdl-es-superior-a-la-proporción-de-mujeres-con-colesterol-por-debajo-de-200mgdl." class="nav-link" data-scroll-target="#contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-colesterol-por-debajo-de-200mgdl-es-superior-a-la-proporción-de-mujeres-con-colesterol-por-debajo-de-200mgdl.">1.5. Contrasta al nivel de significación 0.05 si la proporción de hombres con colesterol por debajo de 200mg/dL es superior a la proporción de mujeres con colesterol por debajo de 200mg/dL.</a></li>
+  </ul></li>
+  <li><a href="#contrastes-no-paramétricos" id="toc-contrastes-no-paramétricos" class="nav-link" data-scroll-target="#contrastes-no-paramétricos">2. Contrastes no-paramétricos</a>
+  <ul class="collapse">
+  <li><a href="#puede-asumirse-que-la-variable-hdl-en-mujeres-sigue-una-distribución-normal-contrasta-al-nivel-de-significación-0.05-si-la-media-de-la-variable-hdl-en-mujeres-es-superior-a-47." id="toc-puede-asumirse-que-la-variable-hdl-en-mujeres-sigue-una-distribución-normal-contrasta-al-nivel-de-significación-0.05-si-la-media-de-la-variable-hdl-en-mujeres-es-superior-a-47." class="nav-link" data-scroll-target="#puede-asumirse-que-la-variable-hdl-en-mujeres-sigue-una-distribución-normal-contrasta-al-nivel-de-significación-0.05-si-la-media-de-la-variable-hdl-en-mujeres-es-superior-a-47.">2.1. ¿Puede asumirse que la variable ‘hdl’ en mujeres sigue una distribución normal? Contrasta al nivel de significación 0.05 si la media de la variable ‘hdl’ en mujeres es superior a 47.</a></li>
+  <li><a href="#contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-entre-los-niveles-de-hdl-en-hombres-y-en-mujeres.-comprueba-si-puede-asumirse-normalidad-y-realiza-el-contraste-adecuado." id="toc-contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-entre-los-niveles-de-hdl-en-hombres-y-en-mujeres.-comprueba-si-puede-asumirse-normalidad-y-realiza-el-contraste-adecuado." class="nav-link" data-scroll-target="#contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-entre-los-niveles-de-hdl-en-hombres-y-en-mujeres.-comprueba-si-puede-asumirse-normalidad-y-realiza-el-contraste-adecuado.">2.2. ¿Contrasta al nivel de significación 0.05 si existen diferencias entre los niveles de hdl en hombres y en mujeres. Comprueba si puede asumirse normalidad y realiza el contraste adecuado.</a></li>
+  <li><a href="#considera-el-fichero-phenyl-de-la-libreria-paswr2.-contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-en-los-niveles-medios-de-la-coenzima-q10-en-el-momento-de-comenzar-el-estudio-variable-q10.1-y-al-finalizar-el-estudio-variable-q10.4." id="toc-considera-el-fichero-phenyl-de-la-libreria-paswr2.-contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-en-los-niveles-medios-de-la-coenzima-q10-en-el-momento-de-comenzar-el-estudio-variable-q10.1-y-al-finalizar-el-estudio-variable-q10.4." class="nav-link" data-scroll-target="#considera-el-fichero-phenyl-de-la-libreria-paswr2.-contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-en-los-niveles-medios-de-la-coenzima-q10-en-el-momento-de-comenzar-el-estudio-variable-q10.1-y-al-finalizar-el-estudio-variable-q10.4.">2.3. Considera el fichero <code>PHENYL</code> de la libreria <code>PASWR2</code>. Contrasta al nivel de significación 0.05 si existen diferencias en los niveles medios de la coenzima Q10 en el momento de comenzar el estudio (variable <code>Q10.1</code>) y al finalizar el estudio (variable <code>Q10.4</code>).</a></li>
+  </ul></li>
+  <li><a href="#análisis-de-la-varianza-y-test-de-kruskal-wallis" id="toc-análisis-de-la-varianza-y-test-de-kruskal-wallis" class="nav-link" data-scroll-target="#análisis-de-la-varianza-y-test-de-kruskal-wallis">3. Análisis de la varianza y test de Kruskal-Wallis</a>
+  <ul class="collapse">
+  <li><a href="#contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres." id="toc-contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres." class="nav-link" data-scroll-target="#contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres.">3.1. Contrasta al nivel de significación 0.10 si el tamaño del cuerpo (<code>frame</code>) influye en la presión diastólica (<code>bp.1d</code>) de las mujeres.</a></li>
+  <li><a href="#utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones." id="toc-utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones." class="nav-link" data-scroll-target="#utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones.">3.2. Utiliza el fichero <code>diabetes.female</code> para responder a las siguientes cuestiones.</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Práctica 3: Contrastes de hipótesis y análisis de la varianza</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aritz Adin </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">04/11/2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="descripción" class="level1">
+<h1>Descripción</h1>
+<p>En esta práctica vamos a trabajar con el fichero de datos <code>Diabetes</code>.</p>
+<ul>
+<li><p>El fichero de datos contiene 19 variables medidas sobre 403 pacientes. Estos pacientes forman parte de un estudio con 1046 sujetos diseñado para investigar la prevalencia de la de obesidad, diabetes, y otros factores de riesgo cardiovasculares para Afroamericanos en Virginia, EEUU.</p></li>
+<li><p>Según Dr John Hong, Diabetes Mellitus Tipo II está asociada con la obesidad. El índice cintura-cadera puede ser un predictor en diabetes y enfermedades de corazón.</p></li>
+<li><p>Diabetes Mellitus Tipo II está también asociada con hipertensión y ambos pueden ser parte del “Síndrome X”.</p></li>
+<li><p>Los 403 sujetos del estudio son aquellos a los que se les hizo un seguimiento de diabetes. La hemoglobina glicosilada <span class="math inline">\(&gt;7.0\)</span> se toma normalmente como diagnóstico positivo de diabetes.</p></li>
+</ul>
+<p>El fichero puede descargarse de la web <a href="http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets" class="uri">http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets</a></p>
+<p>Para más información ver el paper</p>
+<p>Willems JP, Saunders JT, DE Hunt, JB Schorling. Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. <em>Southern Medical Journal</em> 90:814-820; 1997. <a href="https://europepmc.org/abstract/med/9258308" class="uri">https://europepmc.org/abstract/med/9258308</a></p>
+<section id="variables" class="level2">
+<h2 class="anchored" data-anchor-id="variables">Variables</h2>
+<p>Estas son las variables que contiene el fichero (se han eliminado alguna del fichero original y se han reemplazado algunos valores perdidos):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>Subject ID</td>
+</tr>
+<tr class="even">
+<td><code>chol</code></td>
+<td>Total Cholesterol (mg/dL)</td>
+</tr>
+<tr class="odd">
+<td><code>stab.glu</code></td>
+<td>Stabilized Glucose (mg/dL)</td>
+</tr>
+<tr class="even">
+<td><code>hdl</code></td>
+<td>High Density Lipoprotein (mg/dL)</td>
+</tr>
+<tr class="odd">
+<td><code>ratio</code></td>
+<td>Cholesterol / HDL ratio</td>
+</tr>
+<tr class="even">
+<td><code>glyhb</code></td>
+<td>Glycolsolated Hemoglobin (%)</td>
+</tr>
+<tr class="odd">
+<td><code>location</code></td>
+<td>Buckingham or Louisa</td>
+</tr>
+<tr class="even">
+<td><code>age</code></td>
+<td>Age of patient (years)</td>
+</tr>
+<tr class="odd">
+<td><code>gender</code></td>
+<td>Male or Female</td>
+</tr>
+<tr class="even">
+<td><code>height</code></td>
+<td>Height (inches)</td>
+</tr>
+<tr class="odd">
+<td><code>weight</code></td>
+<td>Weight (pounds)</td>
+</tr>
+<tr class="even">
+<td><code>frame</code></td>
+<td>Body frame size (small, medium, large)</td>
+</tr>
+<tr class="odd">
+<td><code>bp.1s</code></td>
+<td>First Systolic Blood Pressure (mmHg)</td>
+</tr>
+<tr class="even">
+<td><code>bp.1d</code></td>
+<td>First Diastolic Blood Pressure (mmHg)</td>
+</tr>
+<tr class="odd">
+<td><code>waist</code></td>
+<td>Waistline (inches)</td>
+</tr>
+<tr class="even">
+<td><code>hip</code></td>
+<td>Hip measurement (inches)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Para leer el fichero de diabetes en <code>R</code>:</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PASWR2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>diabetes <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"diabetes.txt"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Para convertir los carácteres en factor </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>diabetes <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(diabetes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 403 × 16
+      id  chol stab.glu   hdl ratio glyhb location     age gender height weight frame  bp.1s bp.1d waist   hip
+   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  1000   203       82    56  3.60  4.31 Buckingham    46 female     62    121 medium  118   59      29    38
+ 2  1001   165       97    24  6.90  4.44 Buckingham    29 female     64    218 large   112   68      46    48
+ 3  1002   228       92    37  6.20  4.64 Buckingham    58 female     61    256 large   190   92      49    57
+ 4  1003    78       93    12  6.5   4.63 Buckingham    67 male       67    119 large   110   50      33    38
+ 5  1005   249       90    28  8.90  7.72 Buckingham    64 male       68    183 medium  138   80      44    41
+ 6  1008   248       94    69  3.60  4.81 Buckingham    34 male       71    190 large   132   86      36    42
+ 7  1011   195       92    41  4.80  4.84 Buckingham    30 male       69    191 medium  161  112      46    49
+ 8  1015   227       75    44  5.20  3.94 Buckingham    37 male       59    170 medium  137.  83.3    34    39
+ 9  1016   177       87    49  3.60  4.84 Buckingham    45 male       69    166 large   160   80      34    40
+10  1022   263       89    40  6.60  5.78 Buckingham    55 female     63    202 small   108   72      45    50
+# ℹ 393 more rows</code></pre>
+</div>
+</div>
+<p><strong>IMPORTANTE:</strong></p>
+<ul>
+<li><p>Contraste bilateral –&gt; <code>alternative="two.sided"</code></p></li>
+<li><p>Contraste unilateral inferior –&gt; <code>alternative="less"</code></p></li>
+<li><p>Contraste unilateral superior –&gt; <code>alternative="greater"</code></p></li>
+</ul>
+</section>
+</section>
+<section id="contrastes-paramétricos" class="level1">
+<h1>1. Contrastes paramétricos</h1>
+<section id="contrasta-al-nivel-de-significación-0.05-si-el-nivel-medio-de-colesterol-en-los-hombres-del-condado-de-buckingham-es-superior-a-200.-justifica-si-puedes-asumir-normalidad" class="level2">
+<h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.05-si-el-nivel-medio-de-colesterol-en-los-hombres-del-condado-de-buckingham-es-superior-a-200.-justifica-si-puedes-asumir-normalidad">1.1. Contrasta al nivel de significación 0.05 si el nivel medio de colesterol en los hombres del condado de Buckingham es superior a 200. Justifica si puedes asumir normalidad</h2>
+<!-- Sea X="Nivel de colesterol de los hombres del condado de Buckingham (mg/dL)". -->
+<!-- El contraste que debemos realizar ($\alpha=0.05$) se escribe como: -->
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu=200 \\ -->
+<!-- H_1: & \mu>200 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+<!-- En primer lugar seleccionamos los datos de la muestra: -->
+<!-- ```{r include=TRUE} -->
+<!-- chol.manB <- diabetes |>  -->
+<!--   filter(gender=="male", -->
+<!--          location=="Buckingham") |>  -->
+<!--   pull(chol) -->
+<!-- ``` -->
+<!-- Comprobamos la condición de normalidad (test de Shapiro-Wilks): -->
+<!-- ```{r include=TRUE, message=FALSE} -->
+<!-- chol.manB |> eda() -->
+<!-- ``` -->
+<!-- Realizamos el test (paramétrico) para una media: -->
+<!-- ```{r, include=TRUE} -->
+<!-- t.test(chol.manB, mu=200, alternative="greater") -->
+<!-- ``` -->
+<!-- Como p-valor$=0.23>\alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
+<!-- **Interpretación**: Con un nivel de significación del 5%, no existen evidencias estadísticas para afirmar que el nivel medio de colesterol en los hombres de Buckingham es superior a 200 mg/dL. -->
+</section>
+<section id="contrasta-al-nivel-de-significación-0.10-si-la-presión-diastólica-media-de-los-hombres-es-distinta-a-la-presión-diastólica-media-de-las-mujeres.-comprueba-que-las-dos-muestras-provienen-de-poblaciones-normales.-realiza-el-correspondiente-test-de-medias." class="level2">
+<h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.10-si-la-presión-diastólica-media-de-los-hombres-es-distinta-a-la-presión-diastólica-media-de-las-mujeres.-comprueba-que-las-dos-muestras-provienen-de-poblaciones-normales.-realiza-el-correspondiente-test-de-medias.">1.2. Contrasta al nivel de significación 0.10 si la presión diastólica media de los hombres es distinta a la presión diastólica media de las mujeres. Comprueba que las dos muestras provienen de poblaciones normales. Realiza el correspondiente test de medias.</h2>
+<!-- Definimos las variables: -->
+<!-- X="Presión diastólica de los hombres (mmHg)" -->
+<!-- Y="Presión diastólica de las mujeres (mmHg)" -->
+<!-- El contraste que debemos realizar ($\alpha=0.10$) se escribe como: -->
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu_X - \mu_Y = 0 \\ -->
+<!-- H_1: & \mu_X - \mu_Y \neq 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+<!-- En primer lugar seleccionamos los datos de las muestras: -->
+<!-- ```{r include=TRUE} -->
+<!-- diabetes |> count(gender) -->
+<!-- bp.male <- diabetes |>  -->
+<!--   filter(gender=="male") |>  -->
+<!--   pull(bp.1d) -->
+<!-- bp.female <- diabetes |>  -->
+<!--   filter(gender=="female") |>  -->
+<!--   pull(bp.1d) -->
+<!-- ``` -->
+<!-- Comprobamos la condición de normalidad en ambas variables: -->
+<!-- ```{r include=TRUE} -->
+<!-- bp.male |> eda() -->
+<!-- bp.female |> eda() -->
+<!-- ``` -->
+<!-- Verificamos si podemos asumir que las varianzas son iguales o no: -->
+<!-- ```{r include=TRUE} -->
+<!-- boxplot(bp.male, bp.female) -->
+<!-- # boxplot(bp.1d ~ gender, data=diabetes) -->
+<!-- ``` -->
+<!-- Realizamos el test (paramétrico) para la diferencia de medias en poblaciones independientes: -->
+<!-- ```{r include=TRUE} -->
+<!-- t.test(bp.male, bp.female, mu=0, alternative="two.sided", var.equal=TRUE) -->
+<!-- ``` -->
+<!-- Como p-valor$=0.15>\alpha=0.10 \Rightarrow$ No rechazamos $H_0$. -->
+<!-- **Interpretación**: Con un nivel de significación del 10%, no existen evidencias estadísticas para afirmar que la presión diastólica media de los hombres sea distinta del de las mujeres. -->
+</section>
+<section id="se-dispone-de-dos-aparatos-uno-nuevo-y-otro-antiguo-para-medir-los-niveles-de-glucosa-en-sangre.-los-médicos-sospechan-que-el-nuevo-aparato-proporciona-niveles-de-glucosa-en-sangre-superiores-al-antiguo.-se-dispone-de-una-muestra-con-15-pacientes-diabéticos-a-los-que-se-les-ha-medido-los-niveles-de-glucosa-con-los-dos-aparatos.-las-medidas-se-encuentran-en-el-fichero-glucose-de-la-librería-paswr2." class="level2">
+<h2 class="anchored" data-anchor-id="se-dispone-de-dos-aparatos-uno-nuevo-y-otro-antiguo-para-medir-los-niveles-de-glucosa-en-sangre.-los-médicos-sospechan-que-el-nuevo-aparato-proporciona-niveles-de-glucosa-en-sangre-superiores-al-antiguo.-se-dispone-de-una-muestra-con-15-pacientes-diabéticos-a-los-que-se-les-ha-medido-los-niveles-de-glucosa-con-los-dos-aparatos.-las-medidas-se-encuentran-en-el-fichero-glucose-de-la-librería-paswr2.">1.3. Se dispone de dos aparatos, uno nuevo y otro antiguo, para medir los niveles de glucosa en sangre. Los médicos sospechan que el nuevo aparato proporciona niveles de glucosa en sangre superiores al antiguo. Se dispone de una muestra con 15 pacientes diabéticos a los que se les ha medido los niveles de glucosa con los dos aparatos. Las medidas se encuentran en el fichero <code>GLUCOSE</code> de la librería <code>PASWR2</code>.</h2>
+<!-- Definimos las variables: -->
+<!-- X="Nivel de glucosa (mg/dL) con el aparato viejo" -->
+<!-- Y="Nivel de glucosa (mg/dL) con el aparato nuevo" -->
+<!-- -   **¿Son las muestras independientes?** -->
+<!-- Como se tratan de los mismos individuos medidos en distintos instantes de tiempo, las muestras son dependientes (o emparejadas). Por lo tanto, trabajaremos con la diferencia entre ambas variables: -->
+<!-- ```{r include=TRUE} -->
+<!-- GLUCOSE <- GLUCOSE |>  -->
+<!--   mutate(D=old-new) -->
+<!-- ``` -->
+<!-- -   **Comprueba si puede asumirse la hipótesis de normalidad.** -->
+<!-- ```{r include=TRUE} -->
+<!-- GLUCOSE$D |> eda() -->
+<!-- ``` -->
+<!-- -   **Contrasta al nivel de significación** $\alpha=0.05$ **si el nuevo aparato proporciona medidas más altas que el antiguo.** -->
+<!-- El contraste que debemos realizar se escribe como: -->
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu_D = 0 \\ -->
+<!-- H_1: & \mu_D < 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+<!-- Como se verifica la hipótesis de normalidad, realizamo el test (paramétrico) para una media: -->
+<!-- ```{r include=TRUE} -->
+<!-- t.test(GLUCOSE$D, mu=0, alternative="less") -->
+<!-- # Otra opción: -->
+<!-- t.test(GLUCOSE$old, GLUCOSE$new, paired=TRUE, mu=0, alternative="less") -->
+<!-- ``` -->
+<!-- Como p-valor$\approx 0<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el aparato nuevo proporciona niveles de medios de glucosa en sangre superiores al aparato viejo. -->
+</section>
+<section id="contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-hemoglobina-glicosilada-glyhb-por-encima-del-6-es-superior-a-0.2." class="level2">
+<h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-hemoglobina-glicosilada-glyhb-por-encima-del-6-es-superior-a-0.2.">1.4. Contrasta al nivel de significación 0.05 si la proporción de hombres con hemoglobina glicosilada (<code>glyhb</code>) por encima del 6% es superior a 0.2.</h2>
+<!-- Definimos la variable: -->
+<!-- X="Nº de hombres con valores de hemoglobina glicosilada superior al 6%" $\sim Bin(n,\pi)$ -->
+<!-- -   **Calcula el número de hombres en la muestra con `glyhb` por encima del 6% y el total de hombres en la muestra.** -->
+<!-- ```{r include=TRUE} -->
+<!-- # Casos favorables -->
+<!-- diabetes |>  -->
+<!--   filter(gender=="male", -->
+<!--          glyhb>6) |>  -->
+<!--   nrow() -->
+<!-- # Casos totales -->
+<!-- diabetes |> count(gender) -->
+<!-- ``` -->
+<!-- -   **Realiza un test exacto y un test aproximado para la proporción verdadera.** -->
+<!-- El contraste que debemos realizar se escribe como: -->
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \pi = 0.2 \\ -->
+<!-- H_1: & \pi > 0.2 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+<!-- Como se verifica que $n*\pi_0=169*0.2 = 33.8 > 10$ y $n*(1-\pi_0)=169*0.8 = 135.2 > 10$, podemos realizar el test aproximado como: -->
+<!-- ```{r include=TRUE} -->
+<!-- prop.test(x=39, n=169, p=0.2, alternative="greater") -->
+<!-- ``` -->
+<!-- Como p-valor$=0.183 > \alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
+<!-- **Interpretación**: Con un nivel de significación del 5%, no podemos afirmar que la proporción de hombres con valores de hemoglobina glicosilada superior al 6% sea superior a 0.2. -->
+</section>
+<section id="contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-colesterol-por-debajo-de-200mgdl-es-superior-a-la-proporción-de-mujeres-con-colesterol-por-debajo-de-200mgdl." class="level2">
+<h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.05-si-la-proporción-de-hombres-con-colesterol-por-debajo-de-200mgdl-es-superior-a-la-proporción-de-mujeres-con-colesterol-por-debajo-de-200mgdl.">1.5. Contrasta al nivel de significación 0.05 si la proporción de hombres con colesterol por debajo de 200mg/dL es superior a la proporción de mujeres con colesterol por debajo de 200mg/dL.</h2>
+<!-- Definimos la variable: -->
+<!-- X="Nº de hombres con colesterol por debajo de 200mg/dL" $\sim Bin(n_X,\pi_X)$ -->
+<!-- Y="Nº de mujeres con colesterol por debajo de 200mg/dL" $\sim Bin(n_Y,\pi_Y)$ -->
+<!-- -   **Calcula el número de hombres en la muestra con colesterol por debajo de 200mg/dL y el total de hombres de la muestra (**$n_X$). -->
+<!-- ```{r include=TRUE} -->
+<!-- x <- diabetes |>  -->
+<!--   filter(gender=="male", -->
+<!--          chol<200) |>  -->
+<!--   nrow() -->
+<!-- x -->
+<!-- nx <- diabetes |>  -->
+<!--   filter(gender=="male") |>  -->
+<!--   nrow() -->
+<!-- nx -->
+<!-- ``` -->
+<!-- -   **Calcula el número de mujeres en la muestra con colesterol por debajo de 200mg/dL y el total de mujeres de la muestra (**$n_Y$). -->
+<!-- ```{r include=TRUE} -->
+<!-- y <- diabetes |>  -->
+<!--   filter(gender=="female", -->
+<!--          chol<200) |>  -->
+<!--   nrow() -->
+<!-- y -->
+<!-- ny <- diabetes |>  -->
+<!--   filter(gender=="female") |>  -->
+<!--   nrow() -->
+<!-- ny -->
+<!-- ``` -->
+<!-- -   **Realiza un test para la diferencia de proporciones.** -->
+<!-- El contraste que debemos realizar se escribe como: -->
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \pi_X - \pi_Y = 0 \\ -->
+<!-- H_1: & \pi_X - \pi_Y > 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+<!-- Realizamos el test en R: -->
+<!-- ```{r include=TRUE} -->
+<!-- prop.test(c(x,y), c(nx,ny), alternative="greater") -->
+<!-- ``` -->
+<!-- Como p-valor$=0.3931 > \alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
+<!-- **Interpretación**: Con un nivel de significación del 5%, no podemos afirmar que la proporción de hombres con colesterol por debajo de 200mg/dL sea superior a la proporción de mujeres con colesterol por debajo de 200mg/dL. -->
+</section>
+</section>
+<section id="contrastes-no-paramétricos" class="level1">
+<h1>2. Contrastes no-paramétricos</h1>
+<section id="puede-asumirse-que-la-variable-hdl-en-mujeres-sigue-una-distribución-normal-contrasta-al-nivel-de-significación-0.05-si-la-media-de-la-variable-hdl-en-mujeres-es-superior-a-47." class="level2">
+<h2 class="anchored" data-anchor-id="puede-asumirse-que-la-variable-hdl-en-mujeres-sigue-una-distribución-normal-contrasta-al-nivel-de-significación-0.05-si-la-media-de-la-variable-hdl-en-mujeres-es-superior-a-47.">2.1. ¿Puede asumirse que la variable ‘hdl’ en mujeres sigue una distribución normal? Contrasta al nivel de significación 0.05 si la media de la variable ‘hdl’ en mujeres es superior a 47.</h2>
+<!-- Sea X="Nivel de HDL de las mujeres (mg/dL)". -->
+<!-- El contraste que debemos realizar ($\alpha=0.05$) se escribe como: -->
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu=47 \\ -->
+<!-- H_1: & \mu>47 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+<!-- En primer lugar seleccionamos los datos de la muestra: -->
+<!-- ```{r include=TRUE} -->
+<!-- hdl.female <- diabetes |>  -->
+<!--   filter(gender=="female") |>  -->
+<!--   pull(hdl) -->
+<!-- ``` -->
+<!-- Comprobamos la condición de normalidad: -->
+<!-- ```{r include=TRUE, message=FALSE} -->
+<!-- hdl.female |> eda() -->
+<!-- ``` -->
+<!-- Como no se verifica la normalidad (p-valor $<0.05$), realizamos el test no-paramétrico para una media (test de Wilcoxon): -->
+<!-- ```{r include=TRUE} -->
+<!-- wilcox.test(hdl.female, mu=47, alternative="greater") -->
+<!-- ``` -->
+<!-- Como p-valor$=0.0015 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en mujeres es superior a 47 mg/dL. -->
+</section>
+<section id="contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-entre-los-niveles-de-hdl-en-hombres-y-en-mujeres.-comprueba-si-puede-asumirse-normalidad-y-realiza-el-contraste-adecuado." class="level2">
+<h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-entre-los-niveles-de-hdl-en-hombres-y-en-mujeres.-comprueba-si-puede-asumirse-normalidad-y-realiza-el-contraste-adecuado.">2.2. ¿Contrasta al nivel de significación 0.05 si existen diferencias entre los niveles de hdl en hombres y en mujeres. Comprueba si puede asumirse normalidad y realiza el contraste adecuado.</h2>
+<!-- Definimos las variables: -->
+<!-- X="Nivel de HDL en hombres (mg/dL)" -->
+<!-- Y="Nivel de HDL en mujeres (mg/dL)" -->
+<!-- El contraste que debemos realizar ($\alpha=0.10$) se escribe como: \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu_X - \mu_Y = 0 \\ -->
+<!-- H_1: & \mu_X - \mu_Y \neq 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+<!-- En primer lugar seleccionamos los datos de las muestras: -->
+<!-- ```{r include=TRUE} -->
+<!-- hdl.male <- diabetes |>  -->
+<!--   filter(gender=="male") |>  -->
+<!--   pull(hdl) -->
+<!-- hdl.female <- diabetes |>  -->
+<!--   filter(gender=="female") |>  -->
+<!--   pull(hdl) -->
+<!-- ``` -->
+<!-- Comprobamos la condición de normalidad en ambas variables: -->
+<!-- ```{r include=TRUE} -->
+<!-- hdl.male |> eda() -->
+<!-- hdl.female |> eda() -->
+<!-- ``` -->
+<!-- En este caso no es necesario, pero podríamos verificar la igualdad de varianzas: -->
+<!-- ```{r include=TRUE} -->
+<!-- boxplot(hdl ~ gender, data=diabetes) -->
+<!-- ``` -->
+<!-- Como no se verifica la normalidad, realizamos el test no-paramétrico para la diferencia de medias (test de Mann-Withney): -->
+<!-- ```{r include=TRUE} -->
+<!-- wilcox.test(hdl.male, hdl.female, mu=0, alternative="two.sided") -->
+<!-- ``` -->
+<!-- Como p-valor$=0.006<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en hombres y mujeres es distinto. -->
+</section>
+<section id="considera-el-fichero-phenyl-de-la-libreria-paswr2.-contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-en-los-niveles-medios-de-la-coenzima-q10-en-el-momento-de-comenzar-el-estudio-variable-q10.1-y-al-finalizar-el-estudio-variable-q10.4." class="level2">
+<h2 class="anchored" data-anchor-id="considera-el-fichero-phenyl-de-la-libreria-paswr2.-contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-en-los-niveles-medios-de-la-coenzima-q10-en-el-momento-de-comenzar-el-estudio-variable-q10.1-y-al-finalizar-el-estudio-variable-q10.4.">2.3. Considera el fichero <code>PHENYL</code> de la libreria <code>PASWR2</code>. Contrasta al nivel de significación 0.05 si existen diferencias en los niveles medios de la coenzima Q10 en el momento de comenzar el estudio (variable <code>Q10.1</code>) y al finalizar el estudio (variable <code>Q10.4</code>).</h2>
+<!-- Definimos las variables: -->
+<!-- X="Nivel de coenzima Q10 al comienzo del estudio" -->
+<!-- X="Nivel de coenzima Q10 al final del estudio" -->
+<!-- ```{r include=TRUE} -->
+<!-- data("PHENYL") -->
+<!-- head(PHENYL) -->
+<!-- ``` -->
+<!-- Como se tratan de los mismos individuos medidos en distintos instantes de tiempo, las muestras son dependientes (o emparejadas). Por lo tanto, trabajaremos con la diferencia entre ambas variables: -->
+<!-- ```{r include=TRUE} -->
+<!-- PHENYL <- PHENYL |>  -->
+<!--   mutate(D=Q10.1-Q10.4) -->
+<!-- # Comprobamos la condición de normalidad -->
+<!-- PHENYL$D |> eda() -->
+<!-- ``` -->
+<!-- El contraste que debemos realizar se escribe como: -->
+<!-- \begin{eqnarray*} -->
+<!-- \begin{array}{rl} -->
+<!-- H_0: & \mu_D = 0 \\ -->
+<!-- H_1: & \mu_D \neq 0 \\ -->
+<!-- \end{array} -->
+<!-- \end{eqnarray*} -->
+<!-- Como no se verifica la hipótesis de normalidad, realizamo el test no-paramétrico para la diferencia de medias. -->
+<!-- ```{r include=TRUE} -->
+<!-- wilcox.test(PHENYL$D, mu=0, alternative="two.sided") -->
+<!-- # Otra opción -->
+<!-- wilcox.test(PHENYL$Q10.1, PHENYL$Q10.4, paired=TRUE, mu=0, alternative="two.sided") -->
+<!-- ``` -->
+<!-- Como p-valor$=0.0003 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+<!-- **Interpretación**: Con un nivel de significación del 5%, tenemos evidencias estadísticas para afirmar que los niveles medios de la coenzima Q10 han cambiado a lo largo del estudio. -->
+</section>
+</section>
+<section id="análisis-de-la-varianza-y-test-de-kruskal-wallis" class="level1">
+<h1>3. Análisis de la varianza y test de Kruskal-Wallis</h1>
+<section id="contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres." class="level2">
+<h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres.">3.1. Contrasta al nivel de significación 0.10 si el tamaño del cuerpo (<code>frame</code>) influye en la presión diastólica (<code>bp.1d</code>) de las mujeres.</h2>
+<p><strong>a) Crea un nuevo fichero llamado <code>diabetes.female</code> solo con las mujeres.</strong></p>
+<p><strong>b) Exploración gráfica: representa los diagrama de caja de la variable <code>bp.1d</code> según la variable <code>frame</code>.</strong></p>
+<p><strong>c) Realiza el análisis de la varianza con la función <code>aov()</code></strong></p>
+<p><strong>d) Comprueba si pueden asumirse las hipótesis del modelo.</strong></p>
+<p><strong>e) Utiliza un test de Tukey para averiguar entre qué niveles de la variable <code>frame</code> existen diferencias significativas en los niveles medios de la variable <code>bp.1d</code></strong></p>
+</section>
+<section id="utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones." class="level2">
+<h2 class="anchored" data-anchor-id="utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones.">3.2. Utiliza el fichero <code>diabetes.female</code> para responder a las siguientes cuestiones.</h2>
+<p><strong>a) Contrasta al nivel de significación</strong> <span class="math inline">\(\alpha=0.05\)</span> <strong>si existen diferencias entre los niveles medios de glucosa glicosilada (<code>glyhb</code>) según la constitución del tamaño del cuerpo (<code>frame</code>) entre las mujeres.</strong></p>
+<p><strong>b) Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas.</strong></p>
+<!-- # 4. Para entregar -->
+<!-- Responde a las siguientes cuestiones, utilizando la misma muestra de pacientes que te ha sido asignada en la Práctica 2 para el fichero `patients.txt`. -->
+<!-- ## 4.1. Contrasta al nivel de significación 0.1 si los niveles medios de la concentración de Interleukina-6 (`IL6`) son significativamente distintos en pacientes con cáncer en estadio I que en paciente con cáncer en estadio II. -->
+<!-- -   Define correctamente las variables del problema. -->
+<!-- -   Comprueba si las dos muestras provienen de poblaciones normales. -->
+<!-- -   Realiza el correspondiente test de hipótesis. -->
+<!-- ## 4.2. Se estudió la eficacia de la sulfinpirazona en prevenir la muerte después de sufrir infarto de miocardio. Para ello se consideraron pacientes que habían sufrido infarto de miocardio. A un grupo se les proporcionó sulfinpirazona y a otro grupo se les suministró placebo. En la siguiente tabla se muestra el número de pacientes de cada grupo que murieron y que superaron el infarto. -->
+<!-- |                 | Death (all causes) | Survivors | -->
+<!-- |-----------------|--------------------|-----------| -->
+<!-- | Sulphinpyrazole | 41                 | 692       | -->
+<!-- | Placebo         | 60                 | 682       | -->
+<!-- -   **Contrasta al nivel de significación** $\alpha=0.01$ si la proporción de muertes de pacientes que tomaron sulfinpirazona es inferior a la de pacientes que tomaron un placebo. -->
+<!-- ## 4.3. Contrasta al nivel de significación $\alpha=0.1$ si existen diferencias en la edad media de los pacientes según el estadio de cancer (`CancerStage`). -->
+<!-- -   **Realiza una exploración gráfica y el análisis de varianza correspondiente** -->
+<!-- -   **Comprueba si pueden asumirse las hipótesis del modelo** -->
+<!-- -   **Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas** -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
