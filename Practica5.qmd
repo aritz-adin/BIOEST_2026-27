@@ -1,0 +1,187 @@
+---
+title: "Práctica 5: Asociación. Riesgos relativos y Odds Ratio"
+author: "Aritz Adin"
+date: "2026-11-23"
+date-format: "DD/MM/YYYY"
+format:
+  html:
+    toc: true
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(width=1000)
+```
+
+# 1. Riesgos relativos y Odds Ratio
+
+## 1.1. Se estudió la eficacia de la sulfinpirazona en prevenir la muerte después de sufrir infarto de miocardio. Para ello se consideraron pacientes que habían sufrido infarto de miocardio. A un grupo se les proporcionó sulfinpirazona y a otro grupo se les suministró placebo. En la siguiente tabla se muestra el número de pacientes de cada grupo que murieron y que superaron el infarto.
+
+|                 | Death (all causes) | Survivors |
+|-----------------|--------------------|-----------|
+| Sulphinpyrazole | 41                 | 692       |
+| Placebo         | 60                 | 682       |
+
+### a) Calcula e interpreta un intervalo de confianza al 90% para la diferencia de proporciones de muertes en el grupo placebo y en el grupo que tomaron sulfinpirazona.
+
+<!-- Definimos las variables: -->
+
+<!-- X="Nº de fallecidos entre los que tomaron sulfinpirazona." $\sim Bin(n_X,\pi_X)$ -->
+
+<!-- Y="Nº de fallecidos entre los que tomaron placebo" $\sim Bin(n_Y,\pi_Y)$ -->
+
+<!-- Las estimaciones de las proporciones $\pi_X$ y $\pi_Y$ se calculan como: -->
+
+<!-- $$\hat{\pi}_X=p_X=\dfrac{41}{41+692}=0.0559$$ -->
+
+<!-- $$\hat{\pi}_Y=p_Y=\dfrac{60}{60+682}=0.0809$$ Podemos calcular el intervalo de confianza al 90% para la diferencia de proporciones como: -->
+
+<!-- $$IC_{0.90}(\pi_X-\pi_Y) = \left[(p_X-p_Y) \pm z_{0.95} \sqrt{\frac{p_X*(1-p_X)}{n_X}+\frac{p_Y*(1-p_Y)}{n_Y}} \right] = [-0.0465, -0.0033]$$ -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- x <- 41 -->
+<!-- y <- 60 -->
+
+<!-- nx <- 41+692 -->
+<!-- ny <- 60+682 -->
+
+<!-- prop.test(c(x,y), c(nx,ny), alternative="two.sided", conf.level=0.9, correct=FALSE) -->
+<!-- ``` -->
+
+<!-- **Interpretación:** Con un nivel de confianza del 90%, la diferencia entre la proporción de fallecidos en los pacientes que tomaron sulfinpirazona y la proporción de fallecidos en los pacientes que tomaron placebo se encuentra entre -0.0465 y -0.0033. Como $0 \notin IC_{0.90}(\pi_X-\pi_Y)$, existen evidencias estadísticas para afirmar que la proporción de fallecidos en ambos grupos es distinta. -->
+
+### b) Estima e interpreta el riesgo relativo de morir habiendo tomado placebo respecto a haber tomado sulfinpirazona y proporciona un intervalo de confianza al 90% para dicho riesgo.
+
+<!-- El estimador del riesgo relativo es -->
+
+<!-- $$\widehat{RR}=\frac{p_Y}{p_X}=\frac{0.0809}{0.0559}=1.4472$$ -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- px <- x/nx -->
+<!-- py <- y/ny -->
+
+<!-- RR <- py/px -->
+<!-- RR -->
+<!-- ``` -->
+
+<!-- **Interpretación:** La proporción muestral de fallecidos en el grupo placebo es aproximadamente 1.5 veces mayor que en el grupo de sulfinpirazona. -->
+
+<!-- Podemos calcular el intervalo de confianza al 90% para el logaritmo del riesgo relativo (**NOTA: no lo haremos asi**): -->
+
+<!-- $$IC_{0.90}\left(\log \left(\frac{\pi_Y}{\pi_X} \right) \right) = \left[\log(p_Y/p_X) \pm z_{0.95}*SE(\log(p_Y/p_X)) \right] = [0.0465, 0.6907]$$ -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- alpha <- 0.1 -->
+
+<!-- SE.log <- sqrt((1-py)/(ny*py)+(1-px)/(nx*px)) -->
+
+<!-- IC.log <- c(log(RR)-qnorm(1-alpha/2)*SE.log, log(RR)+qnorm(1-alpha/2)*SE.log) -->
+<!-- IC.log -->
+<!-- ``` -->
+
+<!-- Transformando este intervalo mediante la función exponencial, obtenemos que $IC_{0.90}\left(\frac{\pi_Y}{\pi_X}\right) = [\exp(0.0465), \exp(0.6907)]=[1.048, 1.995]$. -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- exp(IC.log) -->
+<!-- ``` -->
+
+<!-- **Interpretación:** Con una confianza del 90%, el riesgo relativo se encuentra entre 1.048 y 1.995. Es decir, la proporción de fallecidos es aproximadamente entre 1.05 y 2 veces mayor en el grupo placebo. -->
+
+### c) Estima e interpreta el odds de fallecer en los dos grupos.
+
+<!-- $$\widehat{odds}_{sulfin}=\frac{p_X}{1-p_X}=0.0592$$ $$\widehat{odds}_{placebo}=\frac{p_Y}{1-p_Y}=0.0880$$ -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- odds.sulfin <- px/(1-px) -->
+<!-- odds.sulfin -->
+
+<!-- odds.placebo <- py/(1-py) -->
+<!-- odds.placebo -->
+<!-- ``` -->
+
+<!-- **Interpretación:** La probabilidad de sobrevivir en el grupo de pacientes que han tomado sulfinpirazona es aproximadamente 17 veces ($1/0.0592=16.89$) superior a la probabilidad de fallecer. -->
+
+<!-- Por otro lado, la probabilidad de sobrevivir en el grupo de pacientes que han tomado placebo es aproximadamente 11 veces ($1/0.0880=11.36$) superior a la probabilidad de fallecer fallecer. -->
+
+### d) Estima e interpreta el odds ratio. Calcula su intervalo de confianza ($\alpha=0.9$) utilizando la función `odds()`.
+
+<!-- El odds ratio estimado, se calcula como el ratio de odds -->
+
+<!-- $$OR=\frac{\widehat{odds}_{sulfin}}{\widehat{odds}_{placebo}}=\frac{0.05924855}{0.08797654}=0.6734585$$ -->
+
+<!-- o como la razón del producto cruzado -->
+
+<!-- $$OR=\frac{n_{11} \times n_{22}}{n_{21} \times n_{12}}=\frac{41 \times 682}{60 \times 692}=0.6734586$$ **Interpretación:** El odds estimado de fallecer en el grupo placebo es aproximadamente 1.5 veces ($1/0.67345=1.484891$) superior al odds estimado de fallecer en el grupo de pacientes que han tomado sulfinpirazona. -->
+
+<!-- Calculamos el intervalo de confianza al 90% para el odds ratio: -->
+
+<!-- ```{r include=TRUE} -->
+<!-- datos <- data.frame(Muertos=c(60,41), -->
+<!--                     Vivos=c(682,692), -->
+<!--                     row.names=c("Placebo","Sulfin")) -->
+<!-- datos -->
+
+<!-- source("odds.R") -->
+<!-- datos |> odds(conf.level=0.9) -->
+<!-- ``` -->
+
+<!-- **Interpretación:** Con una confianza del 90%, el odds ratio se encuentra entre 1.05 y 2.10. Es decir, el odds de fallecer en el grupo de sulfinpirazona es aproximadamente entre 1.05 y 2 veces mayor que el odds de fallecer en el grupo placebo. -->
+
+### e) Utiliza el test Chi-cuadrado ($\alpha=0.1$) para decidir si hay independencia.
+
+<!-- La hipótesis nula del contraste se puede expresar como: -->
+
+<!-- $H_0$: No hay asociación entre tomar el medicamento y sufrir o no un infarto de miocardio (hay independencia) -->
+
+<!-- Si utilizamos la función \func{chisq.test} de R: -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- resultado <- datos |> chisq.test() -->
+<!-- print(resultado) -->
+<!-- ``` -->
+
+<!-- Podemos comprobar cómo se calculan los casos esperados: -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- resultado$expected -->
+<!-- ``` -->
+
+<!-- $$\hat{\mu}_{11}=\dfrac{n_{1+} \times n_{+1}}{n}=\dfrac{(60+682) \times (60+41)}{1475} = 50.80814$$ De forma similar, podemos comprobar que el estadístico Chi-cuadrado se calcula como: -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- sum((resultado$observed-resultado$expected)^2/resultado$expected) -->
+<!-- ``` -->
+
+<!-- **Intepretación del p-valor del test:** Como p-valor$=0.0731<\alpha=0.1$, el test Chi-cuadrado rechaza la hipótesis nula de independencia, es decir, tomar el medicamento tiene una influencia en sufrir o no un infarto de miocardio. -->
+
+### f) Utiliza el test exacto de Fisher para contrastar independencia.
+
+<!-- ```{r include=TRUE} -->
+<!-- datos |> fisher.test(conf.level=0.9) -->
+<!-- ``` -->
+
+<!-- **Intepretación:** Como p-valor$=0.0636<\alpha=0.1$, el test de Fisher también rechaza la hipótesis nula de independencia. Además, proporciona también el intervalo de confianza para el odds ratio (en este caso el intervalo no contiene al "1"). -->
+
+<!-- # 2. Ejercicios propuestos -->
+
+<!-- ## 2.1. En un estudio del tratamiento con Ribavirin en pacientes con síndrome respiratorio severo agudo (Severe Acute Respiratory Syndrome, SARS) se obtuvieron los siguientes resultados. -->
+
+<!-- |           | Death | Survivors | -->
+<!-- |-----------|-------|-----------| -->
+<!-- | Placebo   | 17    | 115       | -->
+<!-- | Ribavirin | 10    | 87        | -->
+
+<!-- Fuente: H-N. Leung, et al. (2004). Investigational Use of Ribavirin in the Treatment of Severe Acute Respiratory Syndrome, Singapore, 2003. *Tropical Medicine and International Health*,9 (8), pp 923-927. -->
+
+<!-- ### a) Calcula e interpreta un intervalo de confianza al 95% para la diferencia de proporciones de muertes en el grupo placebo y en el grupo que tomaron Ribavirin. -->
+
+<!-- ### b) Estima e interpreta el riesgo relativo de muerte en el grupo placebo respecto al grupo Ribavirin y proporciona un intervalo de confianza al 95% para dicho riesgo. -->
+
+<!-- ### c) Estima e interpreta el odds de muerte en los dos grupos. -->
+
+<!-- ### d) Estima e interpreta el odds ratio. Proporciona un intervalo de confianza para el odds ratio ($\alpha=0.95$) y explica qué concluyes. -->
+
+<!-- ### e) Utiliza el test exacto de Fisher para decidir si hay independencia. -->
+
+<!-- ### f) Utiliza el test exacto de la Chi-cuadrado para contrastar independencia. -->

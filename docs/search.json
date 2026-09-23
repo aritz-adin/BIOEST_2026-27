@@ -537,5 +537,19 @@
     "title": "Práctica 4: Regresión",
     "section": "2.1. Con el fichero HSWRESTLER de la librería PASWR2, ajusta un modelo de regresión para predecir la cantidad de grasa (tanfat). Selecciona las variables age, ht, wt, abs, triceps y subscap que mejor sirvan para predecir los valores de tanfat.",
     "text": "2.1. Con el fichero HSWRESTLER de la librería PASWR2, ajusta un modelo de regresión para predecir la cantidad de grasa (tanfat). Selecciona las variables age, ht, wt, abs, triceps y subscap que mejor sirvan para predecir los valores de tanfat.\n\nSelecciona las variables eliminado secuencialmente aquellas que no son estadísticamente significativas.\nUtiliza también la función stepAIC() de la librería MASS para seleccionar las variables.\nInterpreta los coeficientes del modelo.\nPredice el valor de tanfat para dos individuo con valores de la variable abs de 20mm y 25mm, respectivamente, y valores de subscap de 13mm."
+  },
+  {
+    "objectID": "Practica5.html",
+    "href": "Practica5.html",
+    "title": "Práctica 5: Asociación. Riesgos relativos y Odds Ratio",
+    "section": "",
+    "text": "Death (all causes)\nSurvivors\n\n\n\n\nSulphinpyrazole\n41\n692\n\n\nPlacebo\n60\n682"
+  },
+  {
+    "objectID": "Practica5.html#se-estudió-la-eficacia-de-la-sulfinpirazona-en-prevenir-la-muerte-después-de-sufrir-infarto-de-miocardio.-para-ello-se-consideraron-pacientes-que-habían-sufrido-infarto-de-miocardio.-a-un-grupo-se-les-proporcionó-sulfinpirazona-y-a-otro-grupo-se-les-suministró-placebo.-en-la-siguiente-tabla-se-muestra-el-número-de-pacientes-de-cada-grupo-que-murieron-y-que-superaron-el-infarto.",
+    "href": "Practica5.html#se-estudió-la-eficacia-de-la-sulfinpirazona-en-prevenir-la-muerte-después-de-sufrir-infarto-de-miocardio.-para-ello-se-consideraron-pacientes-que-habían-sufrido-infarto-de-miocardio.-a-un-grupo-se-les-proporcionó-sulfinpirazona-y-a-otro-grupo-se-les-suministró-placebo.-en-la-siguiente-tabla-se-muestra-el-número-de-pacientes-de-cada-grupo-que-murieron-y-que-superaron-el-infarto.",
+    "title": "Práctica 5: Asociación. Riesgos relativos y Odds Ratio",
+    "section": "",
+    "text": "Death (all causes)\nSurvivors\n\n\n\n\nSulphinpyrazole\n41\n692\n\n\nPlacebo\n60\n682"
   }
 ]
