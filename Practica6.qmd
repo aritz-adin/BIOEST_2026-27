@@ -1,0 +1,302 @@
+---
+title: "Práctica 6: Regresión Logística"
+author: "Aritz Adin"
+date: "2026-12-09"
+date-format: "DD/MM/YYYY"
+format:
+  html:
+    toc: true
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(width=1000)
+```
+
+## 1. Regresión Logística
+
+Para estudiar la posible relación entre el número de satélites (cangrejos macho a su alrededor) y la anchura del caparazón de los cangrejos hembra tipo herradura, se realizó un experimento con 8 cangrejos hembra a los que se midió:
+
+-   la anchura de los caparazones ($x$), medida en cm.
+-   el número total de cangrejos macho que se utilizaron en el experimento para cada hembra ($n$).
+-   el número de satélites o cangrejos macho que se situaron alrededor de cada hembra.
+
+El objetivo es modelizar la proporción de satélites en función de la anchura del caparazón. Los datos se recogen en la siguiente tabla:
+
+| **Anchura** | Satélites | **Total** |
+|:-----------:|:---------:|:---------:|
+|    23.25    |     5     |    14     |
+|    23.75    |     4     |    14     |
+|    24.75    |    17     |    28     |
+|    25.75    |    21     |    39     |
+|    26.75    |    15     |    22     |
+|    27.75    |    20     |    24     |
+|    28.75    |    15     |    18     |
+|    29.75    |    14     |    14     |
+
+Responde a las siguientes preguntas:
+
+### En primer lugar, cargamos los paquetes necesarios:
+
+```{r, message=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+### 1. Introduce los datos en R mediante la función `data.frame`.
+
+```{r include=FALSE}
+cangrejos <- data.frame(anchura=c(23.25,23.75,24.75,25.75,26.75,27.75,28.75,29.75),
+                        satelites=c(5,4,17,21,15,20,15,14),
+                        total=c(14,14,28,39,22,24,18,14))
+print(cangrejos)
+```
+
+### 2. Define una nueva variable llamada `prop` que indique la proporción de satélites para cada anchura.
+
+```{r include=FALSE}
+cangrejos <- cangrejos |> 
+  mutate(prop=satelites/total)
+
+print(cangrejos)
+```
+
+### 3. Ajusta el modelo probabilistico lineal $$\pi(x)=\alpha + \beta x$$ donde $y$ corresponde a la variable `prop` y $x$ corresponde a la variable `anchura`
+
+```{r include=FALSE}
+modelo1 <- lm(prop~anchura, weights=total, data=cangrejos)
+summary(modelo1)
+```
+
+-   **¿Cuáles son las estimaciones de los coeficientes? ¿Son estadísticamente significativos?**
+
+    <!-- Las estimaciones de los coeficientes del modelo son: $\hat{\alpha}=`r round(as.numeric(modelo1$coefficients[1]),3)`$ y $\hat{\beta}=`r round(as.numeric(modelo1$coefficients[2]),3)`$ -->
+
+    <!-- Ambos coeficientes son estadísticamente significativos, ya que los p-valores son pequeños. -->
+
+-   **¿Cuál es el coeficiente de determinación? Explica su significado.**
+
+    <!-- $R^2_\mbox{adjusted}=`r round(summary(modelo1)$adj.r.squared,4)`$. Es decir, el `r 100*round(summary(modelo1)$adj.r.squared,4)`% de la variabilidad total es explicada por el modelo de regresión (variable`anchura). -->
+
+-   **¿El modelo ajustado es estadísticamente significativo?**
+
+```{r, include=FALSE}
+anova(modelo1)
+```
+
+<!-- Sí, el modelo es estadísticamente significativo. La función `anova()` presenta el análisis de la varianza con la descomposición de la variabilidad total en sus fuentes de variación y nos indica que la variable `anchura` es estadísticamente significativa. -->
+
+### 4. ¿Cuáles son las predicciones de la proporción de satélites para cada valor de la anchura observada? ¿Y el número esperado de satélites por hembra?
+
+```{r, include=FALSE}
+cangrejos |> 
+  mutate(prop.pred = modelo1 |> fitted(),
+         satelite.pred = prop.pred*total)
+```
+
+### 5. Representa gráficamente las proporciones observadas y las predicciones lineales de las proporciones de satélites por cada anchura del caparazón.
+
+```{r, include=FALSE}
+cangrejos |> 
+  ggplot(aes(x=anchura, y=prop)) + 
+  geom_point() +
+  geom_hline(yintercept=c(0,1), linetype=2) + 
+  xlab("Anchura (cm)") + 
+  ylab("Proportion") +
+  ggtitle("Modelo probabilistico lineal") + 
+  geom_abline(intercept=coef(modelo1)[1],
+              slope=coef(modelo1)[2],
+              colour="green")
+```
+
+### 6. Ajusta el modelo de regresión logística $$\mbox{logit}[\pi(x)] = \log \left(\frac{\pi(x)}{1-\pi(x)} \right) = \alpha + \beta x$$ donde $\pi$ corresponde a la variable `prop`, y $x$ a la variable `anchura`.
+
+```{r include=FALSE}
+modelo2 <- glm(prop~anchura, weights=total, family=binomial, data=cangrejos)
+summary(modelo2)
+```
+
+-   **¿Cuáles son las estimaciones de los coeficientes? ¿Son estadísticamente significativos?**
+
+    <!-- Las estimaciones de los coeficientes del modelo son: $\hat{\alpha}=`r round(as.numeric(modelo2$coefficients[1]),3)`$ y $\hat{\beta}=`r round(as.numeric(modelo2$coefficients[2]),3)`$ -->
+
+    <!-- Ambos coeficientes son estadísticamente significativos, ya que los p-valores son pequeños. -->
+
+    <!-- Obtenemos la misma conclusión si interpretamos los intervalos de confianza de los parámetros del modelo: -->
+
+```{r, include=FALSE}
+modelo2 |> confint()
+```
+
+-   **¿El modelo ajustado es estadísticamente significativo?**
+
+<!-- Para ello realizamos el test de la deviance: -->
+<!-- ```{r, include=TRUE} -->
+<!-- modelo2 |> anova(test="Chi") -->
+
+<!-- # o equivalentemente -->
+<!-- modelo.null <- glm(prop~1, weights=total, family=binomial, data=cangrejos) -->
+<!-- anova(modelo.null, modelo2) -->
+<!-- ``` -->
+<!-- Por lo tanto, podemos concluir que el ajuste del modelo que incluye la variable `anchura` es significativamente mejor que el modelo que solamente incluye un intercept. -->
+
+
+### 7. ¿Cuánto crece el odds estimado (*odds ratio*) por cada cm de aumento del caparazón? Proporciona un intervalo de confianza al 95%.
+
+<!-- Cuando la anchura del caparazón aumenta en 1 cm, el odds ratio ($OR=e^\beta$) es de -->
+
+<!-- ```{r, include=TRUE} -->
+<!-- coef(modelo2)[2] |> exp() -->
+<!-- ``` -->
+<!-- Es decir, por cada incremento de 1 cm en la anchura del caparazón el odds estimado crece aproximadamente un `r round(exp(coef(modelo2)[2])-1,2)*100`%. -->
+
+<!-- Para calcular un intervalo de confianza al 95% de $e^\beta$, debemos exponenciar los límites inferior y superior del IC para el parámetro $\beta$. -->
+
+<!-- ```{r, include=FALSE, message=TRUE} -->
+<!-- confint(modelo2)["anchura",] |> exp() -->
+<!-- ``` -->
+
+<!-- Es decir, con un nivel de confianza del 95%, por cada incremento de 1 cm en la anchura del caparazón el odds crece entre 1.36 y 2.05 veces (o lo que es lo mismo, crece entre un 35% y un 105%). -->
+
+
+### 8. ¿Cuáles son las predicciones de la proporción de satélites para cada valor de la anchura observada?¿Y el número esperado de satélites por hembra?
+
+```{r, include=FALSE}
+cangrejos.pred <- cangrejos |> 
+  mutate(prop.pred = modelo2 |> fitted(),
+         satelite.pred = prop.pred*total)
+
+cangrejos.pred
+```
+
+### 9. Representa gráficamente las proporciones observadas y las predicciones lineales y logísticas de las proporciones de satélites por cada anchura del caparazón.
+
+```{r, include=FALSE}
+cangrejos |> 
+  ggplot(aes(x=anchura, y=prop)) + 
+  geom_point() +
+  geom_hline(yintercept=c(0,1), linetype=2) + 
+  xlab("Anchura (cm)") + 
+  ylab("Proportion") +
+  ggtitle("Modelo regresión logística") + 
+  geom_line(data=cangrejos.pred,
+            aes(x=anchura, y=prop.pred),
+            colour="red")
+```
+### 10. ¿Cuál es la tasa incremental de cambio a los 26 cm? ¿Qué significa?
+
+<!-- La tasa incremental de cambio en un punto $x$ se calcula como $$\hat{\beta}*\hat{\pi}(x)*(1-\hat{\pi}(x))$$ -->
+
+<!-- Para una anchura de $x=26$ cm su valor es: -->
+
+```{r, include=FALSE}
+beta <- coef(modelo2)[2]
+hat.prop <- modelo2 |>
+  predict(newdata=data.frame(anchura=26), type="response")
+
+beta*hat.prop*(1-hat.prop)
+```
+
+<!-- También se puede calcular mediante la función `tasa.incremental()` -->
+
+```{r, include=FALSE}
+source("tasa.incremental.R")
+modelo2 |>
+  tasa.incremental(26, 27, decimales=4)
+```
+
+<!-- **Interpretación:** Cuando la anchura del caparazón aumenta de 26 a 27 cm, la proporción de satélites por hembra aumenta en `r round(beta*hat.prop*(1-hat.prop),4)`. -->
+
+### 11. ¿Cuál es la tasa incremental de cambio de probabilidad para pasar de 23 a 24 cm en la anchura del caparazón? ¿Y de 25 a 26 cm? ¿Qué significan?
+
+```{r, include=FALSE}
+modelo2 |> tasa.incremental(23, 24, decimales=4)
+modelo2 |> tasa.incremental(25, 26, decimales=4)
+```
+
+### 12. Calcula la proporción estimada de cangrejos satélite para una hembra con anchura de caparazón de 28 cm. Calcula e interpreta un intervalo de confianza al 95% para la proporción verdadera.
+
+```{r, include=FALSE}
+## Estimacion del logit y su error estándar
+newdata <- data.frame(anchura=28)
+aux <- predict(modelo2, newdata, type="link", se=T)
+aux |> as_tibble()
+
+
+## Estimación del logit + IC asumiendo normalidad
+newdata |> 
+  mutate(fit = aux$fit,
+         lim.inf = aux$fit-1.96*aux$se.fit,
+         lim.sup = aux$fit+1.96*aux$se.fit)
+
+
+## Estimación de la probabilidad + IC transformado
+newdata |> 
+  mutate(fit = aux$fit |> plogis(),
+         lim.inf = (aux$fit-1.96*aux$se.fit) |> plogis(),
+         lim.sup = (aux$fit+1.96*aux$se.fit) |> plogis())
+```
+
+<!-- ## 2. Para entregar -->
+
+<!-- Para estudiar cómo afecta una determinada droga sobre una especie de insectos, se realizó un experimento con 8 grupos de insectos a los que se les administró distintas dosis de dicha droga y se les midió: -->
+
+<!-- * la dosis administrada a cada grupo de insectos ($x$) -->
+<!-- * el número total de insectos por grupo ($n$) -->
+<!-- * el número de insectos muertos en cada grupo tras 5 horas de exposición a la droga -->
+
+<!-- El objetivo es modelizar la proporción de insectos muertos en función de la dosis administrada. Los datos se recogen en la siguiente tabla: -->
+
+<!-- | **Dosis** | **Insectos muertos** | **Total insectos** | -->
+<!-- |:---------:|:--------------------:|:------------------:| -->
+<!-- |  169.1    |       6              |         59         | -->
+<!-- |  172.4    |      13              |         60         | -->
+<!-- |  175.5    |      18              |         62         | -->
+<!-- |  178.4    |      28              |         56         | -->
+<!-- |  181.1    |      52              |         63         | -->
+<!-- |  183.7    |      53              |         59         | -->
+<!-- |  186.1    |      61              |         62         | -->
+<!-- |  188.3    |      60              |         60         | -->
+
+<!-- Responde a las siguientes preguntas: -->
+
+<!-- ### 2.1. Introduce los datos en R mediante la función `data.frame`. -->
+
+<!-- ### 2.2. Define una nueva variable llamada `prop` que indique la proporción de insectos muertos. -->
+
+<!-- ### 2.3. Ajusta el modelo probabilistico lineal $$\pi(x)=\alpha + \beta x$$ donde $y$ corresponde a la variable `prop` y $x$ corresponde a la variable `dosis` -->
+
+<!-- * **¿Cuáles son las estimaciones de los coeficientes? ¿Son estadísticamente significativos?** -->
+
+<!-- * **¿Cuál es el coeficiente de determinación? Explica su significado.** -->
+
+<!-- * **¿El modelo ajustado es estadísticamente significativo?** -->
+
+
+<!-- ### 2.4. ¿Cuáles son las predicciones de la proporción de insectos muertos para cada dosis? ¿Y el número esperado de insectos muertos por dosis? -->
+
+
+<!-- ### 2.5. Representa gráficamente las proporciones observadas y las predicciones lineales de las proporciones de insectos muertos para cada valor de la dosis administrada. -->
+
+
+<!-- ### 2.6. Ajusta el modelo de regresión logística $$\mbox{logit}[\pi(x)] = \log \left(\frac{\pi(x)}{1-\pi(x)} \right) = \alpha + \beta x$$ donde $\pi$ corresponde a la variable `prop`, y $x$ a la variable `dosis`. -->
+
+<!-- * **¿Cuáles son las estimaciones de los coeficientes? ¿Son estadísticamente significativos?** -->
+
+<!-- * **¿El modelo ajustado es estadísticamente significativo?** -->
+
+
+<!-- ### 2.7. ¿Cuál es la tasa incremental de cambio para una dosis de 170? ¿Qué significa? -->
+
+
+<!-- ### 2.8. ¿Cuánto crece el odds estimado al aumentar la dosis del primer valor 169.1 al segundo valor 172.4? -->
+
+
+<!-- ### 2.9. ¿Cuáles son las predicciones de la proporción de insectos muertos para cada valor de la dosis administrada? -->
+
+
+<!-- ### 2.10. Representa gráficamente las proporciones observadas y las predicciones lineales y logísticas de las proporciones de insectos muertos para cada valor de la dosis administrada. -->
+
+
+<!-- ### 2.11. Calcula la probabilidad estimada de que un insecto fallezca con una dosis de 185 unidades y su intervalo de confianza al 95\% . -->
