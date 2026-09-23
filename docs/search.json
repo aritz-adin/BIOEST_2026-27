@@ -502,5 +502,40 @@
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "A fancy way of visualizing correlation matrices",
     "text": "A fancy way of visualizing correlation matrices"
+  },
+  {
+    "objectID": "Practica4.html",
+    "href": "Practica4.html",
+    "title": "Práctica 4: Regresión",
+    "section": "",
+    "text": "En primer lugar, cargamos los paquetes necesarios:\n\nlibrary(dplyr)\nlibrary(PASWR2)\nlibrary(readr)\n\n\n\n\nSeleccionamos los hombres, representamos un diagrama de dispersión y ajustamos un modelo de regresión lineal con la función lm()\nProporciona una interpretación para los coeficientes\n\n\n\n\nRepresenta gráficamente la línea ajustada\nVerifica que se cumplen las hipótesis del modelo\n\n\n\nObtén la predicción para cinco hombres de 20, 29, 46, 58 y 65 años de edad\n\n\n\n\n\nSeleccionamos las mujeres, representamos un diagrama de dispersión y ajustamos un modelo de regresión lineal con la función lm()\nProporciona una interpretación para los coeficientes\n\n\n\n\nRepresenta gráficamente la línea ajustada\nVerifica que se cumplen las hipótesis del modelo\nObtén la predicción para cinco mujeres de 23, 26, 32, 55 y 62 años de edad\n\n\n\n\n\nRepresentamos un diagrama de dispersión (incluyendo colores distintos para hombres y mujeres)\nAjustamos un modelo de regresión lineal con la función lm()\nProporciona una interpretación para los coeficientes\n\n\n\n\n\n\nObtén la predicción para hombres y mujeres de 20, 30, y 40 años de edad"
+  },
+  {
+    "objectID": "Practica4.html#emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-en-hombres-según-la-edad.",
+    "href": "Practica4.html#emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-en-hombres-según-la-edad.",
+    "title": "Práctica 4: Regresión",
+    "section": "",
+    "text": "Seleccionamos los hombres, representamos un diagrama de dispersión y ajustamos un modelo de regresión lineal con la función lm()\nProporciona una interpretación para los coeficientes\n\n\n\n\nRepresenta gráficamente la línea ajustada\nVerifica que se cumplen las hipótesis del modelo\n\n\n\nObtén la predicción para cinco hombres de 20, 29, 46, 58 y 65 años de edad"
+  },
+  {
+    "objectID": "Practica4.html#emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-en-mujeres-según-la-edad.",
+    "href": "Practica4.html#emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-en-mujeres-según-la-edad.",
+    "title": "Práctica 4: Regresión",
+    "section": "",
+    "text": "Seleccionamos las mujeres, representamos un diagrama de dispersión y ajustamos un modelo de regresión lineal con la función lm()\nProporciona una interpretación para los coeficientes\n\n\n\n\nRepresenta gráficamente la línea ajustada\nVerifica que se cumplen las hipótesis del modelo\nObtén la predicción para cinco mujeres de 23, 26, 32, 55 y 62 años de edad"
+  },
+  {
+    "objectID": "Practica4.html#emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-según-la-edad-y-el-sexo-sin-interacción.",
+    "href": "Practica4.html#emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-según-la-edad-y-el-sexo-sin-interacción.",
+    "title": "Práctica 4: Regresión",
+    "section": "",
+    "text": "Representamos un diagrama de dispersión (incluyendo colores distintos para hombres y mujeres)\nAjustamos un modelo de regresión lineal con la función lm()\nProporciona una interpretación para los coeficientes\n\n\n\n\n\n\nObtén la predicción para hombres y mujeres de 20, 30, y 40 años de edad"
+  },
+  {
+    "objectID": "Practica4.html#con-el-fichero-hswrestler-de-la-librería-paswr2-ajusta-un-modelo-de-regresión-para-predecir-la-cantidad-de-grasa-tanfat.-selecciona-las-variables-age-ht-wt-abs-triceps-y-subscap-que-mejor-sirvan-para-predecir-los-valores-de-tanfat.",
+    "href": "Practica4.html#con-el-fichero-hswrestler-de-la-librería-paswr2-ajusta-un-modelo-de-regresión-para-predecir-la-cantidad-de-grasa-tanfat.-selecciona-las-variables-age-ht-wt-abs-triceps-y-subscap-que-mejor-sirvan-para-predecir-los-valores-de-tanfat.",
+    "title": "Práctica 4: Regresión",
+    "section": "2.1. Con el fichero HSWRESTLER de la librería PASWR2, ajusta un modelo de regresión para predecir la cantidad de grasa (tanfat). Selecciona las variables age, ht, wt, abs, triceps y subscap que mejor sirvan para predecir los valores de tanfat.",
+    "text": "2.1. Con el fichero HSWRESTLER de la librería PASWR2, ajusta un modelo de regresión para predecir la cantidad de grasa (tanfat). Selecciona las variables age, ht, wt, abs, triceps y subscap que mejor sirvan para predecir los valores de tanfat.\n\nSelecciona las variables eliminado secuencialmente aquellas que no son estadísticamente significativas.\nUtiliza también la función stepAIC() de la librería MASS para seleccionar las variables.\nInterpreta los coeficientes del modelo.\nPredice el valor de tanfat para dos individuo con valores de la variable abs de 20mm y 25mm, respectivamente, y valores de subscap de 13mm."
   }
 ]
