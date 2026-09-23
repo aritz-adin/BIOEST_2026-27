@@ -1,0 +1,239 @@
+---
+title: "Práctica 7: Análisis de Supervivencia"
+author: "Aritz Adin"
+date: "2026-12-16"
+date-format: "DD/MM/YYYY"
+format:
+  html:
+    toc: true
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(width=1000)
+```
+
+## Ejercicio 1
+
+En pruebas con anticonceptivos, un criterio evidente de aceptación de dicho anticonceptivo es la prevención de embarazos. Sin embargo, los anticonceptivos modernos muestran tasas de fallo muy bajas, y por tanto las alteraciones en ocurrencia de hemorragias, como amenorrea (una ausencia prolongada de hemorragia), hemorragias irregulares o prolongadas, son importantes a la hora de evaluar un método anticonceptivo.
+
+Para promocionar la investigación en este tema la OMS (WHO) ha proporcionado datos de ensayos clínicos realizadas con distintos tipos de anticonceptivos. Una parte de este conjunto de datos tiene que ver con el tiempo que transcurre desde que una mujer comienza a usar un método particular hasta que suspende su uso.
+
+Los datos que presentamos a continuación corresponden al número de semanas que transcurren desde el comienzo de uso de un dispositivo intrauterino particular (DIU) llamado Multiload 250, hasta que se suspende su uso por problemas de hemorragias. Los datos corresponden a 18 mujeres entre 18 y 35 años que habían experimentado dos embarazos previos.
+
+En este ejemplo el tiempo de origen en que se comienza el estudio es a partir del primer día de uso del DIU y el tiempo final es la suspensión debido a problemas hemorrágicos.
+
+Algunas mujeres suspendieron el uso del DIU porque deseaban quedarse embarazadas mientras que otras simplemente se perdió su seguimiento. Por ello aparecen algunos datos censurados.
+
+Un objetivo de este análisis es **resumir la distribución de los tiempos de suspensión del uso del dispositivo intrauterino**.
+
+**Datos**: Tiempo en semanas hasta la suspensión de uso del DIU
+
+10, 13+, 18+, 19, 23+, 30, 36, 38+, 54+ 56+, 59, 75, 93, 97, 104+, 107, 107+, 107+
+
+Responde a las siguientes preguntas:
+
+### En primer lugar, cargamos los paquetes necesarios:
+
+```{r, message=FALSE}
+library(dplyr)
+library(readr)
+library(survival)
+```
+
+### 1.1. Introduce los datos manualmente en R o lee el fichero `dispositivo.txt`.
+
+```{r, include=FALSE, message=FALSE}
+diu <- read_table("dispositivo.txt")
+print(diu)
+```
+
+### 1.2. Estima la función de supervivencia $S(t)$ por Kaplan-Meier. Calcula los errores estándar y proporciona un I.C. al 95% para $S(t)$.
+
+```{r, include=FALSE}
+## Intervalo de confianza con la transformación logística (por defecto) ##
+diu.surv1 <- survfit(Surv(time,status)~1, diu)
+summary(diu.surv1)
+
+## Intervalo de confianza asumiendo normalidad ##
+diu.surv2 <- survfit(Surv(time,status)~1, diu, conf.type="plain")
+summary(diu.surv2)
+
+## Intervalo de confianza con la transformación clog-log ##
+diu.surv3 <- survfit(Surv(time,status)~1, diu, conf.type="log-log")
+summary(diu.surv3)
+```
+
+### 1.3. Dibuja la función de supervivencia estimada con su correspondiente intervalo de confianza.
+
+```{r, include=FALSE}
+plot(diu.surv1, col="red", main="Función supervivencia por Kaplan-Meier", xlab="Tiempo (semanas)")
+lines(diu.surv2, col="blue")
+lines(diu.surv3, col="black")
+legend("bottomleft", c("logistica","normal","log-log"), col=c("red","blue","black"), lty=1)
+```
+
+### 1.4. ¿Cuál es la probabilidad de que el tiempo de uso del dispositivo supere las 19 semanas? Proporciona los correspondientes intervalos de confianza al 95% e interpreta su significado.
+
+```{r, include=FALSE}
+diu.surv1 |> 
+  summary(times=19)
+```
+
+<!-- **INTERPRETACIÓN**: La probabilidad estimada de que una mujer no tenga hemorragias y continúe con el uso del DIU al menos hasta la semana 19 (o dicho de otra manera, de que el tiempo de uso del dispositivo supere las 19 semanas) es de 0.881, con un intervalo de confianza al 95% de [0.739, 1.000]. -->
+
+### 1.5. ¿A partir de qué semana la supervivencia es menor al 80%?
+
+```{r, include=FALSE}
+diu.surv1 |> 
+  summary()
+```
+
+<!-- A partir de la semana 36 la supervivencia es menor al 80%. Sin embargo, mirando el intervalo de confianza vemos que no contiene el valor 0.8 a partir de la semana 97. -->
+
+
+## Ejercicio 2
+
+El fichero `colon.txt` contiene los resultados de un experimento en 929 pacientes con cáncer de colon en estado B/C que se les suministra quimioterapia adyuvante. Algunas de las variables que recoge el fichero son
+
+-   `time`: tiempo de supervivencia en días
+-   `status`: variable que mide el fallo (1) o la censura (0)
+-   `rx`: tratamiento. "Obs", "Lev" (Levamisole), "Lev+5FU" (Levamisole +5-FU)
+-   `sex`: male (1) o female (0)
+-   `age`: edad en años
+-   `differ`: diferenciación del tumor (1=bien, 2=moderadamente, 3=mal)
+-   `extent`: extensión local (1=submucosa, 2=músculo, 3=serosa, 4=estructuras contiguas)
+
+```{r, include=FALSE, message=FALSE}
+colon <- read_table("colon.txt") |> 
+  mutate(across(where(is.character), as.factor))
+
+print(colon)
+```
+
+### 1.1. Estima curvas de supervivencia por el método de Kaplan y Meier para los distintos grupos del tratamiento. ¿Crees que existen diferencias entre las curvas?
+
+```{r, include=FALSE}
+surv1 <- survfit(Surv(time, status) ~ rx, data=colon)
+
+surv1 |> plot(col=c("red","green","blue"))
+legend("bottomleft", levels(colon$rx), col=c("red","green","blue"), lty=1)
+```
+
+<!-- La curva de supervivencia correspondiente al tratamiento "Lev+5FU" está consistentemente por encima de las otras dos curvas ("Lev" y "Lev+5FU"), por lo que el pronóstico de supervivencia es mejor en este grupo que en el resto. Sin embargo, parece no observarse diferencias entre las curvas de supervivencia de los grupos "Lev" y "Obs". -->
+
+### 1.2. Comprueba si las diferencias observadas en las curvas son o no estadísticamente significativas utilizando el test de Log-Rank y el test de Peto-Peto.
+
+<!-- **Test Log-Rank** -->
+
+<!-- ```{r, include=FALSE} -->
+<!-- survdiff(Surv(time,status)~rx, colon) -->
+<!-- ``` -->
+
+<!-- **Test Peto-Peto** -->
+
+<!-- ```{r, include=FALSE} -->
+<!-- survdiff(Surv(time,status)~rx, rho=1, colon) -->
+<!-- ``` -->
+
+<!-- En ambos casos, rechazamos la hipótesis nula de que las curvas de superviviencia KM son iguales para los tres grupos. -->
+
+### 1.3. ¿Cuál es la probabilidad que un individuo del grupo "Lev+5FU" viva más de 127 días? Proporciona un intervalo de confianza al 95% para dicha probabilidad.
+
+```{r, include=FALSE}
+surv1 |> summary(times=127)
+```
+
+<!-- **INTERPRETACIÓN**: La probabilidad de que un individuo del grupo "Lev+5FU" viva más de 127 días es de 0.980 con un intervalo de confianza al 95\% de [0.965, 0.996]. -->
+
+### 1.4. Estima curvas de supervivencia por el método de Kaplan y Meier según el sexo. ¿Crees que existen diferencias entre las curvas?
+
+```{r, include=FALSE}
+surv2 <- survfit(Surv(time, status) ~ sex, data=colon)
+
+surv2 |> plot(col=c("red","green"))
+legend("bottomleft", c("Mujer","Hombre"), col=c("red","green"), lty=1)
+
+survdiff(Surv(time,status)~sex, colon) 
+```
+
+### 1.5. Estima curvas de supervivencia por el método de Kaplan y Meier según si el tumor se diferencia bien, moderadamente o mal. ¿Crees que existen diferencias entre las curvas?
+
+```{r, include=FALSE}
+surv3 <- survfit(Surv(time, status) ~ differ, data=colon)
+
+surv3 |> plot(col=c("red","green","blue"))
+legend("bottomleft", c("Bien","Moderadamente","Mal"), col=c("red","green","blue"), lty=1)
+
+survdiff(Surv(time,status)~differ, colon) 
+```
+
+### 1.6. Estima curvas de supervivencia por el método de Kaplan y Meier según la extensión del tumor. ¿Crees que existen diferencias entre las curvas?
+
+```{r, include=FALSE}
+surv4 <- survfit(Surv(time, status) ~ extent, data=colon)
+
+surv4 |> plot(col=c("red","green","blue","orange"))
+legend("bottomleft", c("submucosa","músculo","serosa","estruc. contiguas"),
+       col=c("red","green","blue","orange"), lty=1)
+
+survdiff(Surv(time,status)~extent, colon) 
+```
+
+### 1.7. Estima curvas de supervivencia por el método de Kaplan y Meier a partir de los siguientes valores de la variable edad: grupo 1 \[18,45\], grupo 2 (45,65\] y grupo 3 (65,+\]. ¿Crees que existen diferencias entre las curvas?
+
+<!-- En primer lugar definimos la nueva variable: -->
+
+<!-- ```{r, include=FALSE} -->
+<!-- colon <- colon |> -->
+<!--   mutate(grupo = case_when(age>=18 & age<=45 ~ "grupo 1", -->
+<!--                            age>45 & age<=65 ~ "grupo 2", -->
+<!--                            age>65 ~ "grupo 3")) |>  -->
+<!--   mutate(grupo = factor(grupo)) -->
+
+<!-- summary(colon$grupo) -->
+<!-- ``` -->
+
+<!-- A continuación, estimamos las curvas de supervivencia por el método KM y comprobamos si existen diferencias significativas entre los grupos de edad: -->
+
+<!-- ```{r, include=FALSE} -->
+<!-- surv5 <- survfit(Surv(time, status) ~ grupo, data=colon) -->
+
+<!-- surv5 |> plot(col=c("red","green","blue")) -->
+<!-- legend("bottomleft", levels(colon$grupo), col=c("red","green","blue"), lty=1) -->
+
+<!-- survdiff(Surv(time,status)~grupo, colon)  -->
+<!-- ``` -->
+
+<!-- ## Para entregar -->
+
+<!-- Disponemos de 137 pacientes con cancer de pulmón. Los datos se encuentran en el fichero `VA` de la librería `MASS`. La variable respuesta es el tiempo de supervivencia en días. El fichero tiene las siguientes variables: -->
+
+<!-- -   `stime`: tiempo de supervivencia en días -->
+<!-- -   `status`: variable que mide el fallo (1) o la censura (0) -->
+<!-- -   `treat`: tratamiento standard (1) o test (2) -->
+<!-- -   `cell`: cuatro tipos distintos de células (1=squamous, 2=smallcell, 3=adeno, 4=large) -->
+<!-- -   `Karn`: puntuación Karnofsky medido en una escala de 0-100, con valores altos para pacientes que se encuentran relativamente bien -->
+<!-- -   `diag.time`: Tiempo en meses desde el diagnóstico al entrar en la prueba -->
+<!-- -   `age`: edad en años -->
+<!-- -   `prior`: variable lógica que determina si hubo terapia a priori (0=no, 10=yes) -->
+
+<!-- ```{r, include=FALSE} -->
+<!-- library(MASS) -->
+
+<!-- data("VA") -->
+<!-- str(VA) -->
+<!-- ``` -->
+
+<!-- Responde a las siguientes preguntas: -->
+
+<!-- ### 1.1. Estima curvas de supervivencia por el método de Kaplan y Meier para los grupos standard y test del tratamiento. ¿Son las curvas significativamente distintas? -->
+
+<!-- ### 1.2. ¿Cuál es la supervivencia en el instante 13 para los distintos grupos? ¿Qué significa? -->
+
+<!-- ### 1.3. Estima curvas de supervivencia por el método de Kaplan y Meier a partir de los siguientes valores de la variable Karnofsky: grupo 1 (0-50\] años, grupo 2 (50-70\] y grupo 3 (70-100\]. -->
+
+<!-- ### 1.4. Comprueba si las diferencias observadas en las curvas son o no estadísticamente significativas utilizando el test de Log-Rank y el test de Peto-Peto. $\alpha=0.05$ -->
+
+<!-- ### 1.5 ¿Cuál es la probabilidad de supervivencia para el grupo 1 (0-50\] en el día 24? ¿Y en el grupo 2 (50,70\]?. Proporciona un intervalo de confianza al 95% para dichas probabilidades. -->
