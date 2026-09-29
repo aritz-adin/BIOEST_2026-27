@@ -32,7 +32,8 @@ Carga la librería `PASWR2` para trabajar con el fichero `EPIDURAL`.
 library(PASWR2)
 data("EPIDURAL")
 
-EPIDURAL <- as_tibble(EPIDURAL)
+EPIDURAL <- EPIDURAL |> 
+  as_tibble()
 ```
 
 -   Visualiza los primeros 6 registros del fichero `EPIDURAL` con el comando `head()`.

@@ -166,10 +166,6 @@ window.Quarto = {
     <a class="nav-link" href="./Practica0.html"> 
 <span class="menu-text">Práctica 0</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./Practica1.html" aria-current="page"> 
-<span class="menu-text">Práctica 1</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -247,7 +243,8 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PASWR2)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"EPIDURAL"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(EPIDURAL)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>EPIDURAL <span class="ot">&lt;-</span> EPIDURAL <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><p>Visualiza los primeros 6 registros del fichero <code>EPIDURAL</code> con el comando <code>head()</code>.</p></li>
