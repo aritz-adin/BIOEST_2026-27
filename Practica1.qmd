@@ -10,7 +10,7 @@ format:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)  
+knitr::opts_chunk$set(echo = FALSE)  
 ```
 
 # 1. Trabajar con ficheros
@@ -172,8 +172,10 @@ datos5
 
 ## 2.1. Descarga el fichero `Bodyfat.txt` desde MiAulario. Léelo en `R` y almacénalo en un objeto llamado `datos`. Abre el fichero en el visor de datos.
 
-```{r include=FALSE}
-datos <- read.table("BodyFat.txt", header=TRUE)
+```{r include=FALSE, message=FALSE}
+library(readr)
+
+datos <- read_table("BodyFat.txt")
 
 View(datos)
 ```
