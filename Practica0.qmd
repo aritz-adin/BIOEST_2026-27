@@ -230,8 +230,10 @@ getwd()
 
 -   Descarga el fichero `Bodyfat.txt` desde MiAulario, léelo en `R` y almacénalo en un objeto llamado `datos`.
 
-```{r eval=FALSE}
-datos <- read.table("BodyFat.txt", header=TRUE)
+```{r eval=FALSE, warning=FALSE}
+library(readr)
+
+datos <- read_table("BodyFat.txt")
 
 head(datos)
 ```
