@@ -14,8 +14,8 @@ website:
         text: Manual dplyr
       - href: Practica1.qmd
         text: Práctica 1
-      # - href: Practica2.qmd
-      #   text: Práctica 2
+      - href: Practica2.qmd
+        text: Práctica 2
       # - href: Practica3.qmd
       #   text: Práctica 3
       # - href: Practica4.qmd
