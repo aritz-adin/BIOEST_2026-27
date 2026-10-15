@@ -284,42 +284,42 @@
     "href": "Practica2.html#cuántas-variables-tiene-el-fichero-diabetes",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.2 ¿Cuántas variables tiene el fichero diabetes?",
-    "text": "1.2 ¿Cuántas variables tiene el fichero diabetes?"
+    "text": "1.2 ¿Cuántas variables tiene el fichero diabetes?\n\ndiabetes |&gt; \n  dim()\n\n[1] 403  16"
   },
   {
     "objectID": "Practica2.html#de-qué-tipo-es-cada-variable",
     "href": "Practica2.html#de-qué-tipo-es-cada-variable",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.3 ¿De qué tipo es cada variable?",
-    "text": "1.3 ¿De qué tipo es cada variable?"
+    "text": "1.3 ¿De qué tipo es cada variable?\n\ndiabetes |&gt; \n  str()\n\ntibble [403 × 16] (S3: tbl_df/tbl/data.frame)\n $ id      : num [1:403] 1000 1001 1002 1003 1005 ...\n $ chol    : num [1:403] 203 165 228 78 249 248 195 227 177 263 ...\n $ stab.glu: num [1:403] 82 97 92 93 90 94 92 75 87 89 ...\n $ hdl     : num [1:403] 56 24 37 12 28 69 41 44 49 40 ...\n $ ratio   : num [1:403] 3.6 6.9 6.2 6.5 8.9 ...\n $ glyhb   : num [1:403] 4.31 4.44 4.64 4.63 7.72 ...\n $ location: Factor w/ 2 levels \"Buckingham\",\"Louisa\": 1 1 1 1 1 1 1 1 1 1 ...\n $ age     : num [1:403] 46 29 58 67 64 34 30 37 45 55 ...\n $ gender  : Factor w/ 2 levels \"female\",\"male\": 1 1 1 2 2 2 2 2 2 1 ...\n $ height  : num [1:403] 62 64 61 67 68 71 69 59 69 63 ...\n $ weight  : num [1:403] 121 218 256 119 183 190 191 170 166 202 ...\n $ frame   : Factor w/ 3 levels \"large\",\"medium\",..: 2 1 1 1 2 1 2 2 1 3 ...\n $ bp.1s   : num [1:403] 118 112 190 110 138 ...\n $ bp.1d   : num [1:403] 59 68 92 50 80 ...\n $ waist   : num [1:403] 29 46 49 33 44 36 46 34 34 45 ...\n $ hip     : num [1:403] 38 48 57 38 41 42 49 39 40 50 ..."
   },
   {
     "objectID": "Practica2.html#cuántas-categorías-tiene-la-variable-frame",
     "href": "Practica2.html#cuántas-categorías-tiene-la-variable-frame",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.4 ¿Cuántas categorías tiene la variable frame?",
-    "text": "1.4 ¿Cuántas categorías tiene la variable frame?"
+    "text": "1.4 ¿Cuántas categorías tiene la variable frame?\n\ndiabetes$frame |&gt; \n  levels()\n\n[1] \"large\"  \"medium\" \"small\""
   },
   {
     "objectID": "Practica2.html#obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame.",
     "href": "Practica2.html#obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame.",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable frame.",
-    "text": "1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable frame.\nNOTA: Primero debemos reordenar los niveles de la variable frame."
+    "text": "1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable frame.\nNOTA: Primero debemos reordenar los niveles de la variable frame.\n\ndiabetes &lt;- diabetes |&gt; \n  mutate(frame=factor(frame, levels=c(\"small\",\"medium\",\"large\")))\n\ndiabetes$frame |&gt; levels()\n\n[1] \"small\"  \"medium\" \"large\" \n\n\n\n## Tabla de frecuencias absolutas y relativas\nTabla &lt;- diabetes |&gt; \n  count(frame) |&gt; \n  mutate(prop=n/nrow(diabetes))\n\nTabla\n\n# A tibble: 3 × 3\n  frame      n  prop\n  &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;\n1 small    104 0.258\n2 medium   196 0.486\n3 large    103 0.256"
   },
   {
     "objectID": "Practica2.html#realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes",
     "href": "Practica2.html#realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.6 Realiza una representación gráfica adecuada para la variable frame. ¿Qué información obtienes?",
-    "text": "1.6 Realiza una representación gráfica adecuada para la variable frame. ¿Qué información obtienes?"
+    "text": "1.6 Realiza una representación gráfica adecuada para la variable frame. ¿Qué información obtienes?\n\nlibrary(ggplot2)\n\nTabla |&gt; \n  ggplot(aes(x=frame, y=n, fill=frame)) +\n  geom_col() + \n  ggtitle(\"Tamaño del cuerpo\")"
   },
   {
     "objectID": "Practica2.html#calcula-la-moda-de-la-variable-frame.-qué-significa",
     "href": "Practica2.html#calcula-la-moda-de-la-variable-frame.-qué-significa",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.7 Calcula la moda de la variable frame. ¿Qué significa?",
-    "text": "1.7 Calcula la moda de la variable frame. ¿Qué significa?"
+    "text": "1.7 Calcula la moda de la variable frame. ¿Qué significa?\n\nModa: medium\nIntepretación: La mayoría de los pacientes tienen tamaño del cuerpo mediano"
   },
   {
     "objectID": "Practica2.html#qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol",

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -75,10 +78,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -108,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -407,24 +410,103 @@ window.Quarto = {
 </section>
 <section id="cuántas-variables-tiene-el-fichero-diabetes" class="level2">
 <h2 class="anchored" data-anchor-id="cuántas-variables-tiene-el-fichero-diabetes">1.2 ¿Cuántas variables tiene el fichero diabetes?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diabetes <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 403  16</code></pre>
+</div>
+</div>
 </section>
 <section id="de-qué-tipo-es-cada-variable" class="level2">
 <h2 class="anchored" data-anchor-id="de-qué-tipo-es-cada-variable">1.3 ¿De qué tipo es cada variable?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>diabetes <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [403 × 16] (S3: tbl_df/tbl/data.frame)
+ $ id      : num [1:403] 1000 1001 1002 1003 1005 ...
+ $ chol    : num [1:403] 203 165 228 78 249 248 195 227 177 263 ...
+ $ stab.glu: num [1:403] 82 97 92 93 90 94 92 75 87 89 ...
+ $ hdl     : num [1:403] 56 24 37 12 28 69 41 44 49 40 ...
+ $ ratio   : num [1:403] 3.6 6.9 6.2 6.5 8.9 ...
+ $ glyhb   : num [1:403] 4.31 4.44 4.64 4.63 7.72 ...
+ $ location: Factor w/ 2 levels "Buckingham","Louisa": 1 1 1 1 1 1 1 1 1 1 ...
+ $ age     : num [1:403] 46 29 58 67 64 34 30 37 45 55 ...
+ $ gender  : Factor w/ 2 levels "female","male": 1 1 1 2 2 2 2 2 2 1 ...
+ $ height  : num [1:403] 62 64 61 67 68 71 69 59 69 63 ...
+ $ weight  : num [1:403] 121 218 256 119 183 190 191 170 166 202 ...
+ $ frame   : Factor w/ 3 levels "large","medium",..: 2 1 1 1 2 1 2 2 1 3 ...
+ $ bp.1s   : num [1:403] 118 112 190 110 138 ...
+ $ bp.1d   : num [1:403] 59 68 92 50 80 ...
+ $ waist   : num [1:403] 29 46 49 33 44 36 46 34 34 45 ...
+ $ hip     : num [1:403] 38 48 57 38 41 42 49 39 40 50 ...</code></pre>
+</div>
+</div>
 </section>
 <section id="cuántas-categorías-tiene-la-variable-frame" class="level2">
 <h2 class="anchored" data-anchor-id="cuántas-categorías-tiene-la-variable-frame">1.4 ¿Cuántas categorías tiene la variable <code>frame</code>?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>frame <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">levels</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "large"  "medium" "small" </code></pre>
+</div>
+</div>
 </section>
 <section id="obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame." class="level2">
 <h2 class="anchored" data-anchor-id="obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame.">1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable <code>frame</code>.</h2>
 <p><strong>NOTA</strong>: Primero debemos reordenar los niveles de la variable <code>frame</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>diabetes <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">frame=</span><span class="fu">factor</span>(frame, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">"small"</span>,<span class="st">"medium"</span>,<span class="st">"large"</span>)))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>frame <span class="sc">|&gt;</span> <span class="fu">levels</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "small"  "medium" "large" </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Tabla de frecuencias absolutas y relativas</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Tabla <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(frame) <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop=</span>n<span class="sc">/</span><span class="fu">nrow</span>(diabetes))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>Tabla</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  frame      n  prop
+  &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;
+1 small    104 0.258
+2 medium   196 0.486
+3 large    103 0.256</code></pre>
+</div>
+</div>
 </section>
 <section id="realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes" class="level2">
 <h2 class="anchored" data-anchor-id="realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes">1.6 Realiza una representación gráfica adecuada para la variable <code>frame</code>. ¿Qué información obtienes?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Tabla <span class="sc">|&gt;</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>frame, <span class="at">y=</span>n, <span class="at">fill=</span>frame)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Tamaño del cuerpo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="calcula-la-moda-de-la-variable-frame.-qué-significa" class="level2">
 <h2 class="anchored" data-anchor-id="calcula-la-moda-de-la-variable-frame.-qué-significa">1.7 Calcula la moda de la variable <code>frame</code>. ¿Qué significa?</h2>
-<!-- - Moda: `medium` -->
-<!-- - **Intepretación**: La mayoría de los pacientes tienen tamaño del cuerpo mediano -->
+<ul>
+<li>Moda: <code>medium</code></li>
+<li><strong>Intepretación</strong>: La mayoría de los pacientes tienen tamaño del cuerpo mediano</li>
+</ul>
 </section>
 <section id="qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol" class="level2">
 <h2 class="anchored" data-anchor-id="qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol">1.8 ¿Qué representaciones gráficas te parecen adecuadas para la variable <code>chol</code>?</h2>

@@ -74,21 +74,21 @@ print(diabetes)
 
 ## 1.2 ¿Cuántas variables tiene el fichero diabetes?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |> 
   dim()
 ```
 
 ## 1.3 ¿De qué tipo es cada variable?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |> 
   str()
 ```
 
 ## 1.4 ¿Cuántas categorías tiene la variable `frame`?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes$frame |> 
   levels()
 ```
@@ -97,13 +97,13 @@ diabetes$frame |>
 
 **NOTA**: Primero debemos reordenar los niveles de la variable `frame`.
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes <- diabetes |> 
   mutate(frame=factor(frame, levels=c("small","medium","large")))
 
 diabetes$frame |> levels()
 ```
-```{r include=FALSE}
+```{r include=TRUE}
 ## Tabla de frecuencias absolutas y relativas
 Tabla <- diabetes |> 
   count(frame) |> 
@@ -114,7 +114,7 @@ Tabla
 
 ## 1.6 Realiza una representación gráfica adecuada para la variable `frame`. ¿Qué información obtienes?
 
-```{r include=FALSE}
+```{r include=TRUE}
 library(ggplot2)
 
 Tabla |> 
@@ -125,8 +125,8 @@ Tabla |>
 
 ## 1.7 Calcula la moda de la variable `frame`. ¿Qué significa?
 
-<!-- - Moda: `medium` -->
-<!-- - **Intepretación**: La mayoría de los pacientes tienen tamaño del cuerpo mediano -->
+- Moda: `medium`
+- **Intepretación**: La mayoría de los pacientes tienen tamaño del cuerpo mediano
 
 ## 1.8 ¿Qué representaciones gráficas te parecen adecuadas para la variable `chol`?
 
