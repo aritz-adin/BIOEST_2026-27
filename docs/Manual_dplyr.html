@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,13 +14,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -79,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -203,6 +200,7 @@ window.Quarto = {
   <li><a href="#seleccionando-observaciones-slice" id="toc-seleccionando-observaciones-slice" class="nav-link" data-scroll-target="#seleccionando-observaciones-slice">Seleccionando observaciones: <code>slice()</code></a></li>
   <li><a href="#filtrando-observaciones-filter" id="toc-filtrando-observaciones-filter" class="nav-link" data-scroll-target="#filtrando-observaciones-filter">Filtrando observaciones: <code>filter()</code></a></li>
   <li><a href="#creando-nuevas-variables-mutate" id="toc-creando-nuevas-variables-mutate" class="nav-link" data-scroll-target="#creando-nuevas-variables-mutate">Creando nuevas variables: <code>mutate()</code></a></li>
+  <li><a href="#análisis-estadístico-descriptivo-por-grupos-group_by-summarise" id="toc-análisis-estadístico-descriptivo-por-grupos-group_by-summarise" class="nav-link" data-scroll-target="#análisis-estadístico-descriptivo-por-grupos-group_by-summarise">Análisis estadístico descriptivo por grupos: <code>group_by()</code> + <code>summarise()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -363,24 +361,29 @@ window.Quarto = {
 # ℹ 75 more rows</code></pre>
 </div>
 </div>
-<!-- ## Análisis estadístico descriptivo por grupos: `group_by()` + `summarise()` -->
-<!-- A menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo. -->
-<!-- Para ello, se utilizan conjuntamente las funciones `group_by()` y `summarise()`. -->
-<!-- Por ejemplo, con el fichero `diabetes` calcula la media, mediana, la desviación típica y los cuartiles de la variable `chol` según las categorías de la variable `frame` -->
-<!-- ```{r, include=FALSE} -->
-<!-- diabetes <- readr::read_table("diabetes.txt") -->
-<!-- diabetes <- diabetes |>  -->
-<!--   mutate(across(where(is.character), as.factor)) -->
-<!-- ``` -->
-<!-- ```{r, eval=TRUE} -->
-<!-- diabetes |>  -->
-<!--   group_by(frame) |>  -->
-<!--   summarise(media=mean(chol), -->
-<!--             mediana=median(chol), -->
-<!--             sd=sd(chol), -->
-<!--             q2.5=quantile(chol, 0.025), -->
-<!--             q2.5=quantile(chol, 0.975)) -->
-<!-- ``` -->
+</section>
+<section id="análisis-estadístico-descriptivo-por-grupos-group_by-summarise" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-estadístico-descriptivo-por-grupos-group_by-summarise">Análisis estadístico descriptivo por grupos: <code>group_by()</code> + <code>summarise()</code></h2>
+<p>A menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo.</p>
+<p>Para ello, se utilizan conjuntamente las funciones <code>group_by()</code> y <code>summarise()</code>.</p>
+<p>Por ejemplo, con el fichero <code>diabetes</code> calcula la media, mediana, la desviación típica y los cuartiles de la variable <code>chol</code> según las categorías de la variable <code>frame</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>diabetes <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(frame) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">media=</span><span class="fu">mean</span>(chol),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mediana=</span><span class="fu">median</span>(chol),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(chol),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">q2.5=</span><span class="fu">quantile</span>(chol, <span class="fl">0.025</span>),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">q2.5=</span><span class="fu">quantile</span>(chol, <span class="fl">0.975</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  frame  media mediana    sd  q2.5
+  &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 large   208     206   43.3  300.
+2 medium  213.    206.  46.9  318.
+3 small   198.    196   39.0  287.</code></pre>
+</div>
+</div>
 <!-- ## Recodificando variables: `mutate()` + `case_when()` -->
 <!-- En ocasiones, se desea clasificar los valores de una variable cuantitativa en diferentes intervalos, creando una nueva variable cualitativa. Para ello, se pueden utilizar las funciones `mutate()` y `case_when()`. -->
 <!-- Por ejemplo, PENDIENTE -->

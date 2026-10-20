@@ -203,6 +203,13 @@
     "text": "Creando nuevas variables: mutate()\nLa función mutate() se utiliza para crear nuevas variables en una base de datos o modificar variables existentes.\nPor ejemplo, para crear en la base de datos EPIDURAL la nueva variable \\(IMC=kg/(cm/100)^2\\):\n\nEPIDURAL |&gt; \n  mutate(IMC=kg/(cm/100)^2) |&gt; \n  select(kg, cm, IMC)\n\n# A tibble: 85 × 3\n      kg    cm   IMC\n   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n 1   116   172  39.2\n 2    86   176  27.8\n 3    72   157  29.2\n 4    63   169  22.1\n 5   114   163  42.9\n 6   121   163  45.5\n 7    90   170  31.1\n 8    87   164  32.3\n 9    74   166  26.9\n10    91   175  29.7\n# ℹ 75 more rows"
   },
   {
+    "objectID": "Manual_dplyr.html#análisis-estadístico-descriptivo-por-grupos-group_by-summarise",
+    "href": "Manual_dplyr.html#análisis-estadístico-descriptivo-por-grupos-group_by-summarise",
+    "title": "dplyr: una gramática para la manipulación de datos",
+    "section": "Análisis estadístico descriptivo por grupos: group_by() + summarise()",
+    "text": "Análisis estadístico descriptivo por grupos: group_by() + summarise()\nA menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo.\nPara ello, se utilizan conjuntamente las funciones group_by() y summarise().\nPor ejemplo, con el fichero diabetes calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame\n\ndiabetes |&gt;\n  group_by(frame) |&gt;\n  summarise(media=mean(chol),\n            mediana=median(chol),\n            sd=sd(chol),\n            q2.5=quantile(chol, 0.025),\n            q2.5=quantile(chol, 0.975))\n\n# A tibble: 3 × 5\n  frame  media mediana    sd  q2.5\n  &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 large   208     206   43.3  300.\n2 medium  213.    206.  46.9  318.\n3 small   198.    196   39.0  287."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Prácticas",
@@ -305,21 +312,21 @@
     "href": "Practica2.html#obtén-una-tabla-de-frecuencias-absolutas-y-relativas-para-la-variable-frame.",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable frame.",
-    "text": "1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable frame.\nNOTA: Primero debemos reordenar los niveles de la variable frame.\n\ndiabetes &lt;- diabetes |&gt; \n  mutate(frame=factor(frame, levels=c(\"small\",\"medium\",\"large\")))\n\ndiabetes$frame |&gt; levels()\n\n[1] \"small\"  \"medium\" \"large\" \n\n\n\n## Tabla de frecuencias absolutas y relativas\nTabla &lt;- diabetes |&gt; \n  count(frame) |&gt; \n  mutate(prop=n/nrow(diabetes))\n\nTabla\n\n# A tibble: 3 × 3\n  frame      n  prop\n  &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;\n1 small    104 0.258\n2 medium   196 0.486\n3 large    103 0.256"
+    "text": "1.5 Obtén una tabla de frecuencias absolutas y relativas para la variable frame.\nNOTA: Primero debemos reordenar los niveles de la variable frame.\n\ndiabetes &lt;- diabetes |&gt; \n  mutate(frame=factor(frame, levels=c(\"small\",\"medium\",\"large\")))\n\ndiabetes$frame |&gt; levels()\n\n[1] \"small\"  \"medium\" \"large\" \n\n\n\n## Tabla de frecuencias absolutas\ndiabetes$frame |&gt; \n  table()\n\n\n small medium  large \n   104    196    103 \n\n## Tabla de frecuencias relativas\ndiabetes$frame |&gt; \n  table() |&gt; \n  prop.table()\n\n\n    small    medium     large \n0.2580645 0.4863524 0.2555831"
   },
   {
     "objectID": "Practica2.html#realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes",
     "href": "Practica2.html#realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.6 Realiza una representación gráfica adecuada para la variable frame. ¿Qué información obtienes?",
-    "text": "1.6 Realiza una representación gráfica adecuada para la variable frame. ¿Qué información obtienes?\n\nlibrary(ggplot2)\n\nTabla |&gt; \n  ggplot(aes(x=frame, y=n, fill=frame)) +\n  geom_col() + \n  ggtitle(\"Tamaño del cuerpo\")"
+    "text": "1.6 Realiza una representación gráfica adecuada para la variable frame. ¿Qué información obtienes?\n\nTabla &lt;- diabetes$frame |&gt; \n  table() \n\nTabla |&gt; barplot(main=\"Tamaño del cuerpo\")\n\n\n\n\n\n\n\nTabla |&gt; pie(main=\"Tamaño del cuerpo\")"
   },
   {
     "objectID": "Practica2.html#calcula-la-moda-de-la-variable-frame.-qué-significa",
     "href": "Practica2.html#calcula-la-moda-de-la-variable-frame.-qué-significa",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.7 Calcula la moda de la variable frame. ¿Qué significa?",
-    "text": "1.7 Calcula la moda de la variable frame. ¿Qué significa?\n\nModa: medium\nIntepretación: La mayoría de los pacientes tienen tamaño del cuerpo mediano"
+    "text": "1.7 Calcula la moda de la variable frame. ¿Qué significa?\n\nModa: medium\nIntepretación: La mayoría de los pacientes tienen tamaño del cuerpo mediano."
   },
   {
     "objectID": "Practica2.html#qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol",
@@ -333,7 +340,7 @@
     "href": "Practica2.html#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.9 Realiza un histograma y un diagrama de cajas de la variable chol. ¿Qué información obtienes de ellos?",
-    "text": "1.9 Realiza un histograma y un diagrama de cajas de la variable chol. ¿Qué información obtienes de ellos?"
+    "text": "1.9 Realiza un histograma y un diagrama de cajas de la variable chol. ¿Qué información obtienes de ellos?\n\npar(mfrow=c(1,2))\n\ndiabetes$chol |&gt; \n  hist(main=\"Histograma\", xlab=\"Colesterol\")\n\ndiabetes$chol |&gt; \n  boxplot(main=\"Diagrama de caja\", xlab=\"Colesterol\")"
   },
   {
     "objectID": "Practica2.html#a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana",
@@ -343,11 +350,11 @@
     "text": "1.10 A la vista del diagrama de cajas y del histograma de la variable chol, qué puedes decir acerca de su simetría? ¿Qué crees que será mayor, la media o la mediana?"
   },
   {
-    "objectID": "Practica2.html#calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol.",
-    "href": "Practica2.html#calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol.",
+    "objectID": "Practica2.html#calcula-e-interpreta-la-media-la-mediana-el-cuartil-3-y-el-coeficiente-de-asimetría-de-la-variable-chol.",
+    "href": "Practica2.html#calcula-e-interpreta-la-media-la-mediana-el-cuartil-3-y-el-coeficiente-de-asimetría-de-la-variable-chol.",
     "title": "Práctica 2: Estadística Descriptiva",
-    "section": "1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable chol.",
-    "text": "1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable chol."
+    "section": "1.11 Calcula e interpreta la media, la mediana, el cuartil 3 y el coeficiente de asimetría de la variable chol.",
+    "text": "1.11 Calcula e interpreta la media, la mediana, el cuartil 3 y el coeficiente de asimetría de la variable chol.\n\nlibrary(PASWR2)\n\ndiabetes$chol |&gt; eda()\n\n\n\n\n\n\n\n\nSize (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val \n 403.000    0.000   78.000  179.000  207.846  204.000  205.903  230.000  443.000   44.390 1970.494    2.211   51.000  365.000    2.558    0.924    0.000 \n\n\nMediana: 204 mg/dl\n\nIntepretación: La mitad de los pacientes tienen un colesterol de 204 mg/dl o menos.\n\nPercentil 75 (Cuartil 3): 230 mg/dl\n\nIntepretación: El 75% de los paciente tiene un colesterol de 230 mg/dl o menos.\n\nCoeficiente de asimetria: 0.924 (sin unidades)\n\nIntepretación: Como el coef. de asimetría es positivo, la distribución de la variable colesterol muestra una asimetría hacia la derecha. Es decir, los niveles de colesterol por encima de la media (207.85 mg/dL) están más dispersos que los valores por debajo de ella."
   },
   {
     "objectID": "Practica2.html#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo",
@@ -361,14 +368,14 @@
     "href": "Practica2.html#calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.13 Calcula el coeficiente de curtosis de la variable chol. ¿Qué indica?",
-    "text": "1.13 Calcula el coeficiente de curtosis de la variable chol. ¿Qué indica?"
+    "text": "1.13 Calcula el coeficiente de curtosis de la variable chol. ¿Qué indica?\nCurtosis: 2.558 (sin unidades)\n\nIntepretación: Como la curtosis es positiva, la distribución de la variable colesterol muestra una mayor concentración en torno a la media (207.85 mg/dL) que una distribución Normal."
   },
   {
     "objectID": "Practica2.html#según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo",
     "href": "Practica2.html#según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?",
-    "text": "1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?\n\nLos valores de colesterol 443, 404, 347 y 342 mg/dL son valores extremos."
+    "text": "1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?"
   },
   {
     "objectID": "Practica2.html#cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra",

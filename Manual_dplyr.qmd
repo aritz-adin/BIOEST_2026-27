@@ -116,30 +116,30 @@ EPIDURAL |>
   select(kg, cm, IMC)
 ```
 
-<!-- ## Análisis estadístico descriptivo por grupos: `group_by()` + `summarise()` -->
+## Análisis estadístico descriptivo por grupos: `group_by()` + `summarise()`
 
-<!-- A menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo. -->
+A menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo.
 
-<!-- Para ello, se utilizan conjuntamente las funciones `group_by()` y `summarise()`. -->
+Para ello, se utilizan conjuntamente las funciones `group_by()` y `summarise()`.
 
-<!-- Por ejemplo, con el fichero `diabetes` calcula la media, mediana, la desviación típica y los cuartiles de la variable `chol` según las categorías de la variable `frame` -->
+Por ejemplo, con el fichero `diabetes` calcula la media, mediana, la desviación típica y los cuartiles de la variable `chol` según las categorías de la variable `frame`
 
-<!-- ```{r, include=FALSE} -->
-<!-- diabetes <- readr::read_table("diabetes.txt") -->
+```{r, include=FALSE}
+diabetes <- readr::read_table("diabetes.txt")
 
-<!-- diabetes <- diabetes |>  -->
-<!--   mutate(across(where(is.character), as.factor)) -->
-<!-- ``` -->
+diabetes <- diabetes |>
+  mutate(across(where(is.character), as.factor))
+```
 
-<!-- ```{r, eval=TRUE} -->
-<!-- diabetes |>  -->
-<!--   group_by(frame) |>  -->
-<!--   summarise(media=mean(chol), -->
-<!--             mediana=median(chol), -->
-<!--             sd=sd(chol), -->
-<!--             q2.5=quantile(chol, 0.025), -->
-<!--             q2.5=quantile(chol, 0.975)) -->
-<!-- ``` -->
+```{r, eval=TRUE}
+diabetes |>
+  group_by(frame) |>
+  summarise(media=mean(chol),
+            mediana=median(chol),
+            sd=sd(chol),
+            q2.5=quantile(chol, 0.025),
+            q2.5=quantile(chol, 0.975))
+```
 
 
 <!-- ## Recodificando variables: `mutate()` + `case_when()` -->

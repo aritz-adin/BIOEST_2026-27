@@ -103,36 +103,38 @@ diabetes <- diabetes |>
 
 diabetes$frame |> levels()
 ```
-```{r include=TRUE}
-## Tabla de frecuencias absolutas y relativas
-Tabla <- diabetes |> 
-  count(frame) |> 
-  mutate(prop=n/nrow(diabetes))
 
-Tabla
+```{r include=TRUE}
+## Tabla de frecuencias absolutas
+diabetes$frame |> 
+  table()
+
+## Tabla de frecuencias relativas
+diabetes$frame |> 
+  table() |> 
+  prop.table()
 ```
 
 ## 1.6 Realiza una representación gráfica adecuada para la variable `frame`. ¿Qué información obtienes?
 
 ```{r include=TRUE}
-library(ggplot2)
+Tabla <- diabetes$frame |> 
+  table() 
 
-Tabla |> 
-  ggplot(aes(x=frame, y=n, fill=frame)) +
-  geom_col() + 
-  ggtitle("Tamaño del cuerpo")
+Tabla |> barplot(main="Tamaño del cuerpo")
+Tabla |> pie(main="Tamaño del cuerpo")
 ```
 
 ## 1.7 Calcula la moda de la variable `frame`. ¿Qué significa?
 
 - Moda: `medium`
-- **Intepretación**: La mayoría de los pacientes tienen tamaño del cuerpo mediano
+- **Intepretación**: La mayoría de los pacientes tienen tamaño del cuerpo mediano.
 
 ## 1.8 ¿Qué representaciones gráficas te parecen adecuadas para la variable `chol`?
 
 ## 1.9 Realiza un histograma y un diagrama de cajas de la variable `chol`. ¿Qué información obtienes de ellos?
 
-```{r include=FALSE}
+```{r include=TRUE}
 par(mfrow=c(1,2))
 
 diabetes$chol |> 
@@ -144,28 +146,33 @@ diabetes$chol |>
 
 ## 1.10 A la vista del diagrama de cajas y del histograma de la variable `chol`, qué puedes decir acerca de su simetría? ¿Qué crees que será mayor, la media o la mediana?
 
-## 1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable `chol`.
+## 1.11 Calcula e interpreta la media, la mediana, el cuartil 3 y el coeficiente de asimetría de la variable `chol`.
 
-```{r include=FALSE}
+```{r include=TRUE, message=FALSE}
 library(PASWR2)
 
 diabetes$chol |> eda()
 ```
-<!-- Coeficiente de asimetria: 0.924 -->
-<!-- - **Intepretación**: Como el coeficiente es positivo, la distribución de la variable colesterol muestra una asimetría hacia la derecha. Es decir, los niveles de colesterol por encima de la media (207.85 mg/dL) están más dispersos que los valores por debajo de ella. -->
+Mediana: 204 mg/dl
 
-<!-- Mediana: 204 mg/dl -->
-<!-- - **Intepretación**: La mitad de los pacientes tienen un colesterol (inferior a) menor o igual a 204 mg/dl -->
+- **Intepretación**: La mitad de los pacientes tienen un colesterol de 204 mg/dl o menos.
 
-<!-- Percentil 75 (Cuartil 3): 230 mg/dl -->
-<!-- - **Intepretación**: El 75% de los paciente tiene un colesterol de 230 mg/dl o menos. -->
+Percentil 75 (Cuartil 3): 230 mg/dl
+
+- **Intepretación**: El 75% de los paciente tiene un colesterol de 230 mg/dl o menos.
+
+Coeficiente de asimetria: 0.924 (sin unidades)
+
+- **Intepretación**: Como el coef. de asimetría es positivo, la distribución de la variable colesterol muestra una asimetría hacia la derecha. Es decir, los niveles de colesterol por encima de la media (207.85 mg/dL) están más dispersos que los valores por debajo de ella.
+
 
 ## 1.12 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable `chol`. ¿Entre qué valores se encuentra el 25% de las personas con el colesterol más alto? ¿Y el 75% de las personas con el colesterol más bajo? ¿Qué puedes decir acerca de la dispersión de la variable?¿ Dónde hay más dispersión, en el 25% de las personas con mayor colesterol o en el 25% de las personas con colesterol más bajo?
 
 ## 1.13 Calcula el coeficiente de curtosis de la variable `chol`. ¿Qué indica?
 
-<!-- Curtosis: 2.558 -->
-<!-- - **Intepretación**: Como la curtosis es positiva, la distribución de la variable colesterol muestra una mayor concentración en torno a la media (207.85 mg/dL) que una distribución normal. -->
+Curtosis: 2.558 (sin unidades)
+
+- **Intepretación**: Como la curtosis es positiva, la distribución de la variable colesterol muestra una mayor concentración en torno a la media (207.85 mg/dL) que una distribución Normal.
 
 ## 1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?
 
@@ -182,20 +189,20 @@ diabetes |>
   arrange(chol)
 ```
 
-- Los valores de colesterol 443, 404, 347 y 342 mg/dL son valores extremos.
+<!-- - Los valores de colesterol 443, 404, 347 y 342 mg/dL son valores extremos. -->
 
 ## 1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?
 
 ```{r include=FALSE}
-diabetes |> 
-  count(gender)
+diabetes$gender |> 
+  table()
 ```
 
 ## 1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?
 
 ```{r include=FALSE}
-diabetes |> 
-  count(location)
+diabetes$location |> 
+  table()
 ```
 
 ## 1.17 ¿Puedes calcular la media y la mediana de la variable `location`?

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,13 +13,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -78,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -111,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -212,7 +209,7 @@ window.Quarto = {
   <li><a href="#qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol" id="toc-qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol" class="nav-link" data-scroll-target="#qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol">1.8 ¿Qué representaciones gráficas te parecen adecuadas para la variable <code>chol</code>?</a></li>
   <li><a href="#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos" id="toc-realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos" class="nav-link" data-scroll-target="#realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos">1.9 Realiza un histograma y un diagrama de cajas de la variable <code>chol</code>. ¿Qué información obtienes de ellos?</a></li>
   <li><a href="#a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana" id="toc-a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana" class="nav-link" data-scroll-target="#a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana">1.10 A la vista del diagrama de cajas y del histograma de la variable <code>chol</code>, qué puedes decir acerca de su simetría? ¿Qué crees que será mayor, la media o la mediana?</a></li>
-  <li><a href="#calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol." id="toc-calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol." class="nav-link" data-scroll-target="#calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol.">1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable <code>chol</code>.</a></li>
+  <li><a href="#calcula-e-interpreta-la-media-la-mediana-el-cuartil-3-y-el-coeficiente-de-asimetría-de-la-variable-chol." id="toc-calcula-e-interpreta-la-media-la-mediana-el-cuartil-3-y-el-coeficiente-de-asimetría-de-la-variable-chol." class="nav-link" data-scroll-target="#calcula-e-interpreta-la-media-la-mediana-el-cuartil-3-y-el-coeficiente-de-asimetría-de-la-variable-chol.">1.11 Calcula e interpreta la media, la mediana, el cuartil 3 y el coeficiente de asimetría de la variable <code>chol</code>.</a></li>
   <li><a href="#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo" id="toc-calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo" class="nav-link" data-scroll-target="#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo">1.12 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable <code>chol</code>. ¿Entre qué valores se encuentra el 25% de las personas con el colesterol más alto? ¿Y el 75% de las personas con el colesterol más bajo? ¿Qué puedes decir acerca de la dispersión de la variable?¿ Dónde hay más dispersión, en el 25% de las personas con mayor colesterol o en el 25% de las personas con colesterol más bajo?</a></li>
   <li><a href="#calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica" id="toc-calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica" class="nav-link" data-scroll-target="#calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica">1.13 Calcula el coeficiente de curtosis de la variable <code>chol</code>. ¿Qué indica?</a></li>
   <li><a href="#según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo" id="toc-según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo" class="nav-link" data-scroll-target="#según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo">1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?</a></li>
@@ -467,35 +464,44 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Tabla de frecuencias absolutas y relativas</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Tabla <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span> </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(frame) <span class="sc">|&gt;</span> </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop=</span>n<span class="sc">/</span><span class="fu">nrow</span>(diabetes))</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>Tabla</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Tabla de frecuencias absolutas</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>frame <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-  frame      n  prop
-  &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;
-1 small    104 0.258
-2 medium   196 0.486
-3 large    103 0.256</code></pre>
+<pre><code>
+ small medium  large 
+   104    196    103 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Tabla de frecuencias relativas</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>frame <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    small    medium     large 
+0.2580645 0.4863524 0.2555831 </code></pre>
 </div>
 </div>
 </section>
 <section id="realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes" class="level2">
 <h2 class="anchored" data-anchor-id="realiza-una-representación-gráfica-adecuada-para-la-variable-frame.-qué-información-obtienes">1.6 Realiza una representación gráfica adecuada para la variable <code>frame</code>. ¿Qué información obtienes?</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Tabla <span class="sc">|&gt;</span> </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>frame, <span class="at">y=</span>n, <span class="at">fill=</span>frame)) <span class="sc">+</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Tamaño del cuerpo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Tabla <span class="ot">&lt;-</span> diabetes<span class="sc">$</span>frame <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>Tabla <span class="sc">|&gt;</span> <span class="fu">barplot</span>(<span class="at">main=</span><span class="st">"Tamaño del cuerpo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="Practica2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Tabla <span class="sc">|&gt;</span> <span class="fu">pie</span>(<span class="at">main=</span><span class="st">"Tamaño del cuerpo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica2_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -505,7 +511,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="calcula-la-moda-de-la-variable-frame.-qué-significa">1.7 Calcula la moda de la variable <code>frame</code>. ¿Qué significa?</h2>
 <ul>
 <li>Moda: <code>medium</code></li>
-<li><strong>Intepretación</strong>: La mayoría de los pacientes tienen tamaño del cuerpo mediano</li>
+<li><strong>Intepretación</strong>: La mayoría de los pacientes tienen tamaño del cuerpo mediano.</li>
 </ul>
 </section>
 <section id="qué-representaciones-gráficas-te-parecen-adecuadas-para-la-variable-chol" class="level2">
@@ -513,32 +519,70 @@ window.Quarto = {
 </section>
 <section id="realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos" class="level2">
 <h2 class="anchored" data-anchor-id="realiza-un-histograma-y-un-diagrama-de-cajas-de-la-variable-chol.-qué-información-obtienes-de-ellos">1.9 Realiza un histograma y un diagrama de cajas de la variable <code>chol</code>. ¿Qué información obtienes de ellos?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>chol <span class="sc">|&gt;</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">main=</span><span class="st">"Histograma"</span>, <span class="at">xlab=</span><span class="st">"Colesterol"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>chol <span class="sc">|&gt;</span> </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">boxplot</span>(<span class="at">main=</span><span class="st">"Diagrama de caja"</span>, <span class="at">xlab=</span><span class="st">"Colesterol"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana" class="level2">
 <h2 class="anchored" data-anchor-id="a-la-vista-del-diagrama-de-cajas-y-del-histograma-de-la-variable-chol-qué-puedes-decir-acerca-de-su-simetría-qué-crees-que-será-mayor-la-media-o-la-mediana">1.10 A la vista del diagrama de cajas y del histograma de la variable <code>chol</code>, qué puedes decir acerca de su simetría? ¿Qué crees que será mayor, la media o la mediana?</h2>
 </section>
-<section id="calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol." class="level2">
-<h2 class="anchored" data-anchor-id="calcula-el-coeficiente-de-asimetría-la-media-y-la-mediana-de-la-variable-chol.">1.11 Calcula el coeficiente de asimetría, la media y la mediana de la variable <code>chol</code>.</h2>
-<!-- Coeficiente de asimetria: 0.924 -->
-<!-- - **Intepretación**: Como el coeficiente es positivo, la distribución de la variable colesterol muestra una asimetría hacia la derecha. Es decir, los niveles de colesterol por encima de la media (207.85 mg/dL) están más dispersos que los valores por debajo de ella. -->
-<!-- Mediana: 204 mg/dl -->
-<!-- - **Intepretación**: La mitad de los pacientes tienen un colesterol (inferior a) menor o igual a 204 mg/dl -->
-<!-- Percentil 75 (Cuartil 3): 230 mg/dl -->
-<!-- - **Intepretación**: El 75% de los paciente tiene un colesterol de 230 mg/dl o menos. -->
+<section id="calcula-e-interpreta-la-media-la-mediana-el-cuartil-3-y-el-coeficiente-de-asimetría-de-la-variable-chol." class="level2">
+<h2 class="anchored" data-anchor-id="calcula-e-interpreta-la-media-la-mediana-el-cuartil-3-y-el-coeficiente-de-asimetría-de-la-variable-chol.">1.11 Calcula e interpreta la media, la mediana, el cuartil 3 y el coeficiente de asimetría de la variable <code>chol</code>.</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PASWR2)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>chol <span class="sc">|&gt;</span> <span class="fu">eda</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val 
+ 403.000    0.000   78.000  179.000  207.846  204.000  205.903  230.000  443.000   44.390 1970.494    2.211   51.000  365.000    2.558    0.924    0.000 </code></pre>
+</div>
+</div>
+<p>Mediana: 204 mg/dl</p>
+<ul>
+<li><strong>Intepretación</strong>: La mitad de los pacientes tienen un colesterol de 204 mg/dl o menos.</li>
+</ul>
+<p>Percentil 75 (Cuartil 3): 230 mg/dl</p>
+<ul>
+<li><strong>Intepretación</strong>: El 75% de los paciente tiene un colesterol de 230 mg/dl o menos.</li>
+</ul>
+<p>Coeficiente de asimetria: 0.924 (sin unidades)</p>
+<ul>
+<li><strong>Intepretación</strong>: Como el coef. de asimetría es positivo, la distribución de la variable colesterol muestra una asimetría hacia la derecha. Es decir, los niveles de colesterol por encima de la media (207.85 mg/dL) están más dispersos que los valores por debajo de ella.</li>
+</ul>
 </section>
 <section id="calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo" class="level2">
 <h2 class="anchored" data-anchor-id="calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-chol.-entre-qué-valores-se-encuentra-el-25-de-las-personas-con-el-colesterol-más-alto-y-el-75-de-las-personas-con-el-colesterol-más-bajo-qué-puedes-decir-acerca-de-la-dispersión-de-la-variable-dónde-hay-más-dispersión-en-el-25-de-las-personas-con-mayor-colesterol-o-en-el-25-de-las-personas-con-colesterol-más-bajo">1.12 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable <code>chol</code>. ¿Entre qué valores se encuentra el 25% de las personas con el colesterol más alto? ¿Y el 75% de las personas con el colesterol más bajo? ¿Qué puedes decir acerca de la dispersión de la variable?¿ Dónde hay más dispersión, en el 25% de las personas con mayor colesterol o en el 25% de las personas con colesterol más bajo?</h2>
 </section>
 <section id="calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica" class="level2">
 <h2 class="anchored" data-anchor-id="calcula-el-coeficiente-de-curtosis-de-la-variable-chol.-qué-indica">1.13 Calcula el coeficiente de curtosis de la variable <code>chol</code>. ¿Qué indica?</h2>
-<!-- Curtosis: 2.558 -->
-<!-- - **Intepretación**: Como la curtosis es positiva, la distribución de la variable colesterol muestra una mayor concentración en torno a la media (207.85 mg/dL) que una distribución normal. -->
+<p>Curtosis: 2.558 (sin unidades)</p>
+<ul>
+<li><strong>Intepretación</strong>: Como la curtosis es positiva, la distribución de la variable colesterol muestra una mayor concentración en torno a la media (207.85 mg/dL) que una distribución Normal.</li>
+</ul>
 </section>
 <section id="según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo" class="level2">
 <h2 class="anchored" data-anchor-id="según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo">1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?</h2>
-<ul>
-<li>Los valores de colesterol 443, 404, 347 y 342 mg/dL son valores extremos.</li>
-</ul>
+<!-- - Los valores de colesterol 443, 404, 347 y 342 mg/dL son valores extremos. -->
 </section>
 <section id="cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra" class="level2">
 <h2 class="anchored" data-anchor-id="cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra">1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?</h2>
