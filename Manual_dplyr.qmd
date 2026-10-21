@@ -29,29 +29,29 @@ Una vez cargado el paquete, todas sus funciones estarán disponibles durante tod
 
 En esta asignatura se utilizarán principalmente las siguientes funciones del paquete **dplyr**:
 
-* `select()`: para seleccionar variables
+- `select()`: para seleccionar variables
 
-* `slice()`: para seleccionar observaciones
+- `slice()`: para seleccionar observaciones
 
-* `filter()`: para filtrar observaciones
+- `filter()`: para filtrar observaciones
 
-* `mutate()`: para crear nuevas variables
+- `mutate()`: para crear nuevas variables
 
-* `group_by()`: para agrupar las observaciones según una variable
+- `group_by()`: para agrupar las observaciones según una variable
 
-* `summarise()`: para calcular estadísticos descriptivos para cada grupo
+- `summarise()`: para calcular estadísticos descriptivos para cada grupo
 
 Además, en algunos ejemplos se utilizarán las siguientes funciones:
 
-* `case_when()`: para recodificar variables
+- `case_when()`: para recodificar variables
 
-* `factor()`: para definir las categorías de una variable cualitativa y su orden
+- `factor()`: para definir las categorías de una variable cualitativa y su orden
 
-* `pull()`: para obtener los valores de una variable como vector
+- `pull()`: para obtener los valores de una variable como vector
 
-* `shapiro.test()`: para realizar el test de normalidad de Shapiro-Wilk
+- `shapiro.test()`: para realizar el test de normalidad de Shapiro-Wilk
 
-* `eda()`: para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete **PASWR2**)
+- `eda()`: para realizar un análisis exploratorio de datos (exploratory data analysis; función del paquete **PASWR2**)
 
 ## El operador pipe (`|>`)
 
@@ -68,7 +68,6 @@ Datos |>
 
 Por tanto, gracias al operador `|>`, no es necesario volver a escribir el nombre de la base de datos en cada función. Esto hace que el código sea más corto, claro y fácil de leer.
 
-
 ## Seleccionando variables: `select()`
 
 La función `select()` se utiliza para seleccionar variables (columnas) de una base de datos.
@@ -80,7 +79,6 @@ EPIDURAL |>
   select(kg, cm)
 ```
 
-
 ## Seleccionando observaciones: `slice()`
 
 La función `slice()` se utiliza para seleccionar observaciones (filas) de una base de datos.
@@ -91,7 +89,6 @@ Por ejemplo, para seleccionar la paciente número 19 del fichero `EPIDURAL`:
 EPIDURAL |> 
   slice(19)
 ```
-
 
 ## Filtrando observaciones: `filter()`
 
@@ -128,7 +125,8 @@ Por ejemplo, con el fichero `diabetes` calcula la media, mediana, la desviación
 diabetes <- readr::read_table("diabetes.txt")
 
 diabetes <- diabetes |>
-  mutate(across(where(is.character), as.factor))
+  mutate(across(where(is.character), as.factor)) |> 
+  mutate(frame=factor(frame, levels=c("small","medium","large")))
 ```
 
 ```{r, eval=TRUE}
@@ -137,10 +135,9 @@ diabetes |>
   summarise(media=mean(chol),
             mediana=median(chol),
             sd=sd(chol),
-            q2.5=quantile(chol, 0.025),
-            q2.5=quantile(chol, 0.975))
+            q1=quantile(chol, 0.25),
+            q3=quantile(chol, 0.75))
 ```
-
 
 <!-- ## Recodificando variables: `mutate()` + `case_when()` -->
 
@@ -167,11 +164,12 @@ diabetes |>
 <!-- Por ejemplo, para analizar la normalidad de la variable X = "PENDIENTE": -->
 
 <!-- ```{r, eval=TRUE} -->
+
 <!-- # NOTA: Se puede utilizar directamente el operador `$` -->
+
 <!-- # shapiro.test(Datos$X) -->
 
 <!-- ``` -->
-
 
 <!-- ## Análisis exploratorio de datos: `eda()` -->
 
@@ -182,6 +180,7 @@ diabetes |>
 <!-- Por ejemplo, para realizar el análisis exploratorio de la variable X = "PENDIENTE: -->
 
 <!-- ```{r, eval=TRUE, message=FALSE, fig.width=7} -->
+
 <!-- library(PASWR2) -->
 
 <!-- # eda(Datos$X) -->

@@ -176,7 +176,7 @@ Curtosis: 2.558 (sin unidades)
 
 ## 1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?
 
-```{r include=FALSE}
+```{r include=TRUE}
 b <- diabetes$chol |> boxplot()
 b$out
 
@@ -193,14 +193,14 @@ diabetes |>
 
 ## 1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes$gender |> 
   table()
 ```
 
 ## 1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes$location |> 
   table()
 ```
@@ -209,42 +209,42 @@ diabetes$location |>
 
 ## 1.18 Realiza un diagrama de cajas de la variable `chol` según las categorías de la variable `frame`.
 
-```{r include=FALSE}
+```{r include=TRUE}
 boxplot(chol ~ frame, data=diabetes)
 ```
 
 ## 1.19 Realiza un diagrama de cajas de la variable `chol` según las categorías de la `frame` y la variable `gender`.
 
-```{r include=FALSE}
+```{r include=TRUE}
 boxplot(chol ~ frame + gender, data=diabetes)
 ```
 
 ## 1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable `chol` según las categorías de la variable `frame`?
 
-```{r include=FALSE}
-diabetes |> 
-  group_by(frame) |> 
+```{r include=TRUE}
+diabetes |>
+  group_by(frame) |>
   summarise(media=mean(chol),
             mediana=median(chol),
             sd=sd(chol),
-            q2.5=quantile(chol, 0.025),
-            q2.5=quantile(chol, 0.975))
+            q1=quantile(chol, 0.25),
+            q3=quantile(chol, 0.75))
 ```
 
-## 1.21 Realiza un histograma de la variable `chol` según las categorías de la variable `frame` y la variable `gender`.
+<!-- ## 1.21 Realiza un histograma de la variable `chol` según las categorías de la variable `frame` y la variable `gender`. -->
 
-```{r include=FALSE}
-library(lattice)
+<!-- ```{r include=TRUE} -->
+<!-- library(lattice) -->
 
-diabetes |> 
-  ggplot(aes(x=chol)) +
-  geom_histogram() +
-  facet_wrap(~ gender * frame)
-```
+<!-- diabetes |>  -->
+<!--   ggplot(aes(x=chol)) + -->
+<!--   geom_histogram() + -->
+<!--   facet_wrap(~ gender * frame) -->
+<!-- ``` -->
 
 ## 1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable `glyhb`. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica.
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes$glyhb |> eda()
 
 par(mfrow=c(1,2))
@@ -474,8 +474,8 @@ cor.matrix |> corrplot(method="number", type="upper")
 <!-- ```{r, message=FALSE} -->
 <!-- patients <- read_table("patients.txt") -->
 
-<!-- # Para convertir los carácteres en factor  -->
-<!-- patients <- patients |>  -->
+<!-- # Para convertir los carácteres en factor -->
+<!-- patients <- patients |> -->
 <!--   mutate(across(where(is.character), as.factor)) -->
 
 <!-- print(patients) -->
@@ -486,7 +486,7 @@ cor.matrix |> corrplot(method="number", type="upper")
 <!-- Por ejemplo: -->
 
 <!-- ```{r} -->
-<!-- datos <- patients |>  -->
+<!-- datos <- patients |> -->
 <!--   filter(ID.hospital=="1") -->
 
 <!-- datos |> str() -->
@@ -506,14 +506,14 @@ cor.matrix |> corrplot(method="number", type="upper")
 <!-- ```{r include=FALSE} -->
 <!-- datos$IL6 |> eda() -->
 
-<!-- datos |>  -->
+<!-- datos |> -->
 <!--   summarise(CV.IL6=sd(IL6)/mean(IL6)) -->
 <!-- ``` -->
 
 <!-- ## 3) Dibuja un histograma y un diagrama de cajas de la variable `IL6` en función de la variable `CancerStage`. Interpreta los gráficos obtenidos. -->
 
 <!-- ```{r, include=FALSE} -->
-<!-- datos |>  -->
+<!-- datos |> -->
 <!--   ggplot(aes(x=IL6)) + -->
 <!--   geom_histogram(bins=10) + -->
 <!--   facet_wrap(~ CancerStage) -->
@@ -529,11 +529,11 @@ cor.matrix |> corrplot(method="number", type="upper")
 <!--   ggplot(aes(x=IL6, y=CRP)) + -->
 <!--   geom_point() -->
 
-<!-- datos |>  -->
+<!-- datos |> -->
 <!--   select(IL6, CRP) |> -->
 <!--   cov() -->
 
-<!-- datos |>  -->
+<!-- datos |> -->
 <!--   select(IL6, CRP) |> -->
 <!--   cor() -->
 <!-- ``` -->
@@ -542,15 +542,15 @@ cor.matrix |> corrplot(method="number", type="upper")
 <!-- ## 5) Selecciona el paciente fumador (*former*) y ex-fumador (*never*) con valores más bajos en la variable `CRP`. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta. -->
 
 <!-- ```{r include=FALSE} -->
-<!-- datos |>  -->
-<!--   filter(Smoking=="former") |>  -->
-<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>  -->
-<!--   arrange(CRP) |>  -->
+<!-- datos |> -->
+<!--   filter(Smoking=="former") |> -->
+<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |> -->
+<!--   arrange(CRP) |> -->
 <!--   slice(1) -->
 
-<!-- datos |>  -->
-<!--   filter(Smoking=="never") |>  -->
-<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>  -->
-<!--   arrange(CRP) |>  -->
+<!-- datos |> -->
+<!--   filter(Smoking=="never") |> -->
+<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |> -->
+<!--   arrange(CRP) |> -->
 <!--   slice(1) -->
 <!-- ``` -->

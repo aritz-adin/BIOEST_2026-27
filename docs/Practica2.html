@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -75,10 +78,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -108,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -219,7 +222,6 @@ window.Quarto = {
   <li><a href="#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame." id="toc-realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame." class="nav-link" data-scroll-target="#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame.">1.18 Realiza un diagrama de cajas de la variable <code>chol</code> según las categorías de la variable <code>frame</code>.</a></li>
   <li><a href="#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender." id="toc-realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender." class="nav-link" data-scroll-target="#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender.">1.19 Realiza un diagrama de cajas de la variable <code>chol</code> según las categorías de la <code>frame</code> y la variable <code>gender</code>.</a></li>
   <li><a href="#calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame" id="toc-calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame" class="nav-link" data-scroll-target="#calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame">1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable <code>chol</code> según las categorías de la variable <code>frame</code>?</a></li>
-  <li><a href="#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender." id="toc-realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender." class="nav-link" data-scroll-target="#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.">1.21 Realiza un histograma de la variable <code>chol</code> según las categorías de la variable <code>frame</code> y la variable <code>gender</code>.</a></li>
   <li><a href="#calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica." id="toc-calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica." class="nav-link" data-scroll-target="#calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica.">1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable <code>glyhb</code>. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica.</a></li>
   <li><a href="#compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada" id="toc-compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada" class="nav-link" data-scroll-target="#compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada">1.23 Compara la dispersión de las variables <code>chol</code> y <code>glyhb</code>. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?</a></li>
   <li><a href="#considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo" id="toc-considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo" class="nav-link" data-scroll-target="#considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo">1.24 Considera la variable <code>chol</code> por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?</a></li>
@@ -582,31 +584,145 @@ window.Quarto = {
 </section>
 <section id="según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo" class="level2">
 <h2 class="anchored" data-anchor-id="según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo">1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> diabetes<span class="sc">$</span>chol <span class="sc">|&gt;</span> <span class="fu">boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>b<span class="sc">$</span>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  78 443 318 347 342 404 307 337 322</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Para calcular valores extremos, debemos tipificar la variable ##</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>diabetes <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Z.chol =</span> (chol<span class="sc">-</span><span class="fu">mean</span>(chol))<span class="sc">/</span><span class="fu">sd</span>(chol))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>diabetes <span class="sc">|&gt;</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Z.chol<span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">3</span> <span class="sc">|</span> Z.chol<span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(chol)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 17
+     id  chol stab.glu   hdl ratio glyhb location     age gender height weight frame  bp.1s bp.1d waist   hip Z.chol
+  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 15800   342      251    48  7.10 12.7  Buckingham    63 female     65    201 medium   178    88    45    46   3.02
+2 12769   347      197    42  8.30  6.34 Buckingham    36 male       70    277 large    140    86    51    49   3.13
+3 20313   404      206    33 12.2  10.8  Louisa        56 male       69    159 medium   162    88    38    39   4.42
+4  2778   443      185    23 19.3  14.3  Buckingham    51 female     70    235 medium   158    98    43    48   5.30</code></pre>
+</div>
+</div>
 <!-- - Los valores de colesterol 443, 404, 347 y 342 mg/dL son valores extremos. -->
 </section>
 <section id="cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra" class="level2">
 <h2 class="anchored" data-anchor-id="cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra">1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>gender <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+female   male 
+   234    169 </code></pre>
+</div>
+</div>
 </section>
 <section id="cuántas-personas-residen-en-buckingham-cuántas-en-louisa" class="level2">
 <h2 class="anchored" data-anchor-id="cuántas-personas-residen-en-buckingham-cuántas-en-louisa">1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>location <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Buckingham     Louisa 
+       200        203 </code></pre>
+</div>
+</div>
 </section>
 <section id="puedes-calcular-la-media-y-la-mediana-de-la-variable-location" class="level2">
 <h2 class="anchored" data-anchor-id="puedes-calcular-la-media-y-la-mediana-de-la-variable-location">1.17 ¿Puedes calcular la media y la mediana de la variable <code>location</code>?</h2>
 </section>
 <section id="realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame." class="level2">
 <h2 class="anchored" data-anchor-id="realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame.">1.18 Realiza un diagrama de cajas de la variable <code>chol</code> según las categorías de la variable <code>frame</code>.</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(chol <span class="sc">~</span> frame, <span class="at">data=</span>diabetes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica2_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender." class="level2">
 <h2 class="anchored" data-anchor-id="realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender.">1.19 Realiza un diagrama de cajas de la variable <code>chol</code> según las categorías de la <code>frame</code> y la variable <code>gender</code>.</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(chol <span class="sc">~</span> frame <span class="sc">+</span> gender, <span class="at">data=</span>diabetes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica2_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame" class="level2">
 <h2 class="anchored" data-anchor-id="calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame">1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable <code>chol</code> según las categorías de la variable <code>frame</code>?</h2>
-</section>
-<section id="realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender." class="level2">
-<h2 class="anchored" data-anchor-id="realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.">1.21 Realiza un histograma de la variable <code>chol</code> según las categorías de la variable <code>frame</code> y la variable <code>gender</code>.</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>diabetes <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(frame) <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">media=</span><span class="fu">mean</span>(chol),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mediana=</span><span class="fu">median</span>(chol),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(chol),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">q1=</span><span class="fu">quantile</span>(chol, <span class="fl">0.25</span>),</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">q3=</span><span class="fu">quantile</span>(chol, <span class="fl">0.75</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 6
+  frame  media mediana    sd    q1    q3
+  &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 small   198.    196   39.0  170.  219.
+2 medium  213.    206.  46.9  181   239.
+3 large   208     206   43.3  182.  232.</code></pre>
+</div>
+</div>
+<!-- ## 1.21 Realiza un histograma de la variable `chol` según las categorías de la variable `frame` y la variable `gender`. -->
+<!-- ```{r include=TRUE} -->
+<!-- library(lattice) -->
+<!-- diabetes |>  -->
+<!--   ggplot(aes(x=chol)) + -->
+<!--   geom_histogram() + -->
+<!--   facet_wrap(~ gender * frame) -->
+<!-- ``` -->
 </section>
 <section id="calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica." class="level2">
 <h2 class="anchored" data-anchor-id="calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica.">1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable <code>glyhb</code>. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica.</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>glyhb <span class="sc">|&gt;</span> <span class="fu">eda</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica2_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val 
+ 403.000    0.000    2.680    4.390    5.590    4.870    5.313    5.590   16.110    2.206    4.867    0.110    1.200   13.430    5.252    2.266    0.000 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>glyhb <span class="sc">|&gt;</span> <span class="fu">hist</span>()</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>glyhb <span class="sc">|&gt;</span> <span class="fu">boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica2_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada" class="level2">
 <h2 class="anchored" data-anchor-id="compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada">1.23 Compara la dispersión de las variables <code>chol</code> y <code>glyhb</code>. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?</h2>
@@ -684,15 +800,15 @@ window.Quarto = {
 <!-- -   `ID.hospital`: ID of the hospital -->
 <!-- ```{r, message=FALSE} -->
 <!-- patients <- read_table("patients.txt") -->
-<!-- # Para convertir los carácteres en factor  -->
-<!-- patients <- patients |>  -->
+<!-- # Para convertir los carácteres en factor -->
+<!-- patients <- patients |> -->
 <!--   mutate(across(where(is.character), as.factor)) -->
 <!-- print(patients) -->
 <!-- ``` -->
 <!-- En primer lugar, selecciona los pacientes asociados a tu código de hospital (`ID.hospital`) e indica cuántos pacientes pertenecen a dicho hospital. -->
 <!-- Por ejemplo: -->
 <!-- ```{r} -->
-<!-- datos <- patients |>  -->
+<!-- datos <- patients |> -->
 <!--   filter(ID.hospital=="1") -->
 <!-- datos |> str() -->
 <!-- ``` -->
@@ -706,12 +822,12 @@ window.Quarto = {
 <!-- ## 2) Calcula la media, mediana, cuartiles, desviación típica, coeficientes de asimetría y de curtosis, y los coeficientes de variación. Indica sus unidades e interpreta los estadísticos (en aquellos casos que sea posible). -->
 <!-- ```{r include=FALSE} -->
 <!-- datos$IL6 |> eda() -->
-<!-- datos |>  -->
+<!-- datos |> -->
 <!--   summarise(CV.IL6=sd(IL6)/mean(IL6)) -->
 <!-- ``` -->
 <!-- ## 3) Dibuja un histograma y un diagrama de cajas de la variable `IL6` en función de la variable `CancerStage`. Interpreta los gráficos obtenidos. -->
 <!-- ```{r, include=FALSE} -->
-<!-- datos |>  -->
+<!-- datos |> -->
 <!--   ggplot(aes(x=IL6)) + -->
 <!--   geom_histogram(bins=10) + -->
 <!--   facet_wrap(~ CancerStage) -->
@@ -722,24 +838,24 @@ window.Quarto = {
 <!-- datos |> -->
 <!--   ggplot(aes(x=IL6, y=CRP)) + -->
 <!--   geom_point() -->
-<!-- datos |>  -->
+<!-- datos |> -->
 <!--   select(IL6, CRP) |> -->
 <!--   cov() -->
-<!-- datos |>  -->
+<!-- datos |> -->
 <!--   select(IL6, CRP) |> -->
 <!--   cor() -->
 <!-- ``` -->
 <!-- ## 5) Selecciona el paciente fumador (*former*) y ex-fumador (*never*) con valores más bajos en la variable `CRP`. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta. -->
 <!-- ```{r include=FALSE} -->
-<!-- datos |>  -->
-<!--   filter(Smoking=="former") |>  -->
-<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>  -->
-<!--   arrange(CRP) |>  -->
+<!-- datos |> -->
+<!--   filter(Smoking=="former") |> -->
+<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |> -->
+<!--   arrange(CRP) |> -->
 <!--   slice(1) -->
-<!-- datos |>  -->
-<!--   filter(Smoking=="never") |>  -->
-<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>  -->
-<!--   arrange(CRP) |>  -->
+<!-- datos |> -->
+<!--   filter(Smoking=="never") |> -->
+<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |> -->
+<!--   arrange(CRP) |> -->
 <!--   slice(1) -->
 <!-- ``` -->
 

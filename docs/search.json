@@ -207,7 +207,7 @@
     "href": "Manual_dplyr.html#análisis-estadístico-descriptivo-por-grupos-group_by-summarise",
     "title": "dplyr: una gramática para la manipulación de datos",
     "section": "Análisis estadístico descriptivo por grupos: group_by() + summarise()",
-    "text": "Análisis estadístico descriptivo por grupos: group_by() + summarise()\nA menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo.\nPara ello, se utilizan conjuntamente las funciones group_by() y summarise().\nPor ejemplo, con el fichero diabetes calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame\n\ndiabetes |&gt;\n  group_by(frame) |&gt;\n  summarise(media=mean(chol),\n            mediana=median(chol),\n            sd=sd(chol),\n            q2.5=quantile(chol, 0.025),\n            q2.5=quantile(chol, 0.975))\n\n# A tibble: 3 × 5\n  frame  media mediana    sd  q2.5\n  &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 large   208     206   43.3  300.\n2 medium  213.    206.  46.9  318.\n3 small   198.    196   39.0  287."
+    "text": "Análisis estadístico descriptivo por grupos: group_by() + summarise()\nA menudo, en lugar de calcular los estadísticos descriptivos para el conjunto de la base de datos, se desea dividir las observaciones en diferentes grupos y calcularlos para cada grupo.\nPara ello, se utilizan conjuntamente las funciones group_by() y summarise().\nPor ejemplo, con el fichero diabetes calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame\n\ndiabetes |&gt;\n  group_by(frame) |&gt;\n  summarise(media=mean(chol),\n            mediana=median(chol),\n            sd=sd(chol),\n            q1=quantile(chol, 0.25),\n            q3=quantile(chol, 0.75))\n\n# A tibble: 3 × 6\n  frame  media mediana    sd    q1    q3\n  &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 small   198.    196   39.0  170.  219.\n2 medium  213.    206.  46.9  181   239.\n3 large   208     206   43.3  182.  232."
   },
   {
     "objectID": "index.html",
@@ -375,21 +375,21 @@
     "href": "Practica2.html#según-el-diagrama-de-cajas-existe-alguna-observación-atípica-alguna-de-ellas-es-un-valor-extremo",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?",
-    "text": "1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?"
+    "text": "1.14 Según el diagrama de cajas, ¿existe alguna observación atípica? ¿Alguna de ellas es un valor extremo?\n\nb &lt;- diabetes$chol |&gt; boxplot()\n\n\n\n\n\n\n\nb$out\n\n[1]  78 443 318 347 342 404 307 337 322\n\n## Para calcular valores extremos, debemos tipificar la variable ##\ndiabetes &lt;- diabetes |&gt; \n  mutate(Z.chol = (chol-mean(chol))/sd(chol))\n\ndiabetes |&gt; \n  filter(Z.chol&lt; -3 | Z.chol&gt; 3) |&gt; \n  arrange(chol)\n\n# A tibble: 4 × 17\n     id  chol stab.glu   hdl ratio glyhb location     age gender height weight frame  bp.1s bp.1d waist   hip Z.chol\n  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;\n1 15800   342      251    48  7.10 12.7  Buckingham    63 female     65    201 medium   178    88    45    46   3.02\n2 12769   347      197    42  8.30  6.34 Buckingham    36 male       70    277 large    140    86    51    49   3.13\n3 20313   404      206    33 12.2  10.8  Louisa        56 male       69    159 medium   162    88    38    39   4.42\n4  2778   443      185    23 19.3  14.3  Buckingham    51 female     70    235 medium   158    98    43    48   5.30"
   },
   {
     "objectID": "Practica2.html#cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra",
     "href": "Practica2.html#cuántos-hombres-y-cuántas-mujeres-hay-en-la-muestra",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?",
-    "text": "1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?"
+    "text": "1.15 ¿Cuántos hombres y cuántas mujeres hay en la muestra?\n\ndiabetes$gender |&gt; \n  table()\n\n\nfemale   male \n   234    169"
   },
   {
     "objectID": "Practica2.html#cuántas-personas-residen-en-buckingham-cuántas-en-louisa",
     "href": "Practica2.html#cuántas-personas-residen-en-buckingham-cuántas-en-louisa",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?",
-    "text": "1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?"
+    "text": "1.16 ¿Cuántas personas residen en Buckingham? ¿Cuántas en Louisa?\n\ndiabetes$location |&gt; \n  table()\n\n\nBuckingham     Louisa \n       200        203"
   },
   {
     "objectID": "Practica2.html#puedes-calcular-la-media-y-la-mediana-de-la-variable-location",
@@ -403,35 +403,28 @@
     "href": "Practica2.html#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-variable-frame.",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.18 Realiza un diagrama de cajas de la variable chol según las categorías de la variable frame.",
-    "text": "1.18 Realiza un diagrama de cajas de la variable chol según las categorías de la variable frame."
+    "text": "1.18 Realiza un diagrama de cajas de la variable chol según las categorías de la variable frame.\n\nboxplot(chol ~ frame, data=diabetes)"
   },
   {
     "objectID": "Practica2.html#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender.",
     "href": "Practica2.html#realiza-un-diagrama-de-cajas-de-la-variable-chol-según-las-categorías-de-la-frame-y-la-variable-gender.",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.19 Realiza un diagrama de cajas de la variable chol según las categorías de la frame y la variable gender.",
-    "text": "1.19 Realiza un diagrama de cajas de la variable chol según las categorías de la frame y la variable gender."
+    "text": "1.19 Realiza un diagrama de cajas de la variable chol según las categorías de la frame y la variable gender.\n\nboxplot(chol ~ frame + gender, data=diabetes)"
   },
   {
     "objectID": "Practica2.html#calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame",
     "href": "Practica2.html#calcula-la-media-mediana-la-desviación-típica-y-los-cuartiles-de-la-variable-chol-según-las-categorías-de-la-variable-frame",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame?",
-    "text": "1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame?"
-  },
-  {
-    "objectID": "Practica2.html#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.",
-    "href": "Practica2.html#realiza-un-histograma-de-la-variable-chol-según-las-categorías-de-la-variable-frame-y-la-variable-gender.",
-    "title": "Práctica 2: Estadística Descriptiva",
-    "section": "1.21 Realiza un histograma de la variable chol según las categorías de la variable frame y la variable gender.",
-    "text": "1.21 Realiza un histograma de la variable chol según las categorías de la variable frame y la variable gender."
+    "text": "1.20 Calcula la media, mediana, la desviación típica y los cuartiles de la variable chol según las categorías de la variable frame?\n\ndiabetes |&gt;\n  group_by(frame) |&gt;\n  summarise(media=mean(chol),\n            mediana=median(chol),\n            sd=sd(chol),\n            q1=quantile(chol, 0.25),\n            q3=quantile(chol, 0.75))\n\n# A tibble: 3 × 6\n  frame  media mediana    sd    q1    q3\n  &lt;fct&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 small   198.    196   39.0  170.  219.\n2 medium  213.    206.  46.9  181   239.\n3 large   208     206   43.3  182.  232."
   },
   {
     "objectID": "Practica2.html#calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica.",
     "href": "Practica2.html#calcula-la-media-la-mediana-los-cuartiles-y-la-desviación-típica-de-la-variable-glyhb.-explica-cómo-está-de-dispersa-utilizando-el-histograma-el-diagrama-de-cajas-los-cuartiles-y-la-desviación-típica.",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable glyhb. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica.",
-    "text": "1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable glyhb. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica."
+    "text": "1.22 Calcula la media, la mediana, los cuartiles y la desviación típica de la variable glyhb. Explica cómo está de dispersa utilizando el histograma, el diagrama de cajas, los cuartiles y la desviación típica.\n\ndiabetes$glyhb |&gt; eda()\n\n\n\n\n\n\n\n\nSize (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val \n 403.000    0.000    2.680    4.390    5.590    4.870    5.313    5.590   16.110    2.206    4.867    0.110    1.200   13.430    5.252    2.266    0.000 \n\npar(mfrow=c(1,2))\ndiabetes$glyhb |&gt; hist()\ndiabetes$glyhb |&gt; boxplot()"
   },
   {
     "objectID": "Practica2.html#compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada",
