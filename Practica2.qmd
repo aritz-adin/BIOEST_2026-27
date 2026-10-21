@@ -254,42 +254,43 @@ diabetes$glyhb |> boxplot()
 
 ## 1.23 Compara la dispersión de las variables `chol` y `glyhb`. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes$chol |> eda()
 diabetes$glyhb |> eda()
 
-diabetes |> 
-  summarise(CV.chol = sd(chol)/mean(chol),
-            CV.glyhb = sd(glyhb)/mean(glyhb))
+CV.chol <- 44.390/207.846
+CV.gly <- 2.206/5.590
+c(CV.chol,CV.gly)
 ```
 
 ## 1.24 Considera la variable `chol` por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |> 
   filter(gender=="male") |> 
   mutate(Z.chol = (chol-mean(chol))/sd(chol)) |> 
   arrange(desc(chol)) |> 
-  slice(1)
+  slice(1) |> 
+  select(id, gender, chol, Z.chol)
   
 diabetes |> 
   filter(gender=="female") |> 
   mutate(Z.chol = (chol-mean(chol))/sd(chol)) |> 
-  slice(1)
+  arrange(desc(chol)) |> 
+  slice(1) |> 
+  select(id, gender, chol, Z.chol)
 ```
 
 ## 1.25 Crea una nueva variable denominada `ratioWH` definida como el cociente de la variable `waist` y la variable `hip` (waist/hip)
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes <- diabetes |> 
   mutate(ratioWH = waist/hip)
-
-diabetes
 ```
 
 ## 1.26 Dibuja un histograma y un diagrama de cajas de la variable `ratioWH`.
 
-```{r include=FALSE}
+```{r include=TRUE}
 par(mfrow=c(1,2))
 diabetes$ratioWH |> hist()
 diabetes$ratioWH |> boxplot()
@@ -297,7 +298,7 @@ diabetes$ratioWH |> boxplot()
 
 ## 1.27 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable `ratioWH`. ¿Entre qué valores se encuentra el 25% de los valores más altos? ¿Y el 75% de los valores más bajos?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes$ratioWH |> eda()
 ```
 

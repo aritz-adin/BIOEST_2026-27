@@ -431,35 +431,35 @@
     "href": "Practica2.html#compara-la-dispersión-de-las-variables-chol-y-glyhb.-qué-variable-tiene-la-desviación-típica-más-alta-puedes-concluir-que-aquella-variable-con-la-desviación-típica-más-alta-es-la-más-dispersa-por-qué-qué-medida-crees-que-es-la-más-adecuada",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.23 Compara la dispersión de las variables chol y glyhb. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?",
-    "text": "1.23 Compara la dispersión de las variables chol y glyhb. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?"
+    "text": "1.23 Compara la dispersión de las variables chol y glyhb. ¿Qué variable tiene la desviación típica más alta? ¿Puedes concluir que aquella variable con la desviación típica más alta es la más dispersa? ¿Por qué? ¿Qué medida crees que es la más adecuada?\n\ndiabetes$chol |&gt; eda()\n\n\n\n\n\n\n\n\nSize (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val \n 403.000    0.000   78.000  179.000  207.846  204.000  205.903  230.000  443.000   44.390 1970.494    2.211   51.000  365.000    2.558    0.924    0.000 \n\ndiabetes$glyhb |&gt; eda()\n\n\n\n\n\n\n\n\nSize (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val \n 403.000    0.000    2.680    4.390    5.590    4.870    5.313    5.590   16.110    2.206    4.867    0.110    1.200   13.430    5.252    2.266    0.000 \n\nCV.chol &lt;- 44.390/207.846\nCV.gly &lt;- 2.206/5.590\nc(CV.chol,CV.gly)\n\n[1] 0.2135716 0.3946333"
   },
   {
     "objectID": "Practica2.html#considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo",
     "href": "Practica2.html#considera-la-variable-chol-por-sexo.-selecciona-el-hombre-y-la-mujer-con-mayor-nivel-de-colesterol.-cuál-de-los-dos-destaca-más-en-comparación-a-la-media-de-su-grupo",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.24 Considera la variable chol por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?",
-    "text": "1.24 Considera la variable chol por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?"
+    "text": "1.24 Considera la variable chol por sexo. Selecciona el hombre y la mujer con mayor nivel de colesterol. ¿Cuál de los dos destaca más en comparación a la media de su grupo?\n\ndiabetes |&gt; \n  filter(gender==\"male\") |&gt; \n  mutate(Z.chol = (chol-mean(chol))/sd(chol)) |&gt; \n  arrange(desc(chol)) |&gt; \n  slice(1) |&gt; \n  select(id, gender, chol, Z.chol)\n\n# A tibble: 1 × 4\n     id gender  chol Z.chol\n  &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 20313 male     404   4.34\n\ndiabetes |&gt; \n  filter(gender==\"female\") |&gt; \n  mutate(Z.chol = (chol-mean(chol))/sd(chol)) |&gt; \n  arrange(desc(chol)) |&gt; \n  slice(1) |&gt; \n  select(id, gender, chol, Z.chol)\n\n# A tibble: 1 × 4\n     id gender  chol Z.chol\n  &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1  2778 female   443   5.36"
   },
   {
     "objectID": "Practica2.html#crea-una-nueva-variable-denominada-ratiowh-definida-como-el-cociente-de-la-variable-waist-y-la-variable-hip-waisthip",
     "href": "Practica2.html#crea-una-nueva-variable-denominada-ratiowh-definida-como-el-cociente-de-la-variable-waist-y-la-variable-hip-waisthip",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.25 Crea una nueva variable denominada ratioWH definida como el cociente de la variable waist y la variable hip (waist/hip)",
-    "text": "1.25 Crea una nueva variable denominada ratioWH definida como el cociente de la variable waist y la variable hip (waist/hip)"
+    "text": "1.25 Crea una nueva variable denominada ratioWH definida como el cociente de la variable waist y la variable hip (waist/hip)\n\ndiabetes &lt;- diabetes |&gt; \n  mutate(ratioWH = waist/hip)"
   },
   {
     "objectID": "Practica2.html#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-ratiowh.",
     "href": "Practica2.html#dibuja-un-histograma-y-un-diagrama-de-cajas-de-la-variable-ratiowh.",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.26 Dibuja un histograma y un diagrama de cajas de la variable ratioWH.",
-    "text": "1.26 Dibuja un histograma y un diagrama de cajas de la variable ratioWH."
+    "text": "1.26 Dibuja un histograma y un diagrama de cajas de la variable ratioWH.\n\npar(mfrow=c(1,2))\ndiabetes$ratioWH |&gt; hist()\ndiabetes$ratioWH |&gt; boxplot()"
   },
   {
     "objectID": "Practica2.html#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-ratiowh.-entre-qué-valores-se-encuentra-el-25-de-los-valores-más-altos-y-el-75-de-los-valores-más-bajos",
     "href": "Practica2.html#calcula-el-mínimo-el-máximo-los-cuartiles-y-la-desviación-típica-de-la-variable-ratiowh.-entre-qué-valores-se-encuentra-el-25-de-los-valores-más-altos-y-el-75-de-los-valores-más-bajos",
     "title": "Práctica 2: Estadística Descriptiva",
     "section": "1.27 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable ratioWH. ¿Entre qué valores se encuentra el 25% de los valores más altos? ¿Y el 75% de los valores más bajos?",
-    "text": "1.27 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable ratioWH. ¿Entre qué valores se encuentra el 25% de los valores más altos? ¿Y el 75% de los valores más bajos?"
+    "text": "1.27 Calcula el mínimo, el máximo, los cuartiles y la desviación típica de la variable ratioWH. ¿Entre qué valores se encuentra el 25% de los valores más altos? ¿Y el 75% de los valores más bajos?\n\ndiabetes$ratioWH |&gt; eda()\n\n\n\n\n\n\n\n\nSize (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val \n 403.000    0.000    0.682    0.830    0.881    0.881    0.879    0.925    1.143    0.072    0.005    0.004    0.095    0.461    0.644    0.383    0.002"
   },
   {
     "objectID": "Practica2.html#cuántos-hombres-y-cuántas-mujeres-hay-en-la-localización-buckingham-cuántos-en-louisa",
