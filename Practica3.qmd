@@ -16,7 +16,7 @@ options(width=1000)
 
 # Descripción
 
-En esta práctica vamos a trabajar con el fichero de datos `Diabetes`.
+En esta práctica vamos a trabajar con el fichero de datos `diabetes`.
 
 -   El fichero de datos contiene 19 variables medidas sobre 403 pacientes. Estos pacientes forman parte de un estudio con 1046 sujetos diseñado para investigar la prevalencia de la de obesidad, diabetes, y otros factores de riesgo cardiovasculares para Afroamericanos en Virginia, EEUU.
 
