@@ -476,6 +476,9 @@ El archivo `patients.txt` contiene las siguientes variables medidas sobre un con
 -   `ID.hospital`: ID of the hospital
 
 ```{r, message=FALSE}
+library(dplyr)
+library(readr)
+
 patients <- read_table("patients.txt")
 
 # Para convertir los carácteres en factor
