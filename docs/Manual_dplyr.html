@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,13 +14,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -79,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -204,6 +201,7 @@ window.Quarto = {
   <li><a href="#filtrando-observaciones-filter" id="toc-filtrando-observaciones-filter" class="nav-link" data-scroll-target="#filtrando-observaciones-filter">Filtrando observaciones: <code>filter()</code></a></li>
   <li><a href="#creando-nuevas-variables-mutate" id="toc-creando-nuevas-variables-mutate" class="nav-link" data-scroll-target="#creando-nuevas-variables-mutate">Creando nuevas variables: <code>mutate()</code></a></li>
   <li><a href="#análisis-estadístico-descriptivo-por-grupos-group_by-summarise" id="toc-análisis-estadístico-descriptivo-por-grupos-group_by-summarise" class="nav-link" data-scroll-target="#análisis-estadístico-descriptivo-por-grupos-group_by-summarise">Análisis estadístico descriptivo por grupos: <code>group_by()</code> + <code>summarise()</code></a></li>
+  <li><a href="#análisis-exploratorio-de-datos-eda" id="toc-análisis-exploratorio-de-datos-eda" class="nav-link" data-scroll-target="#análisis-exploratorio-de-datos-eda">Análisis exploratorio de datos: <code>eda()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -403,15 +401,33 @@ window.Quarto = {
 <!-- # NOTA: Se puede utilizar directamente el operador `$` -->
 <!-- # shapiro.test(Datos$X) -->
 <!-- ``` -->
-<!-- ## Análisis exploratorio de datos: `eda()` -->
-<!-- Para analizar la distribución de una variable cuantitativa, una opción útil es utilizar la función `eda()` del paquete **PASWR2**. -->
-<!-- Esta función realiza un análisis exploratorio de los datos y proporciona diversos estadísticos y representaciones gráficas. -->
-<!-- Por ejemplo, para realizar el análisis exploratorio de la variable X = "PENDIENTE: -->
-<!-- ```{r, eval=TRUE, message=FALSE, fig.width=7} -->
-<!-- library(PASWR2) -->
-<!-- # eda(Datos$X) -->
-<!-- ``` -->
-<!-- Entre los resultados que muestra esta función también aparece el p-valor del test de normalidad de Shapiro-Wilk (SW). -->
+</section>
+<section id="análisis-exploratorio-de-datos-eda" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-exploratorio-de-datos-eda">Análisis exploratorio de datos: <code>eda()</code></h2>
+<p>Para analizar la distribución de una variable cuantitativa, una opción útil es utilizar la función <code>eda()</code> del paquete <strong>PASWR2</strong>.</p>
+<p>Esta función realiza un análisis exploratorio de los datos y proporciona diversos estadísticos y representaciones gráficas.</p>
+<p>Por ejemplo, para realizar el análisis exploratorio de la variable X = “Nivel de colesterol (mg/dL)”</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PASWR2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>diabetes<span class="sc">$</span>chol <span class="sc">|&gt;</span> <span class="fu">eda</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Manual_dplyr_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu 
+ 403.000    0.000   78.000  179.000  207.846  204.000  205.903  230.000 
+     Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness 
+ 443.000   44.390 1970.494    2.211   51.000  365.000    2.558    0.924 
+SW p-val 
+   0.000 </code></pre>
+</div>
+</div>
+<p>Entre los resultados que muestra esta función también aparece el p-valor del test de normalidad de Shapiro-Wilk (SW).</p>
 
 
 </section>

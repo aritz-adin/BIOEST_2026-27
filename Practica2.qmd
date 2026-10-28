@@ -306,7 +306,7 @@ diabetes$ratioWH |> eda()
 
 ## 2.1 ¿Cuántos hombres y cuántas mujeres hay en la localización Buckingham? ¿Cuántos en Louisa?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |> 
   select(gender, location) |> 
   table()
@@ -314,7 +314,7 @@ diabetes |>
 
 ## 2.2 ¿Qué porcentaje de personas en la muestra tienen un body frame *small* y además son de Buckingham?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |> 
   select(frame, location) |> 
   table() |> 
@@ -323,7 +323,7 @@ diabetes |>
 
 ## 2.3 Dibuja un diagrama de barras donde representes las frecuencias de la variable `location` para cada una de las categorías de la variable `frame`?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |> 
   select(location, frame) |> 
   table() |> 
@@ -332,15 +332,15 @@ diabetes |>
 
 ## 2.4 Forma una tabla de doble entrada cruzando las variables `gender` y `frame`. ¿Cuántas mujeres tienen un body frame *medium*?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |> 
   select(gender, frame) |> 
   table()
 ```
 
-## 2.5 Qué porcentaje de hombres tienen un body frame *large*?
+## 2.5 ¿Qué porcentaje de hombres tienen un body frame *large*?
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |> 
   select(gender, frame) |> 
   table() |> 
@@ -361,10 +361,10 @@ Cruza las variables `gender` y `frame` y responde a las siguientes preguntas
 
 ## 3.1 Realiza un diagrama de dispersión de las variables `weight` y `waist`. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |>
-  ggplot(aes(x=weight, y=waist)) +
-  geom_point()
+  select(weight, waist) |>
+  plot()
 
 diabetes |> 
   select(weight, waist) |>
@@ -375,18 +375,18 @@ diabetes |>
   cor()
 ```
 
-<!-- - Covarianza: 194.88 (pounds*inches) -->
+- Covarianza: 194.88 (pounds*inches)
 
-<!-- - Correlación: 0.846 (sin unidades) -->
+- Correlación: 0.846 (sin unidades)
 
-<!-- - **Interpretación:** Dado que la covarianza es positiva, existe una relación lineal directa entre el peso y la anchura de la cintura de los pacientes. Es decir, a medida que aumenta el peso se espera que también lo haga la anchura d ela cintura. Además como la correlación está cerca del valor "1", podemos afirmar que dicha relación lineal es fuerte. -->
+- **Interpretación:** Dado que la covarianza es positiva, existe una relación lineal directa entre el peso y la anchura de la cintura de los pacientes. Es decir, a medida que aumenta el peso se espera que también lo haga la anchura de cintura. Además como la correlación está cerca del valor "1", podemos afirmar que dicha relación lineal es fuerte.
 
 ## 3.2 Realiza un diagrama de dispersión de las variables `chol` y `weight`. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes |>
-  ggplot(aes(x=chol, y=weight)) +
-  geom_point()
+  select(chol, weight) |>
+  plot()
 
 diabetes |> 
   select(chol, weight) |>
@@ -399,50 +399,53 @@ diabetes |>
 
 ## 3.3 Selecciona las personas del condado de Buckingham y realiza un diagrama de dispersión de las variables `waist` y `hip`. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.
 
-```{r include=FALSE}
-diabetes.B <- diabetes |>
-  filter(location=="Buckingham")
+```{r include=TRUE}
+diabetes |> 
+  filter(location=="Buckingham") |> 
+  select(waist, hip) |>
+  plot()
 
-diabetes.B |> 
-  ggplot(aes(x=waist, y=hip)) +
-  geom_point()
-
-diabetes.B |> 
+diabetes |> 
+  filter(location=="Buckingham") |> 
   select(waist, hip) |>
   cov()
 
-diabetes.B |> 
+diabetes |> 
+  filter(location=="Buckingham") |> 
   select(waist, hip) |>
   cor()
 ```
 
 ## 3.4 Selecciona las mujeres con body frame medium y realiza un diagrama de dispersión de las variables `bp.1s` y `age`. ¿Crees que existe relación lineal entre ambas variables? Calcula la covarianza y el coeficiente de correlación lineal.
 
-```{r include=FALSE}
-datos <- diabetes |>
-  filter(gender=="female",
-         frame=="medium")
+```{r include=TRUE}
+diabetes |>
+  filter(gender=="female") |> 
+  filter(frame=="medium") |> 
+  select(bp.1s, age) |>
+  plot()
 
-datos |> 
-  ggplot(aes(x=bp.1s, y=age)) +
-  geom_point()
-
-datos |> 
+diabetes |>
+  filter(gender=="female") |> 
+  filter(frame=="medium") |> 
   select(bp.1s, age) |>
   cov()
 
-datos |> 
+diabetes |>
+  filter(gender=="female") |> 
+  filter(frame=="medium") |> 
   select(bp.1s, age) |>
   cor()
 ```
 
 ## A fancy way of visualizing correlation matrices
 
-```{r include=FALSE}
+```{r include=TRUE}
 library(corrplot)
 
 cor.matrix <- diabetes |> 
   select(where(is.numeric)) |> 
+  select(-id) |> 
   cor()
 
 cor.matrix |> corrplot(method="circle", type="upper")
@@ -450,108 +453,108 @@ cor.matrix |> corrplot(method="number", type="upper")
 ```
 
 
-<!-- # EJERCICIOS A ENTREGAR -->
+# EJERCICIOS A ENTREGAR
 
-<!-- Una Organización de Salud busca identificar qué factores de los pacientes están más asociados con la remisión del cáncer de pulmón tras el tratamiento, en el marco de un estudio más amplio sobre los resultados del tratamiento y la calidad de vida de los pacientes con esta enfermedad. -->
+Una Organización de Salud busca identificar qué factores de los pacientes están más asociados con la remisión del cáncer de pulmón tras el tratamiento, en el marco de un estudio más amplio sobre los resultados del tratamiento y la calidad de vida de los pacientes con esta enfermedad.
 
-<!-- El archivo `patients.txt` contiene las siguientes variables medidas sobre un conjunto de datos de 8.525 pacientes. -->
+El archivo `patients.txt` contiene las siguientes variables medidas sobre un conjunto de datos de 8.525 pacientes.
 
-<!-- -   `remission`: response variable (0=no, 1=yes) -->
+-   `remission`: response variable (0=no, 1=yes)
 
-<!-- -   `Age`: age of the patient (in years) -->
+-   `Age`: age of the patient (in years)
 
-<!-- -   `IL6`: Interleukin-6 concentration in blood (pg/ml) -->
+-   `IL6`: Interleukin-6 concentration in blood (pg/ml)
 
-<!-- -   `CRP`: C-reactive protein concentration in blood (mg/dl) -->
+-   `CRP`: C-reactive protein concentration in blood (mg/dl)
 
-<!-- -   `LengthofStay`: duration of a patient's hospital stay (in weeks) -->
+-   `LengthofStay`: duration of a patient's hospital stay (in weeks)
 
-<!-- -   `CancerStage`: lung cancer stage (I, II, III or IV) -->
+-   `CancerStage`: lung cancer stage (I, II, III or IV)
 
-<!-- -   `Smoking`: is the patient a smoker? (1=never, 2=former, 3=current) -->
+-   `Smoking`: is the patient a smoker? (1=never, 2=former, 3=current)
 
-<!-- -   `ID.hospital`: ID of the hospital -->
+-   `ID.hospital`: ID of the hospital
 
-<!-- ```{r, message=FALSE} -->
-<!-- patients <- read_table("patients.txt") -->
+```{r, message=FALSE}
+patients <- read_table("patients.txt")
 
-<!-- # Para convertir los carácteres en factor -->
-<!-- patients <- patients |> -->
-<!--   mutate(across(where(is.character), as.factor)) -->
+# Para convertir los carácteres en factor
+patients <- patients |>
+  mutate(across(where(is.character), as.factor))
 
-<!-- print(patients) -->
-<!-- ``` -->
+print(patients)
+```
 
-<!-- En primer lugar, selecciona los pacientes asociados a tu código de hospital (`ID.hospital`) e indica cuántos pacientes pertenecen a dicho hospital. -->
+En primer lugar, selecciona los pacientes asociados a tu código de hospital (`ID.hospital`) e indica cuántos pacientes pertenecen a dicho hospital.
 
-<!-- Por ejemplo: -->
+Por ejemplo:
 
-<!-- ```{r} -->
-<!-- datos <- patients |> -->
-<!--   filter(ID.hospital=="1") -->
+```{r}
+datos <- patients |>
+  filter(ID.hospital=="1")
 
-<!-- datos |> str() -->
-<!-- ``` -->
-<!-- El hospital "1" contiene 252 pacientes. -->
+datos |> str()
+```
+El hospital "1" contiene 252 pacientes.
 
-<!-- ## 1) Realiza un histograma y un diagrama de cajas de la variable `IL6`. ¿Qué puedes decir acerca de la simetría y la dispersión de la variable? -->
+## 1) Realiza un histograma y un diagrama de cajas de la variable `IL6`. ¿Qué puedes decir acerca de la simetría y la dispersión de la variable?
 
-<!-- ```{r include=FALSE} -->
-<!-- par(mfrow=c(1,2)) -->
-<!-- datos$IL6 |> hist() -->
-<!-- datos$IL6 |> boxplot() -->
-<!-- ``` -->
+```{r include=FALSE}
+par(mfrow=c(1,2))
+datos$IL6 |> hist()
+datos$IL6 |> boxplot()
+```
 
-<!-- ## 2) Calcula la media, mediana, cuartiles, desviación típica, coeficientes de asimetría y de curtosis, y los coeficientes de variación. Indica sus unidades e interpreta los estadísticos (en aquellos casos que sea posible). -->
+## 2) Calcula la media, mediana, cuartiles, desviación típica, coeficientes de asimetría y de curtosis, y los coeficientes de variación. Indica sus unidades e interpreta los estadísticos (en aquellos casos que sea posible).
 
-<!-- ```{r include=FALSE} -->
-<!-- datos$IL6 |> eda() -->
+```{r include=FALSE}
+datos$IL6 |> eda()
 
-<!-- datos |> -->
-<!--   summarise(CV.IL6=sd(IL6)/mean(IL6)) -->
-<!-- ``` -->
+datos |>
+  summarise(CV.IL6=sd(IL6)/mean(IL6))
+```
 
-<!-- ## 3) Dibuja un histograma y un diagrama de cajas de la variable `IL6` en función de la variable `CancerStage`. Interpreta los gráficos obtenidos. -->
+## 3) Dibuja un histograma y un diagrama de cajas de la variable `IL6` en función de la variable `CancerStage`. Interpreta los gráficos obtenidos.
 
-<!-- ```{r, include=FALSE} -->
-<!-- datos |> -->
-<!--   ggplot(aes(x=IL6)) + -->
-<!--   geom_histogram(bins=10) + -->
-<!--   facet_wrap(~ CancerStage) -->
+```{r, include=FALSE}
+datos |>
+  ggplot(aes(x=IL6)) +
+  geom_histogram(bins=10) +
+  facet_wrap(~ CancerStage)
 
-<!-- boxplot(IL6 ~ CancerStage, data=datos) -->
-<!-- ``` -->
-
-
-<!-- ## 4) Realiza un diagrama de dispersión de las variables `IL6` y `CRP`. ¿Crees que existe relación lineal entre ellas? Calcula e interpreta la covarianza y el coeficiente de correlación lineal (indica sus unidades). -->
-
-<!-- ```{r include=FALSE} -->
-<!-- datos |> -->
-<!--   ggplot(aes(x=IL6, y=CRP)) + -->
-<!--   geom_point() -->
-
-<!-- datos |> -->
-<!--   select(IL6, CRP) |> -->
-<!--   cov() -->
-
-<!-- datos |> -->
-<!--   select(IL6, CRP) |> -->
-<!--   cor() -->
-<!-- ``` -->
+boxplot(IL6 ~ CancerStage, data=datos)
+```
 
 
-<!-- ## 5) Selecciona el paciente fumador (*former*) y ex-fumador (*never*) con valores más bajos en la variable `CRP`. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta. -->
+## 4) Realiza un diagrama de dispersión de las variables `IL6` y `CRP`. ¿Crees que existe relación lineal entre ellas? Calcula e interpreta la covarianza y el coeficiente de correlación lineal (indica sus unidades).
 
-<!-- ```{r include=FALSE} -->
-<!-- datos |> -->
-<!--   filter(Smoking=="former") |> -->
-<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |> -->
-<!--   arrange(CRP) |> -->
-<!--   slice(1) -->
+```{r include=FALSE}
+datos |>
+  ggplot(aes(x=IL6, y=CRP)) +
+  geom_point()
 
-<!-- datos |> -->
-<!--   filter(Smoking=="never") |> -->
-<!--   mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |> -->
-<!--   arrange(CRP) |> -->
-<!--   slice(1) -->
-<!-- ``` -->
+datos |>
+  select(IL6, CRP) |>
+  cov()
+
+datos |>
+  select(IL6, CRP) |>
+  cor()
+```
+
+
+## 5) Selecciona el paciente fumador (*former*) y ex-fumador (*never*) con valores más bajos en la variable `CRP`. ¿Cuál de los dos pacientes destaca más en comparación a la media de su grupo? Justifica la respuesta.
+
+```{r include=FALSE}
+datos |>
+  filter(Smoking=="former") |>
+  mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>
+  arrange(CRP) |>
+  slice(1)
+
+datos |>
+  filter(Smoking=="never") |>
+  mutate(Z.CRP = (CRP-mean(CRP))/sd(CRP)) |>
+  arrange(CRP) |>
+  slice(1)
+```

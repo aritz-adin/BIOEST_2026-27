@@ -171,20 +171,18 @@ diabetes |>
 
 <!-- ``` -->
 
-<!-- ## Análisis exploratorio de datos: `eda()` -->
+## Análisis exploratorio de datos: `eda()`
 
-<!-- Para analizar la distribución de una variable cuantitativa, una opción útil es utilizar la función `eda()` del paquete **PASWR2**. -->
+Para analizar la distribución de una variable cuantitativa, una opción útil es utilizar la función `eda()` del paquete **PASWR2**.
 
-<!-- Esta función realiza un análisis exploratorio de los datos y proporciona diversos estadísticos y representaciones gráficas. -->
+Esta función realiza un análisis exploratorio de los datos y proporciona diversos estadísticos y representaciones gráficas.
 
-<!-- Por ejemplo, para realizar el análisis exploratorio de la variable X = "PENDIENTE: -->
+Por ejemplo, para realizar el análisis exploratorio de la variable X = "Nivel de colesterol (mg/dL)"
 
-<!-- ```{r, eval=TRUE, message=FALSE, fig.width=7} -->
+```{r, eval=TRUE, message=FALSE, fig.width=7}
+library(PASWR2)
 
-<!-- library(PASWR2) -->
+diabetes$chol |> eda()
+```
 
-<!-- # eda(Datos$X) -->
-
-<!-- ``` -->
-
-<!-- Entre los resultados que muestra esta función también aparece el p-valor del test de normalidad de Shapiro-Wilk (SW). -->
+Entre los resultados que muestra esta función también aparece el p-valor del test de normalidad de Shapiro-Wilk (SW).
