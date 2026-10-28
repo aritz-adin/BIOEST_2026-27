@@ -1107,13 +1107,16 @@ age   0.5473436 1.0000000</code></pre>
 <li><p><code>ID.hospital</code>: ID of the hospital</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>patients <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"patients.txt"</span>)</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Para convertir los carácteres en factor</span></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>patients <span class="ot">&lt;-</span> patients <span class="sc">|&gt;</span></span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(patients)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>patients <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"patients.txt"</span>)</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Para convertir los carácteres en factor</span></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>patients <span class="ot">&lt;-</span> patients <span class="sc">|&gt;</span></span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(patients)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8,525 × 8
    remission   Age   IL6   CRP LengthofStay CancerStage Smoking ID.hospital
