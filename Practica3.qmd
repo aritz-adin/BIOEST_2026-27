@@ -83,96 +83,93 @@ print(diabetes)
 
 ## 1.1. Contrasta al nivel de significación 0.05 si el nivel medio de colesterol en los hombres del condado de Buckingham es superior a 200. Justifica si puedes asumir normalidad
 
-<!-- Sea X="Nivel de colesterol de los hombres del condado de Buckingham (mg/dL)". -->
+Sea X="Nivel de colesterol de los hombres del condado de Buckingham (mg/dL)".
 
-<!-- El contraste que debemos realizar ($\alpha=0.05$) se escribe como: -->
+El contraste que debemos realizar ($\alpha=0.05$) se escribe como:
 
-<!-- \begin{eqnarray*} -->
-<!-- \begin{array}{rl} -->
-<!-- H_0: & \mu=200 \\ -->
-<!-- H_1: & \mu>200 \\ -->
-<!-- \end{array} -->
-<!-- \end{eqnarray*} -->
+\begin{eqnarray*}
+\begin{array}{rl}
+H_0: & \mu=200 \\
+H_1: & \mu>200 \\
+\end{array}
+\end{eqnarray*}
 
-<!-- En primer lugar seleccionamos los datos de la muestra: -->
+En primer lugar seleccionamos los datos de la muestra:
 
-<!-- ```{r include=TRUE} -->
-<!-- chol.manB <- diabetes |>  -->
-<!--   filter(gender=="male", -->
-<!--          location=="Buckingham") |>  -->
-<!--   pull(chol) -->
-<!-- ``` -->
+```{r include=TRUE}
+chol.manB <- diabetes |>
+  filter(gender=="male") |> 
+  filter(location=="Buckingham") |>
+  pull(chol)
+```
 
-<!-- Comprobamos la condición de normalidad (test de Shapiro-Wilks): -->
+Comprobamos la condición de normalidad (test de Shapiro-Wilks):
 
-<!-- ```{r include=TRUE, message=FALSE} -->
-<!-- chol.manB |> eda() -->
-<!-- ``` -->
+```{r include=TRUE, message=FALSE}
+chol.manB |> eda()
+```
 
-<!-- Realizamos el test (paramétrico) para una media: -->
+Realizamos el test (paramétrico) para una media:
 
-<!-- ```{r, include=TRUE} -->
-<!-- t.test(chol.manB, mu=200, alternative="greater") -->
-<!-- ``` -->
+```{r, include=TRUE}
+t.test(chol.manB, mu=200, alternative="greater")
+```
 
-<!-- Como p-valor$=0.23>\alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
+Como p-valor$=0.23>\alpha=0.05 \Rightarrow$ No rechazamos $H_0$.
 
-<!-- **Interpretación**: Con un nivel de significación del 5%, no existen evidencias estadísticas para afirmar que el nivel medio de colesterol en los hombres de Buckingham es superior a 200 mg/dL. -->
+**Interpretación**: Con un nivel de significación del 5%, no existen evidencias estadísticas para afirmar que el nivel medio de colesterol en los hombres de Buckingham es superior a 200 mg/dL.
 
 ## 1.2. Contrasta al nivel de significación 0.10 si la presión diastólica media de los hombres es distinta a la presión diastólica media de las mujeres. Comprueba que las dos muestras provienen de poblaciones normales. Realiza el correspondiente test de medias.
 
-<!-- Definimos las variables: -->
+Definimos las variables:
 
-<!-- X="Presión diastólica de los hombres (mmHg)" -->
+X="Presión diastólica de los hombres (mmHg)"
 
-<!-- Y="Presión diastólica de las mujeres (mmHg)" -->
+Y="Presión diastólica de las mujeres (mmHg)"
 
-<!-- El contraste que debemos realizar ($\alpha=0.10$) se escribe como: -->
+El contraste que debemos realizar ($\alpha=0.10$) se escribe como:
 
-<!-- \begin{eqnarray*} -->
-<!-- \begin{array}{rl} -->
-<!-- H_0: & \mu_X - \mu_Y = 0 \\ -->
-<!-- H_1: & \mu_X - \mu_Y \neq 0 \\ -->
-<!-- \end{array} -->
-<!-- \end{eqnarray*} -->
+\begin{eqnarray*}
+\begin{array}{rl}
+H_0: & \mu_X - \mu_Y = 0 \\
+H_1: & \mu_X - \mu_Y \neq 0 \\
+\end{array}
+\end{eqnarray*}
 
-<!-- En primer lugar seleccionamos los datos de las muestras: -->
+En primer lugar seleccionamos los datos de las muestras:
 
-<!-- ```{r include=TRUE} -->
-<!-- diabetes |> count(gender) -->
+```{r include=TRUE}
+bp.male <- diabetes |>
+  filter(gender=="male") |>
+  pull(bp.1d)
 
-<!-- bp.male <- diabetes |>  -->
-<!--   filter(gender=="male") |>  -->
-<!--   pull(bp.1d) -->
+bp.female <- diabetes |>
+  filter(gender=="female") |>
+  pull(bp.1d)
+```
 
-<!-- bp.female <- diabetes |>  -->
-<!--   filter(gender=="female") |>  -->
-<!--   pull(bp.1d) -->
-<!-- ``` -->
+Comprobamos la condición de normalidad en ambas variables:
 
-<!-- Comprobamos la condición de normalidad en ambas variables: -->
+```{r include=TRUE}
+bp.male |> eda()
+bp.female |> eda()
+```
 
-<!-- ```{r include=TRUE} -->
-<!-- bp.male |> eda() -->
-<!-- bp.female |> eda() -->
-<!-- ``` -->
+Verificamos si podemos asumir que las varianzas son iguales o no:
 
-<!-- Verificamos si podemos asumir que las varianzas son iguales o no: -->
+```{r include=TRUE}
+boxplot(bp.male, bp.female, names=c("Hombres","Mujeres"))
+```
 
-<!-- ```{r include=TRUE} -->
-<!-- boxplot(bp.male, bp.female) -->
-<!-- # boxplot(bp.1d ~ gender, data=diabetes) -->
-<!-- ``` -->
+Realizamos el test (paramétrico) para la diferencia de medias en poblaciones independientes:
 
-<!-- Realizamos el test (paramétrico) para la diferencia de medias en poblaciones independientes: -->
+```{r include=TRUE}
+t.test(bp.male, bp.female, mu=0, alternative="two.sided", var.equal=TRUE)
+```
 
-<!-- ```{r include=TRUE} -->
-<!-- t.test(bp.male, bp.female, mu=0, alternative="two.sided", var.equal=TRUE) -->
-<!-- ``` -->
+Como p-valor$=0.15>\alpha=0.10 \Rightarrow$ No rechazamos $H_0$.
 
-<!-- Como p-valor$=0.15>\alpha=0.10 \Rightarrow$ No rechazamos $H_0$. -->
-
-<!-- **Interpretación**: Con un nivel de significación del 10%, no existen evidencias estadísticas para afirmar que la presión diastólica media de los hombres sea distinta del de las mujeres. -->
+**Interpretación**: Con un nivel de significación del 10%, no existen evidencias estadísticas para afirmar que la presión diastólica media de los hombres sea distinta del de las mujeres.
 
 ## 1.3. Se dispone de dos aparatos, uno nuevo y otro antiguo, para medir los niveles de glucosa en sangre. Los médicos sospechan que el nuevo aparato proporciona niveles de glucosa en sangre superiores al antiguo. Se dispone de una muestra con 15 pacientes diabéticos a los que se les ha medido los niveles de glucosa con los dos aparatos. Las medidas se encuentran en el fichero `GLUCOSE` de la librería `PASWR2`.
 
@@ -328,40 +325,40 @@ print(GLUCOSE)
 
 ## 2.1. ¿Puede asumirse que la variable 'hdl' en mujeres sigue una distribución normal? Contrasta al nivel de significación 0.05 si la media de la variable 'hdl' en mujeres es superior a 47.
 
-<!-- Sea X="Nivel de HDL de las mujeres (mg/dL)". -->
+Sea X="Nivel de HDL de las mujeres (mg/dL)".
 
-<!-- El contraste que debemos realizar ($\alpha=0.05$) se escribe como: -->
+El contraste que debemos realizar ($\alpha=0.05$) se escribe como:
 
-<!-- \begin{eqnarray*} -->
-<!-- \begin{array}{rl} -->
-<!-- H_0: & \mu=47 \\ -->
-<!-- H_1: & \mu>47 \\ -->
-<!-- \end{array} -->
-<!-- \end{eqnarray*} -->
+\begin{eqnarray*}
+\begin{array}{rl}
+H_0: & \mu=47 \\
+H_1: & \mu>47 \\
+\end{array}
+\end{eqnarray*}
 
-<!-- En primer lugar seleccionamos los datos de la muestra: -->
+En primer lugar seleccionamos los datos de la muestra:
 
-<!-- ```{r include=TRUE} -->
-<!-- hdl.female <- diabetes |>  -->
-<!--   filter(gender=="female") |>  -->
-<!--   pull(hdl) -->
-<!-- ``` -->
+```{r include=TRUE}
+hdl.female <- diabetes |>
+  filter(gender=="female") |>
+  pull(hdl)
+```
 
-<!-- Comprobamos la condición de normalidad: -->
+Comprobamos la condición de normalidad:
 
-<!-- ```{r include=TRUE, message=FALSE} -->
-<!-- hdl.female |> eda() -->
-<!-- ``` -->
+```{r include=TRUE, message=FALSE}
+hdl.female |> eda()
+```
 
-<!-- Como no se verifica la normalidad (p-valor $<0.05$), realizamos el test no-paramétrico para una media (test de Wilcoxon): -->
+Como no se verifica la normalidad (p-valor $<0.05$), realizamos el test no-paramétrico para una media (test de Wilcoxon):
 
-<!-- ```{r include=TRUE} -->
-<!-- wilcox.test(hdl.female, mu=47, alternative="greater") -->
-<!-- ``` -->
+```{r include=TRUE}
+wilcox.test(hdl.female, mu=47, alternative="greater")
+```
 
-<!-- Como p-valor$=0.0015 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+Como p-valor$=0.0015 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 
-<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en mujeres es superior a 47 mg/dL. -->
+**Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en mujeres es superior a 47 mg/dL.
 
 ## 2.2. ¿Contrasta al nivel de significación 0.05 si existen diferencias entre los niveles de hdl en hombres y en mujeres. Comprueba si puede asumirse normalidad y realiza el contraste adecuado.
 

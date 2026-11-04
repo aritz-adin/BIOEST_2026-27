@@ -389,70 +389,135 @@ window.Quarto = {
 <h1>1. Contrastes paramétricos</h1>
 <section id="contrasta-al-nivel-de-significación-0.05-si-el-nivel-medio-de-colesterol-en-los-hombres-del-condado-de-buckingham-es-superior-a-200.-justifica-si-puedes-asumir-normalidad" class="level2">
 <h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.05-si-el-nivel-medio-de-colesterol-en-los-hombres-del-condado-de-buckingham-es-superior-a-200.-justifica-si-puedes-asumir-normalidad">1.1. Contrasta al nivel de significación 0.05 si el nivel medio de colesterol en los hombres del condado de Buckingham es superior a 200. Justifica si puedes asumir normalidad</h2>
-<!-- Sea X="Nivel de colesterol de los hombres del condado de Buckingham (mg/dL)". -->
-<!-- El contraste que debemos realizar ($\alpha=0.05$) se escribe como: -->
-<!-- \begin{eqnarray*} -->
-<!-- \begin{array}{rl} -->
-<!-- H_0: & \mu=200 \\ -->
-<!-- H_1: & \mu>200 \\ -->
-<!-- \end{array} -->
-<!-- \end{eqnarray*} -->
-<!-- En primer lugar seleccionamos los datos de la muestra: -->
-<!-- ```{r include=TRUE} -->
-<!-- chol.manB <- diabetes |>  -->
-<!--   filter(gender=="male", -->
-<!--          location=="Buckingham") |>  -->
-<!--   pull(chol) -->
-<!-- ``` -->
-<!-- Comprobamos la condición de normalidad (test de Shapiro-Wilks): -->
-<!-- ```{r include=TRUE, message=FALSE} -->
-<!-- chol.manB |> eda() -->
-<!-- ``` -->
-<!-- Realizamos el test (paramétrico) para una media: -->
-<!-- ```{r, include=TRUE} -->
-<!-- t.test(chol.manB, mu=200, alternative="greater") -->
-<!-- ``` -->
-<!-- Como p-valor$=0.23>\alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
-<!-- **Interpretación**: Con un nivel de significación del 5%, no existen evidencias estadísticas para afirmar que el nivel medio de colesterol en los hombres de Buckingham es superior a 200 mg/dL. -->
+<p>Sea X=“Nivel de colesterol de los hombres del condado de Buckingham (mg/dL)”.</p>
+<p>El contraste que debemos realizar (<span class="math inline">\(\alpha=0.05\)</span>) se escribe como:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\begin{array}{rl}
+H_0: &amp; \mu=200 \\
+H_1: &amp; \mu&gt;200 \\
+\end{array}
+\end{eqnarray*}\]</span></p>
+<p>En primer lugar seleccionamos los datos de la muestra:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>chol.manB <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender<span class="sc">==</span><span class="st">"male"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(location<span class="sc">==</span><span class="st">"Buckingham"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(chol)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Comprobamos la condición de normalidad (test de Shapiro-Wilks):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>chol.manB <span class="sc">|&gt;</span> <span class="fu">eda</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val 
+  86.000    0.000   78.000  174.000  203.603  197.500  202.536  230.750  347.000   44.598 1988.956    4.809   56.750  269.000    0.677    0.402    0.208 </code></pre>
+</div>
+</div>
+<p>Realizamos el test (paramétrico) para una media:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(chol.manB, <span class="at">mu=</span><span class="dv">200</span>, <span class="at">alternative=</span><span class="st">"greater"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  chol.manB
+t = 0.74918, df = 85, p-value = 0.2279
+alternative hypothesis: true mean is greater than 200
+95 percent confidence interval:
+ 195.6054      Inf
+sample estimates:
+mean of x 
+ 203.6029 </code></pre>
+</div>
+</div>
+<p>Como p-valor<span class="math inline">\(=0.23&gt;\alpha=0.05 \Rightarrow\)</span> No rechazamos <span class="math inline">\(H_0\)</span>.</p>
+<p><strong>Interpretación</strong>: Con un nivel de significación del 5%, no existen evidencias estadísticas para afirmar que el nivel medio de colesterol en los hombres de Buckingham es superior a 200 mg/dL.</p>
 </section>
 <section id="contrasta-al-nivel-de-significación-0.10-si-la-presión-diastólica-media-de-los-hombres-es-distinta-a-la-presión-diastólica-media-de-las-mujeres.-comprueba-que-las-dos-muestras-provienen-de-poblaciones-normales.-realiza-el-correspondiente-test-de-medias." class="level2">
 <h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.10-si-la-presión-diastólica-media-de-los-hombres-es-distinta-a-la-presión-diastólica-media-de-las-mujeres.-comprueba-que-las-dos-muestras-provienen-de-poblaciones-normales.-realiza-el-correspondiente-test-de-medias.">1.2. Contrasta al nivel de significación 0.10 si la presión diastólica media de los hombres es distinta a la presión diastólica media de las mujeres. Comprueba que las dos muestras provienen de poblaciones normales. Realiza el correspondiente test de medias.</h2>
-<!-- Definimos las variables: -->
-<!-- X="Presión diastólica de los hombres (mmHg)" -->
-<!-- Y="Presión diastólica de las mujeres (mmHg)" -->
-<!-- El contraste que debemos realizar ($\alpha=0.10$) se escribe como: -->
-<!-- \begin{eqnarray*} -->
-<!-- \begin{array}{rl} -->
-<!-- H_0: & \mu_X - \mu_Y = 0 \\ -->
-<!-- H_1: & \mu_X - \mu_Y \neq 0 \\ -->
-<!-- \end{array} -->
-<!-- \end{eqnarray*} -->
-<!-- En primer lugar seleccionamos los datos de las muestras: -->
-<!-- ```{r include=TRUE} -->
-<!-- diabetes |> count(gender) -->
-<!-- bp.male <- diabetes |>  -->
-<!--   filter(gender=="male") |>  -->
-<!--   pull(bp.1d) -->
-<!-- bp.female <- diabetes |>  -->
-<!--   filter(gender=="female") |>  -->
-<!--   pull(bp.1d) -->
-<!-- ``` -->
-<!-- Comprobamos la condición de normalidad en ambas variables: -->
-<!-- ```{r include=TRUE} -->
-<!-- bp.male |> eda() -->
-<!-- bp.female |> eda() -->
-<!-- ``` -->
-<!-- Verificamos si podemos asumir que las varianzas son iguales o no: -->
-<!-- ```{r include=TRUE} -->
-<!-- boxplot(bp.male, bp.female) -->
-<!-- # boxplot(bp.1d ~ gender, data=diabetes) -->
-<!-- ``` -->
-<!-- Realizamos el test (paramétrico) para la diferencia de medias en poblaciones independientes: -->
-<!-- ```{r include=TRUE} -->
-<!-- t.test(bp.male, bp.female, mu=0, alternative="two.sided", var.equal=TRUE) -->
-<!-- ``` -->
-<!-- Como p-valor$=0.15>\alpha=0.10 \Rightarrow$ No rechazamos $H_0$. -->
-<!-- **Interpretación**: Con un nivel de significación del 10%, no existen evidencias estadísticas para afirmar que la presión diastólica media de los hombres sea distinta del de las mujeres. -->
+<p>Definimos las variables:</p>
+<p>X=“Presión diastólica de los hombres (mmHg)”</p>
+<p>Y=“Presión diastólica de las mujeres (mmHg)”</p>
+<p>El contraste que debemos realizar (<span class="math inline">\(\alpha=0.10\)</span>) se escribe como:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\begin{array}{rl}
+H_0: &amp; \mu_X - \mu_Y = 0 \\
+H_1: &amp; \mu_X - \mu_Y \neq 0 \\
+\end{array}
+\end{eqnarray*}\]</span></p>
+<p>En primer lugar seleccionamos los datos de las muestras:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bp.male <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender<span class="sc">==</span><span class="st">"male"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(bp<span class="fl">.1</span>d)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>bp.female <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(bp<span class="fl">.1</span>d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Comprobamos la condición de normalidad en ambas variables:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bp.male <span class="sc">|&gt;</span> <span class="fu">eda</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val 
+ 169.000    0.000   50.000   76.000   84.465   82.000   84.200   92.000  122.000   13.504  182.347    1.039   16.000   72.000    0.124    0.351    0.058 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bp.female <span class="sc">|&gt;</span> <span class="fu">eda</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica3_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val 
+ 234.000    0.000   48.000   72.000   82.496   82.000   82.269   90.000  124.000   13.474  181.535    0.881   18.000   76.000   -0.014    0.216    0.232 </code></pre>
+</div>
+</div>
+<p>Verificamos si podemos asumir que las varianzas son iguales o no:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(bp.male, bp.female, <span class="at">names=</span><span class="fu">c</span>(<span class="st">"Hombres"</span>,<span class="st">"Mujeres"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Realizamos el test (paramétrico) para la diferencia de medias en poblaciones independientes:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(bp.male, bp.female, <span class="at">mu=</span><span class="dv">0</span>, <span class="at">alternative=</span><span class="st">"two.sided"</span>, <span class="at">var.equal=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  bp.male and bp.female
+t = 1.4469, df = 401, p-value = 0.1487
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.7066209  4.6461575
+sample estimates:
+mean of x mean of y 
+ 84.46534  82.49558 </code></pre>
+</div>
+</div>
+<p>Como p-valor<span class="math inline">\(=0.15&gt;\alpha=0.10 \Rightarrow\)</span> No rechazamos <span class="math inline">\(H_0\)</span>.</p>
+<p><strong>Interpretación</strong>: Con un nivel de significación del 10%, no existen evidencias estadísticas para afirmar que la presión diastólica media de los hombres sea distinta del de las mujeres.</p>
 </section>
 <section id="se-dispone-de-dos-aparatos-uno-nuevo-y-otro-antiguo-para-medir-los-niveles-de-glucosa-en-sangre.-los-médicos-sospechan-que-el-nuevo-aparato-proporciona-niveles-de-glucosa-en-sangre-superiores-al-antiguo.-se-dispone-de-una-muestra-con-15-pacientes-diabéticos-a-los-que-se-les-ha-medido-los-niveles-de-glucosa-con-los-dos-aparatos.-las-medidas-se-encuentran-en-el-fichero-glucose-de-la-librería-paswr2." class="level2">
 <h2 class="anchored" data-anchor-id="se-dispone-de-dos-aparatos-uno-nuevo-y-otro-antiguo-para-medir-los-niveles-de-glucosa-en-sangre.-los-médicos-sospechan-que-el-nuevo-aparato-proporciona-niveles-de-glucosa-en-sangre-superiores-al-antiguo.-se-dispone-de-una-muestra-con-15-pacientes-diabéticos-a-los-que-se-les-ha-medido-los-niveles-de-glucosa-con-los-dos-aparatos.-las-medidas-se-encuentran-en-el-fichero-glucose-de-la-librería-paswr2.">1.3. Se dispone de dos aparatos, uno nuevo y otro antiguo, para medir los niveles de glucosa en sangre. Los médicos sospechan que el nuevo aparato proporciona niveles de glucosa en sangre superiores al antiguo. Se dispone de una muestra con 15 pacientes diabéticos a los que se les ha medido los niveles de glucosa con los dos aparatos. Las medidas se encuentran en el fichero <code>GLUCOSE</code> de la librería <code>PASWR2</code>.</h2>
@@ -564,30 +629,49 @@ window.Quarto = {
 <h1>2. Contrastes no-paramétricos</h1>
 <section id="puede-asumirse-que-la-variable-hdl-en-mujeres-sigue-una-distribución-normal-contrasta-al-nivel-de-significación-0.05-si-la-media-de-la-variable-hdl-en-mujeres-es-superior-a-47." class="level2">
 <h2 class="anchored" data-anchor-id="puede-asumirse-que-la-variable-hdl-en-mujeres-sigue-una-distribución-normal-contrasta-al-nivel-de-significación-0.05-si-la-media-de-la-variable-hdl-en-mujeres-es-superior-a-47.">2.1. ¿Puede asumirse que la variable ‘hdl’ en mujeres sigue una distribución normal? Contrasta al nivel de significación 0.05 si la media de la variable ‘hdl’ en mujeres es superior a 47.</h2>
-<!-- Sea X="Nivel de HDL de las mujeres (mg/dL)". -->
-<!-- El contraste que debemos realizar ($\alpha=0.05$) se escribe como: -->
-<!-- \begin{eqnarray*} -->
-<!-- \begin{array}{rl} -->
-<!-- H_0: & \mu=47 \\ -->
-<!-- H_1: & \mu>47 \\ -->
-<!-- \end{array} -->
-<!-- \end{eqnarray*} -->
-<!-- En primer lugar seleccionamos los datos de la muestra: -->
-<!-- ```{r include=TRUE} -->
-<!-- hdl.female <- diabetes |>  -->
-<!--   filter(gender=="female") |>  -->
-<!--   pull(hdl) -->
-<!-- ``` -->
-<!-- Comprobamos la condición de normalidad: -->
-<!-- ```{r include=TRUE, message=FALSE} -->
-<!-- hdl.female |> eda() -->
-<!-- ``` -->
-<!-- Como no se verifica la normalidad (p-valor $<0.05$), realizamos el test no-paramétrico para una media (test de Wilcoxon): -->
-<!-- ```{r include=TRUE} -->
-<!-- wilcox.test(hdl.female, mu=47, alternative="greater") -->
-<!-- ``` -->
-<!-- Como p-valor$=0.0015 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
-<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en mujeres es superior a 47 mg/dL. -->
+<p>Sea X=“Nivel de HDL de las mujeres (mg/dL)”.</p>
+<p>El contraste que debemos realizar (<span class="math inline">\(\alpha=0.05\)</span>) se escribe como:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\begin{array}{rl}
+H_0: &amp; \mu=47 \\
+H_1: &amp; \mu&gt;47 \\
+\end{array}
+\end{eqnarray*}\]</span></p>
+<p>En primer lugar seleccionamos los datos de la muestra:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>hdl.female <span class="ot">&lt;-</span> diabetes <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(hdl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Comprobamos la condición de normalidad:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>hdl.female <span class="sc">|&gt;</span> <span class="fu">eda</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Size (n)  Missing  Minimum   1st Qu     Mean   Median   TrMean   3rd Qu      Max    Stdev      Var  SE Mean   I.Q.R.    Range Kurtosis Skewness SW p-val 
+ 234.000    0.000   14.000   41.000   52.111   47.500   50.825   59.000  120.000   17.255  297.739    1.128   18.000  106.000    2.443    1.390    0.000 </code></pre>
+</div>
+</div>
+<p>Como no se verifica la normalidad (p-valor <span class="math inline">\(&lt;0.05\)</span>), realizamos el test no-paramétrico para una media (test de Wilcoxon):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(hdl.female, <span class="at">mu=</span><span class="dv">47</span>, <span class="at">alternative=</span><span class="st">"greater"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  hdl.female
+V = 16282, p-value = 0.001492
+alternative hypothesis: true location is greater than 47</code></pre>
+</div>
+</div>
+<p>Como p-valor<span class="math inline">\(=0.0015 &lt; \alpha=0.05 \Rightarrow\)</span> Rechazamos <span class="math inline">\(H_0\)</span>.</p>
+<p><strong>Interpretación</strong>: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en mujeres es superior a 47 mg/dL.</p>
 </section>
 <section id="contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-entre-los-niveles-de-hdl-en-hombres-y-en-mujeres.-comprueba-si-puede-asumirse-normalidad-y-realiza-el-contraste-adecuado." class="level2">
 <h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.05-si-existen-diferencias-entre-los-niveles-de-hdl-en-hombres-y-en-mujeres.-comprueba-si-puede-asumirse-normalidad-y-realiza-el-contraste-adecuado.">2.2. ¿Contrasta al nivel de significación 0.05 si existen diferencias entre los niveles de hdl en hombres y en mujeres. Comprueba si puede asumirse normalidad y realiza el contraste adecuado.</h2>
