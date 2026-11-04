@@ -171,57 +171,56 @@ Como p-valor$=0.15>\alpha=0.10 \Rightarrow$ No rechazamos $H_0$.
 
 **Interpretación**: Con un nivel de significación del 10%, no existen evidencias estadísticas para afirmar que la presión diastólica media de los hombres sea distinta del de las mujeres.
 
-## 1.3. Se dispone de dos aparatos, uno nuevo y otro antiguo, para medir los niveles de glucosa en sangre. Los médicos sospechan que el nuevo aparato proporciona niveles de glucosa en sangre superiores al antiguo. Se dispone de una muestra con 15 pacientes diabéticos a los que se les ha medido los niveles de glucosa con los dos aparatos. Las medidas se encuentran en el fichero `GLUCOSE` de la librería `PASWR2`.
+## 1.3. Se dispone de dos aparatos, uno nuevo y otro antiguo, para medir los niveles de glucosa en sangre. Los médicos sospechan que el nuevo aparato proporciona niveles de glucosa medios en sangre superiores al antiguo. Se dispone de una muestra con 15 pacientes diabéticos a los que se les ha medido los niveles de glucosa con los dos aparatos. Las medidas se encuentran en el fichero `GLUCOSE` de la librería `PASWR2`.
 
 ```{r include=FALSE}
 data("GLUCOSE")
 print(GLUCOSE)
 ```
 
-<!-- Definimos las variables: -->
+Definimos las variables:
 
-<!-- X="Nivel de glucosa (mg/dL) con el aparato viejo" -->
+X="Nivel de glucosa (mg/dL) con el aparato viejo"
 
-<!-- Y="Nivel de glucosa (mg/dL) con el aparato nuevo" -->
+Y="Nivel de glucosa (mg/dL) con el aparato nuevo"
 
-<!-- -   **¿Son las muestras independientes?** -->
+-   **¿Son las muestras independientes?**
 
-<!-- Como se tratan de los mismos individuos medidos en distintos instantes de tiempo, las muestras son dependientes (o emparejadas). Por lo tanto, trabajaremos con la diferencia entre ambas variables: -->
+Como se tratan de los mismos individuos medidos en distintos instantes de tiempo, las muestras son dependientes (o emparejadas). Por lo tanto, trabajaremos con la diferencia entre ambas variables:
 
-<!-- ```{r include=TRUE} -->
-<!-- GLUCOSE <- GLUCOSE |>  -->
-<!--   mutate(D=old-new) -->
-<!-- ``` -->
+```{r include=TRUE}
+D <- GLUCOSE$old-GLUCOSE$new
+```
 
-<!-- -   **Comprueba si puede asumirse la hipótesis de normalidad.** -->
+-   **Comprueba si puede asumirse la hipótesis de normalidad.**
 
-<!-- ```{r include=TRUE} -->
-<!-- GLUCOSE$D |> eda() -->
-<!-- ``` -->
+```{r include=TRUE}
+D |> eda()
+```
 
-<!-- -   **Contrasta al nivel de significación** $\alpha=0.05$ **si el nuevo aparato proporciona medidas más altas que el antiguo.** -->
+-   **Contrasta al nivel de significación** $\alpha=0.05$ **si el nuevo aparato proporciona medidas más altas que el antiguo.**
 
-<!-- El contraste que debemos realizar se escribe como: -->
+El contraste que debemos realizar se escribe como:
 
-<!-- \begin{eqnarray*} -->
-<!-- \begin{array}{rl} -->
-<!-- H_0: & \mu_D = 0 \\ -->
-<!-- H_1: & \mu_D < 0 \\ -->
-<!-- \end{array} -->
-<!-- \end{eqnarray*} -->
+\begin{eqnarray*}
+\begin{array}{rl}
+H_0: & \mu_D = 0 \\
+H_1: & \mu_D < 0 \\
+\end{array}
+\end{eqnarray*}
 
-<!-- Como se verifica la hipótesis de normalidad, realizamo el test (paramétrico) para una media: -->
+Como se verifica la hipótesis de normalidad, realizamo el test (paramétrico) para una media:
 
-<!-- ```{r include=TRUE} -->
-<!-- t.test(GLUCOSE$D, mu=0, alternative="less") -->
+```{r include=TRUE}
+t.test(D, mu=0, alternative="less")
 
-<!-- # Otra opción: -->
-<!-- t.test(GLUCOSE$old, GLUCOSE$new, paired=TRUE, mu=0, alternative="less") -->
-<!-- ``` -->
+# Otra opción:
+t.test(GLUCOSE$old, GLUCOSE$new, paired=TRUE, mu=0, alternative="less")
+```
 
-<!-- Como p-valor$\approx 0<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+Como p-valor$\approx 0<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 
-<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el aparato nuevo proporciona niveles de medios de glucosa en sangre superiores al aparato viejo. -->
+**Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el aparato nuevo proporciona niveles medios de glucosa en sangre superiores al aparato viejo.
 
 ## 1.4. Contrasta al nivel de significación 0.05 si la proporción de hombres con hemoglobina glicosilada (`glyhb`) por encima del 6% es superior a 0.2.
 
@@ -360,100 +359,99 @@ Como p-valor$=0.0015 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 
 **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en mujeres es superior a 47 mg/dL.
 
-## 2.2. ¿Contrasta al nivel de significación 0.05 si existen diferencias entre los niveles de hdl en hombres y en mujeres. Comprueba si puede asumirse normalidad y realiza el contraste adecuado.
+## 2.2. ¿Contrasta al nivel de significación 0.05 si existen diferencias entre los niveles medios de hdl en hombres y en mujeres. Comprueba si puede asumirse normalidad y realiza el contraste adecuado.
 
-<!-- Definimos las variables: -->
+Definimos las variables:
 
-<!-- X="Nivel de HDL en hombres (mg/dL)" -->
+X="Nivel de HDL en hombres (mg/dL)"
 
-<!-- Y="Nivel de HDL en mujeres (mg/dL)" -->
+Y="Nivel de HDL en mujeres (mg/dL)"
 
-<!-- El contraste que debemos realizar ($\alpha=0.10$) se escribe como: \begin{eqnarray*} -->
-<!-- \begin{array}{rl} -->
-<!-- H_0: & \mu_X - \mu_Y = 0 \\ -->
-<!-- H_1: & \mu_X - \mu_Y \neq 0 \\ -->
-<!-- \end{array} -->
-<!-- \end{eqnarray*} -->
+El contraste que debemos realizar ($\alpha=0.10$) se escribe como: \begin{eqnarray*}
+\begin{array}{rl}
+H_0: & \mu_X - \mu_Y = 0 \\
+H_1: & \mu_X - \mu_Y \neq 0 \\
+\end{array}
+\end{eqnarray*}
 
-<!-- En primer lugar seleccionamos los datos de las muestras: -->
+En primer lugar seleccionamos los datos de las muestras:
 
-<!-- ```{r include=TRUE} -->
-<!-- hdl.male <- diabetes |>  -->
-<!--   filter(gender=="male") |>  -->
-<!--   pull(hdl) -->
+```{r include=TRUE}
+hdl.male <- diabetes |>
+  filter(gender=="male") |>
+  pull(hdl)
 
-<!-- hdl.female <- diabetes |>  -->
-<!--   filter(gender=="female") |>  -->
-<!--   pull(hdl) -->
-<!-- ``` -->
+hdl.female <- diabetes |>
+  filter(gender=="female") |>
+  pull(hdl)
+```
 
-<!-- Comprobamos la condición de normalidad en ambas variables: -->
+Comprobamos la condición de normalidad en ambas variables:
 
-<!-- ```{r include=TRUE} -->
-<!-- hdl.male |> eda() -->
-<!-- hdl.female |> eda() -->
-<!-- ``` -->
+```{r include=TRUE}
+hdl.male |> eda()
+hdl.female |> eda()
+```
 
-<!-- En este caso no es necesario, pero podríamos verificar la igualdad de varianzas: -->
+En este caso no es necesario, pero podríamos verificar la igualdad de varianzas:
 
-<!-- ```{r include=TRUE} -->
-<!-- boxplot(hdl ~ gender, data=diabetes) -->
-<!-- ``` -->
+```{r include=TRUE}
+boxplot(hdl.male, hdl.female)
+```
 
-<!-- Como no se verifica la normalidad, realizamos el test no-paramétrico para la diferencia de medias (test de Mann-Withney): -->
+Como no se verifica la normalidad, realizamos el test no-paramétrico para la diferencia de medias (test de Mann-Withney):
 
-<!-- ```{r include=TRUE} -->
-<!-- wilcox.test(hdl.male, hdl.female, mu=0, alternative="two.sided") -->
-<!-- ``` -->
+```{r include=TRUE}
+wilcox.test(hdl.male, hdl.female, mu=0, alternative="two.sided")
+```
 
-<!-- Como p-valor$=0.006<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+Como p-valor$=0.006<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 
-<!-- **Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en hombres y mujeres es distinto. -->
+**Interpretación**: Con un nivel de significación del 5%, existen evidencias estadísticas para afirmar que el nivel medio de HDL en hombres y mujeres es distinto.
 
 ## 2.3. Considera el fichero `PHENYL` de la libreria `PASWR2`. Contrasta al nivel de significación 0.05 si existen diferencias en los niveles medios de la coenzima Q10 en el momento de comenzar el estudio (variable `Q10.1`) y al finalizar el estudio (variable `Q10.4`).
 
-<!-- Definimos las variables: -->
+Definimos las variables:
 
-<!-- X="Nivel de coenzima Q10 al comienzo del estudio" -->
+X="Nivel de coenzima Q10 al comienzo del estudio"
 
-<!-- X="Nivel de coenzima Q10 al final del estudio" -->
+X="Nivel de coenzima Q10 al final del estudio"
 
-<!-- ```{r include=TRUE} -->
-<!-- data("PHENYL") -->
-<!-- head(PHENYL) -->
-<!-- ``` -->
+```{r include=TRUE}
+data("PHENYL")
+head(PHENYL)
+```
 
-<!-- Como se tratan de los mismos individuos medidos en distintos instantes de tiempo, las muestras son dependientes (o emparejadas). Por lo tanto, trabajaremos con la diferencia entre ambas variables: -->
+Como se tratan de los mismos individuos medidos en distintos instantes de tiempo, las muestras son dependientes (o emparejadas). Por lo tanto, trabajaremos con la diferencia entre ambas variables:
 
-<!-- ```{r include=TRUE} -->
-<!-- PHENYL <- PHENYL |>  -->
-<!--   mutate(D=Q10.1-Q10.4) -->
+```{r include=TRUE}
+D <- PHENYL$Q10.1 - PHENYL$Q10.4
 
-<!-- # Comprobamos la condición de normalidad -->
-<!-- PHENYL$D |> eda() -->
-<!-- ``` -->
+# Comprobamos la condición de normalidad
+D |> eda()
+```
 
-<!-- El contraste que debemos realizar se escribe como: -->
+El contraste que debemos realizar se escribe como:
 
-<!-- \begin{eqnarray*} -->
-<!-- \begin{array}{rl} -->
-<!-- H_0: & \mu_D = 0 \\ -->
-<!-- H_1: & \mu_D \neq 0 \\ -->
-<!-- \end{array} -->
-<!-- \end{eqnarray*} -->
+\begin{eqnarray*}
+\begin{array}{rl}
+H_0: & \mu_D = 0 \\
+H_1: & \mu_D \neq 0 \\
+\end{array}
+\end{eqnarray*}
 
-<!-- Como no se verifica la hipótesis de normalidad, realizamo el test no-paramétrico para la diferencia de medias. -->
+Como no se verifica la hipótesis de normalidad, realizamo el test no-paramétrico para la diferencia de medias.
 
-<!-- ```{r include=TRUE} -->
-<!-- wilcox.test(PHENYL$D, mu=0, alternative="two.sided") -->
+```{r include=TRUE}
+wilcox.test(D, mu=0, alternative="two.sided")
 
-<!-- # Otra opción -->
-<!-- wilcox.test(PHENYL$Q10.1, PHENYL$Q10.4, paired=TRUE, mu=0, alternative="two.sided") -->
-<!-- ``` -->
+# Otra opción
+wilcox.test(PHENYL$Q10.1, PHENYL$Q10.4, paired=TRUE, mu=0, alternative="two.sided")
+```
 
-<!-- Como p-valor$=0.0003 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$. -->
+Como p-valor$=0.0003 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 
-<!-- **Interpretación**: Con un nivel de significación del 5%, tenemos evidencias estadísticas para afirmar que los niveles medios de la coenzima Q10 han cambiado a lo largo del estudio. -->
+**Interpretación**: Con un nivel de significación del 5%, tenemos evidencias estadísticas para afirmar que los niveles medios de la coenzima Q10 han cambiado a lo largo del estudio.
 
 # 3. Análisis de la varianza y test de Kruskal-Wallis
 
