@@ -232,13 +232,14 @@ Como p-valor$\approx 0<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 
 <!-- ```{r include=TRUE} -->
 <!-- # Casos favorables -->
-<!-- diabetes |>  -->
-<!--   filter(gender=="male", -->
-<!--          glyhb>6) |>  -->
+<!-- diabetes |> -->
+<!--   filter(gender=="male") |>  -->
+<!--   filter(glyhb>6) |> -->
 <!--   nrow() -->
 
 <!-- # Casos totales -->
-<!-- diabetes |> count(gender) -->
+<!-- diabetes$gender |>  -->
+<!--   table() -->
 <!-- ``` -->
 
 <!-- -   **Realiza un test exacto y un test aproximado para la proporción verdadera.** -->
@@ -270,34 +271,25 @@ Como p-valor$\approx 0<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 
 <!-- Y="Nº de mujeres con colesterol por debajo de 200mg/dL" $\sim Bin(n_Y,\pi_Y)$ -->
 
-<!-- -   **Calcula el número de hombres en la muestra con colesterol por debajo de 200mg/dL y el total de hombres de la muestra (**$n_X$). -->
+<!-- -   **Calcula el número de hombres y número de mujeres en la muestra con colesterol por debajo de 200mg/dL** -->
 
 <!-- ```{r include=TRUE} -->
-<!-- x <- diabetes |>  -->
-<!--   filter(gender=="male", -->
-<!--          chol<200) |>  -->
-<!--   nrow() -->
-<!-- x -->
-
-<!-- nx <- diabetes |>  -->
+<!-- diabetes |> -->
 <!--   filter(gender=="male") |>  -->
+<!--   filter(chol<200) |> -->
 <!--   nrow() -->
-<!-- nx -->
+
+<!-- diabetes |> -->
+<!--   filter(gender=="female") |>  -->
+<!--   filter(chol<200) |> -->
+<!--   nrow() -->
 <!-- ``` -->
 
-<!-- -   **Calcula el número de mujeres en la muestra con colesterol por debajo de 200mg/dL y el total de mujeres de la muestra (**$n_Y$). -->
+<!-- -   **Calcula el número total de hombres y mujeres en la muestra** -->
 
 <!-- ```{r include=TRUE} -->
-<!-- y <- diabetes |>  -->
-<!--   filter(gender=="female", -->
-<!--          chol<200) |>  -->
-<!--   nrow() -->
-<!-- y -->
-
-<!-- ny <- diabetes |>  -->
-<!--   filter(gender=="female") |>  -->
-<!--   nrow() -->
-<!-- ny -->
+<!-- diabetes$gender |> -->
+<!--   table() -->
 <!-- ``` -->
 <!-- -   **Realiza un test para la diferencia de proporciones.** -->
 
@@ -313,7 +305,7 @@ Como p-valor$\approx 0<\alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 <!-- Realizamos el test en R: -->
 
 <!-- ```{r include=TRUE} -->
-<!-- prop.test(c(x,y), c(nx,ny), alternative="greater") -->
+<!-- prop.test(c(79,105), c(169,234), alternative="greater") -->
 <!-- ``` -->
 
 <!-- Como p-valor$=0.3931 > \alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
@@ -535,33 +527,33 @@ library(agricolae)
 kruskal(diabetes.female$glyhb, diabetes.female$frame, alpha=0.05, group=FALSE, console=TRUE)
 ```
 
-<!-- # 4. Para entregar -->
+# 4. Para entregar
 
-<!-- Responde a las siguientes cuestiones, utilizando la misma muestra de pacientes que te ha sido asignada en la Práctica 2 para el fichero `patients.txt`. -->
+Responde a las siguientes cuestiones, utilizando la misma muestra de pacientes que te ha sido asignada en la Práctica 2 para el fichero `patients.txt`.
 
-<!-- ## 4.1. Contrasta al nivel de significación 0.1 si los niveles medios de la concentración de Interleukina-6 (`IL6`) son significativamente distintos en pacientes con cáncer en estadio I que en paciente con cáncer en estadio II. -->
+## 4.1. Contrasta al nivel de significación 0.1 si los niveles medios de la concentración de Interleukina-6 (`IL6`) son significativamente distintos en pacientes con cáncer en estadio I que en paciente con cáncer en estadio II.
 
-<!-- -   Define correctamente las variables del problema. -->
+-   Define correctamente las variables del problema.
 
-<!-- -   Comprueba si las dos muestras provienen de poblaciones normales. -->
+-   Comprueba si las dos muestras provienen de poblaciones normales.
 
-<!-- -   Realiza el correspondiente test de hipótesis. -->
-
-
-<!-- ## 4.2. Se estudió la eficacia de la sulfinpirazona en prevenir la muerte después de sufrir infarto de miocardio. Para ello se consideraron pacientes que habían sufrido infarto de miocardio. A un grupo se les proporcionó sulfinpirazona y a otro grupo se les suministró placebo. En la siguiente tabla se muestra el número de pacientes de cada grupo que murieron y que superaron el infarto. -->
-
-<!-- |                 | Death (all causes) | Survivors | -->
-<!-- |-----------------|--------------------|-----------| -->
-<!-- | Sulphinpyrazole | 41                 | 692       | -->
-<!-- | Placebo         | 60                 | 682       | -->
-
-<!-- -   **Contrasta al nivel de significación** $\alpha=0.01$ si la proporción de muertes de pacientes que tomaron sulfinpirazona es inferior a la de pacientes que tomaron un placebo. -->
+-   Realiza el correspondiente test de hipótesis.
 
 
-<!-- ## 4.3. Contrasta al nivel de significación $\alpha=0.1$ si existen diferencias en la edad media de los pacientes según el estadio de cancer (`CancerStage`). -->
+## 4.2. Se estudió la eficacia de la sulfinpirazona en prevenir la muerte después de sufrir infarto de miocardio. Para ello se consideraron pacientes que habían sufrido infarto de miocardio. A un grupo se les proporcionó sulfinpirazona y a otro grupo se les suministró placebo. En la siguiente tabla se muestra el número de pacientes de cada grupo que murieron y que superaron el infarto.
 
-<!-- -   **Realiza una exploración gráfica y el análisis de varianza correspondiente** -->
+|                 | Death (all causes) | Survivors |
+|-----------------|--------------------|-----------|
+| Sulphinpyrazole | 41                 | 692       |
+| Placebo         | 60                 | 682       |
 
-<!-- -   **Comprueba si pueden asumirse las hipótesis del modelo** -->
+-   **Contrasta al nivel de significación** $\alpha=0.01$ si la proporción de muertes de pacientes que tomaron sulfinpirazona es inferior a la de pacientes que tomaron un placebo.
 
-<!-- -   **Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas** -->
+
+## 4.3. Contrasta al nivel de significación $\alpha=0.1$ si existen diferencias en la edad media de los pacientes según el estadio de cancer (`CancerStage`).
+
+-   **Realiza una exploración gráfica y el análisis de varianza correspondiente**
+
+-   **Comprueba si pueden asumirse las hipótesis del modelo**
+
+-   **Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas**

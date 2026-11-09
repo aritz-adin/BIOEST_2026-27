@@ -221,6 +221,12 @@ window.Quarto = {
   <li><a href="#contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres." id="toc-contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres." class="nav-link" data-scroll-target="#contrasta-al-nivel-de-significación-0.10-si-el-tamaño-del-cuerpo-frame-influye-en-la-presión-diastólica-bp.1d-de-las-mujeres.">3.1. Contrasta al nivel de significación 0.10 si el tamaño del cuerpo (<code>frame</code>) influye en la presión diastólica (<code>bp.1d</code>) de las mujeres.</a></li>
   <li><a href="#utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones." id="toc-utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones." class="nav-link" data-scroll-target="#utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones.">3.2. Utiliza el fichero <code>diabetes.female</code> para responder a las siguientes cuestiones.</a></li>
   </ul></li>
+  <li><a href="#para-entregar" id="toc-para-entregar" class="nav-link" data-scroll-target="#para-entregar">4. Para entregar</a>
+  <ul class="collapse">
+  <li><a href="#contrasta-al-nivel-de-significación-0.1-si-los-niveles-medios-de-la-concentración-de-interleukina-6-il6-son-significativamente-distintos-en-pacientes-con-cáncer-en-estadio-i-que-en-paciente-con-cáncer-en-estadio-ii." id="toc-contrasta-al-nivel-de-significación-0.1-si-los-niveles-medios-de-la-concentración-de-interleukina-6-il6-son-significativamente-distintos-en-pacientes-con-cáncer-en-estadio-i-que-en-paciente-con-cáncer-en-estadio-ii." class="nav-link" data-scroll-target="#contrasta-al-nivel-de-significación-0.1-si-los-niveles-medios-de-la-concentración-de-interleukina-6-il6-son-significativamente-distintos-en-pacientes-con-cáncer-en-estadio-i-que-en-paciente-con-cáncer-en-estadio-ii.">4.1. Contrasta al nivel de significación 0.1 si los niveles medios de la concentración de Interleukina-6 (<code>IL6</code>) son significativamente distintos en pacientes con cáncer en estadio I que en paciente con cáncer en estadio II.</a></li>
+  <li><a href="#se-estudió-la-eficacia-de-la-sulfinpirazona-en-prevenir-la-muerte-después-de-sufrir-infarto-de-miocardio.-para-ello-se-consideraron-pacientes-que-habían-sufrido-infarto-de-miocardio.-a-un-grupo-se-les-proporcionó-sulfinpirazona-y-a-otro-grupo-se-les-suministró-placebo.-en-la-siguiente-tabla-se-muestra-el-número-de-pacientes-de-cada-grupo-que-murieron-y-que-superaron-el-infarto." id="toc-se-estudió-la-eficacia-de-la-sulfinpirazona-en-prevenir-la-muerte-después-de-sufrir-infarto-de-miocardio.-para-ello-se-consideraron-pacientes-que-habían-sufrido-infarto-de-miocardio.-a-un-grupo-se-les-proporcionó-sulfinpirazona-y-a-otro-grupo-se-les-suministró-placebo.-en-la-siguiente-tabla-se-muestra-el-número-de-pacientes-de-cada-grupo-que-murieron-y-que-superaron-el-infarto." class="nav-link" data-scroll-target="#se-estudió-la-eficacia-de-la-sulfinpirazona-en-prevenir-la-muerte-después-de-sufrir-infarto-de-miocardio.-para-ello-se-consideraron-pacientes-que-habían-sufrido-infarto-de-miocardio.-a-un-grupo-se-les-proporcionó-sulfinpirazona-y-a-otro-grupo-se-les-suministró-placebo.-en-la-siguiente-tabla-se-muestra-el-número-de-pacientes-de-cada-grupo-que-murieron-y-que-superaron-el-infarto.">4.2. Se estudió la eficacia de la sulfinpirazona en prevenir la muerte después de sufrir infarto de miocardio. Para ello se consideraron pacientes que habían sufrido infarto de miocardio. A un grupo se les proporcionó sulfinpirazona y a otro grupo se les suministró placebo. En la siguiente tabla se muestra el número de pacientes de cada grupo que murieron y que superaron el infarto.</a></li>
+  <li><a href="#contrasta-al-nivel-de-significación-alpha0.1-si-existen-diferencias-en-la-edad-media-de-los-pacientes-según-el-estadio-de-cancer-cancerstage." id="toc-contrasta-al-nivel-de-significación-alpha0.1-si-existen-diferencias-en-la-edad-media-de-los-pacientes-según-el-estadio-de-cancer-cancerstage." class="nav-link" data-scroll-target="#contrasta-al-nivel-de-significación-alpha0.1-si-existen-diferencias-en-la-edad-media-de-los-pacientes-según-el-estadio-de-cancer-cancerstage.">4.3. Contrasta al nivel de significación <span class="math inline">\(\alpha=0.1\)</span> si existen diferencias en la edad media de los pacientes según el estadio de cancer (<code>CancerStage</code>).</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -600,12 +606,13 @@ mean difference
 <!-- -   **Calcula el número de hombres en la muestra con `glyhb` por encima del 6% y el total de hombres en la muestra.** -->
 <!-- ```{r include=TRUE} -->
 <!-- # Casos favorables -->
-<!-- diabetes |>  -->
-<!--   filter(gender=="male", -->
-<!--          glyhb>6) |>  -->
+<!-- diabetes |> -->
+<!--   filter(gender=="male") |>  -->
+<!--   filter(glyhb>6) |> -->
 <!--   nrow() -->
 <!-- # Casos totales -->
-<!-- diabetes |> count(gender) -->
+<!-- diabetes$gender |>  -->
+<!--   table() -->
 <!-- ``` -->
 <!-- -   **Realiza un test exacto y un test aproximado para la proporción verdadera.** -->
 <!-- El contraste que debemos realizar se escribe como: -->
@@ -627,29 +634,21 @@ mean difference
 <!-- Definimos la variable: -->
 <!-- X="Nº de hombres con colesterol por debajo de 200mg/dL" $\sim Bin(n_X,\pi_X)$ -->
 <!-- Y="Nº de mujeres con colesterol por debajo de 200mg/dL" $\sim Bin(n_Y,\pi_Y)$ -->
-<!-- -   **Calcula el número de hombres en la muestra con colesterol por debajo de 200mg/dL y el total de hombres de la muestra (**$n_X$). -->
+<!-- -   **Calcula el número de hombres y número de mujeres en la muestra con colesterol por debajo de 200mg/dL** -->
 <!-- ```{r include=TRUE} -->
-<!-- x <- diabetes |>  -->
-<!--   filter(gender=="male", -->
-<!--          chol<200) |>  -->
-<!--   nrow() -->
-<!-- x -->
-<!-- nx <- diabetes |>  -->
+<!-- diabetes |> -->
 <!--   filter(gender=="male") |>  -->
+<!--   filter(chol<200) |> -->
 <!--   nrow() -->
-<!-- nx -->
-<!-- ``` -->
-<!-- -   **Calcula el número de mujeres en la muestra con colesterol por debajo de 200mg/dL y el total de mujeres de la muestra (**$n_Y$). -->
-<!-- ```{r include=TRUE} -->
-<!-- y <- diabetes |>  -->
-<!--   filter(gender=="female", -->
-<!--          chol<200) |>  -->
-<!--   nrow() -->
-<!-- y -->
-<!-- ny <- diabetes |>  -->
+<!-- diabetes |> -->
 <!--   filter(gender=="female") |>  -->
+<!--   filter(chol<200) |> -->
 <!--   nrow() -->
-<!-- ny -->
+<!-- ``` -->
+<!-- -   **Calcula el número total de hombres y mujeres en la muestra** -->
+<!-- ```{r include=TRUE} -->
+<!-- diabetes$gender |> -->
+<!--   table() -->
 <!-- ``` -->
 <!-- -   **Realiza un test para la diferencia de proporciones.** -->
 <!-- El contraste que debemos realizar se escribe como: -->
@@ -661,7 +660,7 @@ mean difference
 <!-- \end{eqnarray*} -->
 <!-- Realizamos el test en R: -->
 <!-- ```{r include=TRUE} -->
-<!-- prop.test(c(x,y), c(nx,ny), alternative="greater") -->
+<!-- prop.test(c(79,105), c(169,234), alternative="greater") -->
 <!-- ``` -->
 <!-- Como p-valor$=0.3931 > \alpha=0.05 \Rightarrow$ No rechazamos $H_0$. -->
 <!-- **Interpretación**: Con un nivel de significación del 5%, no podemos afirmar que la proporción de hombres con colesterol por debajo de 200mg/dL sea superior a la proporción de mujeres con colesterol por debajo de 200mg/dL. -->
@@ -872,22 +871,53 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <h2 class="anchored" data-anchor-id="utiliza-el-fichero-diabetes.female-para-responder-a-las-siguientes-cuestiones.">3.2. Utiliza el fichero <code>diabetes.female</code> para responder a las siguientes cuestiones.</h2>
 <p><strong>a) Contrasta al nivel de significación</strong> <span class="math inline">\(\alpha=0.05\)</span> <strong>si existen diferencias entre los niveles medios de glucosa glicosilada (<code>glyhb</code>) según la constitución del tamaño del cuerpo (<code>frame</code>) entre las mujeres.</strong></p>
 <p><strong>b) Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas.</strong></p>
-<!-- # 4. Para entregar -->
-<!-- Responde a las siguientes cuestiones, utilizando la misma muestra de pacientes que te ha sido asignada en la Práctica 2 para el fichero `patients.txt`. -->
-<!-- ## 4.1. Contrasta al nivel de significación 0.1 si los niveles medios de la concentración de Interleukina-6 (`IL6`) son significativamente distintos en pacientes con cáncer en estadio I que en paciente con cáncer en estadio II. -->
-<!-- -   Define correctamente las variables del problema. -->
-<!-- -   Comprueba si las dos muestras provienen de poblaciones normales. -->
-<!-- -   Realiza el correspondiente test de hipótesis. -->
-<!-- ## 4.2. Se estudió la eficacia de la sulfinpirazona en prevenir la muerte después de sufrir infarto de miocardio. Para ello se consideraron pacientes que habían sufrido infarto de miocardio. A un grupo se les proporcionó sulfinpirazona y a otro grupo se les suministró placebo. En la siguiente tabla se muestra el número de pacientes de cada grupo que murieron y que superaron el infarto. -->
-<!-- |                 | Death (all causes) | Survivors | -->
-<!-- |-----------------|--------------------|-----------| -->
-<!-- | Sulphinpyrazole | 41                 | 692       | -->
-<!-- | Placebo         | 60                 | 682       | -->
-<!-- -   **Contrasta al nivel de significación** $\alpha=0.01$ si la proporción de muertes de pacientes que tomaron sulfinpirazona es inferior a la de pacientes que tomaron un placebo. -->
-<!-- ## 4.3. Contrasta al nivel de significación $\alpha=0.1$ si existen diferencias en la edad media de los pacientes según el estadio de cancer (`CancerStage`). -->
-<!-- -   **Realiza una exploración gráfica y el análisis de varianza correspondiente** -->
-<!-- -   **Comprueba si pueden asumirse las hipótesis del modelo** -->
-<!-- -   **Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas** -->
+</section>
+</section>
+<section id="para-entregar" class="level1">
+<h1>4. Para entregar</h1>
+<p>Responde a las siguientes cuestiones, utilizando la misma muestra de pacientes que te ha sido asignada en la Práctica 2 para el fichero <code>patients.txt</code>.</p>
+<section id="contrasta-al-nivel-de-significación-0.1-si-los-niveles-medios-de-la-concentración-de-interleukina-6-il6-son-significativamente-distintos-en-pacientes-con-cáncer-en-estadio-i-que-en-paciente-con-cáncer-en-estadio-ii." class="level2">
+<h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-0.1-si-los-niveles-medios-de-la-concentración-de-interleukina-6-il6-son-significativamente-distintos-en-pacientes-con-cáncer-en-estadio-i-que-en-paciente-con-cáncer-en-estadio-ii.">4.1. Contrasta al nivel de significación 0.1 si los niveles medios de la concentración de Interleukina-6 (<code>IL6</code>) son significativamente distintos en pacientes con cáncer en estadio I que en paciente con cáncer en estadio II.</h2>
+<ul>
+<li><p>Define correctamente las variables del problema.</p></li>
+<li><p>Comprueba si las dos muestras provienen de poblaciones normales.</p></li>
+<li><p>Realiza el correspondiente test de hipótesis.</p></li>
+</ul>
+</section>
+<section id="se-estudió-la-eficacia-de-la-sulfinpirazona-en-prevenir-la-muerte-después-de-sufrir-infarto-de-miocardio.-para-ello-se-consideraron-pacientes-que-habían-sufrido-infarto-de-miocardio.-a-un-grupo-se-les-proporcionó-sulfinpirazona-y-a-otro-grupo-se-les-suministró-placebo.-en-la-siguiente-tabla-se-muestra-el-número-de-pacientes-de-cada-grupo-que-murieron-y-que-superaron-el-infarto." class="level2">
+<h2 class="anchored" data-anchor-id="se-estudió-la-eficacia-de-la-sulfinpirazona-en-prevenir-la-muerte-después-de-sufrir-infarto-de-miocardio.-para-ello-se-consideraron-pacientes-que-habían-sufrido-infarto-de-miocardio.-a-un-grupo-se-les-proporcionó-sulfinpirazona-y-a-otro-grupo-se-les-suministró-placebo.-en-la-siguiente-tabla-se-muestra-el-número-de-pacientes-de-cada-grupo-que-murieron-y-que-superaron-el-infarto.">4.2. Se estudió la eficacia de la sulfinpirazona en prevenir la muerte después de sufrir infarto de miocardio. Para ello se consideraron pacientes que habían sufrido infarto de miocardio. A un grupo se les proporcionó sulfinpirazona y a otro grupo se les suministró placebo. En la siguiente tabla se muestra el número de pacientes de cada grupo que murieron y que superaron el infarto.</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Death (all causes)</th>
+<th>Survivors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sulphinpyrazole</td>
+<td>41</td>
+<td>692</td>
+</tr>
+<tr class="even">
+<td>Placebo</td>
+<td>60</td>
+<td>682</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Contrasta al nivel de significación</strong> <span class="math inline">\(\alpha=0.01\)</span> si la proporción de muertes de pacientes que tomaron sulfinpirazona es inferior a la de pacientes que tomaron un placebo.</li>
+</ul>
+</section>
+<section id="contrasta-al-nivel-de-significación-alpha0.1-si-existen-diferencias-en-la-edad-media-de-los-pacientes-según-el-estadio-de-cancer-cancerstage." class="level2">
+<h2 class="anchored" data-anchor-id="contrasta-al-nivel-de-significación-alpha0.1-si-existen-diferencias-en-la-edad-media-de-los-pacientes-según-el-estadio-de-cancer-cancerstage.">4.3. Contrasta al nivel de significación <span class="math inline">\(\alpha=0.1\)</span> si existen diferencias en la edad media de los pacientes según el estadio de cancer (<code>CancerStage</code>).</h2>
+<ul>
+<li><p><strong>Realiza una exploración gráfica y el análisis de varianza correspondiente</strong></p></li>
+<li><p><strong>Comprueba si pueden asumirse las hipótesis del modelo</strong></p></li>
+<li><p><strong>Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas</strong></p></li>
+</ul>
 
 
 </section>
