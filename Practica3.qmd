@@ -451,27 +451,27 @@ Como p-valor$=0.0003 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 
 **a) Crea un nuevo fichero llamado `diabetes.female` solo con las mujeres.**
 
-```{r include=TRUE}
+```{r include=FALSE}
 diabetes.female <- diabetes |> 
   filter(gender=="female")
 ```
 
 **b) Exploración gráfica: representa los diagrama de caja de la variable `bp.1d` según la variable `frame`.**
 
-```{r include=TRUE}
+```{r include=FALSE}
 boxplot(bp.1d ~ frame, data=diabetes.female)
 ```
 
 **c) Realiza el análisis de la varianza con la función `aov()`**
 
-```{r include=TRUE}
+```{r include=FALSE}
 modelo <- aov(bp.1d ~ frame, data=diabetes.female)
 summary(modelo)
 ```
 
 **d) Comprueba si pueden asumirse las hipótesis del modelo.**
 
-```{r include=TRUE}
+```{r include=FALSE}
 modelo |> 
   checking.plots()
 
@@ -487,7 +487,7 @@ leveneTest(bp.1d ~ frame, data=diabetes.female)
 
 **e) Utiliza un test de Tukey para averiguar entre qué niveles de la variable `frame` existen diferencias significativas en los niveles medios de la variable `bp.1d`**
 
-```{r include=TRUE}
+```{r include=FALSE}
 modelo.comp <- TukeyHSD(modelo, conf.level=0.9)
 modelo.comp
 
@@ -499,7 +499,7 @@ plot(modelo.comp)
 
 **a) Contrasta al nivel de significación** $\alpha=0.05$ **si existen diferencias entre los niveles medios de glucosa glicosilada (`glyhb`) según la constitución del tamaño del cuerpo (`frame`) entre las mujeres.**
 
-```{r include=TRUE}
+```{r include=FALSE}
 boxplot(glyhb ~ frame, data=diabetes)
 
 glyhb.aov <- aov(glyhb~frame, data=diabetes.female)
@@ -521,7 +521,7 @@ kruskal.test(glyhb~frame, data=diabetes.female)
 
 **b) Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas.**
 
-```{r include=TRUE}
+```{r include=FALSE}
 library(agricolae)
 
 kruskal(diabetes.female$glyhb, diabetes.female$frame, alpha=0.05, group=FALSE, console=TRUE)
