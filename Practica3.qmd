@@ -451,27 +451,29 @@ Como p-valor$=0.0003 < \alpha=0.05 \Rightarrow$ Rechazamos $H_0$.
 
 **a) Crea un nuevo fichero llamado `diabetes.female` solo con las mujeres.**
 
-```{r include=FALSE}
+```{r include=TRUE}
 diabetes.female <- diabetes |> 
   filter(gender=="female")
 ```
 
 **b) Exploración gráfica: representa los diagrama de caja de la variable `bp.1d` según la variable `frame`.**
 
-```{r include=FALSE}
+```{r include=TRUE}
 boxplot(bp.1d ~ frame, data=diabetes.female)
 ```
 
 **c) Realiza el análisis de la varianza con la función `aov()`**
 
-```{r include=FALSE}
+```{r include=TRUE}
 modelo <- aov(bp.1d ~ frame, data=diabetes.female)
 summary(modelo)
 ```
 
+**IMPORTANTE:** No debemos interpretar el resultado del modelo hasta comprobar que se cumplen las hipótesis
+
 **d) Comprueba si pueden asumirse las hipótesis del modelo.**
 
-```{r include=FALSE}
+```{r include=TRUE}
 modelo |> 
   checking.plots()
 
@@ -479,27 +481,41 @@ modelo |>
 modelo |> 
   rstandard() |> 
   shapiro.test()
+```
+Como el p-valor = 0.1 es mayor que $\alpha=0.05$, no rechazamos la hipótesis de normalidad de los errores.
 
+```{r include=TRUE}
 ## Test de Levene para homogeneidad de varianzas
 library(car)
 leveneTest(bp.1d ~ frame, data=diabetes.female)
 ```
+Como el p-valor = 0.164 es mayor que $\alpha=0.05$, no rechazamos la hipótesis de homogeneidad de la varianza.
+
+**Interpretación del test ANOVA**
+```{r include=TRUE}
+summary(modelo)
+```
+
+Como el p-valor=0.079 es más pequeño que $\alpha=0.1$, rechazamos H0. Es decir, con un nivel de significación del 10%, podemos afirmar que los niveles medios de presión diastólica son diferentes en algún tamaño del cuerpo de las mujeres.
+
 
 **e) Utiliza un test de Tukey para averiguar entre qué niveles de la variable `frame` existen diferencias significativas en los niveles medios de la variable `bp.1d`**
 
-```{r include=FALSE}
-modelo.comp <- TukeyHSD(modelo, conf.level=0.9)
-modelo.comp
+```{r include=TRUE}
+test <- TukeyHSD(modelo, conf.level=0.9)
+test
 
 ## Graficos de intervalos de confianza del test de Tukey
-plot(modelo.comp)
+plot(test)
 ```
+
+A la vista de los p-valores, podemos concluir que existen diferencias significativas en los niveles medios de presión diastólica en las mujeres pertenecientes al grupo small y medium (pero no en el resto de grupos).
 
 ## 3.2. Utiliza el fichero `diabetes.female` para responder a las siguientes cuestiones.
 
 **a) Contrasta al nivel de significación** $\alpha=0.05$ **si existen diferencias entre los niveles medios de glucosa glicosilada (`glyhb`) según la constitución del tamaño del cuerpo (`frame`) entre las mujeres.**
 
-```{r include=FALSE}
+```{r include=TRUE}
 boxplot(glyhb ~ frame, data=diabetes)
 
 glyhb.aov <- aov(glyhb~frame, data=diabetes.female)
@@ -521,7 +537,7 @@ kruskal.test(glyhb~frame, data=diabetes.female)
 
 **b) Si has detectado diferencias, averigua entre qué grupos existen diferencias estadísticamente significativas.**
 
-```{r include=FALSE}
+```{r include=TRUE}
 library(agricolae)
 
 kruskal(diabetes.female$glyhb, diabetes.female$frame, alpha=0.05, group=FALSE, console=TRUE)
