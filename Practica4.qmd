@@ -35,7 +35,7 @@ print(datos)
 
 -   **Seleccionamos los hombres, representamos un diagrama de dispersión y ajustamos un modelo de regresión lineal con la función `lm()`**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 datos.male <- datos |> 
   filter(sex=="M")
 
@@ -59,17 +59,17 @@ model.male <- lm(sbp~age, data=datos.male)
 
 -   **Proporciona una interpretación para los coeficientes**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 model.male |> summary()
 ```
 
--   $\beta_0=110.0385$ mmHg: Valor esperado para un hombre de 0 años de edad (en este ejemplo, no tiene sentido)
+<!-- -   $\beta_0=110.0385$ mmHg: Valor esperado para un hombre de 0 años de edad (en este ejemplo, no tiene sentido) -->
 
--   $\beta_1=0.9614$: Por cada año que aumenta la edad de un hombre, se espera que la presión sistólica aumente en 0.9614 mmHg.
+<!-- -   $\beta_1=0.9614$: Por cada año que aumenta la edad de un hombre, se espera que la presión sistólica aumente en 0.9614 mmHg. -->
 
 -   **Representa gráficamente la línea ajustada**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 datos.male |>
   select(age, sbp) |> 
   plot()
@@ -79,7 +79,7 @@ abline(model.male, col="red", lwd=2)
 
 -   **Verifica que se cumplen las hipótesis del modelo**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 model.male |> checking.plots()
 
 model.male |> 
@@ -87,11 +87,11 @@ model.male |>
   shapiro.test()
 ```
 
-*No se verifica la hipótesis de normalidad de los residuos (p-valor*$<0.05$), pero seguiremos con el ejercicio.
+<!-- *No se verifica la hipótesis de normalidad de los residuos (p-valor*$<0.05$), pero seguiremos con el ejercicio. -->
 
 -   **Obtén la predicción para cinco hombres de 20, 29, 46, 58 y 65 años de edad**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 datos.pred <- data.frame(age=c(20,29,46,58,65))
 
 datos.pred <- bind_cols(datos.pred,
@@ -105,7 +105,7 @@ print(datos.pred)
 
 -   **Seleccionamos las mujeres, representamos un diagrama de dispersión y ajustamos un modelo de regresión lineal con la función `lm()`**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 datos.female <- datos |> 
   filter(sex=="F")
 
@@ -129,17 +129,17 @@ model.female <- lm(sbp~age, data=datos.female)
 
 -   **Proporciona una interpretación para los coeficientes**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 model.female |> summary()
 ```
 
--   $\beta_0=97.0771$ mmHg: Valor esperado para una mujer de 0 años de edad (en este ejemplo, no tiene sentido)
+<!-- -   $\beta_0=97.0771$ mmHg: Valor esperado para una mujer de 0 años de edad (en este ejemplo, no tiene sentido) -->
 
--   $\beta_1=0.9493$: Por cada año que aumenta la edad de una mujer, se espera que la presión sistólica aumente en 0.9493 mmHg.
+<!-- -   $\beta_1=0.9493$: Por cada año que aumenta la edad de una mujer, se espera que la presión sistólica aumente en 0.9493 mmHg. -->
 
 -   **Representa gráficamente la línea ajustada**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 datos.female |>
   select(age, sbp) |> 
   plot()
@@ -149,7 +149,7 @@ abline(model.female, col="red", lwd=2)
 
 -   **Verifica que se cumplen las hipótesis del modelo**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 model.female |> checking.plots()
 
 model.female |> 
@@ -159,7 +159,7 @@ model.female |>
 
 -   **Obtén la predicción para cinco mujeres de 23, 26, 32, 55 y 62 años de edad**
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 datos.pred <- data.frame(age=c(23,26,32,55,62))
 
 datos.pred <- bind_cols(datos.pred,
