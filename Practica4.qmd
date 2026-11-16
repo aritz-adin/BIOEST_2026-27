@@ -26,7 +26,7 @@ library(readr)
 
 ## 1.1. Emplea el fichero `bloodpress1.txt` para ajustar un modelo de regresión lineal que permita estimar la presión sistólica en hombres según la edad.
 
-```{r, message=FALSE, include=FALSE}
+```{r, message=FALSE, include=TRUE}
 datos <- read_table("bloodpres1.txt") |> 
   mutate(across(where(is.character), as.factor))
 
@@ -206,7 +206,7 @@ datos.pred <- bind_cols(datos.pred,
 print(datos.pred)
 ```
 
-<!-- # 2. Para entregar -->
+<!-- # 2. EJERCICIOS A ENTREGAR -->
 
 <!-- ## 2.1. Con el fichero `HSWRESTLER` de la librería PASWR2, ajusta un modelo de regresión para predecir la cantidad de grasa (`tanfat`). Selecciona las variables `age`, `ht`, `wt`, `abs`, `triceps` y `subscap` que mejor sirvan para predecir los valores de `tanfat`. -->
 

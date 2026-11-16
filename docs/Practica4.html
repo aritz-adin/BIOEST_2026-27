@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -75,10 +78,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -225,6 +228,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-en-hombres-según-la-edad." class="level2">
 <h2 class="anchored" data-anchor-id="emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-en-hombres-según-la-edad.">1.1. Emplea el fichero <code>bloodpress1.txt</code> para ajustar un modelo de regresión lineal que permita estimar la presión sistólica en hombres según la edad.</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"bloodpres1.txt"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(datos)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 69 × 3
+     sbp   age sex  
+   &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;
+ 1   158    41 M    
+ 2   185    60 M    
+ 3   152    41 M    
+ 4   159    47 M    
+ 5   176    66 M    
+ 6   156    47 M    
+ 7   184    68 M    
+ 8   138    43 M    
+ 9   172    68 M    
+10   168    57 M    
+# ℹ 59 more rows</code></pre>
+</div>
+</div>
 <ul>
 <li><p><strong>Seleccionamos los hombres, representamos un diagrama de dispersión y ajustamos un modelo de regresión lineal con la función <code>lm()</code></strong></p></li>
 <li><p><strong>Proporciona una interpretación para los coeficientes</strong></p></li>
@@ -268,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong>Obtén la predicción para hombres y mujeres de 20, 30, y 40 años de edad</strong></li>
 </ul>
-<!-- # 2. Para entregar -->
+<!-- # 2. EJERCICIOS A ENTREGAR -->
 <!-- ## 2.1. Con el fichero `HSWRESTLER` de la librería PASWR2, ajusta un modelo de regresión para predecir la cantidad de grasa (`tanfat`). Selecciona las variables `age`, `ht`, `wt`, `abs`, `triceps` y `subscap` que mejor sirvan para predecir los valores de `tanfat`. -->
 <!-- -   Selecciona las variables eliminado secuencialmente aquellas que no son estadísticamente significativas. -->
 <!-- -   Utiliza también la función `stepAIC()` de la librería MASS para seleccionar las variables. -->
