@@ -539,17 +539,77 @@ W = 0.96328, p-value = 0.3948</code></pre>
 <section id="emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-según-la-edad-y-el-sexo-sin-interacción." class="level2">
 <h2 class="anchored" data-anchor-id="emplea-el-fichero-bloodpress1.txt-para-ajustar-un-modelo-de-regresión-lineal-que-permita-estimar-la-presión-sistólica-según-la-edad-y-el-sexo-sin-interacción.">1.3. Emplea el fichero <code>bloodpress1.txt</code> para ajustar un modelo de regresión lineal que permita estimar la presión sistólica según la edad y el sexo (sin interacción).</h2>
 <ul>
-<li><p><strong>Representamos un diagrama de dispersión (incluyendo colores distintos para hombres y mujeres)</strong></p></li>
-<li><p><strong>Ajustamos un modelo de regresión lineal con la función <code>lm()</code></strong></p></li>
-<li><p><strong>Proporciona una interpretación para los coeficientes</strong></p></li>
+<li><strong>Representamos un diagrama de dispersión (incluyendo colores distintos para hombres y mujeres)</strong></li>
 </ul>
-<!-- $$SBP = \beta_0 + \beta_1*age + \beta_2*I(sex=\mbox{"M"})$$ -->
-<!-- -   $\beta_0=96.774$ mmHg: Valor esperado para una mujer de 0 años de edad (en este ejemplo, no tiene sentido) -->
-<!-- -   $\beta_0 + \beta_2=110.287$ mmHg: Valor esperado para un hombre de 0 años de edad (en este ejemplo, no tiene sentido) -->
-<!-- -   $\beta_1=0.956$: Por cada año que aumenta la edad de un paciente (hombre o mujer), se espera que la presión sistólica aumente en 0.956 mmHg. -->
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>sbp, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"F"</span><span class="ot">=</span><span class="st">"red"</span>, <span class="st">"M"</span><span class="ot">=</span><span class="st">"blue"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Practica4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <ul>
-<li><strong>Obtén la predicción para hombres y mujeres de 20, 30, y 40 años de edad</strong></li>
+<li><strong>Ajustamos un modelo de regresión lineal con la función <code>lm()</code></strong></li>
 </ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>model.AgeSex <span class="ot">&lt;-</span> <span class="fu">lm</span>(sbp <span class="sc">~</span> age <span class="sc">+</span> sex, <span class="at">data=</span>datos)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.AgeSex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sbp ~ age + sex, data = datos)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-20.705  -3.299   1.248   4.325  21.160 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 96.77353    3.62085  26.727  &lt; 2e-16 ***
+age          0.95606    0.07153  13.366  &lt; 2e-16 ***
+sexM        13.51345    2.16932   6.229  3.7e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8.878 on 66 degrees of freedom
+Multiple R-squared:  0.7759,    Adjusted R-squared:  0.7691 
+F-statistic: 114.2 on 2 and 66 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Proporciona una interpretación para los coeficientes</strong></li>
+</ul>
+<p><span class="math display">\[SBP = \beta_0 + \beta_1*age + \beta_2*I(sex=\mbox{"M"})\]</span> - <span class="math inline">\(\beta_0=96.774\)</span> mmHg: Valor esperado para una mujer de 0 años de edad (en este ejemplo, no tiene sentido)</p>
+<ul>
+<li><p><span class="math inline">\(\beta_0 + \beta_2=110.287\)</span> mmHg: Valor esperado para un hombre de 0 años de edad (en este ejemplo, no tiene sentido)</p></li>
+<li><p><span class="math inline">\(\beta_1=0.956\)</span>: Por cada año que aumenta la edad de un paciente (hombre o mujer), se espera que la presión sistólica aumente en 0.956 mmHg.</p></li>
+<li><p><strong>Obtén la predicción para hombres y mujeres de 20, 30, y 40 años de edad</strong></p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>datos.pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age=</span><span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">40</span>),</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sex=</span><span class="fu">c</span>(<span class="st">"M"</span>,<span class="st">"F"</span>,<span class="st">"M"</span>,<span class="st">"F"</span>,<span class="st">"M"</span>,<span class="st">"F"</span>))</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>datos.pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(datos.pred,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                        model.AgeSex <span class="sc">|&gt;</span> <span class="fu">predict</span>(<span class="at">newdata=</span>datos.pred,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">interval=</span><span class="st">"prediction"</span>))</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(datos.pred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age sex      fit       lwr      upr
+1  20   M 129.4081 111.05519 147.7611
+2  20   F 115.8947  97.51421 134.2752
+3  30   M 138.9687 120.86107 157.0764
+4  30   F 125.4553 107.29885 143.6117
+5  40   M 148.5293 130.55647 166.5021
+6  40   F 135.0158 116.97289 153.0588</code></pre>
+</div>
+</div>
 <!-- # 2. EJERCICIOS A ENTREGAR -->
 <!-- ## 2.1. Con el fichero `HSWRESTLER` de la librería PASWR2, ajusta un modelo de regresión para predecir la cantidad de grasa (`tanfat`). Selecciona las variables `age`, `ht`, `wt`, `abs`, `triceps` y `subscap` que mejor sirvan para predecir los valores de `tanfat`. -->
 <!-- -   Selecciona las variables eliminado secuencialmente aquellas que no son estadísticamente significativas. -->
