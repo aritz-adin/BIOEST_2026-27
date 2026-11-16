@@ -41,8 +41,8 @@ datos.male <- datos |>
 
 ## Diagrama de dispersión ##
 datos.male |>
-  ggplot(aes(x=age, y=sbp)) +
-  geom_point()
+  select(age, sbp) |> 
+  plot()
 
 ## Covarianza y correlación ##
 datos.male |> 
@@ -71,11 +71,10 @@ model.male |> summary()
 
 ```{r, include=FALSE}
 datos.male |>
-  ggplot(aes(x=age, y=sbp)) +
-  geom_point() +
-  geom_abline(intercept=coef(model.male)[1],
-              slope=coef(model.male)[2],
-              colour="red")
+  select(age, sbp) |> 
+  plot()
+
+abline(model.male, col="red", lwd=2)
 ```
 
 -   **Verifica que se cumplen las hipótesis del modelo**
@@ -93,11 +92,11 @@ model.male |>
 -   **Obtén la predicción para cinco hombres de 20, 29, 46, 58 y 65 años de edad**
 
 ```{r, include=FALSE}
-datos.pred <- tibble(age=c(20,29,46,58,65))
+datos.pred <- data.frame(age=c(20,29,46,58,65))
 
-datos.pred <- cbind(datos.pred,
-                    model.male |> predict(newdata=datos.pred,
-                                         interval="prediction"))
+datos.pred <- bind_cols(datos.pred,
+                        model.male |> predict(newdata=datos.pred,
+                                              interval="prediction"))
 
 print(datos.pred)
 ```
@@ -112,8 +111,8 @@ datos.female <- datos |>
 
 ## Diagrama de dispersión ##
 datos.female |>
-  ggplot(aes(x=age, y=sbp)) +
-  geom_point()
+  select(age, sbp) |> 
+  plot()
 
 ## Covarianza y correlación ##
 datos.female |> 
@@ -142,11 +141,10 @@ model.female |> summary()
 
 ```{r, include=FALSE}
 datos.female |>
-  ggplot(aes(x=age, y=sbp)) +
-  geom_point() +
-  geom_abline(intercept=coef(model.female)[1],
-              slope=coef(model.female)[2],
-              colour="red")
+  select(age, sbp) |> 
+  plot()
+
+abline(model.female, col="red", lwd=2)
 ```
 
 -   **Verifica que se cumplen las hipótesis del modelo**
@@ -162,11 +160,11 @@ model.female |>
 -   **Obtén la predicción para cinco mujeres de 23, 26, 32, 55 y 62 años de edad**
 
 ```{r, include=FALSE}
-datos.pred <- tibble(age=c(23,26,32,55,62))
+datos.pred <- data.frame(age=c(23,26,32,55,62))
 
-datos.pred <- cbind(datos.pred,
-                    model.female |> predict(newdata=datos.pred,
-                                         interval="prediction"))
+datos.pred <- bind_cols(datos.pred,
+                        model.female |> predict(newdata=datos.pred,
+                                                interval="prediction"))
 
 print(datos.pred)
 ```
@@ -198,12 +196,12 @@ summary(model.AgeSex)
 -   **Obtén la predicción para hombres y mujeres de 20, 30, y 40 años de edad**
 
 ```{r, include=FALSE}
-datos.pred <- tibble(age=c(20,20,30,30,40,40),
-                     sex=c("M","F","M","F","M","F"))
+datos.pred <- data.frame(age=c(20,30,40,20,30,40),
+                         sex=c("M","M","M","F","F","F"))
 
-datos.pred <- cbind(datos.pred,
-                    model.AgeSex |> predict(newdata=datos.pred,
-                                            interval="prediction"))
+datos.pred <- bind_cols(datos.pred,
+                        model.AgeSex |> predict(newdata=datos.pred,
+                                                interval="prediction"))
 
 print(datos.pred)
 ```
