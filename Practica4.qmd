@@ -191,10 +191,9 @@ $$SBP = \beta_0 + \beta_1*age + \beta_2*I(sex=\mbox{"M"})$$
 
 -   $\beta_0=96.774$ mmHg: Valor esperado para una mujer de 0 años de edad (en este ejemplo, no tiene sentido)
 
--   $\beta_0 + \beta_2=110.287$ mmHg: Valor esperado para un hombre de 0 años de edad (en este ejemplo, no tiene sentido)
-
 -   $\beta_1=0.956$: Por cada año que aumenta la edad de un paciente (hombre o mujer), se espera que la presión sistólica aumente en 0.956 mmHg.
 
+-   $\beta_2=13.51$ mmHg: Se espera que la presión sistólica de un hombre sea 13.51mmHg mayor que el de una mujer de la misma edad.
 
 ### Obtén la predicción para hombres y mujeres de 20, 30, y 40 años de edad
 
