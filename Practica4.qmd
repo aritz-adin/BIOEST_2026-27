@@ -171,21 +171,24 @@ print(datos.pred)
 
 ## 1.3. Emplea el fichero `bloodpress1.txt` para ajustar un modelo de regresión lineal que permita estimar la presión sistólica según la edad y el sexo (sin interacción).
 
--   **Representamos un diagrama de dispersión (incluyendo colores distintos para hombres y mujeres)**
+### Representamos un diagrama de dispersión (incluyendo colores distintos para hombres y mujeres)
 ```{r, include=TRUE}
 datos |>
   ggplot(aes(x=age, y=sbp, colour=sex)) +
   geom_point() + 
   scale_colour_manual(values=c("F"="red", "M"="blue"))
 ```
--   **Ajustamos un modelo de regresión lineal con la función `lm()`**
+
+### Ajustamos un modelo de regresión lineal con la función `lm()`
 ```{r, include=TRUE}
 model.AgeSex <- lm(sbp ~ age + sex, data=datos)
 summary(model.AgeSex)
 ```
--   **Proporciona una interpretación para los coeficientes**
+
+### Proporciona una interpretación para los coeficientes
 
 $$SBP = \beta_0 + \beta_1*age + \beta_2*I(sex=\mbox{"M"})$$
+
 -   $\beta_0=96.774$ mmHg: Valor esperado para una mujer de 0 años de edad (en este ejemplo, no tiene sentido)
 
 -   $\beta_0 + \beta_2=110.287$ mmHg: Valor esperado para un hombre de 0 años de edad (en este ejemplo, no tiene sentido)
@@ -193,7 +196,7 @@ $$SBP = \beta_0 + \beta_1*age + \beta_2*I(sex=\mbox{"M"})$$
 -   $\beta_1=0.956$: Por cada año que aumenta la edad de un paciente (hombre o mujer), se espera que la presión sistólica aumente en 0.956 mmHg.
 
 
--   **Obtén la predicción para hombres y mujeres de 20, 30, y 40 años de edad**
+### Obtén la predicción para hombres y mujeres de 20, 30, y 40 años de edad
 
 ```{r, include=TRUE}
 datos.pred <- data.frame(age=c(20,20,30,30,40,40),
@@ -206,14 +209,14 @@ datos.pred <- bind_cols(datos.pred,
 print(datos.pred)
 ```
 
-<!-- # 2. EJERCICIOS A ENTREGAR -->
+# 2. EJERCICIOS A ENTREGAR
 
-<!-- ## 2.1. Con el fichero `HSWRESTLER` de la librería PASWR2, ajusta un modelo de regresión para predecir la cantidad de grasa (`tanfat`). Selecciona las variables `age`, `ht`, `wt`, `abs`, `triceps` y `subscap` que mejor sirvan para predecir los valores de `tanfat`. -->
+## 2.1. Con el fichero `HSWRESTLER` de la librería PASWR2, ajusta un modelo de regresión para predecir la cantidad de grasa (`tanfat`). Selecciona las variables `age`, `ht`, `wt`, `abs`, `triceps` y `subscap` que mejor sirvan para predecir los valores de `tanfat`.
 
-<!-- -   Selecciona las variables eliminado secuencialmente aquellas que no son estadísticamente significativas. -->
+-   Selecciona las variables eliminado secuencialmente aquellas que no son estadísticamente significativas.
 
-<!-- -   Utiliza también la función `stepAIC()` de la librería MASS para seleccionar las variables. -->
+-   Utiliza también la función `stepAIC()` de la librería MASS para seleccionar las variables.
 
-<!-- -   Interpreta los coeficientes del modelo. -->
+-   Interpreta los coeficientes del modelo.
 
-<!-- -   Predice el valor de `tanfat` para dos individuo con valores de la variable `abs` de 20mm y 25mm, respectivamente, y valores de `subscap` de 13mm. -->
+-   Predice el valor de `tanfat` para dos individuo con valores de la variable `abs` de 20mm y 25mm, respectivamente, y valores de `subscap` de 13mm.
