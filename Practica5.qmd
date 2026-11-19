@@ -163,7 +163,7 @@ options(width=1000)
 
 <!-- **Intepretación:** Como p-valor$=0.0636<\alpha=0.1$, el test de Fisher también rechaza la hipótesis nula de independencia. Además, proporciona también el intervalo de confianza para el odds ratio (en este caso el intervalo no contiene al "1"). -->
 
-<!-- # 2. Ejercicios propuestos -->
+<!-- # 2. EJERCICIOS A ENTREGAR -->
 
 <!-- ## 2.1. En un estudio del tratamiento con Ribavirin en pacientes con síndrome respiratorio severo agudo (Severe Acute Respiratory Syndrome, SARS) se obtuvieron los siguientes resultados. -->
 
