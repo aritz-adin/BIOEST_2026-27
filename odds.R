@@ -1,36 +1,49 @@
-odds<-function(a,b=1,conf.level=0.95) {
-
-if(all(rownames(a)==c("1","2"))){
-  titulo1 <- "fila 1 vs fila 2"
-  titulo1 <- "fila 2 vs fila 1"
-}else{
-  titulo1 <- paste0(rownames(a),collapse=" vs ")
-  titulo2 <- paste0(rev(rownames(a)),collapse=" vs ")
+odds <- function(a, b = 1, conf.level = 0.95, digits = 3) {
+  
+  # Validación de la tabla
+  a <- as.matrix(a)
+  if (!all(dim(a) == c(2, 2))) {
+    stop("Cuidado con la longitud: la tabla debe ser de 2 x 2")
+  }
+  
+  # Nombres de filas y columnas (por defecto, genéricos)
+  if (is.null(rownames(a))) rownames(a) <- c("Fila 1", "Fila 2")
+  if (is.null(colnames(a))) colnames(a) <- c("Columna 1", "Columna 2")
+  
+  # Si b != 1 se compara fila 2 vs fila 1 (se invierten las filas)
+  if (b != 1) a <- a[2:1, ]
+  
+  z <- qnorm(conf.level + (1 - conf.level) / 2)
+  
+  n1 <- a[1, 1] + a[1, 2]
+  n2 <- a[2, 1] + a[2, 2]
+  p1 <- a[1, 1] / n1
+  p2 <- a[2, 1] / n2
+  
+  # Odds ratio
+  OR        <- (a[1, 1] * a[2, 2]) / (a[1, 2] * a[2, 1])
+  se.log.OR <- sqrt(sum(1 / a))
+  
+  # Riesgo relativo
+  RR        <- p1 / p2
+  se.log.RR <- sqrt((1 - p1) / (p1 * n1) + (1 - p2) / (p2 * n2))
+  
+  resultado <- data.frame(
+    Estimacion  = c(OR, RR),
+    IC.inf = c(exp(log(OR) - z * se.log.OR),
+                    exp(log(RR) - z * se.log.RR)),
+    IC.sup = c(exp(log(OR) + z * se.log.OR),
+                    exp(log(RR) + z * se.log.RR)),
+    row.names   = c("Odds ratio", "Riesgo relativo")
+  )
+  # resultado$log.estimacion <- log(resultado$Estimacion)
+  
+  # Salida por pantalla
+  cat("\nComparacion:", rownames(a)[1], "vs", rownames(a)[2], "\n")
+  cat("Evento (columna de referencia):", colnames(a)[1], "\n")
+  cat("Nivel de confianza:", paste0(conf.level * 100, "%"), "\n\n")
+  print(round(resultado, digits))
+  cat("\n")
+  
+  invisible(resultado)
 }
-    
-if (nrow(a)!=2) {print("Cuidado con la longitud")
-                           break}
-conf.level<-conf.level+(1-conf.level)/2
-if (b==1){
-odds<-(a[1,1]*a[2,2])/(a[1,2]*a[2,1])
-relative.risk<-(a[1,1]/(a[1,1]+a[1,2]))/(a[2,1]/(a[2,1]+a[2,2]))
-print(titulo1)
-} else
-{
-odds<-(a[1,2]*a[2,1])/(a[1,1]*a[2,2])
-relative.risk<-(a[2,1]/(a[2,1]+a[2,2]))/(a[1,1]/(a[1,1]+a[1,2]))
-print(titulo2)
-}
-p1<-(a[1,1]/(a[1,1]+a[1,2]))
-p2<-(a[2,1]/(a[2,1]+a[2,2]))
-log.odds<-log(odds)
-log.RR<-log(relative.risk)
-se.log.odds<-sqrt(1/a[1,1]+1/a[2,2]+1/a[1,2]+1/a[2,1])
-se.log.RR<-sqrt((1-p1)/(p1*(a[1,1]+a[1,2])) +(1-p2)/(p2*(a[2,1]+a[2,2])))
-conf.int.i<-log.odds-qnorm(conf.level)*se.log.odds
-conf.int.s<-log.odds+qnorm(conf.level)*se.log.odds
-conf.int.iRR<-log.RR-qnorm(conf.level)*se.log.RR
-conf.int.sRR<-log.RR+qnorm(conf.level)*se.log.RR
-print(cbind(oddsratio=odds,conf.int.i.OR=exp(conf.int.i),conf.int.s.OR=exp(conf.int.s)))
-print(cbind(relative.risk=relative.risk,conf.int.i.RR=exp(conf.int.iRR),conf.int.s.RR=exp(conf.int.sRR)))}
-
