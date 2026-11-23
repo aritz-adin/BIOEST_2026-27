@@ -123,7 +123,7 @@ options(width=1000)
 <!-- datos -->
 
 <!-- source("odds.R") -->
-<!-- datos |> odds(conf.level=0.9) -->
+<!-- datos |> odds(conf.level=0.9, digits=3) -->
 <!-- ``` -->
 
 <!-- **Interpretación:** Con una confianza del 90%, el odds ratio se encuentra entre 1.05 y 2.10. Es decir, el odds de fallecer en el grupo de sulfinpirazona es aproximadamente entre 1.05 y 2 veces mayor que el odds de fallecer en el grupo placebo. -->
@@ -165,23 +165,22 @@ options(width=1000)
 
 <!-- # 2. EJERCICIOS A ENTREGAR -->
 
-<!-- ## 2.1. En un estudio del tratamiento con Ribavirin en pacientes con síndrome respiratorio severo agudo (Severe Acute Respiratory Syndrome, SARS) se obtuvieron los siguientes resultados. -->
+<!-- ## 2.1. En un estudio sobre la eficacia de la profilaxis antibiótica para prevenir infecciones de la herida quirúrgica se compararon dos grupos de pacientes sometidos a cirugía. Un grupo recibió profilaxis antibiótica antes de la intervención y el otro no recibió profilaxis. -->
 
-<!-- |           | Death | Survivors | -->
-<!-- |-----------|-------|-----------| -->
-<!-- | Placebo   | 17    | 115       | -->
-<!-- | Ribavirin | 10    | 87        | -->
 
-<!-- Fuente: H-N. Leung, et al. (2004). Investigational Use of Ribavirin in the Treatment of Severe Acute Respiratory Syndrome, Singapore, 2003. *Tropical Medicine and International Health*,9 (8), pp 923-927. -->
+<!--   |           | Infección | Sin infección | -->
+<!--   |-----------|-------|-----------| -->
+<!--   | Sin profilaxis antibiótica | 30 | 120 | -->
+<!--   | Con profilaxis antibiótica | 12 | 138 | -->
 
-<!-- ### a) Calcula e interpreta un intervalo de confianza al 95% para la diferencia de proporciones de muertes en el grupo placebo y en el grupo que tomaron Ribavirin. -->
+<!-- ### a) Calcula e interpreta un intervalo de confianza al 95% para la diferencia de proporciones de infecciones entre el grupo que no recibió profilaxis y el grupo que sí la recibió. -->
 
-<!-- ### b) Estima e interpreta el riesgo relativo de muerte en el grupo placebo respecto al grupo Ribavirin y proporciona un intervalo de confianza al 95% para dicho riesgo. -->
+<!-- ### b) Estima e interpreta el riesgo relativo de infección en el grupo que no recibió profilaxis respecto al grupo que sí la recibió y proporciona un intervalo de confianza al 95% para dicho riesgo. -->
 
-<!-- ### c) Estima e interpreta el odds de muerte en los dos grupos. -->
+<!-- ### c) Estima e interpreta el odds de infección en los dos grupos. -->
 
 <!-- ### d) Estima e interpreta el odds ratio. Proporciona un intervalo de confianza para el odds ratio ($\alpha=0.95$) y explica qué concluyes. -->
 
-<!-- ### e) Utiliza el test exacto de Fisher para decidir si hay independencia. -->
+<!-- ### e) Utiliza el test exacto de Fisher para decidir si existe asociación entre la administración de profilaxis antibiótica y la aparición de infección de la herida quirúrgica. -->
 
-<!-- ### f) Utiliza el test exacto de la Chi-cuadrado para contrastar independencia. -->
+<!-- ### f) Utiliza el test de la Chi-cuadrado para contrastar la independencia entre ambas variables. Interpreta el resultado. -->
