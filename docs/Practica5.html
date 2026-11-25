@@ -417,29 +417,57 @@ Riesgo relativo      1.446  1.048  1.995</code></pre>
 </section>
 <section id="e-utiliza-el-test-chi-cuadrado-alpha0.1-para-decidir-si-hay-independencia." class="level3">
 <h3 class="anchored" data-anchor-id="e-utiliza-el-test-chi-cuadrado-alpha0.1-para-decidir-si-hay-independencia.">e) Utiliza el test Chi-cuadrado (<span class="math inline">\(\alpha=0.1\)</span>) para decidir si hay independencia.</h3>
-<!-- La hipótesis nula del contraste se puede expresar como: -->
-<!-- $H_0$: No hay asociación entre tomar el medicamento y sufrir o no un infarto de miocardio (hay independencia) -->
-<!-- Si utilizamos la función \func{chisq.test} de R: -->
-<!-- ```{r, include=TRUE} -->
-<!-- resultado <- datos |> chisq.test() -->
-<!-- print(resultado) -->
-<!-- ``` -->
-<!-- Podemos comprobar cómo se calculan los casos esperados: -->
-<!-- ```{r, include=TRUE} -->
-<!-- resultado$expected -->
-<!-- ``` -->
-<!-- $$\hat{\mu}_{11}=\dfrac{n_{1+} \times n_{+1}}{n}=\dfrac{(60+682) \times (60+41)}{1475} = 50.80814$$ De forma similar, podemos comprobar que el estadístico Chi-cuadrado se calcula como: -->
-<!-- ```{r, include=TRUE} -->
-<!-- sum((resultado$observed-resultado$expected)^2/resultado$expected) -->
-<!-- ``` -->
-<!-- **Intepretación del p-valor del test:** Como p-valor$=0.0731<\alpha=0.1$, el test Chi-cuadrado rechaza la hipótesis nula de independencia, es decir, tomar el medicamento tiene una influencia en sufrir o no un infarto de miocardio. -->
+<p>La hipótesis nula del contraste se puede expresar como:</p>
+<p><span class="math inline">\(H_0\)</span>: No hay asociación entre tomar el medicamento y sufrir o no un infarto de miocardio (hay independencia)</p>
+<p>Si utilizamos la función de R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span> <span class="fu">chisq.test</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(resultado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  datos
+X-squared = 3.2121, df = 1, p-value = 0.0731</code></pre>
+</div>
+</div>
+<p>Podemos comprobar cómo se calculan los casos esperados:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>resultado<span class="sc">$</span>expected</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Muertos    Vivos
+Placebo 50.80814 691.1919
+Sulfin  50.19186 682.8081</code></pre>
+</div>
+</div>
+<p><span class="math display">\[\hat{\mu}_{11}=\dfrac{n_{1+} \times n_{+1}}{n}=\dfrac{(60+682) \times (60+41)}{1475} = 50.80814\]</span> De forma similar, podemos comprobar que el estadístico Chi-cuadrado se calcula como:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((resultado<span class="sc">$</span>observed<span class="sc">-</span>resultado<span class="sc">$</span>expected)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>resultado<span class="sc">$</span>expected)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.592256</code></pre>
+</div>
+</div>
+<p><strong>Intepretación del p-valor del test:</strong> Como p-valor<span class="math inline">\(=0.0731&lt;\alpha=0.1\)</span>, el test Chi-cuadrado rechaza la hipótesis nula de independencia, es decir, tomar el medicamento tiene una influencia en sufrir o no un infarto de miocardio.</p>
 </section>
 <section id="f-utiliza-el-test-exacto-de-fisher-para-contrastar-independencia." class="level3">
 <h3 class="anchored" data-anchor-id="f-utiliza-el-test-exacto-de-fisher-para-contrastar-independencia.">f) Utiliza el test exacto de Fisher para contrastar independencia.</h3>
-<!-- ```{r include=TRUE} -->
-<!-- datos |> fisher.test(conf.level=0.9) -->
-<!-- ``` -->
-<!-- **Intepretación:** Como p-valor$=0.0636<\alpha=0.1$, el test de Fisher también rechaza la hipótesis nula de independencia. Además, proporciona también el intervalo de confianza para el odds ratio (en este caso el intervalo no contiene al "1"). -->
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span> <span class="fu">fisher.test</span>(<span class="at">conf.level=</span><span class="fl">0.9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Fisher's Exact Test for Count Data
+
+data:  datos
+p-value = 0.06356
+alternative hypothesis: true odds ratio is not equal to 1
+90 percent confidence interval:
+ 1.031553 2.147774
+sample estimates:
+odds ratio 
+  1.484468 </code></pre>
+</div>
+</div>
+<p><strong>Intepretación:</strong> Como p-valor<span class="math inline">\(=0.0636&lt;\alpha=0.1\)</span>, el test de Fisher también rechaza la hipótesis nula de independencia. Además, proporciona también el intervalo de confianza para el odds ratio (en este caso el intervalo no contiene al “1”).</p>
 </section>
 </section>
 </section>

@@ -132,38 +132,38 @@ datos |> odds(conf.level=0.9, digits=3)
 
 ### e) Utiliza el test Chi-cuadrado ($\alpha=0.1$) para decidir si hay independencia.
 
-<!-- La hipótesis nula del contraste se puede expresar como: -->
+La hipótesis nula del contraste se puede expresar como:
 
-<!-- $H_0$: No hay asociación entre tomar el medicamento y sufrir o no un infarto de miocardio (hay independencia) -->
+$H_0$: No hay asociación entre tomar el medicamento y sufrir o no un infarto de miocardio (hay independencia)
 
-<!-- Si utilizamos la función \func{chisq.test} de R: -->
+Si utilizamos la función \func{chisq.test} de R:
 
-<!-- ```{r, include=TRUE} -->
-<!-- resultado <- datos |> chisq.test() -->
-<!-- print(resultado) -->
-<!-- ``` -->
+```{r, include=TRUE}
+resultado <- datos |> chisq.test()
+print(resultado)
+```
 
-<!-- Podemos comprobar cómo se calculan los casos esperados: -->
+Podemos comprobar cómo se calculan los casos esperados:
 
-<!-- ```{r, include=TRUE} -->
-<!-- resultado$expected -->
-<!-- ``` -->
+```{r, include=TRUE}
+resultado$expected
+```
 
-<!-- $$\hat{\mu}_{11}=\dfrac{n_{1+} \times n_{+1}}{n}=\dfrac{(60+682) \times (60+41)}{1475} = 50.80814$$ De forma similar, podemos comprobar que el estadístico Chi-cuadrado se calcula como: -->
+$$\hat{\mu}_{11}=\dfrac{n_{1+} \times n_{+1}}{n}=\dfrac{(60+682) \times (60+41)}{1475} = 50.80814$$ De forma similar, podemos comprobar que el estadístico Chi-cuadrado se calcula como:
 
-<!-- ```{r, include=TRUE} -->
-<!-- sum((resultado$observed-resultado$expected)^2/resultado$expected) -->
-<!-- ``` -->
+```{r, include=TRUE}
+sum((resultado$observed-resultado$expected)^2/resultado$expected)
+```
 
-<!-- **Intepretación del p-valor del test:** Como p-valor$=0.0731<\alpha=0.1$, el test Chi-cuadrado rechaza la hipótesis nula de independencia, es decir, tomar el medicamento tiene una influencia en sufrir o no un infarto de miocardio. -->
+**Intepretación del p-valor del test:** Como p-valor$=0.0731<\alpha=0.1$, el test Chi-cuadrado rechaza la hipótesis nula de independencia, es decir, tomar el medicamento tiene una influencia en sufrir o no un infarto de miocardio.
 
 ### f) Utiliza el test exacto de Fisher para contrastar independencia.
 
-<!-- ```{r include=TRUE} -->
-<!-- datos |> fisher.test(conf.level=0.9) -->
-<!-- ``` -->
+```{r include=TRUE}
+datos |> fisher.test(conf.level=0.9)
+```
 
-<!-- **Intepretación:** Como p-valor$=0.0636<\alpha=0.1$, el test de Fisher también rechaza la hipótesis nula de independencia. Además, proporciona también el intervalo de confianza para el odds ratio (en este caso el intervalo no contiene al "1"). -->
+**Intepretación:** Como p-valor$=0.0636<\alpha=0.1$, el test de Fisher también rechaza la hipótesis nula de independencia. Además, proporciona también el intervalo de confianza para el odds ratio (en este caso el intervalo no contiene al "1").
 
 # 2. EJERCICIOS A ENTREGAR
 
