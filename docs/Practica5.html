@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,16 +13,54 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -40,10 +78,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -182,6 +220,18 @@ window.Quarto = {
   <li><a href="#f-utiliza-el-test-exacto-de-fisher-para-contrastar-independencia." id="toc-f-utiliza-el-test-exacto-de-fisher-para-contrastar-independencia." class="nav-link" data-scroll-target="#f-utiliza-el-test-exacto-de-fisher-para-contrastar-independencia.">f) Utiliza el test exacto de Fisher para contrastar independencia.</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#ejercicios-a-entregar" id="toc-ejercicios-a-entregar" class="nav-link" data-scroll-target="#ejercicios-a-entregar">2. EJERCICIOS A ENTREGAR</a>
+  <ul class="collapse">
+  <li><a href="#en-un-estudio-sobre-la-eficacia-de-la-profilaxis-antibiótica-para-prevenir-infecciones-de-la-herida-quirúrgica-se-compararon-dos-grupos-de-pacientes-sometidos-a-cirugía.-un-grupo-recibió-profilaxis-antibiótica-antes-de-la-intervención-y-el-otro-no-recibió-profilaxis." id="toc-en-un-estudio-sobre-la-eficacia-de-la-profilaxis-antibiótica-para-prevenir-infecciones-de-la-herida-quirúrgica-se-compararon-dos-grupos-de-pacientes-sometidos-a-cirugía.-un-grupo-recibió-profilaxis-antibiótica-antes-de-la-intervención-y-el-otro-no-recibió-profilaxis." class="nav-link" data-scroll-target="#en-un-estudio-sobre-la-eficacia-de-la-profilaxis-antibiótica-para-prevenir-infecciones-de-la-herida-quirúrgica-se-compararon-dos-grupos-de-pacientes-sometidos-a-cirugía.-un-grupo-recibió-profilaxis-antibiótica-antes-de-la-intervención-y-el-otro-no-recibió-profilaxis.">2.1. En un estudio sobre la eficacia de la profilaxis antibiótica para prevenir infecciones de la herida quirúrgica se compararon dos grupos de pacientes sometidos a cirugía. Un grupo recibió profilaxis antibiótica antes de la intervención y el otro no recibió profilaxis.</a>
+  <ul class="collapse">
+  <li><a href="#a-calcula-e-interpreta-un-intervalo-de-confianza-al-95-para-la-diferencia-de-proporciones-de-infecciones-entre-el-grupo-que-no-recibió-profilaxis-y-el-grupo-que-sí-la-recibió." id="toc-a-calcula-e-interpreta-un-intervalo-de-confianza-al-95-para-la-diferencia-de-proporciones-de-infecciones-entre-el-grupo-que-no-recibió-profilaxis-y-el-grupo-que-sí-la-recibió." class="nav-link" data-scroll-target="#a-calcula-e-interpreta-un-intervalo-de-confianza-al-95-para-la-diferencia-de-proporciones-de-infecciones-entre-el-grupo-que-no-recibió-profilaxis-y-el-grupo-que-sí-la-recibió.">a) Calcula e interpreta un intervalo de confianza al 95% para la diferencia de proporciones de infecciones entre el grupo que no recibió profilaxis y el grupo que sí la recibió.</a></li>
+  <li><a href="#b-estima-e-interpreta-el-riesgo-relativo-de-infección-en-el-grupo-que-no-recibió-profilaxis-respecto-al-grupo-que-sí-la-recibió-y-proporciona-un-intervalo-de-confianza-al-95-para-dicho-riesgo." id="toc-b-estima-e-interpreta-el-riesgo-relativo-de-infección-en-el-grupo-que-no-recibió-profilaxis-respecto-al-grupo-que-sí-la-recibió-y-proporciona-un-intervalo-de-confianza-al-95-para-dicho-riesgo." class="nav-link" data-scroll-target="#b-estima-e-interpreta-el-riesgo-relativo-de-infección-en-el-grupo-que-no-recibió-profilaxis-respecto-al-grupo-que-sí-la-recibió-y-proporciona-un-intervalo-de-confianza-al-95-para-dicho-riesgo.">b) Estima e interpreta el riesgo relativo de infección en el grupo que no recibió profilaxis respecto al grupo que sí la recibió y proporciona un intervalo de confianza al 95% para dicho riesgo.</a></li>
+  <li><a href="#c-estima-e-interpreta-el-odds-de-infección-en-los-dos-grupos." id="toc-c-estima-e-interpreta-el-odds-de-infección-en-los-dos-grupos." class="nav-link" data-scroll-target="#c-estima-e-interpreta-el-odds-de-infección-en-los-dos-grupos.">c) Estima e interpreta el odds de infección en los dos grupos.</a></li>
+  <li><a href="#d-estima-e-interpreta-el-odds-ratio.-proporciona-un-intervalo-de-confianza-para-el-odds-ratio-alpha0.95-y-explica-qué-concluyes." id="toc-d-estima-e-interpreta-el-odds-ratio.-proporciona-un-intervalo-de-confianza-para-el-odds-ratio-alpha0.95-y-explica-qué-concluyes." class="nav-link" data-scroll-target="#d-estima-e-interpreta-el-odds-ratio.-proporciona-un-intervalo-de-confianza-para-el-odds-ratio-alpha0.95-y-explica-qué-concluyes.">d) Estima e interpreta el odds ratio. Proporciona un intervalo de confianza para el odds ratio (<span class="math inline">\(\alpha=0.95\)</span>) y explica qué concluyes.</a></li>
+  <li><a href="#e-utiliza-el-test-exacto-de-fisher-para-decidir-si-existe-asociación-entre-la-administración-de-profilaxis-antibiótica-y-la-aparición-de-infección-de-la-herida-quirúrgica." id="toc-e-utiliza-el-test-exacto-de-fisher-para-decidir-si-existe-asociación-entre-la-administración-de-profilaxis-antibiótica-y-la-aparición-de-infección-de-la-herida-quirúrgica." class="nav-link" data-scroll-target="#e-utiliza-el-test-exacto-de-fisher-para-decidir-si-existe-asociación-entre-la-administración-de-profilaxis-antibiótica-y-la-aparición-de-infección-de-la-herida-quirúrgica.">e) Utiliza el test exacto de Fisher para decidir si existe asociación entre la administración de profilaxis antibiótica y la aparición de infección de la herida quirúrgica.</a></li>
+  <li><a href="#f-utiliza-el-test-de-la-chi-cuadrado-para-contrastar-la-independencia-entre-ambas-variables.-interpreta-el-resultado." id="toc-f-utiliza-el-test-de-la-chi-cuadrado-para-contrastar-la-independencia-entre-ambas-variables.-interpreta-el-resultado." class="nav-link" data-scroll-target="#f-utiliza-el-test-de-la-chi-cuadrado-para-contrastar-la-independencia-entre-ambas-variables.-interpreta-el-resultado.">f) Utiliza el test de la Chi-cuadrado para contrastar la independencia entre ambas variables. Interpreta el resultado.</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -246,75 +296,124 @@ window.Quarto = {
 </table>
 <section id="a-calcula-e-interpreta-un-intervalo-de-confianza-al-90-para-la-diferencia-de-proporciones-de-muertes-en-el-grupo-placebo-y-en-el-grupo-que-tomaron-sulfinpirazona." class="level3">
 <h3 class="anchored" data-anchor-id="a-calcula-e-interpreta-un-intervalo-de-confianza-al-90-para-la-diferencia-de-proporciones-de-muertes-en-el-grupo-placebo-y-en-el-grupo-que-tomaron-sulfinpirazona.">a) Calcula e interpreta un intervalo de confianza al 90% para la diferencia de proporciones de muertes en el grupo placebo y en el grupo que tomaron sulfinpirazona.</h3>
-<!-- Definimos las variables: -->
-<!-- X="Nº de fallecidos entre los que tomaron sulfinpirazona." $\sim Bin(n_X,\pi_X)$ -->
-<!-- Y="Nº de fallecidos entre los que tomaron placebo" $\sim Bin(n_Y,\pi_Y)$ -->
-<!-- Las estimaciones de las proporciones $\pi_X$ y $\pi_Y$ se calculan como: -->
-<!-- $$\hat{\pi}_X=p_X=\dfrac{41}{41+692}=0.0559$$ -->
-<!-- $$\hat{\pi}_Y=p_Y=\dfrac{60}{60+682}=0.0809$$ Podemos calcular el intervalo de confianza al 90% para la diferencia de proporciones como: -->
-<!-- $$IC_{0.90}(\pi_X-\pi_Y) = \left[(p_X-p_Y) \pm z_{0.95} \sqrt{\frac{p_X*(1-p_X)}{n_X}+\frac{p_Y*(1-p_Y)}{n_Y}} \right] = [-0.0465, -0.0033]$$ -->
-<!-- ```{r, include=TRUE} -->
-<!-- x <- 41 -->
-<!-- y <- 60 -->
-<!-- nx <- 41+692 -->
-<!-- ny <- 60+682 -->
-<!-- prop.test(c(x,y), c(nx,ny), alternative="two.sided", conf.level=0.9, correct=FALSE) -->
-<!-- ``` -->
-<!-- **Interpretación:** Con un nivel de confianza del 90%, la diferencia entre la proporción de fallecidos en los pacientes que tomaron sulfinpirazona y la proporción de fallecidos en los pacientes que tomaron placebo se encuentra entre -0.0465 y -0.0033. Como $0 \notin IC_{0.90}(\pi_X-\pi_Y)$, existen evidencias estadísticas para afirmar que la proporción de fallecidos en ambos grupos es distinta. -->
+<p>Definimos las variables:</p>
+<p>X=“Nº de fallecidos entre los que tomaron sulfinpirazona.” <span class="math inline">\(\sim Bin(n_X,\pi_X)\)</span></p>
+<p>Y=“Nº de fallecidos entre los que tomaron placebo” <span class="math inline">\(\sim Bin(n_Y,\pi_Y)\)</span></p>
+<p>Las estimaciones de las proporciones <span class="math inline">\(\pi_X\)</span> y <span class="math inline">\(\pi_Y\)</span> se calculan como:</p>
+<p><span class="math display">\[\hat{\pi}_X=p_X=\dfrac{41}{41+692}=0.0559\]</span></p>
+<p><span class="math display">\[\hat{\pi}_Y=p_Y=\dfrac{60}{60+682}=0.0809\]</span> Podemos calcular el intervalo de confianza al 90% para la diferencia de proporciones como:</p>
+<p><span class="math display">\[IC_{0.90}(\pi_X-\pi_Y) = \left[(p_X-p_Y) \pm z_{0.95} \sqrt{\frac{p_X*(1-p_X)}{n_X}+\frac{p_Y*(1-p_Y)}{n_Y}} \right] = [-0.0465, -0.0033]\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">41</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>nx <span class="ot">&lt;-</span> <span class="dv">41</span><span class="sc">+</span><span class="dv">692</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ny <span class="ot">&lt;-</span> <span class="dv">60</span><span class="sc">+</span><span class="dv">682</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="fu">c</span>(x,y), <span class="fu">c</span>(nx,ny), <span class="at">alternative=</span><span class="st">"two.sided"</span>, <span class="at">conf.level=</span><span class="fl">0.9</span>, <span class="at">correct=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    2-sample test for equality of proportions without continuity correction
+
+data:  c(x, y) out of c(nx, ny)
+X-squared = 3.5923, df = 1, p-value = 0.05805
+alternative hypothesis: two.sided
+90 percent confidence interval:
+ -0.046513082 -0.003342954
+sample estimates:
+    prop 1     prop 2 
+0.05593452 0.08086253 </code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> Con un nivel de confianza del 90%, la diferencia entre la proporción de fallecidos en los pacientes que tomaron sulfinpirazona y la proporción de fallecidos en los pacientes que tomaron placebo se encuentra entre -0.0465 y -0.0033. Como <span class="math inline">\(0 \notin IC_{0.90}(\pi_X-\pi_Y)\)</span>, existen evidencias estadísticas para afirmar que la proporción de fallecidos en ambos grupos es distinta.</p>
 </section>
 <section id="b-estima-e-interpreta-el-riesgo-relativo-de-morir-habiendo-tomado-placebo-respecto-a-haber-tomado-sulfinpirazona-y-proporciona-un-intervalo-de-confianza-al-90-para-dicho-riesgo." class="level3">
 <h3 class="anchored" data-anchor-id="b-estima-e-interpreta-el-riesgo-relativo-de-morir-habiendo-tomado-placebo-respecto-a-haber-tomado-sulfinpirazona-y-proporciona-un-intervalo-de-confianza-al-90-para-dicho-riesgo.">b) Estima e interpreta el riesgo relativo de morir habiendo tomado placebo respecto a haber tomado sulfinpirazona y proporciona un intervalo de confianza al 90% para dicho riesgo.</h3>
-<!-- El estimador del riesgo relativo es -->
-<!-- $$\widehat{RR}=\frac{p_Y}{p_X}=\frac{0.0809}{0.0559}=1.4472$$ -->
-<!-- ```{r, include=TRUE} -->
-<!-- px <- x/nx -->
-<!-- py <- y/ny -->
-<!-- RR <- py/px -->
-<!-- RR -->
-<!-- ``` -->
-<!-- **Interpretación:** La proporción muestral de fallecidos en el grupo placebo es aproximadamente 1.5 veces mayor que en el grupo de sulfinpirazona. -->
-<!-- Podemos calcular el intervalo de confianza al 90% para el logaritmo del riesgo relativo (**NOTA: no lo haremos asi**): -->
-<!-- $$IC_{0.90}\left(\log \left(\frac{\pi_Y}{\pi_X} \right) \right) = \left[\log(p_Y/p_X) \pm z_{0.95}*SE(\log(p_Y/p_X)) \right] = [0.0465, 0.6907]$$ -->
-<!-- ```{r, include=TRUE} -->
-<!-- alpha <- 0.1 -->
-<!-- SE.log <- sqrt((1-py)/(ny*py)+(1-px)/(nx*px)) -->
-<!-- IC.log <- c(log(RR)-qnorm(1-alpha/2)*SE.log, log(RR)+qnorm(1-alpha/2)*SE.log) -->
-<!-- IC.log -->
-<!-- ``` -->
-<!-- Transformando este intervalo mediante la función exponencial, obtenemos que $IC_{0.90}\left(\frac{\pi_Y}{\pi_X}\right) = [\exp(0.0465), \exp(0.6907)]=[1.048, 1.995]$. -->
-<!-- ```{r, include=TRUE} -->
-<!-- exp(IC.log) -->
-<!-- ``` -->
-<!-- **Interpretación:** Con una confianza del 90%, el riesgo relativo se encuentra entre 1.048 y 1.995. Es decir, la proporción de fallecidos es aproximadamente entre 1.05 y 2 veces mayor en el grupo placebo. -->
+<p>El estimador del riesgo relativo es</p>
+<p><span class="math display">\[\widehat{RR}=\frac{p_Y}{p_X}=\frac{0.0809}{0.0559}=1.4472\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>px <span class="ot">&lt;-</span> x<span class="sc">/</span>nx</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>py <span class="ot">&lt;-</span> y<span class="sc">/</span>ny</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>RR <span class="ot">&lt;-</span> py<span class="sc">/</span>px</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>RR</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.445664</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> La proporción muestral de fallecidos en el grupo placebo es aproximadamente 1.5 veces mayor que en el grupo de sulfinpirazona.</p>
+<p>Podemos calcular el intervalo de confianza al 90% para el logaritmo del riesgo relativo (<strong>No lo haremos asi!!!</strong>):</p>
+<p><span class="math display">\[IC_{0.90}\left(\log \left(\frac{\pi_Y}{\pi_X} \right) \right) = \left[\log(p_Y/p_X) \pm z_{0.95}*SE(\log(p_Y/p_X)) \right] = [0.0465, 0.6907]\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>SE.log <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((<span class="dv">1</span><span class="sc">-</span>py)<span class="sc">/</span>(ny<span class="sc">*</span>py)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">-</span>px)<span class="sc">/</span>(nx<span class="sc">*</span>px))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>IC.log <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">log</span>(RR)<span class="sc">-</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>SE.log, <span class="fu">log</span>(RR)<span class="sc">+</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>SE.log)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>IC.log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04647593 0.69066198</code></pre>
+</div>
+</div>
+<p>Transformando este intervalo mediante la función exponencial, obtenemos que <span class="math display">\[IC_{0.90}\left(\frac{\pi_Y}{\pi_X}\right) = [\exp(0.0465), \exp(0.6907)]=[1.048, 1.995]\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(IC.log)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.047573 1.995036</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> Con una confianza del 90%, el verdadero riesgo relativo se encuentra entre 1.048 y 1.995. Es decir, la proporción de fallecidos en el grupo sulfinpirazona es aproximadamente entre 1.05 y 2 veces mayor (entre un 5% y un 100% más) que en el grupo placebo.</p>
 </section>
 <section id="c-estima-e-interpreta-el-odds-de-fallecer-en-los-dos-grupos." class="level3">
 <h3 class="anchored" data-anchor-id="c-estima-e-interpreta-el-odds-de-fallecer-en-los-dos-grupos.">c) Estima e interpreta el odds de fallecer en los dos grupos.</h3>
-<!-- $$\widehat{odds}_{sulfin}=\frac{p_X}{1-p_X}=0.0592$$ $$\widehat{odds}_{placebo}=\frac{p_Y}{1-p_Y}=0.0880$$ -->
-<!-- ```{r, include=TRUE} -->
-<!-- odds.sulfin <- px/(1-px) -->
-<!-- odds.sulfin -->
-<!-- odds.placebo <- py/(1-py) -->
-<!-- odds.placebo -->
-<!-- ``` -->
-<!-- **Interpretación:** La probabilidad de sobrevivir en el grupo de pacientes que han tomado sulfinpirazona es aproximadamente 17 veces ($1/0.0592=16.89$) superior a la probabilidad de fallecer. -->
-<!-- Por otro lado, la probabilidad de sobrevivir en el grupo de pacientes que han tomado placebo es aproximadamente 11 veces ($1/0.0880=11.36$) superior a la probabilidad de fallecer fallecer. -->
+<p><span class="math display">\[\widehat{odds}_{sulfin}=\frac{p_X}{1-p_X}=0.0592\]</span> <span class="math display">\[\widehat{odds}_{placebo}=\frac{p_Y}{1-p_Y}=0.0880\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>odds.sulfin <span class="ot">&lt;-</span> px<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>px)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>odds.sulfin</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05924855</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>odds.placebo <span class="ot">&lt;-</span> py<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>py)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>odds.placebo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.08797654</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> La probabilidad de sobrevivir en el grupo de pacientes que han tomado sulfinpirazona es aproximadamente 17 veces (<span class="math inline">\(1/0.0592=16.89\)</span>) superior a la probabilidad de fallecer.</p>
+<p>Por otro lado, la probabilidad de sobrevivir en el grupo de pacientes que han tomado placebo es aproximadamente 11 veces (<span class="math inline">\(1/0.0880=11.36\)</span>) superior a la probabilidad de fallecer.</p>
 </section>
 <section id="d-estima-e-interpreta-el-odds-ratio.-calcula-su-intervalo-de-confianza-alpha0.9-utilizando-la-función-odds." class="level3">
 <h3 class="anchored" data-anchor-id="d-estima-e-interpreta-el-odds-ratio.-calcula-su-intervalo-de-confianza-alpha0.9-utilizando-la-función-odds.">d) Estima e interpreta el odds ratio. Calcula su intervalo de confianza (<span class="math inline">\(\alpha=0.9\)</span>) utilizando la función <code>odds()</code>.</h3>
-<!-- El odds ratio estimado, se calcula como el ratio de odds -->
-<!-- $$OR=\frac{\widehat{odds}_{sulfin}}{\widehat{odds}_{placebo}}=\frac{0.05924855}{0.08797654}=0.6734585$$ -->
-<!-- o como la razón del producto cruzado -->
-<!-- $$OR=\frac{n_{11} \times n_{22}}{n_{21} \times n_{12}}=\frac{41 \times 682}{60 \times 692}=0.6734586$$ **Interpretación:** El odds estimado de fallecer en el grupo placebo es aproximadamente 1.5 veces ($1/0.67345=1.484891$) superior al odds estimado de fallecer en el grupo de pacientes que han tomado sulfinpirazona. -->
-<!-- Calculamos el intervalo de confianza al 90% para el odds ratio: -->
-<!-- ```{r include=TRUE} -->
-<!-- datos <- data.frame(Muertos=c(60,41), -->
-<!--                     Vivos=c(682,692), -->
-<!--                     row.names=c("Placebo","Sulfin")) -->
-<!-- datos -->
-<!-- source("odds.R") -->
-<!-- datos |> odds(conf.level=0.9, digits=3) -->
-<!-- ``` -->
-<!-- **Interpretación:** Con una confianza del 90%, el odds ratio se encuentra entre 1.05 y 2.10. Es decir, el odds de fallecer en el grupo de sulfinpirazona es aproximadamente entre 1.05 y 2 veces mayor que el odds de fallecer en el grupo placebo. -->
+<p>El odds ratio estimado, se calcula como el ratio de odds</p>
+<p><span class="math display">\[OR=\frac{\widehat{odds}_{sulfin}}{\widehat{odds}_{placebo}}=\frac{0.05924855}{0.08797654}=0.6734585\]</span></p>
+<p>o como la razón del producto cruzado</p>
+<p><span class="math display">\[OR=\frac{n_{11} \times n_{22}}{n_{21} \times n_{12}}=\frac{41 \times 682}{60 \times 692}=0.6734586\]</span></p>
+<p><strong>Interpretación:</strong> El odds estimado de fallecer en el grupo placebo es aproximadamente 1.5 veces (<span class="math inline">\(1/0.67345=1.484891\)</span>) superior al odds estimado de fallecer en el grupo de pacientes que han tomado sulfinpirazona.</p>
+<p>Calculamos el intervalo de confianza al 90% para el odds ratio:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Muertos=</span><span class="fu">c</span>(<span class="dv">60</span>,<span class="dv">41</span>),</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Vivos=</span><span class="fu">c</span>(<span class="dv">682</span>,<span class="dv">692</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">row.names=</span><span class="fu">c</span>(<span class="st">"Placebo"</span>,<span class="st">"Sulfin"</span>))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>datos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Muertos Vivos
+Placebo      60   682
+Sulfin       41   692</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"odds.R"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span> <span class="fu">odds</span>(<span class="at">conf.level=</span><span class="fl">0.9</span>, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Comparacion: Placebo vs Sulfin 
+Evento (columna de referencia): Muertos 
+Nivel de confianza: 90% 
+
+                Estimacion IC.inf IC.sup
+Odds ratio           1.485  1.052  2.096
+Riesgo relativo      1.446  1.048  1.995</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong> Con una confianza del 90%, el odds ratio se encuentra entre 1.05 y 2.10. Es decir, el odds de fallecer en el grupo de sulfinpirazona es aproximadamente entre 1.05 y 2 veces mayor que el odds de fallecer en el grupo placebo.</p>
 </section>
 <section id="e-utiliza-el-test-chi-cuadrado-alpha0.1-para-decidir-si-hay-independencia." class="level3">
 <h3 class="anchored" data-anchor-id="e-utiliza-el-test-chi-cuadrado-alpha0.1-para-decidir-si-hay-independencia.">e) Utiliza el test Chi-cuadrado (<span class="math inline">\(\alpha=0.1\)</span>) para decidir si hay independencia.</h3>
@@ -341,18 +440,51 @@ window.Quarto = {
 <!-- datos |> fisher.test(conf.level=0.9) -->
 <!-- ``` -->
 <!-- **Intepretación:** Como p-valor$=0.0636<\alpha=0.1$, el test de Fisher también rechaza la hipótesis nula de independencia. Además, proporciona también el intervalo de confianza para el odds ratio (en este caso el intervalo no contiene al "1"). -->
-<!-- # 2. EJERCICIOS A ENTREGAR -->
-<!-- ## 2.1. En un estudio sobre la eficacia de la profilaxis antibiótica para prevenir infecciones de la herida quirúrgica se compararon dos grupos de pacientes sometidos a cirugía. Un grupo recibió profilaxis antibiótica antes de la intervención y el otro no recibió profilaxis. -->
-<!--   |           | Infección | Sin infección | -->
-<!--   |-----------|-------|-----------| -->
-<!--   | Sin profilaxis antibiótica | 30 | 120 | -->
-<!--   | Con profilaxis antibiótica | 12 | 138 | -->
-<!-- ### a) Calcula e interpreta un intervalo de confianza al 95% para la diferencia de proporciones de infecciones entre el grupo que no recibió profilaxis y el grupo que sí la recibió. -->
-<!-- ### b) Estima e interpreta el riesgo relativo de infección en el grupo que no recibió profilaxis respecto al grupo que sí la recibió y proporciona un intervalo de confianza al 95% para dicho riesgo. -->
-<!-- ### c) Estima e interpreta el odds de infección en los dos grupos. -->
-<!-- ### d) Estima e interpreta el odds ratio. Proporciona un intervalo de confianza para el odds ratio ($\alpha=0.95$) y explica qué concluyes. -->
-<!-- ### e) Utiliza el test exacto de Fisher para decidir si existe asociación entre la administración de profilaxis antibiótica y la aparición de infección de la herida quirúrgica. -->
-<!-- ### f) Utiliza el test de la Chi-cuadrado para contrastar la independencia entre ambas variables. Interpreta el resultado. -->
+</section>
+</section>
+</section>
+<section id="ejercicios-a-entregar" class="level1">
+<h1>2. EJERCICIOS A ENTREGAR</h1>
+<section id="en-un-estudio-sobre-la-eficacia-de-la-profilaxis-antibiótica-para-prevenir-infecciones-de-la-herida-quirúrgica-se-compararon-dos-grupos-de-pacientes-sometidos-a-cirugía.-un-grupo-recibió-profilaxis-antibiótica-antes-de-la-intervención-y-el-otro-no-recibió-profilaxis." class="level2">
+<h2 class="anchored" data-anchor-id="en-un-estudio-sobre-la-eficacia-de-la-profilaxis-antibiótica-para-prevenir-infecciones-de-la-herida-quirúrgica-se-compararon-dos-grupos-de-pacientes-sometidos-a-cirugía.-un-grupo-recibió-profilaxis-antibiótica-antes-de-la-intervención-y-el-otro-no-recibió-profilaxis.">2.1. En un estudio sobre la eficacia de la profilaxis antibiótica para prevenir infecciones de la herida quirúrgica se compararon dos grupos de pacientes sometidos a cirugía. Un grupo recibió profilaxis antibiótica antes de la intervención y el otro no recibió profilaxis.</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Infección</th>
+<th>Sin infección</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sin profilaxis antibiótica</td>
+<td>30</td>
+<td>120</td>
+</tr>
+<tr class="even">
+<td>Con profilaxis antibiótica</td>
+<td>12</td>
+<td>138</td>
+</tr>
+</tbody>
+</table>
+<section id="a-calcula-e-interpreta-un-intervalo-de-confianza-al-95-para-la-diferencia-de-proporciones-de-infecciones-entre-el-grupo-que-no-recibió-profilaxis-y-el-grupo-que-sí-la-recibió." class="level3">
+<h3 class="anchored" data-anchor-id="a-calcula-e-interpreta-un-intervalo-de-confianza-al-95-para-la-diferencia-de-proporciones-de-infecciones-entre-el-grupo-que-no-recibió-profilaxis-y-el-grupo-que-sí-la-recibió.">a) Calcula e interpreta un intervalo de confianza al 95% para la diferencia de proporciones de infecciones entre el grupo que no recibió profilaxis y el grupo que sí la recibió.</h3>
+</section>
+<section id="b-estima-e-interpreta-el-riesgo-relativo-de-infección-en-el-grupo-que-no-recibió-profilaxis-respecto-al-grupo-que-sí-la-recibió-y-proporciona-un-intervalo-de-confianza-al-95-para-dicho-riesgo." class="level3">
+<h3 class="anchored" data-anchor-id="b-estima-e-interpreta-el-riesgo-relativo-de-infección-en-el-grupo-que-no-recibió-profilaxis-respecto-al-grupo-que-sí-la-recibió-y-proporciona-un-intervalo-de-confianza-al-95-para-dicho-riesgo.">b) Estima e interpreta el riesgo relativo de infección en el grupo que no recibió profilaxis respecto al grupo que sí la recibió y proporciona un intervalo de confianza al 95% para dicho riesgo.</h3>
+</section>
+<section id="c-estima-e-interpreta-el-odds-de-infección-en-los-dos-grupos." class="level3">
+<h3 class="anchored" data-anchor-id="c-estima-e-interpreta-el-odds-de-infección-en-los-dos-grupos.">c) Estima e interpreta el odds de infección en los dos grupos.</h3>
+</section>
+<section id="d-estima-e-interpreta-el-odds-ratio.-proporciona-un-intervalo-de-confianza-para-el-odds-ratio-alpha0.95-y-explica-qué-concluyes." class="level3">
+<h3 class="anchored" data-anchor-id="d-estima-e-interpreta-el-odds-ratio.-proporciona-un-intervalo-de-confianza-para-el-odds-ratio-alpha0.95-y-explica-qué-concluyes.">d) Estima e interpreta el odds ratio. Proporciona un intervalo de confianza para el odds ratio (<span class="math inline">\(\alpha=0.95\)</span>) y explica qué concluyes.</h3>
+</section>
+<section id="e-utiliza-el-test-exacto-de-fisher-para-decidir-si-existe-asociación-entre-la-administración-de-profilaxis-antibiótica-y-la-aparición-de-infección-de-la-herida-quirúrgica." class="level3">
+<h3 class="anchored" data-anchor-id="e-utiliza-el-test-exacto-de-fisher-para-decidir-si-existe-asociación-entre-la-administración-de-profilaxis-antibiótica-y-la-aparición-de-infección-de-la-herida-quirúrgica.">e) Utiliza el test exacto de Fisher para decidir si existe asociación entre la administración de profilaxis antibiótica y la aparición de infección de la herida quirúrgica.</h3>
+</section>
+<section id="f-utiliza-el-test-de-la-chi-cuadrado-para-contrastar-la-independencia-entre-ambas-variables.-interpreta-el-resultado." class="level3">
+<h3 class="anchored" data-anchor-id="f-utiliza-el-test-de-la-chi-cuadrado-para-contrastar-la-independencia-entre-ambas-variables.-interpreta-el-resultado.">f) Utiliza el test de la Chi-cuadrado para contrastar la independencia entre ambas variables. Interpreta el resultado.</h3>
 
 
 </section>
