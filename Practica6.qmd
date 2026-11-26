@@ -238,7 +238,7 @@ newdata |>
          lim.sup = (aux$fit+1.96*aux$se.fit) |> plogis())
 ```
 
-<!-- ## 2. Para entregar -->
+<!-- ## 2. EJERCICIOS A ENTREGAR -->
 
 <!-- Para estudiar cómo afecta una determinada droga sobre una especie de insectos, se realizó un experimento con 8 grupos de insectos a los que se les administró distintas dosis de dicha droga y se les midió: -->
 

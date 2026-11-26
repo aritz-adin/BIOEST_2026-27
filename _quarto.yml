@@ -22,8 +22,8 @@ website:
         text: Práctica 4
       - href: Practica5.qmd
         text: Práctica 5
-      # - href: Practica6.qmd
-      #   text: Práctica 6
+      - href: Practica6.qmd
+        text: Práctica 6
       # - href: Practica7.qmd
       #   text: Práctica 7
       # - href: PracticaRepaso.qmd
